@@ -1,7 +1,7 @@
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"
 
 interface ChildrenType {
-  children: JSX.Element;
+  children: JSX.Element
 }
 
 const Layout = ({ children }: ChildrenType) => {
@@ -10,7 +10,7 @@ const Layout = ({ children }: ChildrenType) => {
       <Navbar />
       {children}
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

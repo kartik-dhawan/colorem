@@ -26,7 +26,9 @@
     "@typescript-eslint/parser": "^5.45.0",
     "eslint": "^8.28.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "prettier": "2.8.0"
   }
 }
