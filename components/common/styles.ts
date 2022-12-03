@@ -14,33 +14,27 @@ export const styles = {
       sm: "1px",
     },
     fontSize: {
-      xs: "14px",
-      md: "18px",
-      xl: "23px",
+      xs: "19px",
+      md: "22px",
+      xl: "25px",
     },
   },
   // subnav title
   subNavTitle: {
     fontSize: {
-      xs: "18px",
-      sm: "30px",
-      lg: "34px",
+      xs: "30px",
+      md: "34px",
+      lg: "36px",
       xl: "40px",
     },
-    fontWeight: {
-      xs: 500,
-      sm: 300,
-    },
+    fontWeight: 500,
     color: "#D9D9D9",
   },
   // subnav button
   subNavButton: {
     backgroundColor: "#D9D9D9",
     color: "#111",
-    fontWeight: {
-      xs: 300,
-      sm: 500,
-    },
+    fontWeight: 500,
     textTransform: "capitalize",
     borderRadius: "10000px",
     "&:hover": {
@@ -48,20 +42,18 @@ export const styles = {
     },
     letterSpacing: "0px",
     fontSize: {
-      xs: "12px",
-      sm: "14px",
+      xs: "16px",
       md: "18px",
       xl: "22px",
     },
     padding: {
-      xs: "4px 14px",
-      sm: "7px 15px",
+      xs: "7px 15px",
       md: "10px 23px",
       xl: "13px 30px",
     },
-    margin: {
-      xs: "14px 0px",
-      sm: "0px 0px",
+    marginTop: {
+      xs: "20px",
+      sm: "0px",
     },
   },
 }

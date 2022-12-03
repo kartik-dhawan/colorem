@@ -9,7 +9,7 @@ const SubNav = () => {
       container
       sx={{
         ...styles.nav,
-        margin: "10px 0px",
+        margin: "25px 0px",
       }}
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
