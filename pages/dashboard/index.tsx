@@ -1,8 +1,11 @@
+import { Box } from "@mui/material"
+import SubNav from "../../components/common/Navbar/SubNav"
+
 const Dashboard = () => {
   return (
-    <>
-      <div>Dashboard Page</div>
-    </>
+    <Box>
+      <SubNav />
+    </Box>
   )
 }
 
