@@ -1,0 +1,22 @@
+// file-cards css
+.fileSectionCard {
+  margin-bottom: 30px;
+  .fileSectionCardUpper {
+    display: flex;
+    & > div {
+      min-width: 130px;
+      width: 25%;
+      border-top-left-radius: 10px;
+    }
+  }
+  .fileSectionCardLower {
+    height: 450px;
+    .fileSectionRightFileImage {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+  }
+}
