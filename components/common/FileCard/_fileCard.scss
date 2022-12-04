@@ -14,7 +14,6 @@
     }
     .fileSectionRightFileContent {
       height: 100%;
-      // width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -37,7 +36,7 @@
           flex-direction: row;
         }
         .fileSectionGrainIcon {
-          color: #111;
+          color: $text_secondary;
           margin: 20px;
           font-size: 40px;
           cursor: pointer;
@@ -47,7 +46,7 @@
         }
         .fileSectionContentText {
           padding: 0px 0px 20px 25px;
-          color: #111;
+          color: $text_secondary;
           font-size: 30px;
           @include tablets {
             font-size: 22px;
@@ -105,7 +104,7 @@
         }
       }
       .fileSectionArrowIconWrapper {
-        border: 2px solid #111;
+        border: 2px solid $text_secondary;
         display: flex;
         justify-content: space-between;
         margin: 20px 20px;
@@ -124,7 +123,7 @@
           align-self: center;
           margin: 0 6%;
           font-size: 20px;
-          color: #111;
+          color: $text_secondary;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -136,7 +135,7 @@
           }
         }
         .fileSectionArrowIcon {
-          background-color: #111;
+          background-color: $background_primary;
           padding: 12px;
           border-radius: 1000px;
           @include tablets {

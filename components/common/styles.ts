@@ -28,17 +28,17 @@ export const styles = {
       xl: "40px",
     },
     fontWeight: 500,
-    color: "#D9D9D9",
+    color: "#D9D9D9", // text_primary
   },
   // subnav button
   subNavButton: {
-    backgroundColor: "#D9D9D9",
-    color: "#111",
+    backgroundColor: "#D9D9D9", // background_secondary
+    color: "#111", // $text_secondary: #111;
     fontWeight: 500,
     textTransform: "capitalize",
     borderRadius: "10000px",
     "&:hover": {
-      backgroundColor: "#D9D9D9",
+      backgroundColor: "#D9D9D9", // background_secondary
     },
     letterSpacing: "0px",
     fontSize: {
@@ -63,7 +63,7 @@ export const styles = {
       md: "30px 0px 30px 30px",
     },
     marginRight: "1.5rem",
-    background: "linear-gradient(180deg, #19c7a2 0%, #51d9bc 90%)", // green
+    background: "linear-gradient(180deg, #19c7a2 0%, #51d9bc 90%)", // green - green_color_1, green_color_2
   },
   fileSectionCardLowerLeft: {
     borderRadius: {
@@ -71,6 +71,6 @@ export const styles = {
       md: "0px 30px 30px 30px",
     },
     marginLeft: "1.5rem",
-    background: "linear-gradient(180deg, #fdc449 0%, #ddbc6f 80%)", // yellow
+    background: "linear-gradient(180deg, #fdc449 0%, #ddbc6f 80%)", // yellow - yellow_color_1, yellow_color_2
   },
 }
