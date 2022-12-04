@@ -9,15 +9,15 @@ const TeamDetails = () => {
   const avatarObj = [
     {
       name: "Kartik Dhawan",
-      src: "/user1.jpg",
+      src: "/user1.JPG",
     },
     {
       name: "Myrtle Wilson",
-      src: "/user2.png",
+      src: "/user2.PNG",
     },
     {
       name: "Jules Dawn",
-      src: "/user3.jpg",
+      src: "/user3.JPG",
     },
   ]
 
@@ -53,14 +53,12 @@ const TeamDetails = () => {
           id={tid + "AvatarWrapper"}
           sx={styles.teamSectionAvatarWrapper}
         >
-          {avatarObj.map((avi: any, i: number) => {
+          {avatarObj.map((avi, i: number) => {
             return (
               <Image
                 key={i}
-                src={`/images${avi.src}`}
+                src={"/images/user2.PNG"}
                 alt={avi.name + " Avatar"}
-                blurDataURL="data:..."
-                placeholder="blur"
                 height={60}
                 width={60}
                 className={tid + "Avatar"}
