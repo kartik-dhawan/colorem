@@ -29,7 +29,7 @@ const SubNav = () => {
         xs={6}
         sm={4}
         textAlign={"right"}
-        sx={{ color: "#f4eebd" }}
+        sx={{ color: "#ebe1e1" }} // text_third
         className={snid + "ChooseTheme"}
         id={snid + "ChooseTheme"}
       >
