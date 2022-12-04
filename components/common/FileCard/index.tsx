@@ -1,8 +1,5 @@
-import { Grid, Typography } from "@mui/material"
-import Image from "next/image"
+import { Grid } from "@mui/material"
 import { styles } from "../../common/styles"
-import EastIcon from "@mui/icons-material/East"
-import GrainIcon from "@mui/icons-material/Grain"
 import BrowseCard from "./BrowseCard"
 
 interface FileCardType {
