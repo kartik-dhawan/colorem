@@ -15,19 +15,19 @@ const Navbar = () => {
       className="navWrapper"
       id="navWrapper"
     >
-      <Grid item sm={6} xs={6}>
+      <Grid item sm={4} xs={6}>
         <Link href="/" style={{ textDecoration: "none" }}>
           Colorem
         </Link>
       </Grid>
-      <Grid item sm={3} xs={6} textAlign={"right"}>
+      <Grid item sm={4} xs={6} textAlign={"right"}>
         <Link href="/" style={{ textDecoration: "none" }}>
           About
         </Link>
       </Grid>
       <Grid
         item
-        sm={3}
+        sm={4}
         sx={{
           textAlign: "right",
           display: {

@@ -17,7 +17,7 @@ const SubNav = () => {
       <Grid
         item
         xs={6}
-        sm={6}
+        sm={4}
         className={snid + "Title"}
         id={snid + "Title"}
         sx={styles.subNavTitle}
@@ -27,7 +27,7 @@ const SubNav = () => {
       <Grid
         item
         xs={6}
-        sm={3}
+        sm={4}
         textAlign={"right"}
         sx={{ color: "#f4eebd" }}
         className={snid + "ChooseTheme"}
@@ -35,7 +35,7 @@ const SubNav = () => {
       >
         Theme
       </Grid>
-      <Grid item xs={0} sm={3} textAlign={"right"}>
+      <Grid item xs={0} sm={4} textAlign={"right"}>
         <Button
           variant="contained"
           className={snid + "GetStartBtn"}

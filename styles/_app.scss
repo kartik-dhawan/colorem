@@ -1,5 +1,7 @@
 // add all the variables, mixin imports here
 @import "./common/responsive";
+@import "./common/palette";
 
 // add page or component level imports here
 @import "../components/common/Navbar/nav";
+@import "../components/common/FileCard/fileCard";

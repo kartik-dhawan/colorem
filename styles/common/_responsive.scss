@@ -1,17 +1,17 @@
-$mobiles-sm: "screen and (max-width: 400px)"; // till Smaller Mobile View
-$mobiles: "screen and (max-width: 600px)"; // till Mobile View
-$tablets: "screen and (min-width: 601px) and (max-width: 1279px)"; // Tablet view
-$desktops: "screen and (min-width: 1280px)"; // Desktop view and higher
-$mobileAndTablet: "screen and (max-width: 1279px)"; // Cover all devices upto tablet
+$mobiles-sm: "screen and (max-width: 375px)"; // till Smaller Mobile View
+$mobiles: "screen and (min-width: 376px) and (max-width: 600px)"; // till Mobile View
+$tablets: "screen and (min-width: 601px) and (max-width: 1320px)"; // Tablet view
+$desktops: "screen and (min-width: 1321px)"; // Desktop view and higher
+$mobileAndTablet: "screen and (max-width: 1320px)"; // Cover all devices upto tablet
 
 $tablets-up: "screen and (min-width: 601px)"; // If Required for tablets and higher
 $tablets-portrait: "screen and (min-width: 601px) and (max-width: 960px)"; // If Required for tablets-Portrait
-$tablets-landscape: "screen and (min-width: 961px) and (max-width: 1279px)"; // If Required for tablets-landscape
+$tablets-landscape: "screen and (min-width: 961px) and (max-width: 1320px)"; // If Required for tablets-landscape
 
-$desktops-md: "screen and (min-width: 1280px) and (max-width: 1440px)"; // If Required for desktops-medium [HD Devices]
+$desktops-md: "screen and (min-width: 1321px) and (max-width: 1440px)"; // If Required for desktops-medium [HD Devices]
 $desktops-lg: "screen and (min-width: 1441px) and (max-width: 1920px)"; // If Required for desktops-large [FHD Devices]
 $desktops-xl: "screen and (min-width: 1921px)"; // If Required for desktops-extralarge [4k resolution devices]
-$between-tablets-and-desktop: "screen and (min-width: 1025px) and (max-width: 1279px)";
+$between-tablets-and-desktop: "screen and (min-width: 1025px) and (max-width: 1320px)";
 $hasTabletS4AndS3: "screen and (min-width: 601px) and (max-width: 767px)";
 
 @mixin mobiles-sm {
