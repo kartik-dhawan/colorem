@@ -10,7 +10,7 @@ interface FileCardType {
 
 const FileCard = ({ type, fid, fr }: FileCardType) => {
   return (
-    <Grid container md={fr} xs={12} className={fid + "Card"} direction="column">
+    <Grid item md={fr} xs={12} className={fid + "Card"} direction="column">
       <Grid
         item
         className={fid + "CardLower"}

@@ -17,7 +17,12 @@ const BrowseCard = ({ fid }: BrowseType) => {
         </Typography>
       </div>
       <div className={fid + "RightFileImage"}>
-        <Image alt="bitmoji image" height={425} width={425} src="/image.png" />
+        <Image
+          alt="bitmoji image"
+          height={425}
+          width={425}
+          src="/images/browse_bitmoji.png"
+        />
       </div>
       <div className={fid + "ArrowIconWrapper"}>
         <Typography variant="body2" className={fid + "Browse"}>
