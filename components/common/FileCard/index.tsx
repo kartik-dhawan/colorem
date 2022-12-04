@@ -1,6 +1,9 @@
-import { Grid } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 import Image from "next/image"
 import { styles } from "../../common/styles"
+import EastIcon from "@mui/icons-material/East"
+import GrainIcon from "@mui/icons-material/Grain"
+import BrowseCard from "./BrowseCard"
 
 interface FileCardType {
   type: string
@@ -10,20 +13,7 @@ interface FileCardType {
 
 const FileCard = ({ type, fid, fr }: FileCardType) => {
   return (
-    <Grid md={fr} xs={12} item className={fid + "Card"} direction="column">
-      {/* these two divs will always remain as first two children */}
-      <Grid
-        item
-        className={fid + "CardUpper"}
-        id={fid + "CardUpper"}
-        sx={
-          type === "right"
-            ? styles.fileSectionCardUpperRight
-            : styles.fileSectionCardUpperLeft
-        }
-      >
-        <div />
-      </Grid>
+    <Grid container md={fr} xs={12} className={fid + "Card"} direction="column">
       <Grid
         item
         className={fid + "CardLower"}
@@ -34,21 +24,9 @@ const FileCard = ({ type, fid, fr }: FileCardType) => {
             : styles.fileSectionCardLowerLeft
         }
       >
-        {type === "right" ? (
-          <div className={fid + "RightFileImage"}>
-            <Image
-              alt="bitmoji image"
-              height={400}
-              width={400}
-              src="/image.png"
-            />
-          </div>
-        ) : (
-          ""
-        )}
+        {/* conditionally rendered card content */}
+        {type === "right" ? <BrowseCard fid={fid} /> : ""}
       </Grid>
-
-      {/* content components/tags would be entered below */}
     </Grid>
   )
 }

@@ -57,32 +57,20 @@ export const styles = {
     },
   },
   // folder shape containers
-  fileSectionCardUpperRight: {
-    justifyContent: "flex-end",
-    marginRight: "1.5rem",
-    "& > div": {
-      borderBottom: "30px solid #19c7a2",
-      borderLeft: "25px solid transparent",
-      borderTopRightRadius: "20px",
-    },
-  },
-  fileSectionCardUpperLeft: {
-    justifyContent: "flex-start",
-    marginLeft: "1.5rem",
-    "& > div": {
-      borderBottom: "30px solid #fdc449",
-      borderRight: "25px solid transparent",
-      borderTopLeftRadius: "20px",
-    },
-  },
   fileSectionCardLowerRight: {
-    borderRadius: "20px 0px 20px 20px",
+    borderRadius: {
+      xs: "30px 0px 30px 30px",
+      md: "30px 0px 30px 30px",
+    },
     marginRight: "1.5rem",
     background: "linear-gradient(180deg, #19c7a2 0%, #51d9bc 90%)", // green
   },
   fileSectionCardLowerLeft: {
-    borderRadius: "0px 20px 20px 20px",
+    borderRadius: {
+      xs: "0px 30px 30px 30px",
+      md: "0px 30px 30px 30px",
+    },
     marginLeft: "1.5rem",
-    backgroundColor: "#fdc449", // yellow
+    background: "linear-gradient(180deg, #fdc449 0%, #ddbc6f 80%)", // yellow
   },
 }
