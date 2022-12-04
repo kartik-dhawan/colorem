@@ -108,13 +108,15 @@
         border: 2px solid #111;
         display: flex;
         justify-content: space-between;
-        margin: 10px 15px;
+        margin: 20px 20px;
         padding: 10px;
         border-radius: 1000px;
         cursor: pointer;
         z-index: 10;
+        @include tablets {
+          padding: 7px;
+        }
         @include tablets-up {
-          padding: 5px;
           width: 25%;
         }
         .fileSectionBrowse {
