@@ -22,6 +22,8 @@ const BrowseCard = ({ fid }: BrowseType) => {
           height={425}
           width={425}
           src="/images/browse_bitmoji.png"
+          blurDataURL="data:..."
+          placeholder="blur"
         />
       </div>
       <div className={fid + "ArrowIconWrapper"}>
