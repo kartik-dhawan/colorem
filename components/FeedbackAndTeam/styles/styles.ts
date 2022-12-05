@@ -54,7 +54,7 @@ export const styles = {
     padding: "17px 27px",
     backdropFilter: "blur(16px) saturate(180%)",
     WebkitBackdropFilter: "blur(16px) saturate(180%)",
-    boxShadow: "0px 0px 35px -6px rgba(218, 223, 196, 0.193)",
-    margin: "12px 30px 12px 0px",
+    boxShadow: "0px 0px 35px -8px rgba(218, 223, 196, 0.193)",
+    margin: "12px 30px 24px 0px",
   },
 }

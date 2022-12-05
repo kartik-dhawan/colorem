@@ -3,10 +3,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite"
 import { styles } from "../styles/styles"
 
 interface LikeType {
-  likedBy: string
+  likes: number
 }
 
-const LikeCard = ({ likedBy }: LikeType) => {
+const LikeCard = ({ likes }: LikeType) => {
   return (
     <Box
       className={"feedbackCard"}
@@ -21,7 +21,7 @@ const LikeCard = ({ likedBy }: LikeType) => {
           fontSize: "17px",
         }}
       >
-        {likedBy} liked a palette.
+        {likes} new likes on palettes.
       </Typography>
     </Box>
   )

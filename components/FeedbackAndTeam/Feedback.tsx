@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material"
 import { styles } from "./styles/styles"
 import LikeCard from "./FeedbackCards/LikeCard"
+import TextCard from "./FeedbackCards/TextCard"
 
 const Feedback = () => {
   const fid = "feedbackSection"
@@ -25,7 +26,9 @@ const Feedback = () => {
         Working on your feedbacks!
       </Typography>
       <Box className="feedbackCardsWrapper" id="feedbackCardsWrapper">
-        <LikeCard likedBy={"Mr Gray"} />
+        <LikeCard likes={23} />
+        <TextCard cardVariant={"feedback"} />
+        <TextCard cardVariant={"comment"} />
       </Box>
     </Grid>
   )
