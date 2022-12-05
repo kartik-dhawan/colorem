@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material"
-import Review from "./Review"
+import Feedback from "./Feedback"
 import TeamDetails from "./TeamDetails"
 
-const ReviewAndTeam = () => {
+const FeedbackAndTeam = () => {
   return (
     <Grid container spacing={5} mt={1}>
-      <Review />
+      <Feedback />
       <TeamDetails />
     </Grid>
   )
 }
 
-export default ReviewAndTeam
+export default FeedbackAndTeam
