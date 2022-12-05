@@ -54,7 +54,6 @@ const TeamDetails = () => {
           sx={styles.teamSectionAvatarWrapper}
         >
           {avatarObj.map((avi, i: number) => {
-            console.log(`/images${avi.src}`)
             return (
               <Image
                 key={i}
