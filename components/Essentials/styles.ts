@@ -16,8 +16,8 @@ export const styles = {
     textAlign: "center",
     color: "#111",
     padding: {
-      xs: "1rem 0rem",
-      lg: "2rem 0rem",
+      xs: "1rem 1.5rem",
+      lg: "2rem 1rem",
     },
     fontSize: {
       xs: "40px",

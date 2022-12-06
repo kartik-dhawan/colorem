@@ -17,7 +17,7 @@ const Essentials = () => {
         id={eid + "Title"}
         sx={styles.essentialsSectionTitle}
       >
-        Essentials to know
+        The Essentials
       </Typography>
       <Grid container className={eid + "Body"} id={eid + "Body"}>
         <Grid
