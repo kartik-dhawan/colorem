@@ -26,6 +26,7 @@ const TextCard = ({ cardVariant }: TextCardType) => {
           margin: "0px 0px 0 20px",
           fontSize: "17px",
         }}
+        className={"feedbackCardBody"}
       >
         Mr. Shay sent a{" "}
         <b>

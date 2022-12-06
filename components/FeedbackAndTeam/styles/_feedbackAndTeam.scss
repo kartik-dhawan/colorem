@@ -1,3 +1,4 @@
+// team section
 .teamSectionWrapper {
   .teamSectionHead {
     .teamSectionAvatarWrapper {
@@ -32,16 +33,21 @@
     }
   }
   .teamSectionBody {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
+    @include ellipsis;
     -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
     @include mobiles {
       -webkit-line-clamp: 5;
     }
     @include mobiles-sm {
       -webkit-line-clamp: 6;
     }
+  }
+}
+
+// feedback section
+.feedbackSectionWrapper {
+  // margin-top: 30px;
+  .feedbackCardBody {
+    @include ellipsis;
   }
 }

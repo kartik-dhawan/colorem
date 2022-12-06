@@ -55,6 +55,9 @@ export const styles = {
     backdropFilter: "blur(16px) saturate(180%)",
     WebkitBackdropFilter: "blur(16px) saturate(180%)",
     boxShadow: "0px 0px 35px -8px rgba(218, 223, 196, 0.193)",
-    margin: "12px 30px 24px 0px",
+    margin: {
+      xs: "12px 2px 24px 2px",
+      sm: "12px 30px 24px 0px",
+    },
   },
 }
