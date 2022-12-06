@@ -29,7 +29,6 @@ const TeamDetails = () => {
       order={{ md: 2, xs: 1 }}
       className={tid + "Wrapper"}
       id={tid + "Wrapper"}
-      sx={{}}
     >
       <Box
         className={tid + "Head"}

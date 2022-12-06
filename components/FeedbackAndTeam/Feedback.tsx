@@ -18,6 +18,10 @@ const Feedback = () => {
           xs: "none",
           md: "1px solid #444",
         },
+        marginTop: {
+          xs: "27px",
+          md: "0px",
+        },
       }}
     >
       <Typography
