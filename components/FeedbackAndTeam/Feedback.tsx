@@ -14,7 +14,10 @@ const Feedback = () => {
       className={fid + "Wrapper"}
       id={fid + "Wrapper"}
       sx={{
-        borderRight: "1px solid #444",
+        borderRight: {
+          xs: "none",
+          md: "1px solid #444",
+        },
       }}
     >
       <Typography
