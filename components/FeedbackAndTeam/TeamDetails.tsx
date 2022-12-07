@@ -39,14 +39,12 @@ const TeamDetails = () => {
           margin: "0px 0px 25px 0px",
         }}
       >
-        <Button
-          variant="contained"
-          className={tid + "Title"}
-          id={tid + "Title"}
-          sx={styles.teamSectionTitle}
-        >
-          <Link href="/">TEAM</Link>
-        </Button>
+        <Link href="/" className={tid + "Title"} id={tid + "Title"}>
+          <Button variant="contained" sx={styles.teamSectionTitle}>
+            TEAM
+          </Button>
+        </Link>
+
         <Box
           className={tid + "AvatarWrapper"}
           id={tid + "AvatarWrapper"}

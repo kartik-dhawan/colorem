@@ -3,6 +3,7 @@ export const styles = {
   teamSectionTitle: {
     backgroundColor: "#d9d9d9", // background_secondary
     borderRadius: "1000px",
+    color: "#111", // text_secondary
     padding: {
       xs: "10px 40px",
     },

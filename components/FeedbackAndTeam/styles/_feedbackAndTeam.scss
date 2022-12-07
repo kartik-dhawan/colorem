@@ -31,6 +31,9 @@
         }
       }
     }
+    .teamSectionTitle {
+      text-decoration: none;
+    }
   }
   .teamSectionBody {
     @include ellipsis;
