@@ -1,26 +1,9 @@
-// #0070f3
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+// add all the variables, mixin imports here
+@import "./common/responsive";
+@import "./common/palette";
+@import "./common/mixins";
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-}
-
-.indexWrapper {
-  background-color: #111;
-  height: 100vh;
-  display: flex;
-  place-content: center center;
-  align-items: center;
-  .indexMain {
-    .indexHeader {
-      color: #e1d5d5;
-      font-size: 60px;
-      letter-spacing: 1px;
-      a {
-        color: #0071f3f5;
-      }
-    }
-  }
-}
+// add page or component level imports here
+@import "../components/common/Navbar/nav";
+@import "../components/common/FileCard/fileCard";
+@import "../components/FeedbackAndTeam/styles/feedbackAndTeam";

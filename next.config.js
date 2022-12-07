@@ -2,6 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-};
+}
 
-module.exports = nextConfig; // eslint-disable-line
+module.exports = nextConfig // eslint-disable-line

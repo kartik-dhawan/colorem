@@ -1,4 +1,44 @@
-// add all the variables, mixin imports here
-
-// add page or component level imports here
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "./app";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: $background_primary;
+  color: $text_third;
+  font-weight: 300;
+}
+
+.indexWrapper {
+  background-color: $background_primary;
+  height: 100vh;
+  display: flex;
+  place-content: center center;
+  align-items: center;
+  .indexMain {
+    .indexHeader {
+      color: $text_third;
+      font-size: 60px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      @include mobiles-sm {
+        font-size: 25px;
+        padding: 20px;
+      }
+      @include mobiles {
+        font-size: 30px;
+        padding: 20px;
+      }
+      @include tablets {
+        font-size: 40px;
+        padding: 30px;
+      }
+      a {
+        color: $next_blue;
+        font-weight: 700;
+      }
+    }
+  }
+}

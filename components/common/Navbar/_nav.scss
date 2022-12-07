@@ -1,0 +1,8 @@
+// Navbar css
+.navWrapper {
+  a {
+    &:any-link {
+      color: $text_third;
+    }
+  }
+}

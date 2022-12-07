@@ -1,0 +1,148 @@
+// file-cards css
+.fileSectionCard {
+  .fileSectionCardLower {
+    position: relative;
+    height: 500px;
+    @include mobiles-sm {
+      height: 300px;
+    }
+    @include mobiles {
+      height: 350px;
+    }
+    @include tablets {
+      height: 400px;
+    }
+    .fileSectionRightFileContent {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      .fileSectionContent {
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include desktops {
+          width: 25%;
+        }
+        @include tablets-landscape {
+          width: 30%;
+        }
+        @include tablets-portrait {
+          flex-direction: row;
+        }
+        @include mobiles {
+          flex-direction: row;
+        }
+        .fileSectionGrainIcon {
+          color: $text_secondary;
+          margin: 20px;
+          font-size: 40px;
+          cursor: pointer;
+          @include mobileAndTablet {
+            font-size: 32px;
+          }
+        }
+        .fileSectionContentText {
+          padding: 0px 0px 20px 25px;
+          color: $text_secondary;
+          font-size: 30px;
+          @include tablets {
+            font-size: 22px;
+          }
+          @include between-tablets-and-desktop {
+            font-size: 27px;
+          }
+          @include mobiles {
+            font-size: 21px;
+          }
+          @include tablets-portrait {
+            padding: 20px 0px;
+            width: max-content;
+            position: absolute;
+            left: 12%;
+          }
+          @include mobiles {
+            padding: 20px 15px;
+            position: absolute;
+            left: 15%;
+            font-size: 20px;
+          }
+          @include mobiles-sm {
+            padding: 16px 15px;
+            position: absolute;
+            left: 17%;
+            font-size: 19px;
+          }
+        }
+      }
+      .fileSectionRightFileImage {
+        position: absolute;
+        width: 100%;
+        img {
+          position: relative;
+          left: calc(50% - 1.5rem);
+          transform: translate(-50%);
+          margin-bottom: -4px;
+          @include mobiles-sm {
+            width: 235px;
+            height: 235px;
+          }
+          @include mobiles {
+            width: 275px;
+            height: 275px;
+          }
+          @include tablets {
+            width: 300px;
+            height: 300px;
+          }
+          @include between-tablets-and-desktop {
+            width: 375px;
+            height: 375px;
+          }
+        }
+      }
+      .fileSectionArrowIconWrapper {
+        border: 2px solid $text_secondary;
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 20px;
+        padding: 10px;
+        border-radius: 1000px;
+        cursor: pointer;
+        z-index: 10;
+        @include tablets {
+          padding: 7px;
+        }
+        @include tablets-up {
+          width: 25%;
+        }
+        .fileSectionBrowse {
+          text-align: left;
+          align-self: center;
+          margin: 0 6%;
+          font-size: 20px;
+          color: $text_secondary;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          @include mobiles {
+            display: none;
+          }
+          @include mobiles-sm {
+            display: none;
+          }
+        }
+        .fileSectionArrowIcon {
+          background-color: $background_primary;
+          padding: 12px;
+          border-radius: 1000px;
+          @include tablets {
+            padding: 6px;
+          }
+        }
+      }
+    }
+  }
+}
