@@ -15,6 +15,7 @@ export const styles = {
     },
     "& > a": {
       color: "#111", // text_secondary
+      textDecoration: "none",
     },
   },
   teamSectionAvatarWrapper: {

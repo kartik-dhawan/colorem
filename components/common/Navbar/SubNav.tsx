@@ -1,5 +1,5 @@
 import { Button, Grid } from "@mui/material"
-import { styles } from ".././styles"
+import { styles } from "./styles"
 
 const SubNav = () => {
   const snid = "subNav"
