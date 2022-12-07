@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 import Link from "next/link"
-import { styles } from ".././styles"
+import { styles } from "./styles"
 
 const Navbar = () => {
   return (
