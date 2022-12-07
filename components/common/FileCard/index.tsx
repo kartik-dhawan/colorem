@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import { styles } from "../../common/styles"
+import { styles } from "./styles"
 import BrowseCard from "./BrowseCard"
 
 interface FileCardType {
