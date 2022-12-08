@@ -4,6 +4,7 @@ import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import Link from "next/link"
 import { styles } from "./styles"
+import { externalLinks } from "../../../utils/constants"
 
 const Footer = () => {
   const frid = "footerBox"
@@ -43,9 +44,15 @@ const Footer = () => {
           padding: "20px 0px",
         }}
       >
-        <GitHubIcon sx={styles.footerBoxIcon} />
-        <InstagramIcon sx={styles.footerBoxIcon} />
-        <LinkedInIcon sx={styles.footerBoxIcon} />
+        <Link href={externalLinks.GITHUB} target="_blank">
+          <GitHubIcon sx={styles.footerBoxIcon} />
+        </Link>
+        <Link href={externalLinks.INSTAGRAM} target="_blank">
+          <InstagramIcon sx={styles.footerBoxIcon} />
+        </Link>
+        <Link href={externalLinks.LINKEDIN} target="_blank">
+          <LinkedInIcon sx={styles.footerBoxIcon} />
+        </Link>
       </Box>
       <Typography
         variant="body1"
@@ -54,7 +61,7 @@ const Footer = () => {
         sx={styles.footerBoxBody}
       >
         Coded & developed completely by{" "}
-        <Link href="/">
+        <Link href="/about">
           <u>Kartik Dhawan</u>
         </Link>
         <br></br>
@@ -75,7 +82,7 @@ const Footer = () => {
               sx={styles.footerBoxReference}
               key={mapId}
             >
-              <Link href={item.source} className={"refLink"}>
+              <Link href={item.source} target="_blank" className={"refLink"}>
                 {item.title}
               </Link>
               {mapId < 3 && <span>|</span>}
