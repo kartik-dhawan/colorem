@@ -5,6 +5,9 @@ import Essentials from "../../components/Essentials"
 import FeedbackAndTeam from "../../components/FeedbackAndTeam"
 import { client } from "../../utils/contentful/config"
 import { ContentfulType } from "../../utils/interfaces"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { updateContent } from "../../redux/slices/contentSlice"
 
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line
@@ -17,10 +20,15 @@ export const getStaticProps = async () => {
 }
 
 const Dashboard = ({ data }: ContentfulType) => {
-  console.log("Dashboard: ", data)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(updateContent(data))
+  }, [data])
+
   return (
     <Box>
-      <SubNav />
+      <SubNav content={data} />
       <FileSection />
       <FeedbackAndTeam />
       <Essentials />

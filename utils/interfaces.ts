@@ -1,3 +1,3 @@
 export interface ContentfulType {
-  [key: string]: string | any
+  [key: string]: any
 }

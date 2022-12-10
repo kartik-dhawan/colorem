@@ -1,7 +1,8 @@
 import { Button, Grid } from "@mui/material"
+import { ContentfulType } from "../../../utils/interfaces"
 import { styles } from "./styles"
 
-const SubNav = () => {
+const SubNav = ({ content }: ContentfulType) => {
   const snid = "subNav"
 
   return (
@@ -22,7 +23,7 @@ const SubNav = () => {
         id={snid + "Title"}
         sx={styles.subNavTitle}
       >
-        Permutations<br></br>with colors<br></br>and more.
+        {content.subnavHeader}
       </Grid>
       <Grid
         item
