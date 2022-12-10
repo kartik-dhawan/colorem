@@ -19,7 +19,6 @@ export const contentSlice = createSlice({
       state.data = action.payload
     },
   },
-  extraReducers: {},
 })
 
 // typescript support is included inside createSlice

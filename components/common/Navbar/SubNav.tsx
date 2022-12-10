@@ -1,9 +1,14 @@
 import { Button, Grid } from "@mui/material"
+import { useState } from "react"
 import { ContentfulType } from "../../../utils/interfaces"
 import { styles } from "./styles"
+import SideNav from "../../SideNav"
 
 const SubNav = ({ content }: ContentfulType) => {
   const snid = "subNav"
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
+
+  sideNavToggle && (document.body.style.overflow = "hidden") // eslint-disable-line
 
   return (
     <Grid
@@ -15,6 +20,11 @@ const SubNav = ({ content }: ContentfulType) => {
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
     >
+      {/* positioned absolute-fixed and will cover the whole screen */}
+      <SideNav
+        sideNavToggle={sideNavToggle}
+        setSideNavToggle={setSideNavToggle}
+      />
       <Grid
         item
         xs={6}
@@ -42,6 +52,10 @@ const SubNav = ({ content }: ContentfulType) => {
           className={snid + "GetStartBtn"}
           id={snid + "GetStartBtn"}
           sx={styles.subNavButton}
+          onClick={() => {
+            console.log("Toggled sidenav")
+            setSideNavToggle(!sideNavToggle)
+          }}
         >
           Get Started
         </Button>
