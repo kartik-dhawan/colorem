@@ -112,6 +112,8 @@
         border-radius: 1000px;
         cursor: pointer;
         z-index: 10;
+        color: $text_primary;
+        text-decoration: none;
         @include tablets {
           padding: 7px;
         }
@@ -127,6 +129,10 @@
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          font-weight: 400;
+          &:any-link {
+            text-decoration: none;
+          }
           @include mobiles {
             display: none;
           }

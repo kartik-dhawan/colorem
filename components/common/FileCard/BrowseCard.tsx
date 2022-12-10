@@ -2,6 +2,7 @@ import { Typography } from "@mui/material"
 import EastIcon from "@mui/icons-material/East"
 import GrainIcon from "@mui/icons-material/Grain"
 import Image from "next/image"
+import Link from "next/link"
 
 interface BrowseType {
   fid: string
@@ -24,12 +25,10 @@ const BrowseCard = ({ fid }: BrowseType) => {
           src="/images/browse_bitmoji.png"
         />
       </div>
-      <div className={fid + "ArrowIconWrapper"}>
-        <Typography variant="body2" className={fid + "Browse"}>
-          Browse more
-        </Typography>
+      <Link href="/palettes" className={fid + "ArrowIconWrapper"}>
+        <div className={fid + "Browse"}>Browse more</div>
         <EastIcon className={fid + "ArrowIcon"} />
-      </div>
+      </Link>
     </div>
   )
 }

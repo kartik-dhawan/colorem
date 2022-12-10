@@ -15,8 +15,11 @@ const FileCard = ({ type, fid, fr }: FileCardType) => {
       md={fr}
       xs={12}
       className={fid + "Card"}
-      direction="column"
-      marginBottom={"30px"}
+      sx={{
+        marginBottom: "30px",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <Grid
         item
