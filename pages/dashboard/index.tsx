@@ -9,6 +9,9 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateContent } from "../../redux/slices/contentSlice"
 
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line
 
@@ -16,10 +19,15 @@ export const getStaticProps = async () => {
     props: {
       data: response?.items[0]?.fields,
     },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
 const Dashboard = ({ data }: ContentfulType) => {
+  console.log("ISR: ", process.env.ISR_REVAL_TIME_DASHBOARD)
   const dispatch = useDispatch()
 
   useEffect(() => {
