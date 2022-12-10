@@ -28,6 +28,9 @@ export const styles = {
     },
     fontWeight: 500,
     color: "#D9D9D9", // text_primary
+    paddingRight: {
+      md: "100px",
+    },
   },
   // subnav button
   subNavButton: {

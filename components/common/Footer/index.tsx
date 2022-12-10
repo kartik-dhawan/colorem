@@ -5,32 +5,14 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import Link from "next/link"
 import { styles } from "./styles"
 import { externalLinks } from "../../../utils/constants"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
 const Footer = () => {
   const frid = "footerBox"
   let mapId = 0
-  const references = [
-    {
-      title: "Halo Lab",
-      source:
-        "https://dribbble.com/shots/18365166-Web-site-design-landing-page-home-page-ui",
-      sourceName: "Dribbble",
-      type: "UI/UX Design",
-    },
-    {
-      title: "Coolers",
-      source: "https://coolors.co/",
-      sourceName: "Coolers",
-      type: "Web Application",
-    },
-    {
-      title: "Colormind",
-      source: "http://colormind.io/api-access/",
-      sourceName: "Colormind API",
-      type: "API",
-    },
-  ]
 
+  const content = useSelector((state: RootType) => state.contentSlice.data)
   return (
     <Box
       className={frid + "Wrapper"}
@@ -60,20 +42,19 @@ const Footer = () => {
         id={frid + "Body"}
         sx={styles.footerBoxBody}
       >
-        Coded & developed completely by{" "}
+        {content.footerDevelopedByText}{" "}
         <Link href="/about">
-          <u>Kartik Dhawan</u>
+          <u>{content.developedBy}</u>
         </Link>
         <br></br>
-        This web app is only made as a project and in complete reference to the
-        following resourses...
+        {content.footerReferenceText}
       </Typography>
       <Box
         className={frid + "ReferenceWrapper"}
         id={frid + "ReferenceWrapper"}
         sx={styles.footerBoxReferenceWrapper}
       >
-        {references.map((item) => {
+        {content.references?.map((item: any) => {
           mapId++
           return (
             <Box

@@ -3,18 +3,22 @@ import EastIcon from "@mui/icons-material/East"
 import GrainIcon from "@mui/icons-material/Grain"
 import Image from "next/image"
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
 interface BrowseType {
   fid: string
 }
 
 const BrowseCard = ({ fid }: BrowseType) => {
+  const content = useSelector((state: RootType) => state.contentSlice.data)
+
   return (
     <div className={fid + "RightFileContent"}>
       <div className={fid + "Content"}>
         <GrainIcon className={fid + "GrainIcon"} />
         <Typography variant="h5" className={fid + "ContentText"}>
-          Because your project needs more colors.
+          {content.browseCardContent}
         </Typography>
       </div>
       <div className={fid + "RightFileImage"}>
