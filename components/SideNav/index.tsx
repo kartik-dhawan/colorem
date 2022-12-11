@@ -1,4 +1,8 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button, Drawer } from "@mui/material"
+import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { styles } from "./styles/styles"
 // EJS syntax for importing not working with framer motion in react so used CJS
 const { motion } = require("framer-motion") // eslint-disable-line
 
@@ -8,34 +12,85 @@ interface SideNavProps {
 }
 
 const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
-  const variants = {
-    open: { opacity: 1, display: "flex" },
-    closed: { opacity: 0, display: "none" },
+  const { sideNavigationItems } = useSelector(
+    (state: RootType) => state.contentSlice.data
+  )
+
+  const variant = {
+    before: { opacity: 0, x: -50 },
+    after: { opacity: 1, x: 0 },
   }
 
+  const sid = "sideNav"
+
   return (
-    <motion.div
-      className="motionWrapper"
-      variants={variants}
-      animate={sideNavToggle ? "open" : "closed"}
-      transition={{
-        type: "spring",
-        stiffness: 50,
-        x: { duration: 0.4 },
+    <Drawer
+      anchor={"right"}
+      open={sideNavToggle}
+      onClose={() => {
+        setSideNavToggle(false)
       }}
+      className={sid + "Drawer"}
+      id={sid + "Drawer"}
+      elevation={2}
+      transitionDuration={400}
+      sx={styles.sideNavDrawer}
     >
-      <Box>
+      <Box
+        className={sid + "Wrapper"}
+        id={sid + "Wrapper"}
+        sx={styles.sideNavWrapper}
+      >
+        <motion.div
+          className={sid + "LinksContainer"}
+          id={sid + "LinksContainer"}
+          transition={{ delay: 0.5 }}
+        >
+          {sideNavigationItems?.map((item: any) => {
+            return (
+              <motion.div
+                initial={variant.before}
+                animate={variant.after}
+                transition={{ duration: 0.7, delay: item.id * 0.17 }}
+                key={item.id}
+                className={sid + "LinkItem"}
+                id={sid + "LinkItem_" + item.id}
+              >
+                <Link
+                  href={item.link}
+                  className={sid + "Link"}
+                  id={sid + "Link" + item.id}
+                >
+                  {item.title}
+                  <div
+                    className={sid + "ItemBody"}
+                    id={sid + "ItemBody_" + item.id}
+                  >
+                    {item.body}
+                  </div>
+                </Link>
+                <div
+                  className={sid + "LinkOverlay"}
+                  id={sid + "LinkOverlay" + item.id}
+                />
+              </motion.div>
+            )
+          })}
+        </motion.div>
         <Button
           variant="contained"
           onClick={() => {
             setSideNavToggle(!sideNavToggle)
             localStorage.setItem("sideNavToggle", `${!sideNavToggle}`)
           }}
+          className={sid + "CloseBtn"}
+          id={sid + "CloseBtn"}
+          sx={styles.sideNavCloseBtn}
         >
           Close
         </Button>
       </Box>
-    </motion.div>
+    </Drawer>
   )
 }
 export default SideNav

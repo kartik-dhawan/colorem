@@ -1,9 +1,41 @@
-.motionWrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: #111;
-  z-index: 10000;
+.sideNavWrapper {
+  .sideNavLinksContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    margin: 0 5rem;
+    .sideNavLinkItem {
+      text-align: center;
+      padding: 15px;
+      margin: 10px;
+      text-transform: uppercase;
+      .sideNavLink {
+        &:any-link {
+          color: $text_primary;
+          text-decoration: none;
+        }
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        .sideNavItemBody {
+          color: $text_primary_dull;
+          font-size: 19px;
+          font-weight: 300;
+          letter-spacing: 1px;
+        }
+      }
+
+      .sideNavLinkOverlay {
+        height: 5px;
+        width: 0%;
+        background-color: $spotify_green;
+        margin: 5px 0px;
+        transition: 500ms all ease;
+      }
+      &:hover .sideNavLinkOverlay {
+        width: 100%;
+      }
+    }
+  }
 }

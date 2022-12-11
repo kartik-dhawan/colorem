@@ -8,8 +8,6 @@ const SubNav = ({ content }: ContentfulType) => {
   const snid = "subNav"
   const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
-  sideNavToggle && (document.body.style.overflow = "hidden") // eslint-disable-line
-
   return (
     <Grid
       container
