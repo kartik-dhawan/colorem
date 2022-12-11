@@ -51,7 +51,6 @@ const SubNav = ({ content }: ContentfulType) => {
           id={snid + "GetStartBtn"}
           sx={styles.subNavButton}
           onClick={() => {
-            console.log("Toggled sidenav")
             setSideNavToggle(!sideNavToggle)
           }}
         >
