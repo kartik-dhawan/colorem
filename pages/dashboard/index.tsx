@@ -22,12 +22,11 @@ export const getStaticProps = async () => {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 10 seconds
-    revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
+    revalidate: 10 || parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
 const Dashboard = ({ data }: ContentfulType) => {
-  console.log("ISR: ", process.env.ISR_REVAL_TIME_DASHBOARD)
   const dispatch = useDispatch()
 
   useEffect(() => {
