@@ -1,11 +1,13 @@
 .sideNavWrapper {
+  // overflow: scroll;
   .sideNavLinksContainer {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 1rem;
+    margin: 0rem 1rem;
+    // overflow: scroll;
     .sideNavLinkItem {
       text-align: center;
       margin: 10px;
