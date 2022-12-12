@@ -6,11 +6,11 @@ import Link from "next/link"
 import { useSelector } from "react-redux"
 import { RootType } from "../../../redux/constants/stateTypes"
 
-interface BrowseType {
+interface BrowseCardProps {
   fid: string
 }
 
-const BrowseCard = ({ fid }: BrowseType) => {
+const BrowseCard = ({ fid }: BrowseCardProps) => {
   const content = useSelector((state: RootType) => state.contentSlice.data)
 
   return (
