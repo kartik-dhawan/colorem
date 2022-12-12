@@ -26,7 +26,7 @@ const BrowseCard = ({ fid }: BrowseType) => {
           alt="bitmoji image"
           height={425}
           width={425}
-          src="/images/browse_bitmoji.png"
+          src="/images/browse_bitmoji.webp"
         />
       </div>
       <Link href="/palettes" className={fid + "ArrowIconWrapper"}>
