@@ -20,6 +20,10 @@ const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
     return COLORMIND_MODELS[Math.floor(Math.random() * 6)]
   }
 
+  // using POST method even when we just need GET because Next.js doesn't
+  // hide our API end points after deployment.
+  // ex: colorem.vercel.app/api/palettes would still return the api response
+  // when we hit it anywhere, hence exposing our APIs
   if (req.method === "POST") {
     const randomModel = getRandomColormindModel()
     await getColormindPalette(randomModel).then((response) => {
