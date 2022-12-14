@@ -7,29 +7,52 @@ import {
   getColormindPalette,
   rgbArrayToHex,
 } from "../../../lib/methods/savePalette"
-import { FinalPaletteType } from "../../../lib/utils/interfaces"
+import {
+  FinalPaletteType,
+  RandomColormindModelType,
+} from "../../../lib/utils/interfaces"
+import colorPalette from "../../../lib/database/models/colorPalette"
+import { COLORMIND_MODELS } from "../../../lib/utils/constants"
 
 const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
+  // gets a random colormind model-type to fetch a random palette
+  const getRandomColormindModel: RandomColormindModelType = () => {
+    return COLORMIND_MODELS[Math.floor(Math.random() * 6)]
+  }
+
   if (req.method === "POST") {
-    await getColormindPalette().then((response) => {
+    const randomModel = getRandomColormindModel()
+    await getColormindPalette(randomModel).then((response) => {
       // gets array of colors in hex-code
       const paletteInHexCode = rgbArrayToHex(response.result)
 
-      const finalPalette: FinalPaletteType = {
+      const paletteResponse: FinalPaletteType = {
         paletteGuid: uuidv4(),
         name: randomWords({ exactly: 1, wordsPerString: 2 })[0],
         hex: paletteInHexCode,
         rgb: response.result,
+        model: randomModel,
       }
 
-      // saves this object to MongoDB
-      // ----
+      // creates an instance of the schema
+      const palette = new colorPalette(paletteResponse)
 
-      // sends the response to the API
-      res.status(200).json(finalPalette)
+      // saves that instance into the DB
+      palette
+        .save()
+        .then(() => {
+          // sends the response to the API
+          res.status(200).json(paletteResponse)
+        })
+        .catch(() => {
+          // sends the error response to the API
+          res.status(501).json("Could not save the palette to MongoDB")
+        })
     })
   } else {
-    res.status(200).json("Cannot access this API")
+    res
+      .status(403)
+      .json("Cannot access this API. Try sending a POST request to this API.")
   }
 }
 
