@@ -4,32 +4,15 @@ import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import Link from "next/link"
 import { styles } from "./styles"
+import { externalLinks } from "../../../utils/constants"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
 const Footer = () => {
   const frid = "footerBox"
   let mapId = 0
-  const references = [
-    {
-      title: "Halo Lab",
-      source:
-        "https://dribbble.com/shots/18365166-Web-site-design-landing-page-home-page-ui",
-      sourceName: "Dribbble",
-      type: "UI/UX Design",
-    },
-    {
-      title: "Coolers",
-      source: "https://coolors.co/",
-      sourceName: "Coolers",
-      type: "Web Application",
-    },
-    {
-      title: "Colormind",
-      source: "http://colormind.io/api-access/",
-      sourceName: "Colormind API",
-      type: "API",
-    },
-  ]
 
+  const content = useSelector((state: RootType) => state.contentSlice.data)
   return (
     <Box
       className={frid + "Wrapper"}
@@ -43,9 +26,15 @@ const Footer = () => {
           padding: "20px 0px",
         }}
       >
-        <GitHubIcon sx={styles.footerBoxIcon} />
-        <InstagramIcon sx={styles.footerBoxIcon} />
-        <LinkedInIcon sx={styles.footerBoxIcon} />
+        <Link href={externalLinks.GITHUB} target="_blank">
+          <GitHubIcon sx={styles.footerBoxIcon} />
+        </Link>
+        <Link href={externalLinks.INSTAGRAM} target="_blank">
+          <InstagramIcon sx={styles.footerBoxIcon} />
+        </Link>
+        <Link href={externalLinks.LINKEDIN} target="_blank">
+          <LinkedInIcon sx={styles.footerBoxIcon} />
+        </Link>
       </Box>
       <Typography
         variant="body1"
@@ -53,20 +42,19 @@ const Footer = () => {
         id={frid + "Body"}
         sx={styles.footerBoxBody}
       >
-        Coded & developed completely by{" "}
-        <Link href="/">
-          <u>Kartik Dhawan</u>
+        {content.footerDevelopedByText}{" "}
+        <Link href="/about">
+          <u>{content.developedBy}</u>
         </Link>
         <br></br>
-        This web app is only made as a project and in complete reference to the
-        following resourses...
+        {content.footerReferenceText}
       </Typography>
       <Box
         className={frid + "ReferenceWrapper"}
         id={frid + "ReferenceWrapper"}
         sx={styles.footerBoxReferenceWrapper}
       >
-        {references.map((item) => {
+        {content.references?.map((item: any) => {
           mapId++
           return (
             <Box
@@ -75,7 +63,7 @@ const Footer = () => {
               sx={styles.footerBoxReference}
               key={mapId}
             >
-              <Link href={item.source} className={"refLink"}>
+              <Link href={item.source} target="_blank" className={"refLink"}>
                 {item.title}
               </Link>
               {mapId < 3 && <span>|</span>}

@@ -1,8 +1,12 @@
 import { Button, Grid } from "@mui/material"
+import { useState } from "react"
+import { ContentfulType } from "../../../utils/interfaces"
 import { styles } from "./styles"
+import SideNav from "../../SideNav"
 
-const SubNav = () => {
+const SubNav = ({ content }: ContentfulType) => {
   const snid = "subNav"
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   return (
     <Grid
@@ -14,6 +18,11 @@ const SubNav = () => {
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
     >
+      {/* positioned absolute-fixed and will cover the whole screen */}
+      <SideNav
+        sideNavToggle={sideNavToggle}
+        setSideNavToggle={setSideNavToggle}
+      />
       <Grid
         item
         xs={6}
@@ -22,7 +31,7 @@ const SubNav = () => {
         id={snid + "Title"}
         sx={styles.subNavTitle}
       >
-        Permutations<br></br>with colors<br></br>and more.
+        {content.subnavHeader}
       </Grid>
       <Grid
         item
@@ -41,6 +50,9 @@ const SubNav = () => {
           className={snid + "GetStartBtn"}
           id={snid + "GetStartBtn"}
           sx={styles.subNavButton}
+          onClick={() => {
+            setSideNavToggle(!sideNavToggle)
+          }}
         >
           Get Started
         </Button>

@@ -2,18 +2,23 @@ import { Typography } from "@mui/material"
 import EastIcon from "@mui/icons-material/East"
 import GrainIcon from "@mui/icons-material/Grain"
 import Image from "next/image"
+import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
-interface BrowseType {
+interface BrowseCardProps {
   fid: string
 }
 
-const BrowseCard = ({ fid }: BrowseType) => {
+const BrowseCard = ({ fid }: BrowseCardProps) => {
+  const content = useSelector((state: RootType) => state.contentSlice.data)
+
   return (
     <div className={fid + "RightFileContent"}>
       <div className={fid + "Content"}>
         <GrainIcon className={fid + "GrainIcon"} />
         <Typography variant="h5" className={fid + "ContentText"}>
-          Because your project needs more colors.
+          {content.browseCardContent}
         </Typography>
       </div>
       <div className={fid + "RightFileImage"}>
@@ -21,15 +26,13 @@ const BrowseCard = ({ fid }: BrowseType) => {
           alt="bitmoji image"
           height={425}
           width={425}
-          src="/images/browse_bitmoji.png"
+          src="/images/browse_bitmoji.webp"
         />
       </div>
-      <div className={fid + "ArrowIconWrapper"}>
-        <Typography variant="body2" className={fid + "Browse"}>
-          Browse more
-        </Typography>
+      <Link href="/palettes" className={fid + "ArrowIconWrapper"}>
+        <div className={fid + "Browse"}>Browse more</div>
         <EastIcon className={fid + "ArrowIcon"} />
-      </div>
+      </Link>
     </div>
   )
 }

@@ -1,0 +1,57 @@
+.sideNavWrapper {
+  .sideNavLinksContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 1rem;
+    .sideNavLinkItem {
+      text-align: center;
+      margin: 10px;
+      @include tablets {
+        padding: 5px;
+      }
+      @include desktops {
+        padding: 15px;
+      }
+      .sideNavLink {
+        &:any-link {
+          color: $text_primary;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+        font-size: 22px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        @include tablets-up {
+          font-size: 24px;
+        }
+        .sideNavItemBody {
+          color: $text_primary_dull;
+          font-size: 16px;
+          font-weight: 300;
+          text-transform: uppercase;
+          letter-spacing: 0px;
+          font-family: "Nunito Sans";
+          @include tablets {
+            font-size: 18px;
+          }
+          @include desktops {
+            font-size: 19px;
+          }
+        }
+      }
+      .sideNavLinkOverlay {
+        height: 5px;
+        width: 0%;
+        background-color: $spotify_green;
+        margin: 5px 0px;
+        transition: 500ms all ease;
+      }
+      &:hover .sideNavLinkOverlay {
+        width: 100%;
+      }
+    }
+  }
+}

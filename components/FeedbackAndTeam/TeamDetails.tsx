@@ -1,25 +1,17 @@
 import { Box, Button, Grid, Typography } from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { ContentfulType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
 
 const TeamDetails = () => {
+  const content: ContentfulType = useSelector(
+    (state: RootType) => state.contentSlice.data
+  )
+  const members = content.teamMembers
   const tid = "teamSection"
-
-  const avatarObj = [
-    {
-      name: "Kartik Dhawan",
-      src: "/user1.JPG",
-    },
-    {
-      name: "Myrtle Wilson",
-      src: "/user2.PNG",
-    },
-    {
-      name: "Jules Dawn",
-      src: "/user3.JPG",
-    },
-  ]
 
   return (
     <Grid
@@ -39,7 +31,7 @@ const TeamDetails = () => {
           margin: "0px 0px 25px 0px",
         }}
       >
-        <Link href="/" className={tid + "Title"} id={tid + "Title"}>
+        <Link href="/about" className={tid + "Title"} id={tid + "Title"}>
           <Button variant="contained" sx={styles.teamSectionTitle}>
             TEAM
           </Button>
@@ -50,11 +42,11 @@ const TeamDetails = () => {
           id={tid + "AvatarWrapper"}
           sx={styles.teamSectionAvatarWrapper}
         >
-          {avatarObj.map((avi, i: number) => {
+          {members?.map((avi: any, i: number) => {
             return (
               <Image
                 key={i}
-                src={`/images${avi.src}`}
+                src={`https:${avi.fields?.file.url}`}
                 alt={avi.name + " Avatar"}
                 height={60}
                 width={60}
@@ -71,9 +63,7 @@ const TeamDetails = () => {
         id={tid + "Body"}
         sx={styles.teamSectionBody} // ellipsis css in .scss file
       >
-        The super fast color palettes generator! Create the perfect color
-        palette or get inspired by thousands of beautiful color schemes. Explore
-        trending palettes now & start creating.
+        {content?.teamSectionBody}
       </Typography>
     </Grid>
   )

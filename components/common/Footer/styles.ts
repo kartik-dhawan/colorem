@@ -8,9 +8,9 @@ export const styles = {
     flexDirection: "column",
     alignItems: "center",
   },
-  footerBoxIconsWrapper: {},
   footerBoxIcon: {
     margin: "5px 15px",
+    color: "#d9d9d9",
     fontSize: {
       xs: "45px",
       sm: "53px",

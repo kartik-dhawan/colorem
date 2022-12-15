@@ -2,9 +2,13 @@ import { Box, Grid, Typography } from "@mui/material"
 import { styles } from "./styles/styles"
 import LikeCard from "./FeedbackCards/LikeCard"
 import TextCard from "./FeedbackCards/TextCard"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
 
 const Feedback = () => {
   const fid = "feedbackSection"
+  const content = useSelector((state: RootType) => state.contentSlice.data)
+
   return (
     <Grid
       item
@@ -30,7 +34,7 @@ const Feedback = () => {
         id={fid + "Title"}
         sx={styles.feedbackSectionTitle}
       >
-        Working on your feedbacks!
+        {content.feedbackTitle}
       </Typography>
       <Box className="feedbackCardsWrapper" id="feedbackCardsWrapper">
         <LikeCard likes={23} />

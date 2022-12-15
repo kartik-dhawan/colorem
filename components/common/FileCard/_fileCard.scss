@@ -2,16 +2,6 @@
 .fileSectionCard {
   .fileSectionCardLower {
     position: relative;
-    height: 500px;
-    @include mobiles-sm {
-      height: 300px;
-    }
-    @include mobiles {
-      height: 350px;
-    }
-    @include tablets {
-      height: 400px;
-    }
     .fileSectionRightFileContent {
       height: 100%;
       display: flex;
@@ -112,6 +102,8 @@
         border-radius: 1000px;
         cursor: pointer;
         z-index: 10;
+        color: $text_primary;
+        text-decoration: none;
         @include tablets {
           padding: 7px;
         }
@@ -127,6 +119,10 @@
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          font-weight: 400;
+          &:any-link {
+            text-decoration: none;
+          }
           @include mobiles {
             display: none;
           }
