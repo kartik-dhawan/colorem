@@ -1,9 +1,10 @@
 import axios from "axios"
+import { URLS } from "../utils/constants"
 
 // runs colormind api and returns a promise
 export const getColormindPalette = async (model: string) => {
   const res = await axios.post(
-    "http://colormind.io/api/",
+    URLS.COLORMIND_API,
     { model: model },
     {
       headers: {
