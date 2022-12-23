@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Live deployment (As per latest release)
+
+Colorem - [colorem.vercel.app](https://colorem.vercel.app)
+
 ## Getting Started
 
 First, run the development server:
@@ -14,9 +18,38 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/palettes](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/palettes.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Scripts & Commands
+
+To create & test build.
+
+```bash
+npm run build
+```
+
+To run eslint & check for linting errors.
+
+```bash
+npm run elint
+```
+
+To fix basic linting errors before commit.
+
+```bash
+npm run lint:fix
+```
+
+## Additional tools used
+
+- MongoDB Atlas for database system.
+- @reduxjs/toolkit for state management.
+- MaterialUI for UI.
+- Contentful as a headless CMS.
+- Husky for pre-commit hooks.
+- Framer-motion for subtle animations.
 
 ## Learn More
 
