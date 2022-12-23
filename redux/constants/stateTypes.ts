@@ -1,5 +1,5 @@
 import store from "../store"
-import { ContentfulType } from "../../utils/interfaces"
+import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
 // Add the Type for all the states used in redux in this file.
 
 // state types for store (no other types are required since they are included in 'configureStore')
@@ -8,4 +8,8 @@ export type DispatchType = typeof store.dispatch
 
 export interface ContentType {
   data: ContentfulType
+}
+
+export interface PaletteType {
+  data: PaletteDataType[]
 }
