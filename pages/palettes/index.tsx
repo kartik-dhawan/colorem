@@ -1,36 +1,38 @@
 import { Box } from "@mui/material"
-import axios from "axios"
 import PaletteSection from "../../components/PaletteSection"
 import { useDispatch } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { updatePalettes } from "../../redux/slices/paletteSlice"
-import { PaletteType } from "../../redux/constants/stateTypes"
-import { LOCAL_URL } from "../../utils/constants"
 import { client } from "../../utils/contentful/config"
 import { updateContent } from "../../redux/slices/contentSlice"
+import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
+import axios from "axios"
 
 export const getStaticProps = async () => {
-  const response = await axios.get(LOCAL_URL + "/api/palettes")
   const contentResponse = await client.getEntries({
     content_type: "coloremDashboard", // eslint-disable-line
   })
 
   return {
     props: {
-      data: response?.data,
       contentData: contentResponse?.items[0]?.fields,
     },
+    revalidate: 10 || parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
-const Palettes = ({ data, contentData }: PaletteType) => {
+const Palettes = ({ contentData }: ContentfulType) => {
   const dispatch = useDispatch()
+  const [palettesData, setPalettesData] = useState<PaletteDataType[]>([]) // eslint-disable-line
 
   useEffect(() => {
-    // saves the palettes in redux store.
-    dispatch(updatePalettes(data))
+    axios.post("/api/palettes").then((res) => {
+      setPalettesData(res.data)
+      // saves the palettes in redux store.
+      dispatch(updatePalettes(res.data))
+    })
     dispatch(updateContent(contentData))
-  }, [data])
+  }, [])
 
   return (
     <Box

@@ -10,7 +10,11 @@ export interface ContentType {
   data: ContentfulType
 }
 
+export interface PalettesPagePropsType {
+  palettesData: PaletteDataType[]
+  contentData: ContentfulType
+}
+
 export interface PaletteType {
   data: PaletteDataType[]
-  contentData: ContentfulType
 }

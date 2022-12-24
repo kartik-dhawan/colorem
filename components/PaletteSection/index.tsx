@@ -7,8 +7,7 @@ import { styles } from "./styles/styles"
 const PaletteSection = () => {
   const pid = "paletteSection"
   const allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
-  const palette = allPalettes[34]
-  console.log(palette)
+  const palette = allPalettes && allPalettes[34]
 
   return (
     <Box
