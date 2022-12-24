@@ -29,7 +29,7 @@ const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // when we hit it anywhere, hence exposing our APIs
   if (req.method === "POST") {
     const randomModel = getRandomColormindModel()
-    await getColormindPalette(randomModel)
+    return await getColormindPalette(randomModel)
       .then((response) => {
         // gets array of colors in hex-code
         const paletteInHexCode = rgbArrayToHex(response.result)
