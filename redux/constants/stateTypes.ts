@@ -12,4 +12,5 @@ export interface ContentType {
 
 export interface PaletteType {
   data: PaletteDataType[]
+  contentData: ContentfulType
 }
