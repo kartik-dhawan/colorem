@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { updatePalettes } from "../../redux/slices/paletteSlice"
 import { PaletteType } from "../../redux/constants/stateTypes"
+import { LOCAL_URL } from "../../utils/constants"
 
 export const getStaticProps = async () => {
-  const response = await axios.get("http://localhost:3000/api/palettes")
+  const response = await axios.get(LOCAL_URL + "/api/palettes")
   return {
     props: {
       data: response?.data,
@@ -21,11 +22,15 @@ const Palettes = ({ data }: PaletteType) => {
   useEffect(() => {
     // saves the palettes in redux store.
     dispatch(updatePalettes(data))
-    console.log("Saved data in redux")
   }, [data])
 
   return (
-    <Box>
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+      }}
+    >
       <PaletteSection />
     </Box>
   )

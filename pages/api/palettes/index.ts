@@ -8,7 +8,7 @@ const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {
   // hide our API end points after deployment.
   // ex: colorem.vercel.app/api/palettes would still return the api response
   // when we hit it anywhere, hence exposing our APIs
-  if (req.method === "POST") {
+  if (req.method === "GET") {
     // fetches all the color palettes from the DB
     getAllColorPalettes()
       .then((response) => {
