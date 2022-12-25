@@ -6,6 +6,7 @@ import { PaletteDataType } from "../../utils/interfaces"
 import PaletteBar from "./PaletteBar"
 import { styles } from "./styles/styles"
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight"
+import PrimaryLoader from "../common/Loaders/PrimaryLoader"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -52,7 +53,7 @@ const PaletteSection = () => {
     window.addEventListener("keydown", handleKeyDown)
   }, [])
 
-  return (
+  return allPalettes.length !== 0 ? (
     <Box
       className={pid + "Wrapper"}
       id={pid + "Wrapper"}
@@ -63,12 +64,7 @@ const PaletteSection = () => {
     >
       <Box
         className={pid + "HeaderWrapper"}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "10px 6px",
-        }}
+        sx={styles.paletteSectionHeaderWrapper}
       >
         <Typography
           variant="body2"
@@ -81,14 +77,8 @@ const PaletteSection = () => {
         <Button
           onClick={countHandler}
           className={pid + "NextBtn"}
-          id={pid + "NextPaletteBtn"}
-          sx={{
-            color: "#d9d9d9", // $text_primary
-            fontSize: "20px",
-            fontWeight: 300,
-            borderRadius: "0px",
-            padding: "2px 7px 2px 16px",
-          }}
+          id={pid + "NextBtn"}
+          sx={styles.paletteSectionNextBtn}
         >
           Next <KeyboardDoubleArrowRightIcon />
         </Button>
@@ -103,6 +93,8 @@ const PaletteSection = () => {
         })}
       </Box>
     </Box>
+  ) : (
+    <PrimaryLoader />
   )
 }
 
