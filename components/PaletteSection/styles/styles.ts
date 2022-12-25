@@ -9,10 +9,9 @@ export const styles = {
     height: "100%",
   },
   paletteSectionTitle: {
+    color: "#d9d9d9", // $text_primary
     textTransform: "capitalize",
     fontSize: "20px",
-    color: "#d9d9d9", // $text_primary
     fontWeight: 300,
-    padding: "16px 4px 8px 4px",
   },
 }
