@@ -7,6 +7,10 @@ import { client } from "../../utils/contentful/config"
 import { updateContent } from "../../redux/slices/contentSlice"
 import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
 import axios from "axios"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback, {
+  myErrorHandler,
+} from "../../components/common/ErrorFallback"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -41,7 +45,9 @@ const Palettes = ({ contentData }: ContentfulType) => {
         display: "flex",
       }}
     >
-      <PaletteSection />
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+        <PaletteSection />
+      </ErrorBoundary>
     </Box>
   )
 }
