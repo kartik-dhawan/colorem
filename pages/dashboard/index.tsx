@@ -8,6 +8,10 @@ import { ContentfulType } from "../../utils/interfaces"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateContent } from "../../redux/slices/contentSlice"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback, {
+  myErrorHandler,
+} from "../../components/common/ErrorFallback"
 
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
@@ -35,10 +39,12 @@ const Dashboard = ({ data }: ContentfulType) => {
 
   return (
     <Box>
-      <SubNav content={data} />
-      <FileSection />
-      <FeedbackAndTeam />
-      <Essentials />
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+        <SubNav content={data} />
+        <FileSection />
+        <FeedbackAndTeam />
+        <Essentials />
+      </ErrorBoundary>
     </Box>
   )
 }
