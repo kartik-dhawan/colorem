@@ -88,8 +88,11 @@ const PaletteSection = () => {
         id={pid + "BarsWrapper"}
         sx={styles.paletteSectionBarsWrapper}
       >
-        {allPalettes[count]?.hex.map((hexcode) => {
-          return <PaletteBar key={hexcode} pid={pid} hexcode={hexcode} />
+        {/* reversing the array so that new palettes come first */}
+        {[...allPalettes].reverse()[count]?.hex.map((hexcode, i) => {
+          return (
+            <PaletteBar key={hexcode} pid={pid} hexcode={hexcode} index={i} />
+          )
         })}
       </Box>
     </Box>

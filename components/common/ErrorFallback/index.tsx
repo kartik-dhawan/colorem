@@ -13,7 +13,7 @@ const ErrorFallback = ({
   resetErrorBoundary,
 }: {
   error: Error
-  resetErrorBoundary: any
+  resetErrorBoundary: any // eslint-disable-line
 }) => {
   return (
     <div role="alert">

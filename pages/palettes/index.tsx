@@ -45,7 +45,9 @@ const Palettes = ({ contentData }: ContentfulType) => {
     dispatch(updatePalettes(data ? data : []))
 
     // handle the error here, set it in redux and display a generic error page.
-    console.log(error ? error : "")
+    if (error) {
+      console.log(error)
+    }
 
     // storing contentful data in redux for this page
     dispatch(updateContent(contentData))
