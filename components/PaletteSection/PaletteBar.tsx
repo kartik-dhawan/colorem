@@ -1,6 +1,6 @@
 import { Box, Container, Divider, Typography } from "@mui/material"
 import { styles } from "./styles/styles"
-import { useEffect, useId } from "react"
+import { useId } from "react"
 import { GetColorName } from "hex-color-to-color-name"
 import {
   getContrastingColor,
@@ -16,11 +16,6 @@ interface PaletteBarType {
 const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
   // use this id in common components that are rendered multiple times on the same page to keep the id unique at all places
   const id = useId()
-
-  useEffect(() => {
-    console.log("Color 1: ", GetColorName(hexcode))
-    console.log("Color 2: ", GetColorName(getContrastingColor(hexcode)))
-  }, [])
 
   return (
     <Container
@@ -43,9 +38,9 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
       <Box
         className={pid + "BarContentWrapper"}
         id={id + pid + "BarContentWrapper"}
+        sx={styles.paletteSectionBarContentWrapper}
       >
-        <Typography
-          variant="body1"
+        <Box
           className={pid + "BarColorText"}
           id={id + pid + "BarColorText"}
           sx={{
@@ -53,16 +48,16 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
             color: `#${getLightOrDarkTextColor(hexcode)}`,
           }}
         >
-          <Typography variant="body1" sx={{ fontSize: "25px" }}>
+          <Typography variant="body1" sx={styles.paletteBarFirstColorName}>
             {GetColorName(hexcode)}
           </Typography>
-          <Typography variant="body1">
-            & {GetColorName(getContrastingColor(hexcode))}
+          <Typography variant="body1" sx={styles.paletteBarSecondColorName}>
+            &nbsp;& {GetColorName(getContrastingColor(hexcode))}
           </Typography>
-        </Typography>
+        </Box>
         <Divider
           sx={{
-            margin: "15px 0px 75px 0px",
+            ...styles.paletteSectionBarDivider,
             backgroundColor: `#${getContrastingColor(hexcode)}`,
           }}
         />
@@ -91,7 +86,7 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                 color: `#${getLightOrDarkTextColor(hexcode)}`,
               }}
             >
-              Primary Text Color
+              Text Color
             </Typography>
           </Box>
           <Box
@@ -114,7 +109,7 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                 color: `#${getLightOrDarkTextColor(hexcode)}`,
               }}
             >
-              Primary Background Color
+              Background Color
             </Typography>
           </Box>
         </Box>
