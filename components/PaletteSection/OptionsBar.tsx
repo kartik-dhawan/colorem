@@ -16,7 +16,7 @@ interface OptionsBarProps {
 
 const OptionsBar = ({ pid, countHandler }: OptionsBarProps) => {
   const [saved, setSaved] = useState<boolean>(false)
-  const [favorite, setfavorite] = useState<boolean>(false)
+  const [favorite, setFavorite] = useState<boolean>(false)
 
   // to toggle save post button (bookmark icon)
   const savedHandler = useCallback(() => {
@@ -25,7 +25,7 @@ const OptionsBar = ({ pid, countHandler }: OptionsBarProps) => {
 
   // to toggle like post button (heart icon)
   const favoriteHandler = useCallback(() => {
-    setfavorite(!favorite)
+    setFavorite(!favorite)
   }, [favorite])
 
   return (
@@ -66,7 +66,11 @@ const OptionsBar = ({ pid, countHandler }: OptionsBarProps) => {
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconNext"}
-        onClick={countHandler}
+        onClick={() => {
+          countHandler()
+          setSaved(false)
+          setFavorite(false)
+        }}
         sx={styles.optionsIconNext}
       >
         <NextPlanIcon sx={{ fontSize: "26px" }} />
