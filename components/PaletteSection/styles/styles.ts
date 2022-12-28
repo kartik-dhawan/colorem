@@ -11,6 +11,9 @@ export const styles = {
     fontWeight: 300,
     borderRadius: "0px",
     padding: "2px 7px 2px 16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   paletteSectionBarsWrapper: {
     display: "flex",
@@ -131,5 +134,20 @@ export const styles = {
     textTransform: "capitalize",
     fontSize: "20px",
     fontWeight: 300,
+  },
+  optionsIcon: {
+    color: "#d9d9d9",
+  },
+  optionsIconWrapper: {
+    marginLeft: "auto",
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  optionsIconNext: {
+    color: "#d9d9d9",
+    transition: "150ms all ease-in",
+    "&:hover": {
+      transform: "scale(1.11)",
+    },
   },
 }
