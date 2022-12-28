@@ -1,12 +1,12 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
-import { PaletteDataType } from "../../utils/interfaces"
+import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
 import PaletteBar from "./PaletteBar"
 import { styles } from "./styles/styles"
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight"
 import PrimaryLoader from "../common/Loaders/PrimaryLoader"
+import OptionsBar from "./OptionsBar"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -32,7 +32,7 @@ const PaletteSection = () => {
   }, [count, allPalettes[0], totalPalettes])
 
   // used to control the count from client screen (without keyboard)
-  const countHandler = () => {
+  const countHandler: CountHandlerType = () => {
     if (count < totalPalettes - 1) {
       setCount((count) => count + 1)
     } else {
@@ -62,27 +62,22 @@ const PaletteSection = () => {
       }}
       tabIndex={0}
     >
-      <Box
+      <Grid
+        container
         className={pid + "HeaderWrapper"}
         sx={styles.paletteSectionHeaderWrapper}
       >
-        <Typography
-          variant="body2"
+        <Grid
+          item
+          xs={6}
           sx={styles.paletteSectionTitle}
           className={pid + "Title"}
           id={pid + "Title"}
         >
           {palette?.name}
-        </Typography>
-        <Button
-          onClick={countHandler}
-          className={pid + "NextBtn"}
-          id={pid + "NextBtn"}
-          sx={styles.paletteSectionNextBtn}
-        >
-          Next <KeyboardDoubleArrowRightIcon />
-        </Button>
-      </Box>
+        </Grid>
+        <OptionsBar countHandler={countHandler} pid={pid} />
+      </Grid>
       <Box
         className={pid + "BarsWrapper"}
         id={pid + "BarsWrapper"}
