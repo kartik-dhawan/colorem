@@ -129,6 +129,12 @@ export const styles = {
   paletteSectionBarColorReference: {
     fontSize: "12px",
   },
+  paletteBarHexcode: {
+    fontSize: "13px",
+    display: "flex",
+    alignItems: "center",
+    padding: "5px",
+  },
   paletteSectionTitle: {
     color: "#d9d9d9", // $text_primary
     textTransform: "capitalize",

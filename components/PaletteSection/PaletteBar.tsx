@@ -1,8 +1,9 @@
-import { Box, Container, Divider, Typography } from "@mui/material"
+import { Box, Button, Container, Divider, Typography } from "@mui/material"
 import { styles } from "./styles/styles"
 import { useId } from "react"
 import { GetColorName } from "hex-color-to-color-name"
 import {
+  copyToClipboard,
   getContrastingColor,
   getLightOrDarkTextColor,
 } from "../../utils/methods"
@@ -87,6 +88,17 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
               }}
             >
               Text Color
+              <Button
+                sx={{
+                  ...styles.paletteBarHexcode,
+                  color: `#${getContrastingColor(hexcode)}`,
+                }}
+                onClick={() => {
+                  copyToClipboard(getContrastingColor(hexcode))
+                }}
+              >
+                {`#${getContrastingColor(hexcode)}`}
+              </Button>
             </Typography>
           </Box>
           <Box
@@ -110,6 +122,15 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
               }}
             >
               Background Color
+              <Button
+                sx={{
+                  ...styles.paletteBarHexcode,
+                  color: `#${getContrastingColor(hexcode)}`,
+                }}
+                onClick={() => {
+                  copyToClipboard(hexcode)
+                }}
+              >{`#${hexcode}`}</Button>
             </Typography>
           </Box>
         </Box>
