@@ -89,3 +89,8 @@ export const getLightOrDarkTextColor: GetLightOrDarkTextColor = (
     return "fff"
   }
 }
+
+// copy to clipboard function
+export const copyToClipboard = (hexcode: string) => {
+  navigator.clipboard.writeText(`#${hexcode}`)
+}
