@@ -3,7 +3,7 @@ import { styles } from "./styles/styles"
 import { useId } from "react"
 import { GetColorName } from "hex-color-to-color-name"
 import {
-  copyToClipboard,
+  copyHexCode,
   getContrastingColor,
   getLightOrDarkTextColor,
 } from "../../utils/methods"
@@ -94,7 +94,7 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                   color: `#${getContrastingColor(hexcode)}`,
                 }}
                 onClick={() => {
-                  copyToClipboard(getContrastingColor(hexcode))
+                  copyHexCode(getContrastingColor(hexcode))
                 }}
               >
                 {`#${getContrastingColor(hexcode)}`}
@@ -128,7 +128,7 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                   color: `#${getContrastingColor(hexcode)}`,
                 }}
                 onClick={() => {
-                  copyToClipboard(hexcode)
+                  copyHexCode(hexcode)
                 }}
               >{`#${hexcode}`}</Button>
             </Typography>

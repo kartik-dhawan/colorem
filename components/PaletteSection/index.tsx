@@ -1,12 +1,18 @@
 import { Box, Grid } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
-import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
+import {
+  CountHandlerType,
+  PaletteColorJSONType,
+  PaletteDataType,
+  PaletteJSONType,
+} from "../../utils/interfaces"
 import PaletteBar from "./PaletteBar"
 import { styles } from "./styles/styles"
 import PrimaryLoader from "../common/Loaders/PrimaryLoader"
 import OptionsBar from "./OptionsBar"
+import { getContrastingColor } from "../../utils/methods"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -49,6 +55,29 @@ const PaletteSection = () => {
     }
   }
 
+  // creates a JSON object for the palette
+  const getJSONObjectForPalette = useCallback(
+    (allPalettes: PaletteDataType[], count: number) => {
+      const paletteJSONObject: PaletteJSONType = {}
+      const paletteArray: PaletteColorJSONType[] = []
+      const currentPalette = [...allPalettes][count]
+      // stores palette name in the JSON obj
+      paletteJSONObject["name"] = [...allPalettes].reverse()[count].name
+      // for every color generates an object for hexcodes and stores in paletteArray
+      currentPalette?.hex.map((hex, i) => {
+        paletteArray[i] = {
+          TITLE: `color_${i}`,
+          BACKGROUND: `#${hex}`,
+          TEXT: `#${getContrastingColor(hex)}`,
+        }
+      })
+      // stores the palette array generated in the JSON Obj
+      paletteJSONObject["palette"] = paletteArray
+      return paletteJSONObject
+    },
+    [count, allPalettes]
+  )
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
   }, [])
@@ -76,7 +105,13 @@ const PaletteSection = () => {
         >
           {palette?.name}
         </Grid>
-        <OptionsBar countHandler={countHandler} pid={pid} />
+        <OptionsBar
+          countHandler={countHandler}
+          pid={pid}
+          getJSONObjectForPalette={getJSONObjectForPalette}
+          allPalettes={allPalettes}
+          count={count}
+        />
       </Grid>
       <Box
         className={pid + "BarsWrapper"}

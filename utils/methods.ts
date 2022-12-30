@@ -91,6 +91,14 @@ export const getLightOrDarkTextColor: GetLightOrDarkTextColor = (
 }
 
 // copy to clipboard function
-export const copyToClipboard = (hexcode: string) => {
-  navigator.clipboard.writeText(`#${hexcode}`)
+export const copyToClipboard = (data: string) => {
+  navigator.clipboard.writeText(data)
+}
+
+export const copyHexCode = (hexcode: string) => {
+  copyToClipboard(`#${hexcode}`)
+}
+
+export const copyPaletteJSON = (palette: any) => {
+  copyToClipboard(JSON.stringify(palette))
 }
