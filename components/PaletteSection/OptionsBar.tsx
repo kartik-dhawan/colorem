@@ -6,15 +6,25 @@ import BookmarkIcon from "@mui/icons-material/Bookmark"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { useCallback, useState } from "react"
-import { CountHandlerType } from "../../utils/interfaces"
+import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
+import { copyPaletteJSON } from "../../utils/methods"
 
 interface OptionsBarProps {
   countHandler: CountHandlerType
   pid: string
+  getJSONObjectForPalette: any
+  allPalettes: PaletteDataType[]
+  count: number
 }
 
-const OptionsBar = ({ pid, countHandler }: OptionsBarProps) => {
+const OptionsBar = ({
+  pid,
+  countHandler,
+  getJSONObjectForPalette,
+  allPalettes,
+  count,
+}: OptionsBarProps) => {
   const [saved, setSaved] = useState<boolean>(false)
   const [favorite, setFavorite] = useState<boolean>(false)
 
@@ -41,6 +51,14 @@ const OptionsBar = ({ pid, countHandler }: OptionsBarProps) => {
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconCopy"}
         sx={styles.optionsIcon}
+        onClick={() => {
+          // console.log(allPalettes)
+          const paletteJSON = getJSONObjectForPalette(
+            [...allPalettes].reverse(),
+            count
+          )
+          copyPaletteJSON(paletteJSON)
+        }}
       >
         <ContentCopyIcon />
       </IconButton>

@@ -17,3 +17,14 @@ export type GetLightOrDarkTextColor = (hexcode: any) => "444" | "d9d9d9" | "fff"
 export type GetContrastingColor = (hexcode: any) => string // eslint-disable-line
 
 export type CountHandlerType = () => void
+
+export interface PaletteColorJSONType {
+  TITLE: string
+  BACKGROUND: string
+  TEXT: string
+}
+
+export interface PaletteJSONType {
+  name?: string
+  palette?: PaletteColorJSONType[]
+}
