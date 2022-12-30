@@ -16,6 +16,9 @@ const Layout = ({ children }: ChildrenType) => {
             xs: "24px 30px",
             sm: "30px 50px",
           },
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
         }}
       >
         <Head>

@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 
 const connectDatabase =
   (handler: any) => async (req: NextApiRequest, res: NextApiResponse) => {
+    // eslint-disable-line
     if (mongoose.connections[0].readyState) {
       return handler(req, res)
     }

@@ -1,5 +1,6 @@
 $mobiles-sm: "screen and (max-width: 375px)"; // till Smaller Mobile View
-$mobiles: "screen and (min-width: 376px) and (max-width: 600px)"; // till Mobile View
+$mobiles: "screen and (min-width: 376px) and (max-width: 600px)"; // from smaller mobiles to regular Mobile View
+$mobiles-and-sm: "screen and (max-width: 600px)"; // till Mobile View
 $tablets: "screen and (min-width: 601px) and (max-width: 1320px)"; // Tablet view
 $desktops: "screen and (min-width: 1321px)"; // Desktop view and higher
 $mobileAndTablet: "screen and (max-width: 1320px)"; // Cover all devices upto tablet

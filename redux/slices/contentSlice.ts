@@ -3,7 +3,7 @@ import { ContentfulType } from "../../utils/interfaces"
 import { ContentType } from "../constants/stateTypes"
 
 // initial state
-const initialState: any = {
+const initialState: ContentType = {
   data: {},
 }
 

@@ -38,6 +38,7 @@
     "no-unused-expressions": "error",
     "no-console": "warn",
     "no-multiple-empty-lines": ["error", { "max": 2 }],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "no-console": "off"
   }
 }
