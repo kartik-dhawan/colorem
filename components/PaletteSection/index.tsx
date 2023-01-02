@@ -13,6 +13,7 @@ import { styles } from "./styles/styles"
 import PrimaryLoader from "../common/Loaders/PrimaryLoader"
 import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
+import Instructor from "../common/Instructor"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -20,6 +21,12 @@ const PaletteSection = () => {
   const totalPalettes = allPalettes.length
   const [count, setCount] = useState<number>(0)
   const [palette, setPalette] = useState<PaletteDataType>(allPalettes[0])
+
+  // instructor variables and states
+  const [showInstructor, setShowInstructor] = useState<boolean>(true)
+  const { paletteSectionInstructor } = useSelector(
+    (state: RootType) => state.contentSlice.data
+  )
 
   // returns the palette onthe basis of index from the API
   const getNewPaletteOnSpacebar = (count: number) => {
@@ -82,7 +89,7 @@ const PaletteSection = () => {
     window.addEventListener("keydown", handleKeyDown)
   }, [])
 
-  return allPalettes.length !== 0 ? (
+  return allPalettes.length !== 0 && !showInstructor ? (
     <Box
       className={pid + "Wrapper"}
       id={pid + "Wrapper"}
@@ -126,6 +133,11 @@ const PaletteSection = () => {
         })}
       </Box>
     </Box>
+  ) : showInstructor ? (
+    <Instructor
+      instructorData={paletteSectionInstructor}
+      setShowInstructor={setShowInstructor}
+    />
   ) : (
     <PrimaryLoader />
   )
