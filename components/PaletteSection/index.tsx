@@ -85,8 +85,19 @@ const PaletteSection = () => {
     [count, allPalettes]
   )
 
+  // looks for any key pressing event on any componeny on the window
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
+  }, [])
+
+  // if on a session on a page, user visits this page for the first time
+  // then & only then this popup will be visible
+  useEffect(() => {
+    const isFirstTimePopup =
+      sessionStorage.getItem("persistPaletteInstructor") === "visited"
+        ? false
+        : true
+    setShowInstructor(isFirstTimePopup)
   }, [])
 
   return allPalettes.length !== 0 && !showInstructor ? (
