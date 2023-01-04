@@ -5,10 +5,14 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
 import BookmarkIcon from "@mui/icons-material/Bookmark"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import FavoriteIcon from "@mui/icons-material/Favorite"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
 import { copyPaletteJSON } from "../../utils/methods"
+import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 
 interface OptionsBarProps {
   countHandler: CountHandlerType
@@ -28,6 +32,17 @@ const OptionsBar = ({
   const [saved, setSaved] = useState<boolean>(false)
   const [favorite, setFavorite] = useState<boolean>(false)
 
+  const dispatch = useDispatch()
+
+  const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
+
+  // if any 'copied' alert is on the screen, it would remove it after 3 seconds
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(toggleCopiedAlert(false))
+    }, COPIED_ALERT_TIMEOUT)
+  }, [copiedAlert])
+
   // to toggle save post button (bookmark icon)
   const savedHandler = useCallback(() => {
     setSaved(!saved)
@@ -37,6 +52,13 @@ const OptionsBar = ({
   const favoriteHandler = useCallback(() => {
     setFavorite(!favorite)
   }, [favorite])
+
+  // clear saves and likes on clicking next palette icon
+  const nextHandler = useCallback(() => {
+    countHandler()
+    setSaved(false)
+    setFavorite(false)
+  }, [])
 
   return (
     <Grid
@@ -52,12 +74,13 @@ const OptionsBar = ({
         id={pid + "OptionsIconCopy"}
         sx={styles.optionsIcon}
         onClick={() => {
-          // console.log(allPalettes)
           const paletteJSON = getJSONObjectForPalette(
             [...allPalettes].reverse(),
             count
           )
           copyPaletteJSON(paletteJSON)
+          // shows an alert
+          dispatch(toggleCopiedAlert(true))
         }}
       >
         <ContentCopyIcon />
@@ -84,11 +107,7 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconNext"}
-        onClick={() => {
-          countHandler()
-          setSaved(false)
-          setFavorite(false)
-        }}
+        onClick={nextHandler}
         sx={styles.optionsIconNext}
       >
         <NextPlanIcon sx={{ fontSize: "26px" }} />

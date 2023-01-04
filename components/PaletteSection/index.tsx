@@ -13,6 +13,8 @@ import { styles } from "./styles/styles"
 import PrimaryLoader from "../common/Loaders/PrimaryLoader"
 import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
+import Instructor from "../common/Instructor"
+import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -20,6 +22,12 @@ const PaletteSection = () => {
   const totalPalettes = allPalettes.length
   const [count, setCount] = useState<number>(0)
   const [palette, setPalette] = useState<PaletteDataType>(allPalettes[0])
+
+  // instructor variables and states
+  const [showInstructor, setShowInstructor] = useState<boolean>(true)
+  const { paletteSectionInstructor } = useSelector(
+    (state: RootType) => state.contentSlice.data
+  )
 
   // returns the palette onthe basis of index from the API
   const getNewPaletteOnSpacebar = (count: number) => {
@@ -78,11 +86,24 @@ const PaletteSection = () => {
     [count, allPalettes]
   )
 
+  // looks for any key pressing event on any componeny on the window
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
   }, [])
 
-  return allPalettes.length !== 0 ? (
+  // if on a session on a page, user visits this page for the first time
+  // then & only then this popup will be visible
+  useEffect(() => {
+    const isFirstTimePopup =
+      sessionStorage.getItem("persistPaletteInstructor") === "visited"
+        ? false
+        : true
+    setShowInstructor(isFirstTimePopup)
+  }, [])
+
+  const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
+
+  return allPalettes.length !== 0 && !showInstructor ? (
     <Box
       className={pid + "Wrapper"}
       id={pid + "Wrapper"}
@@ -105,6 +126,7 @@ const PaletteSection = () => {
         >
           {palette?.name}
         </Grid>
+        {/*  options bar  */}
         <OptionsBar
           countHandler={countHandler}
           pid={pid}
@@ -113,6 +135,8 @@ const PaletteSection = () => {
           count={count}
         />
       </Grid>
+      {/* Alert which will appear to notify that the text has been copied */}
+      {copiedAlert && <PrimaryAlertBox alertTitle={"copied"} />}
       <Box
         className={pid + "BarsWrapper"}
         id={pid + "BarsWrapper"}
@@ -126,6 +150,11 @@ const PaletteSection = () => {
         })}
       </Box>
     </Box>
+  ) : showInstructor ? (
+    <Instructor
+      instructorData={paletteSectionInstructor}
+      setShowInstructor={setShowInstructor}
+    />
   ) : (
     <PrimaryLoader />
   )

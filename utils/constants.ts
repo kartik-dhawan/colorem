@@ -9,3 +9,5 @@ export const externalLinks = {
 export const API_URLS = {
   GET_ALL_PALETTES: "/api/palettes",
 }
+
+export const COPIED_ALERT_TIMEOUT = 2000
