@@ -10,4 +10,4 @@ export const API_URLS = {
   GET_ALL_PALETTES: "/api/palettes",
 }
 
-export const COPIED_ALERT_TIMEOUT = 3000
+export const COPIED_ALERT_TIMEOUT = 2000
