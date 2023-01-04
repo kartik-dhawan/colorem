@@ -18,3 +18,7 @@ export interface PalettesPagePropsType {
 export interface PaletteType {
   data: PaletteDataType[]
 }
+
+export interface ToggleSliceType {
+  copiedAlert: boolean
+}

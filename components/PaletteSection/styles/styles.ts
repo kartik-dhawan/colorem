@@ -40,8 +40,8 @@ export const styles = {
       md: 0,
     },
     margin: {
-      xs: "13px 5px 8px 25px",
-      sm: "25px 50px 15px 50px",
+      xs: "13px 5px 2px 25px",
+      sm: "25px 50px 8px 50px",
       md: "0px",
     },
   },
@@ -72,7 +72,9 @@ export const styles = {
   },
   paletteBarFirstColorName: {
     fontSize: {
-      sm: "21px",
+      xs: "18px",
+      sm: "23px",
+      md: "19px",
       lg: "25px",
     },
   },
@@ -80,7 +82,9 @@ export const styles = {
     display: "flex",
     alignItems: "center",
     fontSize: {
+      xs: "17px",
       sm: "21px",
+      md: "17px",
       lg: "20px",
     },
   },
@@ -127,13 +131,18 @@ export const styles = {
     flex: 1,
   },
   paletteSectionBarColorReference: {
-    fontSize: "12px",
+    fontSize: {
+      xs: "14px",
+      md: "12px",
+    },
   },
   paletteBarHexcode: {
     fontSize: "13px",
     display: "flex",
     alignItems: "center",
     padding: "5px",
+    marginLeft: "-5px",
+    marginBottom: "-3px",
   },
   paletteSectionTitle: {
     color: "#d9d9d9", // $text_primary
