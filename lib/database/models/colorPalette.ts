@@ -9,6 +9,7 @@ const PaletteSchema = new Schema(
     paletteGuid: String,
     rgb: [[Number]],
     model: String,
+    likes: Number,
   },
   { collection: "colorPalette" }
 )
