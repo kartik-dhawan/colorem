@@ -40,6 +40,7 @@ const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
           hex: paletteInHexCode,
           rgb: response.result,
           model: randomModel,
+          likes: 0,
         }
 
         // creates an instance of the schema

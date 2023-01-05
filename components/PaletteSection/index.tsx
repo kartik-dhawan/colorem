@@ -18,7 +18,11 @@ import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
-  const allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
+  let allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
+  {
+    /* reversing the array so that new palettes come first */
+  }
+  allPalettes = [...allPalettes].reverse()
   const totalPalettes = allPalettes.length
   const [count, setCount] = useState<number>(0)
   const [palette, setPalette] = useState<PaletteDataType>(allPalettes[0])
@@ -44,6 +48,10 @@ const PaletteSection = () => {
     // gets the current palette on the basis of index or count & set it in the state
     setPalette(getNewPaletteOnSpacebar(count))
   }, [count, allPalettes[0], totalPalettes])
+
+  useEffect(() => {
+    console.log(palette)
+  }, [palette?.name])
 
   // used to control the count from client screen (without keyboard)
   const countHandler: CountHandlerType = () => {
@@ -142,8 +150,7 @@ const PaletteSection = () => {
         id={pid + "BarsWrapper"}
         sx={styles.paletteSectionBarsWrapper}
       >
-        {/* reversing the array so that new palettes come first */}
-        {[...allPalettes].reverse()[count]?.hex.map((hexcode, i) => {
+        {allPalettes[count]?.hex.map((hexcode, i) => {
           return (
             <PaletteBar key={hexcode} pid={pid} hexcode={hexcode} index={i} />
           )

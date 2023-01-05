@@ -1,4 +1,5 @@
 import axios from "axios"
+import { NextApiRequest, NextApiResponse } from "next"
 import colorPalette from "../database/models/colorPalette"
 import { URLS } from "../utils/constants"
 import { FinalPaletteType } from "../utils/interfaces"
@@ -25,4 +26,27 @@ export const getColormindModels: () => Promise<any> = async () => {
       })
       return err
     })
+}
+
+// a function to get a palette on the basis of paletteGuid
+export const getPaletteByGuid = async (
+  paletteGuid: string | string[] | undefined,
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  const filter = {
+    paletteGuid: paletteGuid,
+  }
+
+  const palette = await colorPalette.findOne(filter)
+
+  if (palette) {
+    return palette
+  } else {
+    res
+      .status(404)
+      .json(
+        "Palette not found. Please verify the paletteGuid. If it is correct, the database doesn't consist of this record."
+      )
+  }
 }
