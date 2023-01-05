@@ -72,7 +72,7 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconCopy"}
-        sx={styles.optionsIcon}
+        sx={styles.optionsCopyIcon}
         onClick={() => {
           const paletteJSON = getJSONObjectForPalette(
             [...allPalettes].reverse(),
@@ -89,7 +89,7 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconLike"}
-        sx={styles.optionsIcon}
+        sx={styles.optionsLikeIcon}
         onClick={favoriteHandler}
       >
         {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
@@ -98,7 +98,7 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconSave"}
-        sx={styles.optionsIcon}
+        sx={styles.optionsSaveIcon}
         onClick={savedHandler}
       >
         {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}

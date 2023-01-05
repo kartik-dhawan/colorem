@@ -1,3 +1,5 @@
+import { getTooltipStyles } from "../../../styles/common/tooltip"
+
 export const styles = {
   paletteSectionHeaderWrapper: {
     display: "flex",
@@ -150,17 +152,29 @@ export const styles = {
     fontSize: "20px",
     fontWeight: 300,
   },
-  optionsIcon: {
-    color: "#d9d9d9",
-  },
   optionsIconWrapper: {
     marginLeft: "auto",
     display: "flex",
     justifyContent: "flex-end",
+    position: "relative",
   },
+  optionsCopyIcon: {
+    color: "#d9d9d9",
+    ...getTooltipStyles("Copy Palette"),
+  },
+  optionsLikeIcon: {
+    color: "#d9d9d9",
+    ...getTooltipStyles("Like"),
+  },
+  optionsSaveIcon: {
+    color: "#d9d9d9",
+    ...getTooltipStyles("Bookmark"),
+  },
+
   optionsIconNext: {
     color: "#d9d9d9",
     transition: "150ms all ease-in",
+    ...getTooltipStyles("Next"),
     "&:hover": {
       transform: "scale(1.11)",
     },
