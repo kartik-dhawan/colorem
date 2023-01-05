@@ -1,12 +1,16 @@
 import { Box, Button, Container, Divider, Typography } from "@mui/material"
 import { styles } from "./styles/styles"
-import { useId } from "react"
+import { useCallback, useEffect, useId } from "react"
 import { GetColorName } from "hex-color-to-color-name"
 import {
   copyHexCode,
   getContrastingColor,
   getLightOrDarkTextColor,
 } from "../../utils/methods"
+import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 
 interface PaletteBarType {
   pid: string
@@ -17,6 +21,16 @@ interface PaletteBarType {
 const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
   // use this id in common components that are rendered multiple times on the same page to keep the id unique at all places
   const id = useId()
+  const dispatch = useDispatch()
+
+  const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
+
+  // if any 'copied' alert is on the screen, it would remove it after 3 seconds
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(toggleCopiedAlert(false))
+    }, COPIED_ALERT_TIMEOUT)
+  }, [copiedAlert])
 
   return (
     <Container
@@ -87,18 +101,21 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                 color: `#${getLightOrDarkTextColor(hexcode)}`,
               }}
             >
-              Text Color
               <Button
                 sx={{
                   ...styles.paletteBarHexcode,
                   color: `#${getContrastingColor(hexcode)}`,
                 }}
-                onClick={() => {
+                onClick={useCallback(() => {
+                  // text-color section
+                  dispatch(toggleCopiedAlert(true))
+                  // shows an alert
                   copyHexCode(getContrastingColor(hexcode))
-                }}
+                }, [hexcode])}
               >
                 {`#${getContrastingColor(hexcode)}`}
               </Button>
+              Text Color
             </Typography>
           </Box>
           <Box
@@ -121,16 +138,19 @@ const PaletteBar = ({ pid, hexcode, index }: PaletteBarType) => {
                 color: `#${getLightOrDarkTextColor(hexcode)}`,
               }}
             >
-              Background Color
               <Button
                 sx={{
                   ...styles.paletteBarHexcode,
                   color: `#${getContrastingColor(hexcode)}`,
                 }}
-                onClick={() => {
+                onClick={useCallback(() => {
+                  // background-color section
                   copyHexCode(hexcode)
-                }}
+                  // shows an alert
+                  dispatch(toggleCopiedAlert(true))
+                }, [hexcode])}
               >{`#${hexcode}`}</Button>
+              Background Color
             </Typography>
           </Box>
         </Box>

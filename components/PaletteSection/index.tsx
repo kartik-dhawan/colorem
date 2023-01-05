@@ -14,6 +14,7 @@ import PrimaryLoader from "../common/Loaders/PrimaryLoader"
 import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
 import Instructor from "../common/Instructor"
+import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -100,6 +101,8 @@ const PaletteSection = () => {
     setShowInstructor(isFirstTimePopup)
   }, [])
 
+  const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
+
   return allPalettes.length !== 0 && !showInstructor ? (
     <Box
       className={pid + "Wrapper"}
@@ -123,6 +126,7 @@ const PaletteSection = () => {
         >
           {palette?.name}
         </Grid>
+        {/*  options bar  */}
         <OptionsBar
           countHandler={countHandler}
           pid={pid}
@@ -131,6 +135,8 @@ const PaletteSection = () => {
           count={count}
         />
       </Grid>
+      {/* Alert which will appear to notify that the text has been copied */}
+      {copiedAlert && <PrimaryAlertBox alertTitle={"copied"} />}
       <Box
         className={pid + "BarsWrapper"}
         id={pid + "BarsWrapper"}
