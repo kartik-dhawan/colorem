@@ -15,6 +15,7 @@ import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
 import Instructor from "../common/Instructor"
 import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
+import { logger } from "../../lib/methods"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -50,7 +51,7 @@ const PaletteSection = () => {
   }, [count, allPalettes[0], totalPalettes])
 
   useEffect(() => {
-    console.log(palette)
+    logger(palette)
   }, [palette?.name])
 
   // used to control the count from client screen (without keyboard)
@@ -63,7 +64,7 @@ const PaletteSection = () => {
   }
 
   // changes palette index (or count) on hitting spacebar
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: any) /* eslint-disable-line */ => {
     if (event.key === " ") {
       // " " - space
       event.preventDefault()
@@ -78,7 +79,7 @@ const PaletteSection = () => {
       const paletteArray: PaletteColorJSONType[] = []
       const currentPalette = [...allPalettes][count]
       // stores palette name in the JSON obj
-      paletteJSONObject["name"] = [...allPalettes].reverse()[count].name
+      paletteJSONObject["name"] = allPalettes[count].name
       // for every color generates an object for hexcodes and stores in paletteArray
       currentPalette?.hex.map((hex, i) => {
         paletteArray[i] = {

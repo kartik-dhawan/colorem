@@ -13,6 +13,7 @@ import ErrorFallback, {
 } from "../../components/common/ErrorFallback"
 import useSWR from "swr"
 import { API_URLS } from "../../utils/constants"
+import { logger } from "../../lib/methods"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -46,7 +47,7 @@ const Palettes = ({ contentData }: ContentfulType) => {
 
     // handle the error here, set it in redux and display a generic error page.
     if (error) {
-      console.log(error)
+      logger({ error, type: "error" })
     }
 
     // storing contentful data in redux for this page

@@ -6,7 +6,11 @@ import BookmarkIcon from "@mui/icons-material/Bookmark"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { useCallback, useEffect, useState } from "react"
-import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
+import {
+  CountHandlerType,
+  JSONForPaletteFunction,
+  PaletteDataType,
+} from "../../utils/interfaces"
 import { styles } from "./styles/styles"
 import { copyPaletteJSON } from "../../utils/methods"
 import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
@@ -17,7 +21,7 @@ import { COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 interface OptionsBarProps {
   countHandler: CountHandlerType
   pid: string
-  getJSONObjectForPalette: any
+  getJSONObjectForPalette: JSONForPaletteFunction
   allPalettes: PaletteDataType[]
   count: number
 }
@@ -74,10 +78,7 @@ const OptionsBar = ({
         id={pid + "OptionsIconCopy"}
         sx={styles.optionsCopyIcon}
         onClick={() => {
-          const paletteJSON = getJSONObjectForPalette(
-            [...allPalettes].reverse(),
-            count
-          )
+          const paletteJSON = getJSONObjectForPalette(allPalettes, count)
           copyPaletteJSON(paletteJSON)
           // shows an alert
           dispatch(toggleCopiedAlert(true))

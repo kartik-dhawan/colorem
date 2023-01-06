@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { logger } from "../../../lib/methods"
 import { getPaletteByGuid } from "../../../lib/methods/getPalettes"
 import { updatePaletteByGuid } from "../../../lib/methods/savePalette"
+import { responseTexts } from "../../../lib/utils/constants"
 
 const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // gets the params from URL
@@ -15,14 +17,14 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(200).json(updatedPalette)
           })
           .catch((err) => {
-            console.log(err)
+            logger({ error: err, type: "Error" })
             res.status(501).json({
-              message: "Could not complete the PUT request.",
+              message: responseTexts.COULD_NOT_COMPLETE.PUT,
               err,
             })
           })
       : res.status(200).json({
-          message: "Please select a type of PUT request in context to the app.",
+          message: responseTexts.SELECT_TYPE_PUT,
           types: ["Like/Unlike"],
         })
   }
@@ -34,16 +36,14 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json(palette)
       })
       .catch((err) => {
-        console.log(err)
+        logger({ error: err, type: "Error" })
         res.status(501).json({
-          message: "Could not complete the PUT request.",
+          message: responseTexts.COULD_NOT_COMPLETE.PUT,
           err,
         })
       })
   } else {
-    res
-      .status(403)
-      .json("Cannot access this API. Try sending a PUT request to this API.")
+    res.status(403).json(responseTexts.TRY_DIFFERENT_REQUEST)
   }
 }
 
