@@ -13,6 +13,7 @@ import {
 } from "../../../lib/utils/interfaces"
 import colorPalette from "../../../lib/database/models/colorPalette"
 import { getColormindModels } from "../../../lib/methods/getPalettes"
+import { logger } from "../../../lib/methods"
 
 const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // gets a list of available models
@@ -51,7 +52,7 @@ const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
           .save()
           .then(() => {
             // sends the palette as a response to the API if saved
-            console.log("============= Saved the palette to DB =============")
+            logger("============= Saved the palette to DB =============")
             res.status(200).json(paletteResponse)
           })
           .catch(() => {

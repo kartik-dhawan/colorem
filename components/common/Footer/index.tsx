@@ -54,7 +54,7 @@ const Footer = () => {
         id={frid + "ReferenceWrapper"}
         sx={styles.footerBoxReferenceWrapper}
       >
-        {content.references?.map((item: any) => {
+        {content.references?.map((item: FooterContentObject) => {
           mapId++
           return (
             <Box

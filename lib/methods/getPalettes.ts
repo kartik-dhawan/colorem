@@ -1,5 +1,6 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
+import { logger } from "."
 import colorPalette from "../database/models/colorPalette"
 import { URLS } from "../utils/constants"
 import { FinalPaletteType } from "../utils/interfaces"
@@ -13,14 +14,14 @@ export const getAllColorPalettes: () => Promise<
 }
 
 // this function fetches all colormind models in a list
-export const getColormindModels: () => Promise<any> = async () => {
+export const getColormindModels = async () => {
   return await axios
     .get(URLS.COLORMIND_MODELS_API)
     .then((res) => {
       return res.data
     })
     .catch((err) => {
-      console.log({
+      logger({
         message: "Could not fetch colormind models' list.",
         error: err,
       })

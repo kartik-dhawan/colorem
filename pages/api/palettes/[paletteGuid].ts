@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { logger } from "../../../lib/methods"
 import { getPaletteByGuid } from "../../../lib/methods/getPalettes"
 import { updatePaletteByGuid } from "../../../lib/methods/savePalette"
 
@@ -15,7 +16,7 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(200).json(updatedPalette)
           })
           .catch((err) => {
-            console.log(err)
+            logger({ error: err, type: "Error" })
             res.status(501).json({
               message: "Could not complete the PUT request.",
               err,
@@ -34,7 +35,7 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json(palette)
       })
       .catch((err) => {
-        console.log(err)
+        logger({ error: err, type: "Error" })
         res.status(501).json({
           message: "Could not complete the PUT request.",
           err,

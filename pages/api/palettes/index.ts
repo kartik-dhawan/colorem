@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next"
 import connectDatabase from "../../../lib/database/connect"
+import { logger } from "../../../lib/methods"
 import { getAllColorPalettes } from "../../../lib/methods/getPalettes"
 
 const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,7 +16,7 @@ const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json(response)
       })
       .catch((err) => {
-        console.log({
+        logger({
           message: "Error fetching records.",
           error: err,
         })

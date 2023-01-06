@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
+import { EssentialItemsType } from "../../utils/interfaces"
 import { styles } from "./styles"
 
 const Essentials = () => {
@@ -23,7 +24,7 @@ const Essentials = () => {
         The Essentials
       </Typography>
       <Grid container className={eid + "Body"} id={eid + "Body"}>
-        {content.essentialItemsText?.map((item: any) => {
+        {content.essentialItemsText?.map((item: EssentialItemsType) => {
           return (
             <Grid
               item

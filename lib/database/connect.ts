@@ -2,8 +2,8 @@ import mongoose from "mongoose"
 import { NextApiRequest, NextApiResponse } from "next"
 
 const connectDatabase =
-  (handler: any) => async (req: NextApiRequest, res: NextApiResponse) => {
-    // eslint-disable-line
+  (handler: any) /* eslint-disable-line */ =>
+  async (req: NextApiRequest, res: NextApiResponse) => {
     if (mongoose.connections[0].readyState) {
       return handler(req, res)
     }
