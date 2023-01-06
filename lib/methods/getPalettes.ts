@@ -2,7 +2,7 @@ import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
 import { logger } from "."
 import colorPalette from "../database/models/colorPalette"
-import { URLS } from "../utils/constants"
+import { responseTexts, URLS } from "../utils/constants"
 import { FinalPaletteType } from "../utils/interfaces"
 
 // this function returns a promise which further consists the response.
@@ -22,7 +22,7 @@ export const getColormindModels = async () => {
     })
     .catch((err) => {
       logger({
-        message: "Could not fetch colormind models' list.",
+        message: responseTexts.COULD_NOT_COMPLETE.COLORMIND_MODEL,
         error: err,
       })
       return err
@@ -44,10 +44,6 @@ export const getPaletteByGuid = async (
   if (palette) {
     return palette
   } else {
-    res
-      .status(404)
-      .json(
-        "Palette not found. Please verify the paletteGuid. If it is correct, the database doesn't consist of this record."
-      )
+    res.status(404).json(responseTexts.PALETTE_NOT_FOUND)
   }
 }

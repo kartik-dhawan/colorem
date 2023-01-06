@@ -14,6 +14,7 @@ import {
 import colorPalette from "../../../lib/database/models/colorPalette"
 import { getColormindModels } from "../../../lib/methods/getPalettes"
 import { logger } from "../../../lib/methods"
+import { responseTexts } from "../../../lib/utils/constants"
 
 const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // gets a list of available models
@@ -57,19 +58,17 @@ const savePalette = async (req: NextApiRequest, res: NextApiResponse) => {
           })
           .catch(() => {
             // else sends the error response to the API
-            res.status(501).json("Could not save the palette to MongoDB")
+            res.status(501).json(responseTexts.COULD_NOT_COMPLETE.MONGODB_SAVE)
           })
       })
       .catch((err) => {
         res.status(401).json({
-          message: "Could not fetch the palette from ColorMind API",
+          message: responseTexts.COULD_NOT_COMPLETE.COLORMIND,
           err,
         })
       })
   } else {
-    res
-      .status(403)
-      .json("Cannot access this API. Try sending a POST request to this API.")
+    res.status(403).json(responseTexts.TRY_DIFFERENT_REQUEST)
   }
 }
 

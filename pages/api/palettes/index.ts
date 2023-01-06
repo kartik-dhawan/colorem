@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import connectDatabase from "../../../lib/database/connect"
 import { logger } from "../../../lib/methods"
 import { getAllColorPalettes } from "../../../lib/methods/getPalettes"
+import { responseTexts } from "../../../lib/utils/constants"
 
 const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {
   // using POST method even when we just need GET because Next.js doesn't
@@ -20,12 +21,10 @@ const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {
           message: "Error fetching records.",
           error: err,
         })
-        res.status(501).json("Could not fetch color palettes from MongoDB")
+        res.status(501).json(responseTexts.COULD_NOT_COMPLETE.MONGODB_FETCH)
       })
   } else {
-    res
-      .status(403)
-      .send("Cannot access this api. Try sending a POST request to this API.")
+    res.status(403).send(responseTexts.TRY_DIFFERENT_REQUEST)
   }
 }
 

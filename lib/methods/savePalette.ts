@@ -1,7 +1,7 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
 import colorPalette from "../database/models/colorPalette"
-import { URLS } from "../utils/constants"
+import { responseTexts, URLS } from "../utils/constants"
 import { getPaletteByGuid } from "./getPalettes"
 
 // runs colormind api and returns a promise
@@ -42,11 +42,7 @@ export const updatePaletteByGuid = async (
 
   // returns a generic response if no palette with that Guid is found
   if (!palette) {
-    res
-      .status(200)
-      .json(
-        "Palette not found. Please verify the paletteGuid. If it is correct, the database doesn't consist of this record."
-      )
+    res.status(200).json(responseTexts.PALETTE_NOT_FOUND)
   }
 
   // filter on the basis of which the palette would be searched and then updated
@@ -67,11 +63,7 @@ export const updatePaletteByGuid = async (
       likes: palette?.likes && palette?.likes - 1,
     }
   } else {
-    res
-      .status(200)
-      .json(
-        "Request body is not present. Please pass a valid body in the API request"
-      )
+    res.status(200).json(responseTexts.BODY_NOT_PRESENT)
   }
 
   // final updated palette after increasing or decreasing the like count
