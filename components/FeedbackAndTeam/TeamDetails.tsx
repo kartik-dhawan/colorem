@@ -42,7 +42,7 @@ const TeamDetails = () => {
           id={tid + "AvatarWrapper"}
           sx={styles.teamSectionAvatarWrapper}
         >
-          {members?.map((avi: any, i: number) => {
+          {members?.map((avi: any, i: number) /* eslint-disable-line */ => {
             return (
               <Image
                 key={i}

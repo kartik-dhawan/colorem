@@ -1,6 +1,8 @@
 import axios from "axios"
+import { NextApiRequest, NextApiResponse } from "next"
+import { logger } from "."
 import colorPalette from "../database/models/colorPalette"
-import { URLS } from "../utils/constants"
+import { responseTexts, URLS } from "../utils/constants"
 import { FinalPaletteType } from "../utils/interfaces"
 
 // this function returns a promise which further consists the response.
@@ -12,17 +14,36 @@ export const getAllColorPalettes: () => Promise<
 }
 
 // this function fetches all colormind models in a list
-export const getColormindModels: () => Promise<any> = async () => {
+export const getColormindModels = async () => {
   return await axios
     .get(URLS.COLORMIND_MODELS_API)
     .then((res) => {
       return res.data
     })
     .catch((err) => {
-      console.log({
-        message: "Could not fetch colormind models' list.",
+      logger({
+        message: responseTexts.COULD_NOT_COMPLETE.COLORMIND_MODEL,
         error: err,
       })
       return err
     })
+}
+
+// a function to get a palette on the basis of paletteGuid
+export const getPaletteByGuid = async (
+  paletteGuid: string | string[] | undefined,
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  const filter = {
+    paletteGuid: paletteGuid,
+  }
+
+  const palette = await colorPalette.findOne(filter)
+
+  if (palette) {
+    return palette
+  } else {
+    res.status(404).json(responseTexts.PALETTE_NOT_FOUND)
+  }
 }

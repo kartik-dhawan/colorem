@@ -18,10 +18,16 @@ import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
-  const allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
+  let allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
+  {
+    /* reversing the array so that new palettes come first */
+  }
+  allPalettes = [...allPalettes].reverse()
   const totalPalettes = allPalettes.length
   const [count, setCount] = useState<number>(0)
   const [palette, setPalette] = useState<PaletteDataType>(allPalettes[0])
+
+  const [guid, setGuid] = useState<string | undefined>()
 
   // instructor variables and states
   const [showInstructor, setShowInstructor] = useState<boolean>(true)
@@ -45,6 +51,10 @@ const PaletteSection = () => {
     setPalette(getNewPaletteOnSpacebar(count))
   }, [count, allPalettes[0], totalPalettes])
 
+  useEffect(() => {
+    setGuid(palette?.paletteGuid)
+  }, [palette?.name])
+
   // used to control the count from client screen (without keyboard)
   const countHandler: CountHandlerType = () => {
     if (count < totalPalettes - 1) {
@@ -55,7 +65,7 @@ const PaletteSection = () => {
   }
 
   // changes palette index (or count) on hitting spacebar
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: any) /* eslint-disable-line */ => {
     if (event.key === " ") {
       // " " - space
       event.preventDefault()
@@ -70,7 +80,7 @@ const PaletteSection = () => {
       const paletteArray: PaletteColorJSONType[] = []
       const currentPalette = [...allPalettes][count]
       // stores palette name in the JSON obj
-      paletteJSONObject["name"] = [...allPalettes].reverse()[count].name
+      paletteJSONObject["name"] = allPalettes[count].name
       // for every color generates an object for hexcodes and stores in paletteArray
       currentPalette?.hex.map((hex, i) => {
         paletteArray[i] = {
@@ -133,6 +143,7 @@ const PaletteSection = () => {
           getJSONObjectForPalette={getJSONObjectForPalette}
           allPalettes={allPalettes}
           count={count}
+          guid={guid}
         />
       </Grid>
       {/* Alert which will appear to notify that the text has been copied */}
@@ -142,8 +153,7 @@ const PaletteSection = () => {
         id={pid + "BarsWrapper"}
         sx={styles.paletteSectionBarsWrapper}
       >
-        {/* reversing the array so that new palettes come first */}
-        {[...allPalettes].reverse()[count]?.hex.map((hexcode, i) => {
+        {allPalettes[count]?.hex.map((hexcode, i) => {
           return (
             <PaletteBar key={hexcode} pid={pid} hexcode={hexcode} index={i} />
           )
