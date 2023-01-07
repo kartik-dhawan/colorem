@@ -15,7 +15,6 @@ import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
 import Instructor from "../common/Instructor"
 import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
-import { logger } from "../../lib/methods"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -27,6 +26,8 @@ const PaletteSection = () => {
   const totalPalettes = allPalettes.length
   const [count, setCount] = useState<number>(0)
   const [palette, setPalette] = useState<PaletteDataType>(allPalettes[0])
+
+  const [guid, setGuid] = useState<string | undefined>()
 
   // instructor variables and states
   const [showInstructor, setShowInstructor] = useState<boolean>(true)
@@ -51,7 +52,7 @@ const PaletteSection = () => {
   }, [count, allPalettes[0], totalPalettes])
 
   useEffect(() => {
-    logger(palette)
+    setGuid(palette?.paletteGuid)
   }, [palette?.name])
 
   // used to control the count from client screen (without keyboard)
@@ -142,6 +143,7 @@ const PaletteSection = () => {
           getJSONObjectForPalette={getJSONObjectForPalette}
           allPalettes={allPalettes}
           count={count}
+          guid={guid}
         />
       </Grid>
       {/* Alert which will appear to notify that the text has been copied */}

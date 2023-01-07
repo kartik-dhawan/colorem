@@ -29,6 +29,7 @@ export interface PaletteDataType {
   rgb: number[][]
   __v: number
   _id: string
+  likes: number
 }
 
 export type JSONForPaletteFunction = (
