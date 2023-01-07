@@ -1,4 +1,4 @@
-import { Grid, IconButton, Typography } from "@mui/material"
+import { Grid, IconButton } from "@mui/material"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
@@ -6,28 +6,20 @@ import BookmarkIcon from "@mui/icons-material/Bookmark"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { useCallback, useEffect, useState } from "react"
-import {
-  CountHandlerType,
-  JSONForPaletteFunction,
-  PaletteDataType,
-} from "../../utils/interfaces"
+import { CountHandlerType, PaletteDataType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
 import { copyPaletteJSON } from "../../utils/methods"
 import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
-import { API_URLS, COPIED_ALERT_TIMEOUT } from "../../utils/constants"
-import axios from "axios"
-import { validate } from "uuid"
-import { logger } from "../../lib/methods"
+import { COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 
 interface OptionsBarProps {
   countHandler: CountHandlerType
   pid: string
-  getJSONObjectForPalette: JSONForPaletteFunction
+  getJSONObjectForPalette: any
   allPalettes: PaletteDataType[]
   count: number
-  guid: string | undefined
 }
 
 const OptionsBar = ({
@@ -36,7 +28,6 @@ const OptionsBar = ({
   getJSONObjectForPalette,
   allPalettes,
   count,
-  guid,
 }: OptionsBarProps) => {
   const [saved, setSaved] = useState<boolean>(false)
   const [favorite, setFavorite] = useState<boolean>(false)
@@ -44,27 +35,6 @@ const OptionsBar = ({
   const dispatch = useDispatch()
 
   const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
-
-  const [likeCount, setLikeCount] = useState<number>(allPalettes[count].likes)
-
-  // sets the initial likeCount as likes from DB
-  useEffect(() => {
-    setLikeCount(allPalettes[count].likes ? allPalettes[count].likes : 0)
-  }, [count])
-
-  // clears previous palette's state on liking that palette
-  const handleKeyDown = (event: any) /* eslint-disable-line */ => {
-    if (event.key === " ") {
-      // " " - space
-      event.preventDefault()
-      setFavorite(false)
-      setSaved(false)
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown)
-  }, [])
 
   // if any 'copied' alert is on the screen, it would remove it after 3 seconds
   useEffect(() => {
@@ -78,68 +48,10 @@ const OptionsBar = ({
     setSaved(!saved)
   }, [saved])
 
-  // updates like count instantly on UI while it asynchronously updates it in DB
-  const likesHandlerUI = (like: boolean) => {
-    if (like) {
-      setLikeCount((like) => like + 1)
-    } else {
-      setLikeCount((like) => like - 1)
-    }
-  }
-
-  // to hit like-a-palette api on toggle
-  const hitLikePaletteAPI = useCallback(
-    (like: boolean) => {
-      return (
-        guid &&
-        validate(guid) &&
-        axios
-          .put(`${API_URLS.UPDATE_A_PALETTE}/${guid}`, {
-            like: like, // request body
-            type: "Like/Unlike",
-          })
-          .then(() => {
-            // updates like count instantly on UI while it asynchronously updates it in DB
-            likesHandlerUI(like)
-          })
-          .catch((err) => {
-            logger({
-              error: err,
-              type: "error",
-            })
-          })
-      )
-    },
-    [guid]
-  )
-
-  // gets liked palettes by user in that session
-  const likedPalettes: string[] = JSON.parse(
-    localStorage.getItem("liked") || "[]"
-  )
-
-  // if the user has already liked that palette in that session, it will persist that
-  useEffect(() => {
-    return guid && likedPalettes.includes(guid)
-      ? setFavorite(true)
-      : setFavorite(false)
-  }, [likedPalettes])
-
   // to toggle like post button (heart icon)
   const favoriteHandler = useCallback(() => {
     setFavorite(!favorite)
-    hitLikePaletteAPI(!favorite)
-    const liked =
-      guid &&
-      (!favorite
-        ? likedPalettes[likedPalettes.push(guid) - 1]
-        : likedPalettes.splice(likedPalettes.indexOf(guid), 1))
-
-    // stores liked palettes in local storage to persist temporarily
-    // once authentication has been implemented, this data will be stored in that user's collection
-    localStorage.setItem("liked", JSON.stringify(likedPalettes))
-    localStorage.setItem("previous-liked-unliked", JSON.stringify(liked))
-  }, [favorite, guid])
+  }, [favorite])
 
   // clear saves and likes on clicking next palette icon
   const nextHandler = useCallback(() => {
@@ -160,9 +72,12 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconCopy"}
-        sx={styles.optionsCopyIcon}
+        sx={styles.optionsIcon}
         onClick={() => {
-          const paletteJSON = getJSONObjectForPalette(allPalettes, count)
+          const paletteJSON = getJSONObjectForPalette(
+            [...allPalettes].reverse(),
+            count
+          )
           copyPaletteJSON(paletteJSON)
           // shows an alert
           dispatch(toggleCopiedAlert(true))
@@ -174,24 +89,16 @@ const OptionsBar = ({
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconLike"}
-        sx={styles.optionsLikeIcon}
+        sx={styles.optionsIcon}
         onClick={favoriteHandler}
       >
         {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        <Typography
-          variant="body1"
-          sx={{
-            paddingLeft: "4px",
-          }}
-        >
-          {likeCount}
-        </Typography>
       </IconButton>
       {/* button to save the palette */}
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconSave"}
-        sx={styles.optionsSaveIcon}
+        sx={styles.optionsIcon}
         onClick={savedHandler}
       >
         {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}

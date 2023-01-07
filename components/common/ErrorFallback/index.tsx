@@ -1,6 +1,5 @@
 import { Alert, AlertTitle, Box, Button } from "@mui/material"
 import { useCallback, useState } from "react"
-import { logger } from "../../../lib/methods"
 import { styles } from "./styles"
 
 export const myErrorHandler = (
@@ -9,8 +8,8 @@ export const myErrorHandler = (
 ) => {
   // Do something with the error
   // E.g. log to an error logging client here
-  logger({ error, type: "Error" })
-  logger({ info, type: "Info" })
+  console.log("Error: ", error)
+  console.log("ErrorInfo: ", info)
 }
 
 const ErrorFallback = ({
