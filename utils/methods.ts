@@ -30,7 +30,8 @@ export const LightenDarkenColor = (col: string, amt: number) => {
 }
 
 // finds out if a color is light or dark
-export const lightOrDark = (color: any) /* eslint-disable-line */ => {
+export const lightOrDark = (color: any) => {
+  // eslint-disable-line
   // letiables for red, green, blue values
   let r, g, b
 
@@ -65,9 +66,8 @@ export const lightOrDark = (color: any) /* eslint-disable-line */ => {
 }
 
 // gets a contrasting color by 50% for any color
-export const getContrastingColor: GetContrastingColor = (
-  hexcode: any /* eslint-disable-line */
-) => {
+export const getContrastingColor: GetContrastingColor = (hexcode: any) => {
+  // eslint-disable-line
   if (lightOrDark(hexcode) === "light") {
     return LightenDarkenColor(hexcode, -50)
   } else if (lightOrDark(hexcode) === "dark") {
@@ -99,6 +99,6 @@ export const copyHexCode = (hexcode: string) => {
   copyToClipboard(`#${hexcode}`)
 }
 
-export const copyPaletteJSON = (palette: any) /* eslint-disable-line */ => {
+export const copyPaletteJSON = (palette: any) => {
   copyToClipboard(JSON.stringify(palette))
 }
