@@ -129,15 +129,16 @@ const OptionsBar = ({
   const favoriteHandler = useCallback(() => {
     setFavorite(!favorite)
     hitLikePaletteAPI(!favorite)
-    guid &&
+    const liked =
+      guid &&
       (!favorite
-        ? likedPalettes.push(guid)
+        ? likedPalettes[likedPalettes.push(guid) - 1]
         : likedPalettes.splice(likedPalettes.indexOf(guid), 1))
 
     // stores liked palettes in local storage to persist temporarily
     // once authentication has been implemented, this data will be stored in that user's collection
     localStorage.setItem("liked", JSON.stringify(likedPalettes))
-    return
+    localStorage.setItem("previous-liked-unliked", JSON.stringify(liked))
   }, [favorite, guid])
 
   // clear saves and likes on clicking next palette icon
