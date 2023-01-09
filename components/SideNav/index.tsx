@@ -1,6 +1,6 @@
 import { Box, Button, Drawer } from "@mui/material"
 import Link from "next/link"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useCallback } from "react"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { SideNavItemsType } from "../../utils/interfaces"
@@ -25,13 +25,15 @@ const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
 
   const sid = "sideNav"
 
+  const sideNavCloseHandler = useCallback(() => {
+    setSideNavToggle(false)
+  }, [])
+
   return (
     <Drawer
       anchor={"right"}
       open={sideNavToggle}
-      onClose={() => {
-        setSideNavToggle(false)
-      }}
+      onClose={sideNavCloseHandler}
       className={sid + "Drawer"}
       id={sid + "Drawer"}
       elevation={2}

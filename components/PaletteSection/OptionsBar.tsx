@@ -1,17 +1,14 @@
-import { Grid, IconButton, Typography } from "@mui/material"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import ContentCopyIcon from "@mui/icons-material/ContentCopy"
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
-import BookmarkIcon from "@mui/icons-material/Bookmark"
+import { Box, Divider, Grid, IconButton, Menu, MenuItem } from "@mui/material"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
-import FavoriteIcon from "@mui/icons-material/Favorite"
+import MenuIcon from "@mui/icons-material/Menu"
+import MoreVertIcon from "@mui/icons-material/MoreVert"
 import { useCallback, useEffect, useState } from "react"
 import {
   CountHandlerType,
   JSONForPaletteFunction,
   PaletteDataType,
 } from "../../utils/interfaces"
-import { styles } from "./styles/styles"
+import { iconStyles, styles } from "./styles/styles"
 import { copyPaletteJSON } from "../../utils/methods"
 import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -20,6 +17,12 @@ import { API_URLS, COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 import axios from "axios"
 import { validate } from "uuid"
 import { logger } from "../../lib/methods"
+import SideNav from "../SideNav"
+import {
+  CopyIconComponent,
+  LikeIconComponent,
+  SaveIconComponent,
+} from "./icons"
 
 interface OptionsBarProps {
   countHandler: CountHandlerType
@@ -46,6 +49,7 @@ const OptionsBar = ({
   const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
 
   const [likeCount, setLikeCount] = useState<number>(allPalettes[count].likes)
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   // sets the initial likeCount as likes from DB
   useEffect(() => {
@@ -141,6 +145,13 @@ const OptionsBar = ({
     localStorage.setItem("previous-liked-unliked", JSON.stringify(liked))
   }, [favorite, guid])
 
+  const copyHandler = () => {
+    const paletteJSON = getJSONObjectForPalette(allPalettes, count)
+    copyPaletteJSON(paletteJSON)
+    // shows an alert
+    dispatch(toggleCopiedAlert(true))
+  }
+
   // clear saves and likes on clicking next palette icon
   const nextHandler = useCallback(() => {
     countHandler()
@@ -148,63 +159,125 @@ const OptionsBar = ({
     setFavorite(false)
   }, [])
 
+  // toggles sidenav menu
+  const menuHandler = useCallback(() => {
+    setSideNavToggle(!sideNavToggle)
+  }, [sideNavToggle])
+
+  // for submenu
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleSubMenuIconClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <Grid
       item
       xs={6}
-      sx={styles.optionsIconWrapper}
+      sx={iconStyles.optionsIconWrapper}
       className={pid + "IconButtonWrapper"}
       id={pid + "IconButtonWrapper"}
     >
-      {/* button to copy the code for palette */}
-      <IconButton
-        className={pid + "OptionsIcon"}
-        id={pid + "OptionsIconCopy"}
-        sx={styles.optionsCopyIcon}
-        onClick={() => {
-          const paletteJSON = getJSONObjectForPalette(allPalettes, count)
-          copyPaletteJSON(paletteJSON)
-          // shows an alert
-          dispatch(toggleCopiedAlert(true))
-        }}
+      <Box
+        className={pid + "SubMenuWrapper"}
+        id={pid + "SubMenuWrapper"}
+        sx={iconStyles.optionsBarSubMenuWrapper}
       >
-        <ContentCopyIcon />
-      </IconButton>
-      {/* button to like the palette */}
-      <IconButton
-        className={pid + "OptionsIcon"}
-        id={pid + "OptionsIconLike"}
-        sx={styles.optionsLikeIcon}
-        onClick={favoriteHandler}
-      >
-        {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        <Typography
-          variant="body1"
-          sx={{
-            paddingLeft: "4px",
-          }}
+        {/* for mobile & tablet view */}
+        <IconButton
+          id={pid + "SubMenuIconBtn"}
+          sx={{ color: "#d9d9d9" }}
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleSubMenuIconClick}
         >
-          {likeCount}
-        </Typography>
-      </IconButton>
-      {/* button to save the palette */}
-      <IconButton
-        className={pid + "OptionsIcon"}
-        id={pid + "OptionsIconSave"}
-        sx={styles.optionsSaveIcon}
-        onClick={savedHandler}
-      >
-        {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-      </IconButton>
-      {/* button to go to the next palette */}
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          elevation={0}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          sx={styles.optionsBarMenu}
+        >
+          <MenuItem
+            disableRipple
+            onClick={copyHandler}
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+          >
+            <CopyIconComponent copyHandler={copyHandler} />
+            Copy
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+            onClick={favoriteHandler}
+          >
+            <LikeIconComponent favorite={favorite} likeCount={likeCount} />
+            Like
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+            onClick={savedHandler}
+          >
+            <SaveIconComponent saved={saved} />
+            Save
+          </MenuItem>
+        </Menu>
+      </Box>
+      {/* for desktops */}
+      <CopyIconComponent
+        copyHandler={copyHandler}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
+      />
+      <LikeIconComponent
+        favorite={favorite}
+        likeCount={likeCount}
+        favoriteHandler={favoriteHandler}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
+      />
+      <SaveIconComponent
+        saved={saved}
+        savedHandler={savedHandler}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
+      />
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconNext"}
         onClick={nextHandler}
-        sx={styles.optionsIconNext}
+        sx={iconStyles.optionsIconNext}
       >
         <NextPlanIcon sx={{ fontSize: "26px" }} />
       </IconButton>
+      <IconButton
+        className={pid + "OptionsIcon"}
+        id={pid + "OptionsIconMenu"}
+        onClick={menuHandler}
+        sx={iconStyles.optionsMenuIcon}
+      >
+        <MenuIcon sx={{ fontSize: "26px" }} />
+      </IconButton>
+      <SideNav
+        sideNavToggle={sideNavToggle}
+        setSideNavToggle={setSideNavToggle}
+      />
     </Grid>
   )
 }
