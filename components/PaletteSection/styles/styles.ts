@@ -159,15 +159,12 @@ export const styles = {
     position: "relative",
   },
   optionsCopyIcon: {
-    color: "#d9d9d9",
     ...getTooltipStyles("Copy Palette"),
   },
   optionsLikeIcon: {
-    color: "#d9d9d9",
     ...getTooltipStyles("Like"),
   },
   optionsSaveIcon: {
-    color: "#d9d9d9",
     ...getTooltipStyles("Bookmark"),
   },
   optionsIconNext: {
@@ -182,6 +179,24 @@ export const styles = {
     color: "#d9d9d9",
     "& > svg": {
       fontSize: "28px",
+    },
+  },
+  optionsBarButtonsCommon: {
+    color: "#d9d9d9",
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  optionsBarButtonsConditionalDisplay: {
+    display: {
+      xs: "none",
+      sm: "flex",
+    },
+  },
+  optionsBarSubMenuWrapper: {
+    display: {
+      xs: "flex",
+      sm: "none",
     },
   },
 }
