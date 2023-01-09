@@ -7,7 +7,6 @@ import { styles } from "./styles"
 import { externalLinks } from "../../../utils/constants"
 import { useSelector } from "react-redux"
 import { RootType } from "../../../redux/constants/stateTypes"
-import { FooterContentObject } from "../../../utils/interfaces"
 
 const Footer = () => {
   const frid = "footerBox"
@@ -55,7 +54,7 @@ const Footer = () => {
         id={frid + "ReferenceWrapper"}
         sx={styles.footerBoxReferenceWrapper}
       >
-        {content.references?.map((item: FooterContentObject) => {
+        {content.references?.map((item: any) => {
           mapId++
           return (
             <Box

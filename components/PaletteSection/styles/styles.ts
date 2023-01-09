@@ -187,7 +187,6 @@ export const iconStyles = {
     marginLeft: "auto",
     display: "flex",
     justifyContent: "flex-end",
-    position: "relative",
   },
   optionsCopyIcon: {
     "&:hover::after": { sm: getTooltipStylesHoverAfter("Copy Palette") },

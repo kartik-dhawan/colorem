@@ -4,7 +4,6 @@ export interface FinalPaletteType {
   hex: string[]
   rgb: number[][]
   model: string
-  likes?: number
 }
 
 export type RandomColormindModelType = () => string

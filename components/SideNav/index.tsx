@@ -3,14 +3,13 @@ import Link from "next/link"
 import { Dispatch, SetStateAction, useCallback } from "react"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
-import { SideNavItemsType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
 // EJS syntax for importing not working with framer motion in react so used CJS
 const { motion } = require("framer-motion") // eslint-disable-line
 
 interface SideNavProps {
   sideNavToggle: boolean
-  setSideNavToggle: Dispatch<SetStateAction<boolean>>
+  setSideNavToggle: any
 }
 
 const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
@@ -50,7 +49,7 @@ const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
           id={sid + "LinksContainer"}
           transition={{ delay: 0.5 }}
         >
-          {sideNavigationItems?.map((item: SideNavItemsType) => {
+          {sideNavigationItems?.map((item: any) => {
             return (
               <motion.div
                 initial={variant.before}
