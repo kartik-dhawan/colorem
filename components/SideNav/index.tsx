@@ -1,6 +1,6 @@
 import { Box, Button, Drawer } from "@mui/material"
 import Link from "next/link"
-import { Dispatch, SetStateAction, useCallback } from "react"
+import { useCallback } from "react"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { styles } from "./styles/styles"
