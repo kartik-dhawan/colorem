@@ -5,6 +5,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
 import BookmarkIcon from "@mui/icons-material/Bookmark"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import FavoriteIcon from "@mui/icons-material/Favorite"
+import MenuIcon from "@mui/icons-material/Menu"
 import { useCallback, useEffect, useState } from "react"
 import {
   CountHandlerType,
@@ -20,6 +21,7 @@ import { API_URLS, COPIED_ALERT_TIMEOUT } from "../../utils/constants"
 import axios from "axios"
 import { validate } from "uuid"
 import { logger } from "../../lib/methods"
+import SideNav from "../SideNav"
 
 interface OptionsBarProps {
   countHandler: CountHandlerType
@@ -46,6 +48,7 @@ const OptionsBar = ({
   const { copiedAlert } = useSelector((state: RootType) => state.toggleSlice)
 
   const [likeCount, setLikeCount] = useState<number>(allPalettes[count].likes)
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   // sets the initial likeCount as likes from DB
   useEffect(() => {
@@ -148,6 +151,10 @@ const OptionsBar = ({
     setFavorite(false)
   }, [])
 
+  const menuHandler = useCallback(() => {
+    setSideNavToggle(!sideNavToggle)
+  }, [sideNavToggle])
+
   return (
     <Grid
       item
@@ -205,6 +212,20 @@ const OptionsBar = ({
       >
         <NextPlanIcon sx={{ fontSize: "26px" }} />
       </IconButton>
+      {/* button to open the menu */}
+      <IconButton
+        className={pid + "OptionsIcon"}
+        id={pid + "OptionsIconMenu"}
+        onClick={menuHandler}
+        sx={styles.optionsMenuIcon}
+      >
+        <MenuIcon sx={{ fontSize: "26px" }} />
+      </IconButton>
+      {/* sidenav component of this page */}
+      <SideNav
+        sideNavToggle={sideNavToggle}
+        setSideNavToggle={setSideNavToggle}
+      />
     </Grid>
   )
 }

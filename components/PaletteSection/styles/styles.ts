@@ -170,13 +170,18 @@ export const styles = {
     color: "#d9d9d9",
     ...getTooltipStyles("Bookmark"),
   },
-
   optionsIconNext: {
     color: "#d9d9d9",
     transition: "150ms all ease-in",
     ...getTooltipStyles("Next"),
     "&:hover": {
       transform: "scale(1.11)",
+    },
+  },
+  optionsMenuIcon: {
+    color: "#d9d9d9",
+    "& > svg": {
+      fontSize: "28px",
     },
   },
 }
