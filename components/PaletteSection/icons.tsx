@@ -1,5 +1,5 @@
 import { IconButton, SxProps, Theme, Typography } from "@mui/material"
-import { styles } from "./styles/styles"
+import { iconStyles } from "./styles/styles"
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
@@ -9,20 +9,20 @@ import BookmarkIcon from "@mui/icons-material/Bookmark"
 const pid = "paletteSection"
 
 interface CopyIconProps {
-  copyHandler: () => void
+  copyHandler?: () => void
   sx?: SxProps<Theme>
 }
 
 interface LikeIconProps {
   favorite: boolean
-  favoriteHandler: () => void
+  favoriteHandler?: () => void
   likeCount: number
   sx?: SxProps<Theme>
 }
 
 interface SaveIconProps {
   saved: boolean
-  savedHandler: () => void
+  savedHandler?: () => void
   sx?: SxProps<Theme>
 }
 
@@ -33,8 +33,8 @@ export const CopyIconComponent = ({ copyHandler, sx }: CopyIconProps) => {
       className={pid + "OptionsIcon"}
       id={pid + "OptionsIconCopy"}
       sx={{
-        ...styles.optionsCopyIcon,
-        ...styles.optionsBarButtonsCommon,
+        ...iconStyles.optionsCopyIcon,
+        ...iconStyles.optionsBarButtonsCommon,
         ...sx,
       }}
       onClick={copyHandler}
@@ -56,8 +56,8 @@ export const LikeIconComponent = ({
       className={pid + "OptionsIcon"}
       id={pid + "OptionsIconLike"}
       sx={{
-        ...styles.optionsLikeIcon,
-        ...styles.optionsBarButtonsCommon,
+        ...iconStyles.optionsLikeIcon,
+        ...iconStyles.optionsBarButtonsCommon,
         ...sx,
       }}
       onClick={favoriteHandler}
@@ -86,8 +86,8 @@ export const SaveIconComponent = ({
       className={pid + "OptionsIcon"}
       id={pid + "OptionsIconSave"}
       sx={{
-        ...styles.optionsSaveIcon,
-        ...styles.optionsBarButtonsCommon,
+        ...iconStyles.optionsSaveIcon,
+        ...iconStyles.optionsBarButtonsCommon,
         ...sx,
       }}
       onClick={savedHandler}

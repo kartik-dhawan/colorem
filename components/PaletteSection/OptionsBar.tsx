@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Menu, MenuItem } from "@mui/material"
+import { Box, Divider, Grid, IconButton, Menu, MenuItem } from "@mui/material"
 import NextPlanIcon from "@mui/icons-material/NextPlan"
 import MenuIcon from "@mui/icons-material/Menu"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
@@ -8,7 +8,7 @@ import {
   JSONForPaletteFunction,
   PaletteDataType,
 } from "../../utils/interfaces"
-import { styles } from "./styles/styles"
+import { iconStyles, styles } from "./styles/styles"
 import { copyPaletteJSON } from "../../utils/methods"
 import { toggleCopiedAlert } from "../../redux/slices/toggleSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -178,14 +178,14 @@ const OptionsBar = ({
     <Grid
       item
       xs={6}
-      sx={styles.optionsIconWrapper}
+      sx={iconStyles.optionsIconWrapper}
       className={pid + "IconButtonWrapper"}
       id={pid + "IconButtonWrapper"}
     >
       <Box
         className={pid + "SubMenuWrapper"}
         id={pid + "SubMenuWrapper"}
-        sx={styles.optionsBarSubMenuWrapper}
+        sx={iconStyles.optionsBarSubMenuWrapper}
       >
         {/* for mobile & tablet view */}
         <IconButton
@@ -211,43 +211,58 @@ const OptionsBar = ({
             vertical: "top",
             horizontal: "right",
           }}
+          sx={styles.optionsBarMenu}
         >
-          <MenuItem disableRipple onClick={copyHandler}>
+          <MenuItem
+            disableRipple
+            onClick={copyHandler}
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+          >
             <CopyIconComponent copyHandler={copyHandler} />
+            Copy
           </MenuItem>
-          <MenuItem>
-            <LikeIconComponent
-              favorite={favorite}
-              favoriteHandler={favoriteHandler}
-              likeCount={likeCount}
-            />
+          <Divider />
+          <MenuItem
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+            onClick={favoriteHandler}
+          >
+            <LikeIconComponent favorite={favorite} likeCount={likeCount} />
+            Like
           </MenuItem>
-          <MenuItem>
-            <SaveIconComponent saved={saved} savedHandler={savedHandler} />
+          <Divider />
+          <MenuItem
+            className={pid + "SubMenuItem"}
+            sx={styles.optionsBarSubMenuItem}
+            onClick={savedHandler}
+          >
+            <SaveIconComponent saved={saved} />
+            Save
           </MenuItem>
         </Menu>
       </Box>
       {/* for desktops */}
       <CopyIconComponent
         copyHandler={copyHandler}
-        sx={styles.optionsBarButtonsConditionalDisplay}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
       />
       <LikeIconComponent
         favorite={favorite}
-        favoriteHandler={favoriteHandler}
         likeCount={likeCount}
-        sx={styles.optionsBarButtonsConditionalDisplay}
+        favoriteHandler={favoriteHandler}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
       />
       <SaveIconComponent
         saved={saved}
         savedHandler={savedHandler}
-        sx={styles.optionsBarButtonsConditionalDisplay}
+        sx={iconStyles.optionsBarButtonsConditionalDisplay}
       />
       <IconButton
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconNext"}
         onClick={nextHandler}
-        sx={styles.optionsIconNext}
+        sx={iconStyles.optionsIconNext}
       >
         <NextPlanIcon sx={{ fontSize: "26px" }} />
       </IconButton>
@@ -255,7 +270,7 @@ const OptionsBar = ({
         className={pid + "OptionsIcon"}
         id={pid + "OptionsIconMenu"}
         onClick={menuHandler}
-        sx={styles.optionsMenuIcon}
+        sx={iconStyles.optionsMenuIcon}
       >
         <MenuIcon sx={{ fontSize: "26px" }} />
       </IconButton>

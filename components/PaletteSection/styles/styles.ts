@@ -1,4 +1,7 @@
-import { getTooltipStyles } from "../../../styles/common/tooltip"
+import {
+  getTooltipStylesHoverAfter,
+  getTooltipStylesHoverBefore,
+} from "../../../styles/common/tooltip"
 
 export const styles = {
   paletteSectionHeaderWrapper: {
@@ -152,6 +155,34 @@ export const styles = {
     fontSize: "20px",
     fontWeight: 300,
   },
+  optionsBarMenu: {
+    backgroundColor: "#111111a3",
+    "& .MuiPaper-root": {
+      backgroundColor: "transparent",
+      borderRadius: "8px",
+      "& .MuiList-root": {
+        padding: 0,
+        "& .MuiDivider-root": {
+          margin: 0,
+          backgroundColor: "#c7b4b4",
+          borderBottomWidth: "0.2px",
+        },
+      },
+    },
+  },
+  optionsBarSubMenuItem: {
+    background: "linear-gradient(90deg, #222 40%, #252525 99%)",
+    color: "#d9d9d9ba",
+    fontWeight: 300,
+    letterSpacing: "0.8px",
+    "&:hover": {
+      background: "linear-gradient(90deg, #202020 40%, #222222 99%)",
+    },
+  },
+}
+
+// icon styling
+export const iconStyles = {
   optionsIconWrapper: {
     marginLeft: "auto",
     display: "flex",
@@ -159,18 +190,22 @@ export const styles = {
     position: "relative",
   },
   optionsCopyIcon: {
-    ...getTooltipStyles("Copy Palette"),
+    "&:hover::after": { sm: getTooltipStylesHoverAfter("Copy Palette") },
+    "&:hover::before": { sm: getTooltipStylesHoverBefore() },
   },
   optionsLikeIcon: {
-    ...getTooltipStyles("Like"),
+    "&:hover::after": { sm: getTooltipStylesHoverAfter("Like") },
+    "&:hover::before": { sm: getTooltipStylesHoverBefore() },
   },
   optionsSaveIcon: {
-    ...getTooltipStyles("Bookmark"),
+    "&:hover::after": { sm: getTooltipStylesHoverAfter("Bookmark") },
+    "&:hover::before": { sm: getTooltipStylesHoverBefore() },
   },
   optionsIconNext: {
     color: "#d9d9d9",
     transition: "150ms all ease-in",
-    ...getTooltipStyles("Next"),
+    "&:hover::after": { sm: getTooltipStylesHoverAfter("Next") },
+    "&:hover::before": { sm: getTooltipStylesHoverBefore() },
     "&:hover": {
       transform: "scale(1.11)",
     },
