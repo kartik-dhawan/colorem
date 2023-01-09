@@ -242,7 +242,7 @@ const OptionsBar = ({
           </MenuItem>
         </Menu>
       </Box>
-      {/* for desktops */}
+      {/* for desktop view */}
       <CopyIconComponent
         copyHandler={copyHandler}
         sx={iconStyles.optionsBarButtonsConditionalDisplay}
