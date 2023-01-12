@@ -1,9 +1,9 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
-import { logger } from "."
-import colorPalette from "../database/models/colorPalette"
-import { responseTexts, URLS } from "../utils/constants"
-import { FinalPaletteType } from "../utils/interfaces"
+import { logger } from ".."
+import colorPalette from "../../database/models/colorPalette"
+import { responseTexts, URLS } from "../../utils/constants"
+import { FinalPaletteType } from "../../utils/interfaces"
 
 // this function returns a promise which further consists the response.
 export const getAllColorPalettes: () => Promise<

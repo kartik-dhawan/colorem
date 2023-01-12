@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { logger } from "../../../lib/methods"
-import { getPaletteByGuid } from "../../../lib/methods/getPalettes"
-import { updatePaletteByGuid } from "../../../lib/methods/savePalette"
+import { getPaletteByGuid } from "../../../lib/methods/palettes/getPalettes"
+import { updatePaletteByGuid } from "../../../lib/methods/palettes/savePalette"
 import { responseTexts } from "../../../lib/utils/constants"
 
 const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {

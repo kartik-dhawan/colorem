@@ -1,4 +1,4 @@
-// imports 'color-palettes' collection from mongo db atlas
+// imports 'colorPalettes' collection from mongo db atlas
 import mongoose from "mongoose"
 const Schema = mongoose.Schema
 

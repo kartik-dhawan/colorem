@@ -6,13 +6,13 @@ import connectDatabase from "../../../lib/database/connect"
 import {
   getColormindPalette,
   rgbArrayToHex,
-} from "../../../lib/methods/savePalette"
+} from "../../../lib/methods/palettes/savePalette"
 import {
   FinalPaletteType,
   RandomColormindModelType,
 } from "../../../lib/utils/interfaces"
 import colorPalette from "../../../lib/database/models/colorPalette"
-import { getColormindModels } from "../../../lib/methods/getPalettes"
+import { getColormindModels } from "../../../lib/methods/palettes/getPalettes"
 import { logger } from "../../../lib/methods"
 import { responseTexts } from "../../../lib/utils/constants"
 
