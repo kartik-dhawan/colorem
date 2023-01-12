@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import connectDatabase from "../../../lib/database/connect"
 import { logger } from "../../../lib/methods"
-import { getAllColorPalettes } from "../../../lib/methods/getPalettes"
+import { getAllColorPalettes } from "../../../lib/methods/palettes/getPalettes"
 import { responseTexts } from "../../../lib/utils/constants"
 
 const getPalettes = async (req: NextApiRequest, res: NextApiResponse) => {

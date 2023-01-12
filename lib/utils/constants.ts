@@ -27,5 +27,7 @@ export const responseTexts = {
   PALETTE_NOT_FOUND:
     "Palette not found. Please verify the paletteGuid. If it is correct, the database doesn't consist of this record.",
   BODY_NOT_PRESENT:
-    "Request body is not present. Please pass a valid body in the API request",
+    "Request body is either not present or incorrect. Please pass a valid body in the API request",
 }
+
+export const SaveGradientBodyKeys = ["name", "colors", "filter"]

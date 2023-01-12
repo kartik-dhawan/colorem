@@ -1,7 +1,7 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
-import colorPalette from "../database/models/colorPalette"
-import { responseTexts, URLS } from "../utils/constants"
+import colorPalette from "../../database/models/colorPalette"
+import { responseTexts, URLS } from "../../utils/constants"
 import { getPaletteByGuid } from "./getPalettes"
 
 // runs colormind api and returns a promise

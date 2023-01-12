@@ -8,3 +8,9 @@ export interface FinalPaletteType {
 }
 
 export type RandomColormindModelType = () => string
+
+export interface GradientBody {
+  name: string
+  colors: string[]
+  filter: string[]
+}
