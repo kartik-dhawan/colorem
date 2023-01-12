@@ -14,3 +14,11 @@ export interface GradientBody {
   colors: string[]
   filter: string[]
 }
+
+export interface FinalGradientType {
+  gradientGuid: string
+  name: string
+  colors: string[]
+  filter: string[]
+  likes: number
+}
