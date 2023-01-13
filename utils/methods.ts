@@ -1,3 +1,4 @@
+import { gradientBoxTypes } from "./constants"
 import { GetContrastingColor, GetLightOrDarkTextColor } from "./interfaces"
 
 // lightens or darkens a color by a certain amount
@@ -101,4 +102,9 @@ export const copyHexCode = (hexcode: string) => {
 
 export const copyPaletteJSON = (palette: any) /* eslint-disable-line */ => {
   copyToClipboard(JSON.stringify(palette))
+}
+
+// returns a random box-size for gradients page
+export const getRandomBox: () => string = () => {
+  return gradientBoxTypes[Math.floor(Math.random() * 4)]
 }
