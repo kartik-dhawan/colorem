@@ -43,19 +43,19 @@ const Footer = () => {
         id={frid + "Body"}
         sx={styles.footerBoxBody}
       >
-        {content.footerDevelopedByText}{" "}
+        {content?.footerDevelopedByText}{" "}
         <Link href="/about">
-          <u>{content.developedBy}</u>
+          <u>{content?.developedBy}</u>
         </Link>
         <br></br>
-        {content.footerReferenceText}
+        {content?.footerReferenceText}
       </Typography>
       <Box
         className={frid + "ReferenceWrapper"}
         id={frid + "ReferenceWrapper"}
         sx={styles.footerBoxReferenceWrapper}
       >
-        {content.references?.map((item: FooterContentObject) => {
+        {content?.references?.map((item: FooterContentObject) => {
           mapId++
           return (
             <Box
