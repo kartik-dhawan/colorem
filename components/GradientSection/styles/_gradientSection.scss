@@ -1,0 +1,17 @@
+.gradientSectionWrapper {
+  .gradientSectionTabsWrapper {
+    .gradientSectionTabList {
+      .MuiTabs-scroller {
+        .MuiTabs-flexContainer {
+          .Mui-disabled {
+            color: $text_disabled;
+          }
+        }
+        .MuiTabs-indicator {
+          background-color: $text_primary_dull;
+          height: 1.5px;
+        }
+      }
+    }
+  }
+}

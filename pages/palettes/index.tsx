@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
     props: {
       contentData: contentResponse?.items[0]?.fields,
     },
-    revalidate: 10 || parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
+    revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 

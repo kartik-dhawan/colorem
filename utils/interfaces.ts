@@ -53,3 +53,14 @@ export interface PaletteJSONType {
   name?: string
   palette?: PaletteColorJSONType[]
 }
+
+export interface BoxTypeStylesType {
+  [key: string]: {
+    gridColumn?: {
+      [key: string]: string
+    }
+    gridRow?: {
+      [key: string]: string
+    }
+  }
+}
