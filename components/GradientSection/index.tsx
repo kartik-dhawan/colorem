@@ -7,7 +7,7 @@ import { useCallback, useState } from "react"
 import { styles } from "./styles"
 import GradientsTab from "./GradientsTab"
 import SideNav from "../SideNav"
-import { IconButton } from "@mui/material"
+import { IconButton, Typography } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { iconStyles } from "../PaletteSection/styles/styles"
 
@@ -58,7 +58,6 @@ const GradientSection = () => {
               sx={styles.gradientSectionTabs}
               className={gid + "CreateTab"}
               id={gid + "CreateTab"}
-              disabled
               disableRipple
             />
             <SideNav
@@ -91,7 +90,7 @@ const GradientSection = () => {
           className={gid + "CreateTabBody"}
           id={gid + "CreateTabBody"}
         >
-          Item Two Body
+          <Typography sx={{ fontWeight: 300 }}>Feature coming soon.</Typography>
         </TabPanel>
       </TabContext>
     </Box>

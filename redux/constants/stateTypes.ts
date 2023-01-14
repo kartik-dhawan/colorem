@@ -21,4 +21,6 @@ export interface PaletteType {
 
 export interface ToggleSliceType {
   copiedAlert: boolean
+  selectedColor: string
+  selectedColorsNumber: number | null
 }

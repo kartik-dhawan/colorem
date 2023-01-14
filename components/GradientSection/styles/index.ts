@@ -55,7 +55,7 @@ export const styles = {
     gridAutoRows: "1fr",
     gridAutoFlow: "row dense",
     gridGap: "10px",
-    padding: "20px 0px",
+    padding: "10px 0px",
   },
   gradientSectionLoaderWrapper: {
     height: "80vh",

@@ -1,6 +1,9 @@
-import { Box } from "@mui/material"
 import { useEffect } from "react"
+import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
+import ErrorFallback, {
+  myErrorHandler,
+} from "../../components/common/ErrorFallback"
 import GradientSection from "../../components/GradientSection"
 import { updateContent } from "../../redux/slices/contentSlice"
 import { client } from "../../utils/contentful/config"
@@ -27,9 +30,9 @@ const Gradients = ({ contentData }: ContentfulType) => {
   }, [contentData])
 
   return (
-    <Box>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       <GradientSection />
-    </Box>
+    </ErrorBoundary>
   )
 }
 
