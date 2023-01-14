@@ -173,7 +173,10 @@ export const styles = {
   optionsBarSubMenuItem: {
     background: "linear-gradient(90deg, #222 40%, #252525 99%)",
     color: "#d9d9d9ba",
-    fontWeight: 300,
+    fontWeight: {
+      xs: 300,
+      md: 400,
+    },
     letterSpacing: "0.8px",
     "&:hover": {
       background: "linear-gradient(90deg, #202020 40%, #222222 99%)",

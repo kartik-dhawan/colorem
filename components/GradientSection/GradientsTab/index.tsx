@@ -6,6 +6,7 @@ import useSWR from "swr"
 import { GradientDataType } from "../../../utils/interfaces"
 import { fetcher } from "../../../utils/methods"
 import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
+import GradientFilter from "./GradientFilter"
 
 interface GradientsTabProps {
   gid: string
@@ -30,19 +31,23 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           <PrimaryLoader />
         </Box>
       )}
-      {gradients && (
-        <Box
-          sx={styles.gradientSectionColorBoxWrapper}
-          className={gid + "ColorBoxWrapper"}
-          id={gid + "ColorBoxWrapper"}
-        >
-          {gradients?.map((gradient) => (
-            <GradientBox grad={gradient} key={gradient.gradientGuid} />
-          ))}
-        </Box>
+      {gradients && !error ? (
+        <>
+          <GradientFilter />
+          <Box
+            sx={styles.gradientSectionColorBoxWrapper}
+            className={gid + "ColorBoxWrapper"}
+            id={gid + "ColorBoxWrapper"}
+          >
+            {gradients?.map((gradient) => (
+              <GradientBox grad={gradient} key={gradient.gradientGuid} />
+            ))}
+          </Box>
+        </>
+      ) : (
+        /* Design a proper error component for API fail */
+        <pre>Error running the api please try again</pre>
       )}
-      {/* Design a proper error component for API fail */}
-      {error && <pre>Error running the api please try again</pre>}
     </>
   )
 }
