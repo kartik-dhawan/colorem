@@ -74,3 +74,9 @@ export interface BoxTypeStylesType {
     }
   }
 }
+
+export interface ColorListType {
+  cid: number
+  colorType: string
+  colorCode: string
+}

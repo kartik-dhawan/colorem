@@ -11,8 +11,9 @@ import { pid } from "process"
 import { useCallback, useState } from "react"
 import ClearIcon from "@mui/icons-material/Clear"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
-import { styles as SubMenuStyles } from "../../PaletteSection/styles/styles"
-import { styles } from "../styles/gradientFilterStyles"
+import { styles as SubMenuStyles } from "../../../PaletteSection/styles/styles"
+import { styles } from "../../styles/gradientFilterStyles"
+import ColorOptions from "./ColorOptions"
 
 const GradientFilter = () => {
   const gid = "gradientFilter"
@@ -30,7 +31,16 @@ const GradientFilter = () => {
   }
 
   return (
-    <Box className={gid + "Wrapper"} id={gid + "Wrapper"}>
+    <Box
+      className={gid + "Wrapper"}
+      id={gid + "Wrapper"}
+      sx={{
+        display: {
+          md: "flex",
+        },
+        alignItems: "center",
+      }}
+    >
       <Box
         sx={styles.gradientFilterToggleWrapper}
         className={gid + "ToggleWrapper"}
@@ -46,7 +56,7 @@ const GradientFilter = () => {
           className={gid + "SubMenuBtn"}
           id={gid + "SubMenuBtn"}
         >
-          FILTERS <ArrowRightIcon />
+          Filters <ArrowRightIcon />
         </Button>
         {filterType !== "" && (
           <>
@@ -107,6 +117,17 @@ const GradientFilter = () => {
             By number of colors
           </MenuItem>
         </Menu>
+      </Box>
+      <Box
+        className={gid + "OptionsBody"}
+        id={gid + "OptionsBody"}
+        sx={{
+          padding: {
+            md: "0px 30px",
+          },
+        }}
+      >
+        {filterType === "Color" && <ColorOptions />}
       </Box>
     </Box>
   )

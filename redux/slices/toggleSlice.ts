@@ -3,6 +3,7 @@ import { ToggleSliceType } from "../constants/stateTypes"
 
 const initialState: ToggleSliceType = {
   copiedAlert: false,
+  selectedColor: "",
 }
 
 const toggleSlice = createSlice({
@@ -15,9 +16,15 @@ const toggleSlice = createSlice({
     ) => {
       state.copiedAlert = action.payload
     },
+    toggleSelectedColor: (
+      state: ToggleSliceType,
+      action: PayloadAction<string>
+    ) => {
+      state.selectedColor = action.payload
+    },
   },
 })
 
-export const { toggleCopiedAlert } = toggleSlice.actions
+export const { toggleCopiedAlert, toggleSelectedColor } = toggleSlice.actions
 
 export default toggleSlice.reducer

@@ -7,6 +7,9 @@ import { GradientDataType } from "../../../utils/interfaces"
 import { fetcher } from "../../../utils/methods"
 import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
 import GradientFilter from "./GradientFilter"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
+import { useEffect, useState } from "react"
 
 interface GradientsTabProps {
   gid: string
@@ -18,7 +21,27 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
     fetcher
   )
 
-  const gradients = data && [...data].reverse()
+  const [gradientsArray, setGradientsArray] = useState<GradientDataType[]>([])
+
+  const { selectedColor } = useSelector((state: RootType) => state.toggleSlice)
+
+  useEffect(() => {
+    return data && setGradientsArray([...data].reverse())
+  }, [data])
+
+  // filters gradients on the basis of the color selected
+  useEffect(() => {
+    if (selectedColor !== "") {
+      return (
+        data &&
+        setGradientsArray(
+          data.filter((grad) => grad.filter.includes(selectedColor)).reverse()
+        )
+      )
+    } else {
+      return data && setGradientsArray(data.reverse())
+    }
+  }, [selectedColor])
 
   return (
     <>
@@ -31,7 +54,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           <PrimaryLoader />
         </Box>
       )}
-      {gradients && !error ? (
+      {gradientsArray && !error ? (
         <>
           <GradientFilter />
           <Box
@@ -39,7 +62,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
             className={gid + "ColorBoxWrapper"}
             id={gid + "ColorBoxWrapper"}
           >
-            {gradients?.map((gradient) => (
+            {gradientsArray?.map((gradient) => (
               <GradientBox grad={gradient} key={gradient.gradientGuid} />
             ))}
           </Box>
