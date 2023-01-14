@@ -1,3 +1,4 @@
+import axios from "axios"
 import { gradientBoxTypes } from "./constants"
 import { GetContrastingColor, GetLightOrDarkTextColor } from "./interfaces"
 
@@ -108,3 +109,6 @@ export const copyPaletteJSON = (palette: any) /* eslint-disable-line */ => {
 export const getRandomBox: () => string = () => {
   return gradientBoxTypes[Math.floor(Math.random() * 4)]
 }
+
+// fetcher (POST) for useSWR API call
+export const fetcher = (url: string) => axios.post(url).then((res) => res.data)

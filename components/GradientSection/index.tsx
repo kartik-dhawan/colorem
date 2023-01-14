@@ -3,18 +3,28 @@ import Tab from "@mui/material/Tab"
 import TabContext from "@mui/lab/TabContext"
 import TabList from "@mui/lab/TabList"
 import TabPanel from "@mui/lab/TabPanel"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { styles } from "./styles"
 import GradientsTab from "./GradientsTab"
+import SideNav from "../SideNav"
+import { IconButton } from "@mui/material"
+import MenuIcon from "@mui/icons-material/Menu"
+import { iconStyles } from "../PaletteSection/styles/styles"
 
 const GradientSection = () => {
   const gid = "gradientSection"
 
   const [value, setValue] = useState("1")
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
   }
+
+  // toggles sidenav menu
+  const menuHandler = useCallback(() => {
+    setSideNavToggle(!sideNavToggle)
+  }, [sideNavToggle])
 
   return (
     <Box
@@ -24,10 +34,7 @@ const GradientSection = () => {
     >
       <TabContext value={value}>
         <Box
-          sx={{
-            borderBottom: 1,
-            borderColor: "divider",
-          }}
+          sx={styles.gradientSectionTabsWrapper}
           className={gid + "TabsWrapper"}
           id={gid + "TabsWrapper"}
         >
@@ -54,7 +61,19 @@ const GradientSection = () => {
               disabled
               disableRipple
             />
+            <SideNav
+              sideNavToggle={sideNavToggle}
+              setSideNavToggle={setSideNavToggle}
+            />
           </TabList>
+          <IconButton
+            className={gid + "MenuIcon"}
+            id={gid + "MenuIcon"}
+            onClick={menuHandler}
+            sx={iconStyles.optionsMenuIcon}
+          >
+            <MenuIcon sx={{ fontsize: "26px" }} />
+          </IconButton>
         </Box>
         <TabPanel
           value="1"
@@ -64,6 +83,7 @@ const GradientSection = () => {
             padding: "0px",
           }}
         >
+          {/* Gradients Tab Body Section */}
           <GradientsTab gid={gid} />
         </TabPanel>
         <TabPanel
