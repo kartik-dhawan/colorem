@@ -64,6 +64,7 @@ const GradientSection = () => {
             padding: "0px",
           }}
         >
+          {/* Gradients Tab Body Section */}
           <GradientsTab gid={gid} />
         </TabPanel>
         <TabPanel

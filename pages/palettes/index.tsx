@@ -6,7 +6,6 @@ import { updatePalettes } from "../../redux/slices/paletteSlice"
 import { client } from "../../utils/contentful/config"
 import { updateContent } from "../../redux/slices/contentSlice"
 import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
-import axios from "axios"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, {
   myErrorHandler,
@@ -14,6 +13,7 @@ import ErrorFallback, {
 import useSWR from "swr"
 import { API_URLS } from "../../utils/constants"
 import { logger } from "../../lib/methods"
+import { fetcher } from "../../utils/methods"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -35,7 +35,6 @@ const Palettes = ({ contentData }: ContentfulType) => {
   // it calls the function twice.
   // while using useSWR() it only gets called once, and even when we try to
   // call it again in any of the subcomponent it uses the response of its previous call
-  const fetcher = (url: string) => axios.post(url).then((res) => res.data)
   const { data, error } = useSWR<PaletteDataType[]>(
     API_URLS.GET_ALL_PALETTES,
     fetcher
