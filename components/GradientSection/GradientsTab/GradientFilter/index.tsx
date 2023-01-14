@@ -14,6 +14,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { styles as SubMenuStyles } from "../../../PaletteSection/styles/styles"
 import { styles } from "../../styles/gradientFilterStyles"
 import ColorOptions from "./ColorOptions"
+import NumberOptions from "./NumberOptions"
 
 const GradientFilter = () => {
   const gid = "gradientFilter"
@@ -128,6 +129,7 @@ const GradientFilter = () => {
         }}
       >
         {filterType === "Color" && <ColorOptions />}
+        {filterType === "Number" && <NumberOptions />}
       </Box>
     </Box>
   )

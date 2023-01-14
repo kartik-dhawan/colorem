@@ -63,3 +63,5 @@ export const ColorOptionConstants = [
     colorCode: "#f1bb4b",
   },
 ]
+
+export const ColorNumberOptionsConstants = [2, 3, 4, 5]
