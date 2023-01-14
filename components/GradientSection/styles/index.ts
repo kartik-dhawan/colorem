@@ -1,6 +1,12 @@
 import { BoxTypeStylesType } from "../../../utils/interfaces"
 
 export const styles = {
+  gradientSectionTabsWrapper: {
+    borderBottom: 1,
+    borderColor: "divider",
+    display: "flex",
+    justifyContent: "space-between",
+  },
   gradientSectionTabs: {
     color: "#d9d9d9",
     fontSize: {

@@ -46,6 +46,7 @@ const Palettes = ({ contentData }: ContentfulType) => {
 
     // handle the error here, set it in redux and display a generic error page.
     if (error) {
+      // we need to create an error page for error condition
       logger({ error, type: "error" })
     }
 
