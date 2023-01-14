@@ -57,6 +57,11 @@ export const styles = {
     gridGap: "10px",
     padding: "20px 0px",
   },
+  gradientSectionLoaderWrapper: {
+    height: "80vh",
+    display: "flex",
+    alignItems: "center",
+  },
 }
 
 export const gradientBoxTypeStyles: BoxTypeStylesType = {

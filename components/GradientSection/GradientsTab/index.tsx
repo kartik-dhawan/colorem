@@ -5,29 +5,45 @@ import GradientBox from "./GradientBox"
 import useSWR from "swr"
 import { GradientDataType } from "../../../utils/interfaces"
 import { fetcher } from "../../../utils/methods"
+import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
 
 interface GradientsTabProps {
   gid: string
 }
 
 const GradientsTab = ({ gid }: GradientsTabProps) => {
-  const { data } = useSWR<GradientDataType[]>(
+  const { data, isLoading, error } = useSWR<GradientDataType[]>(
     API_URLS ? API_URLS.GET_ALL_GRADIENTS : "",
     fetcher
   )
 
-  const gradients = data?.reverse()
+  const gradients = data && [...data].reverse()
 
   return (
-    <Box
-      sx={styles.gradientSectionColorBoxWrapper}
-      className={gid + "ColorBoxWrapper"}
-      id={gid + "ColorBoxWrapper"}
-    >
-      {gradients?.map((gradient) => (
-        <GradientBox grad={gradient} key={gradient.gradientGuid} />
-      ))}
-    </Box>
+    <>
+      {isLoading && (
+        <Box
+          sx={styles.gradientSectionLoaderWrapper}
+          className={gid + "LoaderWrapper"}
+          id={gid + "LoaderWrapper"}
+        >
+          <PrimaryLoader />
+        </Box>
+      )}
+      {gradients && (
+        <Box
+          sx={styles.gradientSectionColorBoxWrapper}
+          className={gid + "ColorBoxWrapper"}
+          id={gid + "ColorBoxWrapper"}
+        >
+          {gradients?.map((gradient) => (
+            <GradientBox grad={gradient} key={gradient.gradientGuid} />
+          ))}
+        </Box>
+      )}
+      {/* Design a proper error component for API fail */}
+      {error && <pre>Error running the api please try again</pre>}
+    </>
   )
 }
 
