@@ -47,6 +47,13 @@ export const styles = {
       top: 0,
       left: 0,
     },
+    "&:hover": {
+      backgroundColor: "#222",
+      opacity: 0.9,
+    },
+    "&:hover .gradientBoxHoverWrapper": {
+      display: "flex",
+    },
   },
   gradientSectionColorBoxWrapper: {
     width: "100%",
@@ -61,6 +68,24 @@ export const styles = {
     height: "80vh",
     display: "flex",
     alignItems: "center",
+  },
+  gradientBoxHoverWrapper: {
+    position: "absolute",
+    top: "0%",
+    left: "0%",
+    height: "100%",
+    width: "100%",
+    display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10000,
+  },
+  gradientBoxActionBtnsWrapper: {
+    backgroundColor: "#90909059",
+    padding: "5px 10px",
+    borderRadius: "100px",
+    display: "flex",
+    gap: "5px",
   },
 }
 
