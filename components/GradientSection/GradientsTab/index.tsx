@@ -16,13 +16,32 @@ interface GradientsTabProps {
 }
 
 const GradientsTab = ({ gid }: GradientsTabProps) => {
-  const { data, isLoading } = useSWR<GradientDataType[]>(
-    API_URLS ? API_URLS.GET_ALL_GRADIENTS : "",
-    fetcher
-  )
-
   // final array of gradients which is further twisted as per the filter
   const [gradientsArray, setGradientsArray] = useState<GradientDataType[]>([])
+  // const [filteredGradients, setFilteredGradients] = useState<GradientDataType[]>([])
+
+  const [offset, setOffset] = useState<number>(0)
+
+  const { data, isLoading, mutate } = useSWR<GradientDataType[]>(() => {
+    if (offset <= 390) {
+      return `${API_URLS.GET_ALL_GRADIENTS}?limit=30&offset=${offset}`
+    }
+  }, fetcher)
+
+  const handleScroll = (e: any) => {
+    const scrollHeight = e.target.documentElement.scrollHeight
+    if (
+      Math.floor(window.innerHeight + e.target.documentElement.scrollTop) ===
+      Math.floor(scrollHeight)
+    ) {
+      setOffset((e) => e + 30)
+      mutate()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  }, [])
 
   // gets the filter value
   const { selectedColor, selectedColorsNumber } = useSelector(
@@ -31,23 +50,30 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
 
   // sets default data (all gradients) for the gradients page
   useEffect(() => {
-    return data && setGradientsArray([...data])
+    return data && setGradientsArray((oldData) => [...oldData, ...data])
   }, [data])
 
   // filters gradients on the basis of the color or colorsNumber selected
   useEffect(() => {
+    console.log(gradientsArray)
     if (data) {
       return selectedColor !== ""
         ? setGradientsArray(
-            data.filter((grad) => grad.filter.includes(selectedColor))
+            gradientsArray.filter((grad) => grad.filter.includes(selectedColor))
           )
         : selectedColorsNumber !== null
         ? setGradientsArray(
-            data.filter((grad) => grad.colors.length === selectedColorsNumber)
+            gradientsArray.filter(
+              (grad) => grad.colors.length === selectedColorsNumber
+            )
           )
-        : setGradientsArray(data)
+        : setGradientsArray(gradientsArray)
     }
   }, [selectedColor, selectedColorsNumber])
+
+  // useEffect(() => {
+  //   console.log(offset)
+  // }, [offset])
 
   return (
     <>
@@ -68,7 +94,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
             className={gid + "ColorBoxWrapper"}
             id={gid + "ColorBoxWrapper"}
           >
-            {[...gradientsArray]?.reverse().map((gradient) => (
+            {[...gradientsArray]?.map((gradient) => (
               <GradientBox grad={gradient} key={gradient.gradientGuid} />
             ))}
           </Box>

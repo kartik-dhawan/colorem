@@ -5,8 +5,11 @@ import { responseTexts } from "../../../lib/utils/constants"
 
 const getGradients = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    // fetches all the color gradients from the DB
-    return getAllColorGradients()
+    // gets the URL parameters
+    const { limit, offset } = req.query
+
+    // fetches either all the color gradients or a range of gradients on the basis of the offset & limit
+    return getAllColorGradients(Number(offset), Number(limit))
       .then((gradients) => {
         res.status(200).json(gradients)
       })

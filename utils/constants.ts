@@ -10,6 +10,7 @@ export const API_URLS = {
   GET_ALL_PALETTES: "/api/palettes",
   UPDATE_A_PALETTE: "/api/palettes", // followed by the guid
   GET_ALL_GRADIENTS: "/api/gradients",
+  GET_RANGED_GRADIENTS: "/api/gradients?limit={}&offset={}",
 }
 
 export const COPIED_ALERT_TIMEOUT = 2000
