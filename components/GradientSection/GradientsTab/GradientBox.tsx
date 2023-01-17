@@ -1,23 +1,44 @@
 import { Box, IconButton, Typography } from "@mui/material"
-import { useEffect, useId, useState } from "react"
-import { FinalGradientType } from "../../../lib/utils/interfaces"
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+} from "react"
 import { getRandomBox } from "../../../utils/methods"
 import { gradientBoxTypeStyles, styles } from "../styles"
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import InfoIcon from "@mui/icons-material/Info"
+import { useDispatch } from "react-redux"
+import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
+import { GradientDataType } from "../../../utils/interfaces"
 
 interface GradientBoxProps {
-  grad: FinalGradientType
+  grad: GradientDataType
+  infoDrawerToggle: boolean
+  setInfoDrawerToggle: Dispatch<SetStateAction<boolean>>
 }
-const GradientBox = ({ grad }: GradientBoxProps) => {
+const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
   const gid = "gradientBox"
   const id = useId()
+
+  const dispatch = useDispatch()
 
   const [randomBox, setRandomBoxState] = useState("wide")
 
   useEffect(() => {
     // gets a random box type - tall || wide || square || largeSquare
     setRandomBoxState(getRandomBox())
+  }, [])
+
+  /*
+   * Toggles the info drawer open and stores that gradient's data in the redux store
+   */
+  const handleInfoDrawerToggle = useCallback(() => {
+    setInfoDrawerToggle(true)
+    dispatch(updateCurrentGradient(grad))
   }, [])
 
   return (
@@ -47,7 +68,7 @@ const GradientBox = ({ grad }: GradientBoxProps) => {
           <IconButton sx={{ color: "#111" }}>
             <EditOutlinedIcon />
           </IconButton>
-          <IconButton sx={{ color: "#111" }}>
+          <IconButton sx={{ color: "#111" }} onClick={handleInfoDrawerToggle}>
             <InfoIcon />
           </IconButton>
         </Box>
