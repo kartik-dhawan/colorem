@@ -41,12 +41,18 @@ const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
     dispatch(updateCurrentGradient(grad))
   }, [])
 
+  const gradientStyleString: string = grad.colors
+    .map((color) => {
+      return `#${color}`
+    })
+    .join(", ")
+
   return (
     <Box
       className={"gradientSectionColorBox " + randomBox}
       id={id + "gradientSectionColorBox"}
       sx={{
-        background: `linear-gradient(90deg, #${grad.colors[0]}, #${grad.colors[1]})`,
+        background: `linear-gradient(90deg, ${gradientStyleString})`,
         ...styles.gradientSectionColorBox,
         ...gradientBoxTypeStyles[randomBox],
       }}
