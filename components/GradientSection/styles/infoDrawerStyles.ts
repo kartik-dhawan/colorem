@@ -23,6 +23,10 @@ export const styles = {
       md: "row",
     },
     justifyContent: "center",
+    flex: {
+      xs: 1,
+      md: 0,
+    },
   },
   infoDrawerGradientBox: {
     minHeight: {
@@ -34,7 +38,10 @@ export const styles = {
       md: "300px",
     },
     // backgroundColor: "#444",
-    margin: "3rem 2rem",
+    margin: {
+      xs: "3rem 2rem 1.5rem 2rem",
+      md: "3rem 2rem",
+    },
     flex: {
       xs: 1,
       md: 0,
@@ -95,6 +102,73 @@ export const styles = {
     letterSpacing: {
       xs: "0.7px",
       sm: "0.4px",
+    },
+  },
+  infoDrawerIconsWrapper: {
+    margin: {
+      xs: "1rem 0rem 5rem 0rem",
+      md: "0px",
+    },
+    display: "flex",
+    justifyContent: {
+      xs: "center",
+      md: "flex-start",
+    },
+  },
+  infoDrawerCopyButton: {
+    color: "#111",
+    backgroundColor: "#1db954", // $spotify_green
+    padding: {
+      xs: "15px",
+      md: "20px",
+    },
+    boxShadow: "-2px 0px 55px -15px #d9d9d9",
+    transition: "200ms all ease-in-out",
+    "&:hover": {
+      backgroundColor: "#1db954", // $spotify_green
+      transform: "scale(1.04)",
+    },
+    "& > svg": {
+      fontSize: {
+        xs: "29px",
+        md: "35px",
+      },
+    },
+    margin: {
+      xs: "0px 10px",
+      md: "0px 30px",
+    },
+    order: {
+      xs: 2,
+      md: 1,
+    },
+  },
+  infoDrawerLikeButton: {
+    color: "#b7b7b7", // dull_gray
+    "& > svg": {
+      fontSize: {
+        xs: "27px",
+        md: "30px",
+      },
+    },
+    padding: "0px 12px",
+    order: {
+      xs: 1,
+      md: 2,
+    },
+  },
+  infoDrawerSaveButton: {
+    color: "#b7b7b7", // dull_gray
+    "& > svg": {
+      fontSize: {
+        xs: "27px",
+        md: "30px",
+      },
+    },
+    padding: "0px 12px",
+    order: {
+      xs: 3,
+      md: 3,
     },
   },
 }
