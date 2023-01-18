@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import contentSlice from "../slices/contentSlice"
+import gradientSlice from "../slices/gradientSlice"
 import paletteSlice from "../slices/paletteSlice"
 import toggleSlice from "../slices/toggleSlice"
 
@@ -8,6 +9,7 @@ const store = configureStore({
     contentSlice,
     paletteSlice,
     toggleSlice,
+    gradientSlice,
   },
 })
 
