@@ -25,6 +25,8 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
 import BookmarkIcon from "@mui/icons-material/Bookmark"
 import { styles as sideNavStyles } from "../../SideNav/styles/styles"
 import { TabContext, TabList, TabPanel } from "@mui/lab"
+import SyntaxHighlightBox from "../../common/SyntaxHighlightBox"
+import { hexToRGB } from "../../../utils/methods"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -39,32 +41,38 @@ const InfoDrawer = ({
 
   const [likeToggle, setLikeToggle] = useState<boolean>(false)
   const [saveToggle, setSaveToggle] = useState<boolean>(false)
+  const [gradientCode, setGradientCode] = useState<string>("")
 
-  // state for the current value of selected tab
+  /*
+   * state for the current value of selected tab
+   */
   const [value, setValue] = useState("css")
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
   }
 
-  useEffect(() => {
-    console.log(value)
-  }, [value])
-
   const infoDrawerCloseHandler = useCallback(() => {
     setInfoDrawerToggle(false)
   }, [])
 
+  /*
+   * gets current selected gradient from store
+   */
   const { gradient } = useSelector((state: RootType) => state.gradientSlice)
-  useEffect(() => {
-    console.log(gradient)
-  }, [gradient])
 
+  /*
+   * final string of all hexcodes in a gradient
+   */
   const gradientStyleString: string = gradient.colors
     .map((color) => {
       return `#${color}`
     })
     .join(", ")
+
+  /**
+   * toggle handlers for likes & save feature
+   */
 
   const likeToggleHandler = useCallback(() => {
     setLikeToggle(!likeToggle)
@@ -73,6 +81,35 @@ const InfoDrawer = ({
   const saveToggleHandler = useCallback(() => {
     setSaveToggle(!saveToggle)
   }, [saveToggle])
+
+  /**
+   * gets gradient's code in the selected format
+   */
+  useEffect(() => {
+    if (value === "css") {
+      const cssGradientString = `.yourClass {
+  background: linear-gradient(90deg, ${gradientStyleString});
+  background: -moz-linear-gradient(90deg, ${gradientStyleString});
+  background: -webkit-linear-gradient(90deg,${gradientStyleString};
+}`
+      setGradientCode(cssGradientString)
+    } else if (value === "json") {
+      const jsonGradient: { [key: string]: string } = {}
+      gradient.colors.map((color, index) => {
+        return (jsonGradient[`color_${index}`] = `#${color}`)
+      })
+      setGradientCode(JSON.stringify(jsonGradient))
+    } else if (value === "javascript") {
+      const arrayGradientString = `const hexArray: [ ${gradient.colors
+        .map((color) => `#${color}`)
+        .join(", ")} ]
+const rgbArray: [ ${gradient.colors
+        .map((color) => `rgb ${hexToRGB(`#${color}`)}`)
+        .join(", ")} ]
+      `
+      setGradientCode(arrayGradientString)
+    }
+  }, [value, gradient])
 
   return (
     <Drawer
@@ -198,7 +235,7 @@ const InfoDrawer = ({
             />
             <Tab
               label="Array"
-              value="array"
+              value="javascript"
               disableRipple
               className={iid + "TabItem"}
               id={iid + "ArrayTab"}
@@ -214,7 +251,11 @@ const InfoDrawer = ({
             }}
           >
             {/* Gradients Tab Body Section */}
-            {value}
+            <SyntaxHighlightBox
+              body={gradientCode}
+              language={value}
+              sx={styles.infoDrawerCodeBox}
+            />
           </TabPanel>
         </TabContext>
       </Container>

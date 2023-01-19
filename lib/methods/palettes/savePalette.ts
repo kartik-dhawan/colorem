@@ -4,7 +4,11 @@ import colorPalette from "../../database/models/colorPalette"
 import { responseTexts, URLS } from "../../utils/constants"
 import { getPaletteByGuid } from "./getPalettes"
 
-// runs colormind api and returns a promise
+/**
+ * runs colormind api and returns a promise
+ * @param {string} model
+ * @returns
+ */
 export const getColormindPalette = async (model: string) => {
   const res = await axios.post(
     URLS.COLORMIND_API,
@@ -18,7 +22,11 @@ export const getColormindPalette = async (model: string) => {
   return res.data
 }
 
-// converts an array of colors in RGB to an array of hexcodes
+/**
+ * converts an array of colors in RGB to an array of hexcodes
+ * @param {number[][]} palette
+ * @returns
+ */
 export const rgbArrayToHex = (palette: number[][]) => {
   const hexArray = palette.map((color) => {
     const hex = color
@@ -31,7 +39,13 @@ export const rgbArrayToHex = (palette: number[][]) => {
   return hexArray
 }
 
-// updates palettes likes
+/**
+ * updates palettes likes
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @param {string | string[] | undefined} paletteGuid
+ * @returns
+ */
 export const updatePaletteByGuid = async (
   req: NextApiRequest,
   res: NextApiResponse,

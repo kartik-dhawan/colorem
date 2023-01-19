@@ -194,9 +194,6 @@ export const styles = {
   },
   infoDrawerTabItem: {
     color: "#b7b7b7", // dull_grey
-    padding: "0px 12px",
-    margin: "6px 0px",
-    minHeight: "30px",
     minWidth: "max-content",
     "&.Mui-selected": {
       color: "#d9d9d9", // text_primary
@@ -218,5 +215,11 @@ export const styles = {
     },
     flexDirection: "column",
   },
-  // infoDrawer
+  infoDrawerCodeBox: {
+    margin: "26px",
+    "& > pre": {
+      fontSize: "17px",
+      lineHeight: "35px",
+    },
+  },
 }
