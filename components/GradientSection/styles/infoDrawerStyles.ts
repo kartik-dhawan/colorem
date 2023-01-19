@@ -18,6 +18,7 @@ export const styles = {
   },
   infoDrawerDescWrapper: {
     display: "flex",
+    order: 1,
     flexDirection: {
       xs: "column",
       md: "row",
@@ -25,7 +26,7 @@ export const styles = {
     justifyContent: "center",
     flex: {
       xs: 1,
-      md: 0,
+      sm: 0,
     },
   },
   infoDrawerGradientBox: {
@@ -114,6 +115,10 @@ export const styles = {
       xs: "center",
       md: "flex-start",
     },
+    order: {
+      xs: 3,
+      md: 2,
+    },
   },
   infoDrawerCopyButton: {
     color: "#111",
@@ -171,4 +176,47 @@ export const styles = {
       md: 3,
     },
   },
+  infoDrawerTabList: {
+    textAlign: "left",
+    "& .MuiTabs-scroller": {
+      "& .MuiTabs-indicator": {
+        backgroundColor: "#1db954", // spotify_green
+      },
+      "& .MuiTabs-flexContainer": {
+        marginLeft: "1rem",
+        display: "flex",
+        justifyContent: {
+          sm: "center",
+          md: "flex-start",
+        },
+      },
+    },
+  },
+  infoDrawerTabItem: {
+    color: "#b7b7b7", // dull_grey
+    padding: "0px 12px",
+    margin: "6px 0px",
+    minHeight: "30px",
+    minWidth: "max-content",
+    "&.Mui-selected": {
+      color: "#d9d9d9", // text_primary
+    },
+  },
+  infoDrawerCopyStylingWrapper: {
+    display: {
+      xs: "none",
+      sm: "flex",
+    },
+    margin: "30px 0px",
+    order: {
+      xs: 3,
+      sm: 2,
+    },
+    flex: {
+      xs: 1,
+      md: 0,
+    },
+    flexDirection: "column",
+  },
+  // infoDrawer
 }

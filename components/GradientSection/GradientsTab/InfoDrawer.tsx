@@ -4,6 +4,7 @@ import {
   Container,
   Drawer,
   IconButton,
+  Tab,
   Typography,
 } from "@mui/material"
 import {
@@ -23,6 +24,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder"
 import BookmarkIcon from "@mui/icons-material/Bookmark"
 import { styles as sideNavStyles } from "../../SideNav/styles/styles"
+import { TabContext, TabList, TabPanel } from "@mui/lab"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -37,6 +39,17 @@ const InfoDrawer = ({
 
   const [likeToggle, setLikeToggle] = useState<boolean>(false)
   const [saveToggle, setSaveToggle] = useState<boolean>(false)
+
+  // state for the current value of selected tab
+  const [value, setValue] = useState("css")
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue)
+  }
+
+  useEffect(() => {
+    console.log(value)
+  }, [value])
 
   const infoDrawerCloseHandler = useCallback(() => {
     setInfoDrawerToggle(false)
@@ -157,7 +170,54 @@ const InfoDrawer = ({
       <Container
         className={iid + "CopyStylingWrapper"}
         id={iid + "CopyStylingWrapper"}
-      ></Container>
+        sx={styles.infoDrawerCopyStylingWrapper}
+      >
+        <TabContext value={value}>
+          <TabList
+            onChange={handleChange}
+            orientation="horizontal"
+            sx={styles.infoDrawerTabList}
+            className={iid + "TabList"}
+            id={iid + "TabList"}
+          >
+            <Tab
+              label="CSS"
+              value="css"
+              disableRipple
+              className={iid + "TabItem"}
+              id={iid + "CSSTab"}
+              sx={styles.infoDrawerTabItem}
+            />
+            <Tab
+              label="JSON"
+              value="json"
+              disableRipple
+              className={iid + "TabItem"}
+              id={iid + "JSONTab"}
+              sx={styles.infoDrawerTabItem}
+            />
+            <Tab
+              label="Array"
+              value="array"
+              disableRipple
+              className={iid + "TabItem"}
+              id={iid + "ArrayTab"}
+              sx={styles.infoDrawerTabItem}
+            />
+          </TabList>
+          <TabPanel
+            value={value}
+            className={iid + "SelectedTabCode"}
+            id={iid + "SelectedTabCode" + value.toUpperCase()}
+            sx={{
+              padding: "0px",
+            }}
+          >
+            {/* Gradients Tab Body Section */}
+            {value}
+          </TabPanel>
+        </TabContext>
+      </Container>
     </Drawer>
   )
 }
