@@ -5,6 +5,12 @@ import { GradientBody } from "../../utils/interfaces"
 import { responseTexts, SaveGradientBodyKeys } from "../../utils/constants"
 import { areArraysEqual, logger } from ".."
 
+/**
+ *
+ * @param {GradientBody} body
+ * @param {NextApiResponse} res
+ * @returns
+ */
 export const saveAGradient = async (
   body: GradientBody,
   res: NextApiResponse

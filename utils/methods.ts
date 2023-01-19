@@ -2,7 +2,12 @@ import axios from "axios"
 import { gradientBoxTypes } from "./constants"
 import { GetContrastingColor, GetLightOrDarkTextColor } from "./interfaces"
 
-// lightens or darkens a color by a certain amount
+/**
+ * lightens or darkens a color by a certain amount
+ * @param {string} col
+ * @param {number} amt
+ * @returns
+ */
 export const LightenDarkenColor = (col: string, amt: number) => {
   let usePound = false
 
@@ -31,7 +36,11 @@ export const LightenDarkenColor = (col: string, amt: number) => {
   return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
 }
 
-// finds out if a color is light or dark
+/**
+ * finds out if a color is light or dark
+ * @param {any} color
+ * @returns
+ */
 export const lightOrDark = (color: any) /* eslint-disable-line */ => {
   // letiables for red, green, blue values
   let r, g, b
@@ -66,7 +75,11 @@ export const lightOrDark = (color: any) /* eslint-disable-line */ => {
   }
 }
 
-// gets a contrasting color by 50% for any color
+/**
+ * gets a contrasting color by 50% for any color
+ * @param {string | number | any} hexcode
+ * @returns
+ */
 export const getContrastingColor: GetContrastingColor = (
   hexcode: any /* eslint-disable-line */
 ) => {
@@ -79,7 +92,11 @@ export const getContrastingColor: GetContrastingColor = (
   }
 }
 
-// returns #444 or #d9d9d9 color for text on the basis of lighter or darker background
+/**
+ * returns #444 or #d9d9d9 color for text on the basis of lighter or darker background
+ * @param {string | number | any} hexcode
+ * @returns
+ */
 export const getLightOrDarkTextColor: GetLightOrDarkTextColor = (
   hexcode: any // eslint-disable-line
 ) => {
@@ -92,23 +109,54 @@ export const getLightOrDarkTextColor: GetLightOrDarkTextColor = (
   }
 }
 
-// copy to clipboard function
+// copy to clipboard functions
+/**
+ * @param {string} data
+ */
 export const copyToClipboard = (data: string) => {
   navigator.clipboard.writeText(data)
 }
 
+/**
+ * @param {string} hexcode
+ */
 export const copyHexCode = (hexcode: string) => {
   copyToClipboard(`#${hexcode}`)
 }
 
+/**
+ * @param {any} palette
+ */
 export const copyPaletteJSON = (palette: any) /* eslint-disable-line */ => {
   copyToClipboard(JSON.stringify(palette))
 }
 
-// returns a random box-size for gradients page
+/**
+ * returns a random box-size for gradients page
+ * @returns {string}
+ */
 export const getRandomBox: () => string = () => {
   return gradientBoxTypes[Math.floor(Math.random() * 4)]
 }
 
-// fetcher (POST) for useSWR API call
+/**
+ * fetcher (POST) for useSWR API call
+ * @param {string} url
+ */
 export const fetcher = (url: string) => axios.post(url).then((res) => res.data)
+
+/**
+ * converts hex to rgb
+ * @param {string} hex
+ */
+
+export const hexToRGB = (hex: string) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  const rgb =
+    result &&
+    `(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
+      result[3],
+      16
+    )})`
+  return rgb
+}

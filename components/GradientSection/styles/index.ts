@@ -10,9 +10,10 @@ export const styles = {
   gradientSectionTabs: {
     color: "#d9d9d9",
     fontSize: {
-      xs: "13px",
-      md: "15px",
-      xl: "16px",
+      xs: "15px",
+      md: "16px",
+      xl: "17px",
+      lg: "19px",
     },
     fontWeight: 300,
     padding: "0px 4px",
