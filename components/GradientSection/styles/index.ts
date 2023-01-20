@@ -56,6 +56,23 @@ export const styles = {
       display: "flex",
     },
   },
+  gradientSectionBoxTitleText: {
+    position: "absolute",
+    bottom: "10px",
+    left: "10px",
+    backgroundColor: "#33333385",
+    fontWeight: 300,
+    fontSize: {
+      xs: "16px",
+      md: "14px",
+      xl: "16px",
+    },
+    padding: {
+      xs: "2px 12px",
+      md: "3px 12px",
+    },
+    borderRadius: "100px",
+  },
   gradientSectionColorBoxWrapper: {
     width: "100%",
     display: "grid",

@@ -57,7 +57,7 @@ const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
         ...gradientBoxTypeStyles[randomBox],
       }}
     >
-      <Typography sx={{ position: "absolute", bottom: "10px", left: "10px" }}>
+      <Typography sx={styles.gradientSectionBoxTitleText}>
         {grad.name}
       </Typography>
       {/* action buttons on hover */}
@@ -71,7 +71,7 @@ const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
           className={gid + "ActionBtnsWrapper"}
           id={id + gid + "ActionBtnsWrapper"}
         >
-          <IconButton sx={{ color: "#111" }}>
+          <IconButton sx={{ color: "#111" }} disabled>
             <EditOutlinedIcon />
           </IconButton>
           <IconButton sx={{ color: "#111" }} onClick={handleInfoDrawerToggle}>

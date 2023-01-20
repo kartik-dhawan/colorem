@@ -65,3 +65,7 @@ export const ColorOptionConstants = [
 ]
 
 export const ColorNumberOptionsConstants = [2, 3, 4, 5]
+
+export const popupAlertTitles = {
+  COPIED: "Copied",
+}

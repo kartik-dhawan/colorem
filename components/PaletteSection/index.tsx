@@ -15,6 +15,7 @@ import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
 import Instructor from "../common/Instructor"
 import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
+import { popupAlertTitles } from "../../utils/constants"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
@@ -147,7 +148,7 @@ const PaletteSection = () => {
         />
       </Grid>
       {/* Alert which will appear to notify that the text has been copied */}
-      {copiedAlert && <PrimaryAlertBox alertTitle={"copied"} />}
+      {copiedAlert && <PrimaryAlertBox alertTitle={popupAlertTitles.COPIED} />}
       <Box
         className={pid + "BarsWrapper"}
         id={pid + "BarsWrapper"}
