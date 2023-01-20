@@ -17,9 +17,6 @@ export const styles = {
       md: "22px",
       xl: "25px",
     },
-    border: "0.5px solid #ffffffc6",
-    borderRight: "none",
-    borderLeft: "none",
   },
   navbarItems: {
     fontSize: {

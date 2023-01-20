@@ -5,7 +5,17 @@ import { externalLinks } from "../../../utils/constants"
 
 const Navbar = () => {
   return (
-    <Grid container sx={styles.nav} className="navWrapper" id="navWrapper">
+    <Grid
+      container
+      sx={{
+        ...styles.nav,
+        border: "0.5px solid #ffffffc6",
+        borderRight: "none",
+        borderLeft: "none",
+      }}
+      className="navWrapper"
+      id="navWrapper"
+    >
       <Grid item sm={4} xs={6} sx={styles.navbarItems}>
         <Link href="/" style={{ textDecoration: "none" }}>
           Colorem
