@@ -9,22 +9,20 @@ import {
 import { Dispatch, SetStateAction, useId } from "react"
 import TouchAppIcon from "@mui/icons-material/TouchApp"
 import SpaceBarIcon from "@mui/icons-material/SpaceBar"
+import InfoIcon from "@mui/icons-material/Info"
 import { styles } from "./styles"
-
-interface InstructorObject {
-  icon?: string
-  instruction: string
-  id: number
-}
+import { InstructorObject } from "../../../utils/interfaces"
 
 interface InstructorPropsType {
   instructorData: InstructorObject[]
   setShowInstructor: Dispatch<SetStateAction<boolean>>
+  page: string
 }
 
 const Instructor = ({
   instructorData,
   setShowInstructor,
+  page,
 }: InstructorPropsType) => {
   const iid = "instructor"
   const id = useId()
@@ -56,6 +54,7 @@ const Instructor = ({
               >
                 {item.icon === "tap" && <TouchAppIcon />}
                 {item.icon === "spacebar" && <SpaceBarIcon />}
+                {item.icon === "info" && <InfoIcon />}
               </ListItemIcon>
               <ListItemText
                 disableTypography={true}
@@ -77,7 +76,7 @@ const Instructor = ({
           setShowInstructor(false)
           // persists the state of shhowInstructor
           // so that user doesn't get this popup everytime
-          sessionStorage.setItem("persistPaletteInstructor", "visited")
+          localStorage.setItem(`${page}Instructor`, "visited")
         }}
       >
         Understood!
