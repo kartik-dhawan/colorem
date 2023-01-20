@@ -19,6 +19,7 @@ import { popupAlertTitles } from "../../utils/constants"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
+  const pageName = "palettesPage"
   let allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
   {
     /* reversing the array so that new palettes come first */
@@ -106,9 +107,7 @@ const PaletteSection = () => {
   // then & only then this popup will be visible
   useEffect(() => {
     const isFirstTimePopup =
-      sessionStorage.getItem("persistPaletteInstructor") === "visited"
-        ? false
-        : true
+      localStorage.getItem(`${pageName}Instructor`) === "visited" ? false : true
     setShowInstructor(isFirstTimePopup)
   }, [])
 
@@ -165,6 +164,7 @@ const PaletteSection = () => {
     <Instructor
       instructorData={paletteSectionInstructor}
       setShowInstructor={setShowInstructor}
+      page={pageName}
     />
   ) : (
     <PrimaryLoader />

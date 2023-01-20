@@ -1,25 +1,33 @@
 import { Box } from "@mui/material"
-import { API_URLS } from "../../../utils/constants"
 import { styles } from "../styles"
 import GradientBox from "./GradientBox"
-import useSWR from "swr"
 import { GradientDataType } from "../../../utils/interfaces"
-import { fetcher } from "../../../utils/methods"
 import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
 import GradientFilter from "./GradientFilter"
 import { useSelector } from "react-redux"
 import { RootType } from "../../../redux/constants/stateTypes"
 import { useEffect, useState } from "react"
 import InfoDrawer from "./InfoDrawer"
+import Instructor from "../../common/Instructor"
 
 interface GradientsTabProps {
   gid: string
 }
 
 const GradientsTab = ({ gid }: GradientsTabProps) => {
-  const { data, isLoading } = useSWR<GradientDataType[]>(
-    API_URLS ? API_URLS.GET_ALL_GRADIENTS : "",
-    fetcher
+  const pageName = "gradientsPage"
+
+  const [showInstructor, setShowInstructor] = useState<boolean>(false)
+
+  /**
+   * gets the contentful data
+   */
+  const { gradientSectionInstructor } = useSelector(
+    (state: RootType) => state.contentSlice.data
+  )
+
+  const { data, isLoading } = useSelector(
+    (state: RootType) => state.gradientSlice
   )
 
   /*
@@ -61,9 +69,15 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
    */
   const [infoDrawerToggle, setInfoDrawerToggle] = useState<boolean>(false)
 
+  useEffect(() => {
+    const isFirstTimePopup =
+      localStorage.getItem(`${pageName}Instructor`) === "visited" ? false : true
+    setShowInstructor(isFirstTimePopup)
+  }, [])
+
   return (
     <>
-      {isLoading && (
+      {isLoading && !showInstructor && (
         <Box
           sx={styles.gradientSectionLoaderWrapper}
           className={gid + "LoaderWrapper"}
@@ -72,7 +86,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           <PrimaryLoader />
         </Box>
       )}
-      {gradientsArray ? (
+      {gradientsArray && !showInstructor ? (
         <>
           <GradientFilter />
           <InfoDrawer
@@ -94,6 +108,14 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
             ))}
           </Box>
         </>
+      ) : showInstructor ? (
+        <Box sx={{ fontWeight: 300, letterSpacing: "0.3px" }}>
+          <Instructor
+            instructorData={gradientSectionInstructor}
+            setShowInstructor={setShowInstructor}
+            page={pageName}
+          />
+        </Box>
       ) : (
         /* Design a proper error component for API fail */
         <pre>Error running the api please try again</pre>

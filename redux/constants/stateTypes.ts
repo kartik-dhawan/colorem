@@ -31,4 +31,6 @@ export interface ToggleSliceType {
 
 export interface GradientSliceType {
   gradient: GradientDataType
+  data: GradientDataType[]
+  isLoading: boolean
 }

@@ -80,3 +80,9 @@ export interface ColorListType {
   colorType: string
   colorCode: string
 }
+
+export interface InstructorObject {
+  icon?: string
+  instruction: string
+  id: number
+}
