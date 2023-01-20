@@ -12,6 +12,8 @@ const initialState: GradientSliceType = {
     name: "",
     likes: 0,
   },
+  data: [],
+  isLoading: true,
 }
 
 const gradientSlice = createSlice({
@@ -24,8 +26,24 @@ const gradientSlice = createSlice({
     ) => {
       state.gradient = action.payload
     },
+    updateGradientsData: (
+      state: GradientSliceType,
+      action: PayloadAction<GradientDataType[]>
+    ) => {
+      state.data = action.payload
+    },
+    updateLoadingStatus: (
+      state: GradientSliceType,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isLoading = action.payload
+    },
   },
 })
 
-export const { updateCurrentGradient } = gradientSlice.actions
+export const {
+  updateCurrentGradient,
+  updateGradientsData,
+  updateLoadingStatus,
+} = gradientSlice.actions
 export default gradientSlice.reducer

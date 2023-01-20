@@ -1,10 +1,7 @@
 import { Box } from "@mui/material"
-import { API_URLS } from "../../../utils/constants"
 import { styles } from "../styles"
 import GradientBox from "./GradientBox"
-import useSWR from "swr"
 import { GradientDataType } from "../../../utils/interfaces"
-import { fetcher } from "../../../utils/methods"
 import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
 import GradientFilter from "./GradientFilter"
 import { useSelector } from "react-redux"
@@ -29,9 +26,8 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
     (state: RootType) => state.contentSlice.data
   )
 
-  const { data, isLoading } = useSWR<GradientDataType[]>(
-    API_URLS ? API_URLS.GET_ALL_GRADIENTS : "",
-    fetcher
+  const { data, isLoading } = useSelector(
+    (state: RootType) => state.gradientSlice
   )
 
   /*
@@ -81,7 +77,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
 
   return (
     <>
-      {isLoading && (
+      {isLoading && !showInstructor && (
         <Box
           sx={styles.gradientSectionLoaderWrapper}
           className={gid + "LoaderWrapper"}
