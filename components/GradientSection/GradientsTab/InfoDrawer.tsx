@@ -26,7 +26,9 @@ import BookmarkIcon from "@mui/icons-material/Bookmark"
 import { styles as sideNavStyles } from "../../SideNav/styles/styles"
 import { TabContext, TabList, TabPanel } from "@mui/lab"
 import SyntaxHighlightBox from "../../common/SyntaxHighlightBox"
-import { hexToRGB } from "../../../utils/methods"
+import { copyToClipboard, hexToRGB } from "../../../utils/methods"
+import PrimaryAlertBox from "../../common/AlertBoxes/PrimaryAlertBox"
+import { popupAlertTitles } from "../../../utils/constants"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -42,6 +44,18 @@ const InfoDrawer = ({
   const [likeToggle, setLikeToggle] = useState<boolean>(false)
   const [saveToggle, setSaveToggle] = useState<boolean>(false)
   const [gradientCode, setGradientCode] = useState<string>("")
+  const [isCopied, setIsCopied] = useState<boolean>(false)
+
+  /**
+   * Removes copied alert after 2 seconds
+   */
+  useEffect(() => {
+    if (isCopied) {
+      setTimeout(() => {
+        setIsCopied(false)
+      }, 2000)
+    }
+  }, [isCopied])
 
   /*
    * state for the current value of selected tab
@@ -90,7 +104,7 @@ const InfoDrawer = ({
       const cssGradientString = `.yourClass {
   background: linear-gradient(90deg, ${gradientStyleString});
   background: -moz-linear-gradient(90deg, ${gradientStyleString});
-  background: -webkit-linear-gradient(90deg,${gradientStyleString};
+  background: -webkit-linear-gradient(90deg,${gradientStyleString});
 }`
       setGradientCode(cssGradientString)
     } else if (value === "json") {
@@ -100,16 +114,21 @@ const InfoDrawer = ({
       })
       setGradientCode(JSON.stringify(jsonGradient))
     } else if (value === "javascript") {
-      const arrayGradientString = `const hexArray: [ ${gradient.colors
-        .map((color) => `#${color}`)
+      const arrayGradientString = `const colorsInHex = [ ${gradient.colors
+        .map((color) => `"#${color}"`)
         .join(", ")} ]
-const rgbArray: [ ${gradient.colors
-        .map((color) => `rgb ${hexToRGB(`#${color}`)}`)
+const colorsInRGB = [ ${gradient.colors
+        .map((color) => `"rgb${hexToRGB(`#${color}`)}"`)
         .join(", ")} ]
       `
       setGradientCode(arrayGradientString)
     }
   }, [value, gradient])
+
+  const copyGradientHandler = useCallback(() => {
+    copyToClipboard(gradientCode)
+    setIsCopied(true)
+  }, [gradientCode])
 
   return (
     <Drawer
@@ -184,6 +203,7 @@ const rgbArray: [ ${gradient.colors
           sx={styles.infoDrawerCopyButton}
           className={iid + "CopyButton"}
           id={iid + "CopyButton"}
+          onClick={copyGradientHandler}
         >
           <ContentCopyIcon />
         </IconButton>
@@ -259,6 +279,7 @@ const rgbArray: [ ${gradient.colors
           </TabPanel>
         </TabContext>
       </Container>
+      {isCopied && <PrimaryAlertBox alertTitle={popupAlertTitles.COPIED} />}
     </Drawer>
   )
 }

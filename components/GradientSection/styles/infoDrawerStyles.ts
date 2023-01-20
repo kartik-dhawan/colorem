@@ -1,6 +1,5 @@
 export const styles = {
   gradientInfoDrawer: {
-    // position: "absolute",
     "& .MuiDrawer-paper": {
       width: {
         xs: "100vw",
@@ -31,16 +30,17 @@ export const styles = {
   },
   infoDrawerGradientBox: {
     minHeight: {
-      xs: "250px",
+      xs: "275px",
       md: "300px",
+      xl: "325px",
     },
     minWidth: {
       xs: "80%",
       md: "300px",
+      xl: "325px",
     },
-    // backgroundColor: "#444",
     margin: {
-      xs: "3rem 2rem 1.5rem 2rem",
+      xs: "4rem 2rem 1.5rem 2rem",
       md: "3rem 2rem",
     },
     flex: {
@@ -133,6 +133,10 @@ export const styles = {
       backgroundColor: "#1db954", // $spotify_green
       transform: "scale(1.04)",
     },
+    "&:active": {
+      transform: "scale(0.95)",
+    },
+    TouchEvent: "inherit",
     "& > svg": {
       fontSize: {
         xs: "29px",
