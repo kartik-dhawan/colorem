@@ -1,5 +1,9 @@
 import store from "../store"
-import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
+import {
+  ContentfulType,
+  GradientDataType,
+  PaletteDataType,
+} from "../../utils/interfaces"
 // Add the Type for all the states used in redux in this file.
 
 // state types for store (no other types are required since they are included in 'configureStore')
@@ -21,4 +25,12 @@ export interface PaletteType {
 
 export interface ToggleSliceType {
   copiedAlert: boolean
+  selectedColor: string
+  selectedColorsNumber: number | null
+}
+
+export interface GradientSliceType {
+  gradient: GradientDataType
+  data: GradientDataType[]
+  isLoading: boolean
 }

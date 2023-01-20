@@ -15,9 +15,11 @@ import OptionsBar from "./OptionsBar"
 import { getContrastingColor } from "../../utils/methods"
 import Instructor from "../common/Instructor"
 import PrimaryAlertBox from "../common/AlertBoxes/PrimaryAlertBox"
+import { popupAlertTitles } from "../../utils/constants"
 
 const PaletteSection = () => {
   const pid = "paletteSection"
+  const pageName = "palettesPage"
   let allPalettes = useSelector((state: RootType) => state.paletteSlice.data)
   {
     /* reversing the array so that new palettes come first */
@@ -105,9 +107,7 @@ const PaletteSection = () => {
   // then & only then this popup will be visible
   useEffect(() => {
     const isFirstTimePopup =
-      sessionStorage.getItem("persistPaletteInstructor") === "visited"
-        ? false
-        : true
+      localStorage.getItem(`${pageName}Instructor`) === "visited" ? false : true
     setShowInstructor(isFirstTimePopup)
   }, [])
 
@@ -147,7 +147,7 @@ const PaletteSection = () => {
         />
       </Grid>
       {/* Alert which will appear to notify that the text has been copied */}
-      {copiedAlert && <PrimaryAlertBox alertTitle={"copied"} />}
+      {copiedAlert && <PrimaryAlertBox alertTitle={popupAlertTitles.COPIED} />}
       <Box
         className={pid + "BarsWrapper"}
         id={pid + "BarsWrapper"}
@@ -164,6 +164,7 @@ const PaletteSection = () => {
     <Instructor
       instructorData={paletteSectionInstructor}
       setShowInstructor={setShowInstructor}
+      page={pageName}
     />
   ) : (
     <PrimaryLoader />

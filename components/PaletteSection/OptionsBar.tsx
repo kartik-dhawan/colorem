@@ -80,6 +80,7 @@ const OptionsBar = ({
   // to toggle save post button (bookmark icon)
   const savedHandler = useCallback(() => {
     setSaved(!saved)
+    setAnchorEl(null)
   }, [saved])
 
   // updates like count instantly on UI while it asynchronously updates it in DB
@@ -143,6 +144,7 @@ const OptionsBar = ({
     // once authentication has been implemented, this data will be stored in that user's collection
     localStorage.setItem("liked", JSON.stringify(likedPalettes))
     localStorage.setItem("previous-liked-unliked", JSON.stringify(liked))
+    setAnchorEl(null)
   }, [favorite, guid])
 
   const copyHandler = () => {
@@ -150,6 +152,7 @@ const OptionsBar = ({
     copyPaletteJSON(paletteJSON)
     // shows an alert
     dispatch(toggleCopiedAlert(true))
+    setAnchorEl(null)
   }
 
   // clear saves and likes on clicking next palette icon
@@ -224,6 +227,7 @@ const OptionsBar = ({
           </MenuItem>
           <Divider />
           <MenuItem
+            disableRipple
             className={pid + "SubMenuItem"}
             sx={styles.optionsBarSubMenuItem}
             onClick={favoriteHandler}
@@ -233,6 +237,7 @@ const OptionsBar = ({
           </MenuItem>
           <Divider />
           <MenuItem
+            disableRipple
             className={pid + "SubMenuItem"}
             sx={styles.optionsBarSubMenuItem}
             onClick={savedHandler}

@@ -18,6 +18,14 @@ export const styles = {
       xl: "25px",
     },
   },
+  navbarItems: {
+    fontSize: {
+      xs: "22px",
+      md: "24px",
+      lg: "26px",
+      xl: "28px",
+    },
+  },
   // subnav title
   subNavTitle: {
     fontSize: {

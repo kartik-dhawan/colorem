@@ -1,11 +1,14 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
-import { logger } from "."
-import colorPalette from "../database/models/colorPalette"
-import { responseTexts, URLS } from "../utils/constants"
-import { FinalPaletteType } from "../utils/interfaces"
+import { logger } from ".."
+import colorPalette from "../../database/models/colorPalette"
+import { responseTexts, URLS } from "../../utils/constants"
+import { FinalPaletteType } from "../../utils/interfaces"
 
-// this function returns a promise which further consists the response.
+/**
+ * this function returns a promise which further consists the response.
+//  * @returns {Promise<FinalPaletteType[]>} 
+ */
 export const getAllColorPalettes: () => Promise<
   FinalPaletteType[]
 > = async () => {
@@ -13,7 +16,10 @@ export const getAllColorPalettes: () => Promise<
   return await colorPalette.find()
 }
 
-// this function fetches all colormind models in a list
+/**
+ *
+ * this function fetches all colormind models in a list
+ */
 export const getColormindModels = async () => {
   return await axios
     .get(URLS.COLORMIND_MODELS_API)
@@ -29,7 +35,13 @@ export const getColormindModels = async () => {
     })
 }
 
-// a function to get a palette on the basis of paletteGuid
+/**
+ * a function to get a palette on the basis of paletteGuid
+ * @param {string | string[] | undefined} paletteGuid
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @returns
+ */
 export const getPaletteByGuid = async (
   paletteGuid: string | string[] | undefined,
   req: NextApiRequest,

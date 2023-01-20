@@ -32,6 +32,16 @@ export interface PaletteDataType {
   likes: number
 }
 
+export interface GradientDataType {
+  gradientGuid: string
+  colors: string[]
+  filter: string[]
+  __v: number
+  _id: string
+  name: string
+  likes: number
+}
+
 export type JSONForPaletteFunction = (
   allPalettes: PaletteDataType[], // eslint-disable-line
   count: number // eslint-disable-line
@@ -52,4 +62,27 @@ export interface PaletteColorJSONType {
 export interface PaletteJSONType {
   name?: string
   palette?: PaletteColorJSONType[]
+}
+
+export interface BoxTypeStylesType {
+  [key: string]: {
+    gridColumn?: {
+      [key: string]: string
+    }
+    gridRow?: {
+      [key: string]: string
+    }
+  }
+}
+
+export interface ColorListType {
+  cid: number
+  colorType: string
+  colorCode: string
+}
+
+export interface InstructorObject {
+  icon?: string
+  instruction: string
+  id: number
 }

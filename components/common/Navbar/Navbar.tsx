@@ -16,12 +16,12 @@ const Navbar = () => {
       className="navWrapper"
       id="navWrapper"
     >
-      <Grid item sm={4} xs={6}>
+      <Grid item sm={4} xs={6} sx={styles.navbarItems}>
         <Link href="/" style={{ textDecoration: "none" }}>
           Colorem
         </Link>
       </Grid>
-      <Grid item sm={4} xs={6} textAlign={"right"}>
+      <Grid item sm={4} xs={6} textAlign={"right"} sx={styles.navbarItems}>
         <Link href="/about" style={{ textDecoration: "none" }}>
           About
         </Link>
@@ -35,6 +35,7 @@ const Navbar = () => {
             xs: "none",
             sm: "inline",
           },
+          ...styles.navbarItems,
         }}
       >
         <Link
