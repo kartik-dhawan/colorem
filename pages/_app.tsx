@@ -8,7 +8,11 @@ import { Provider } from "react-redux"
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
-  if (router.pathname === "/_error" || router.pathname === "/") {
+  if (
+    router.pathname === "/_error" ||
+    router.pathname === "/" ||
+    router.pathname === "/404"
+  ) {
     return (
       <Provider store={store}>
         <Component {...pageProps} />
