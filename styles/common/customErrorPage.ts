@@ -1,6 +1,6 @@
 export const styles = {
   customErrorPageWrapper: {
-    minHeight: "100vh",
+    minHeight: "90vh",
     maxHeight: "-webkit-fill-available",
     width: "100vw",
     display: "flex",
