@@ -20,21 +20,20 @@ export const styles = {
   },
   navbarItems: {
     fontSize: {
-      xs: "22px",
-      md: "24px",
-      lg: "26px",
-      xl: "28px",
+      xs: "20px",
+      md: "18px",
+      xl: "22px",
     },
   },
   // subnav title
   subNavTitle: {
     fontSize: {
-      xs: "30px",
-      md: "34px",
-      lg: "36px",
-      xl: "40px",
+      xs: "31px",
+      md: "35px",
+      lg: "37px",
+      xl: "41px",
     },
-    fontWeight: 500,
+    fontWeight: 400,
     color: "#D9D9D9", // text_primary
     paddingRight: {
       md: "100px",
