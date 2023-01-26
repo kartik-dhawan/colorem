@@ -25,5 +25,5 @@ export const getGradientByGuid = async (
   if (typeof gradientGuid === "string") {
     return await colorGradient.findOne({ gradientGuid: gradientGuid })
   }
-  return res.status(404).json(responseTexts.INCORRECT_GUID_TYPE)
+  return res.status(404).json({ message: responseTexts.INCORRECT_GUID_TYPE })
 }

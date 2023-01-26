@@ -26,9 +26,13 @@ export const responseTexts = {
   SELECT_TYPE_PUT: "Please select a type of PUT request in context to the app.",
   PALETTE_NOT_FOUND:
     "Palette not found. Please verify the paletteGuid. If it is correct, the database doesn't consist of this record.",
+  GRADIENT_NOT_FOUND:
+    "Gradient not found. Please verify the gradientGuid. If it is correct, the database doesn't consist of this record.",
   BODY_NOT_PRESENT:
     "Request body is either not present or incorrect. Please pass a valid body in the API request",
   INCORRECT_GUID_TYPE: "Please enter a valid ID type in the url.",
 }
 
 export const SaveGradientBodyKeys = ["name", "colors", "filter"]
+
+export const PUT_TYPES = ["Like/Unlike"]

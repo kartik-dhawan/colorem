@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { logger } from "../../../lib/methods"
 import { getPaletteByGuid } from "../../../lib/methods/palettes/getPalettes"
-import { updatePaletteByGuid } from "../../../lib/methods/palettes/savePalette"
-import { responseTexts } from "../../../lib/utils/constants"
+import { updatePaletteLikesByGuid } from "../../../lib/methods/palettes/savePalette"
+import { PUT_TYPES, responseTexts } from "../../../lib/utils/constants"
 
 const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // gets the params from URL
@@ -11,8 +11,8 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
   // PUT - api route-method tp update likes of a palette
   if (req.method === "PUT") {
     // a function to like or unlike the palette
-    return req.body.type === "Like/Unlike" // eslint-disable-line
-      ? updatePaletteByGuid(req, res, paletteGuid)
+    return req.body?.type === "Like/Unlike" // eslint-disable-line
+      ? updatePaletteLikesByGuid(req, res, paletteGuid)
           .then((updatedPalette) => {
             res.status(200).json(updatedPalette)
           })
@@ -25,7 +25,7 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
           })
       : res.status(200).json({
           message: responseTexts.SELECT_TYPE_PUT,
-          types: ["Like/Unlike"],
+          types: PUT_TYPES,
         })
   }
 
@@ -43,7 +43,7 @@ const individualPalette = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       })
   } else {
-    res.status(403).json(responseTexts.TRY_DIFFERENT_REQUEST)
+    res.status(403).json({ message: responseTexts.TRY_DIFFERENT_REQUEST })
   }
 }
 
