@@ -46,25 +46,33 @@ export const rgbArrayToHex = (palette: number[][]) => {
  * @param {string | string[] | undefined} paletteGuid
  * @returns
  */
-export const updatePaletteByGuid = async (
+export const updatePaletteLikesByGuid = async (
   req: NextApiRequest,
   res: NextApiResponse,
   paletteGuid: string | string[] | undefined
 ) => {
-  // gets the palette matching the GUID from URL
+  /**
+   * gets the palette matching the GUID from URL
+   */
   const palette = await getPaletteByGuid(paletteGuid, req, res)
 
-  // returns a generic response if no palette with that Guid is found
+  /**
+   * returns a generic response if no palette with that Guid is found
+   */
   if (!palette) {
-    res.status(200).json(responseTexts.PALETTE_NOT_FOUND)
+    res.status(200).json({ message: responseTexts.PALETTE_NOT_FOUND })
   }
 
-  // filter on the basis of which the palette would be searched and then updated
+  /*
+   * filter on the basis of which the palette would be searched and then updated
+   */
   const filter = {
     paletteGuid: paletteGuid,
   }
 
-  // update object contains the key value pair of the items to be added/updated
+  /**
+   * update object contains the key value pair of the items to be added/updated
+   */
   let update
   if (req.body.like === true) {
     // adds a like count
@@ -77,10 +85,12 @@ export const updatePaletteByGuid = async (
       likes: palette?.likes && palette?.likes - 1,
     }
   } else {
-    res.status(200).json(responseTexts.BODY_NOT_PRESENT)
+    res.status(200).json({ message: responseTexts.BODY_NOT_PRESENT })
   }
 
-  // final updated palette after increasing or decreasing the like count
+  /**
+   * final updated palette after increasing or decreasing the like count
+   */
   const updatedPalette = await colorPalette.findOneAndUpdate(filter, update, {
     new: true, // added so as to return the new updated object after the process
   })
