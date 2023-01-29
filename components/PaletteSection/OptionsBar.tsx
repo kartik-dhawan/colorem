@@ -83,7 +83,10 @@ const OptionsBar = ({
     setAnchorEl(null)
   }, [saved])
 
-  // updates like count instantly on UI while it asynchronously updates it in DB
+  /**
+   * updates like count instantly on UI while it asynchronously updates it in DB
+   * @param {boolean} like
+   */
   const likesHandlerUI = (like: boolean) => {
     if (like) {
       setLikeCount((like) => like + 1)
@@ -92,7 +95,9 @@ const OptionsBar = ({
     }
   }
 
-  // to hit like-a-palette api on toggle
+  /**
+   * to hit like-a-palette api on toggle
+   */
   const hitLikePaletteAPI = useCallback(
     (like: boolean) => {
       return (

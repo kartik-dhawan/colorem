@@ -51,7 +51,7 @@ const Gradients = ({ contentData }: ContentfulType) => {
 
     // storing contentful data in redux for this page
     dispatch(updateContent(contentData))
-  }, [contentData, isLoading])
+  }, [contentData, isLoading, data])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>

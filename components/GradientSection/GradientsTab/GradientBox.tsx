@@ -23,9 +23,7 @@ interface GradientBoxProps {
 const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
   const gid = "gradientBox"
   const id = useId()
-
   const dispatch = useDispatch()
-
   const [randomBox, setRandomBoxState] = useState("wide")
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
   const handleInfoDrawerToggle = useCallback(() => {
     setInfoDrawerToggle(true)
     dispatch(updateCurrentGradient(grad))
-  }, [])
+  }, [grad])
 
   const gradientStyleString: string = grad.colors
     .map((color) => {
