@@ -62,7 +62,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           )
         : setGradientsArray(data)
     }
-  }, [selectedColor, selectedColorsNumber])
+  }, [selectedColor, selectedColorsNumber, data])
 
   /*
    * Toggle state for gradient info drawer

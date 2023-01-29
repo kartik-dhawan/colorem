@@ -14,7 +14,7 @@ import {
   useEffect,
   useState,
 } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootType } from "../../../redux/constants/stateTypes"
 import { GetColorName } from "hex-color-to-color-name"
 import { styles } from "../styles/infoDrawerStyles"
@@ -28,7 +28,12 @@ import { TabContext, TabList, TabPanel } from "@mui/lab"
 import SyntaxHighlightBox from "../../common/SyntaxHighlightBox"
 import { copyToClipboard, hexToRGB } from "../../../utils/methods"
 import PrimaryAlertBox from "../../common/AlertBoxes/PrimaryAlertBox"
-import { popupAlertTitles } from "../../../utils/constants"
+import { API_URLS, popupAlertTitles } from "../../../utils/constants"
+import { validate } from "uuid"
+import axios from "axios"
+import { logger } from "../../../lib/methods"
+import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
+import { useSWRConfig } from "swr"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -40,11 +45,26 @@ const InfoDrawer = ({
   setInfoDrawerToggle,
 }: InfoDrawerProps) => {
   const iid = "infoDrawer"
+  const dispatch = useDispatch()
+  const { mutate } = useSWRConfig()
+
+  /*
+   * gets current selected gradient from store
+   */
+  const { gradient } = useSelector((state: RootType) => state.gradientSlice)
 
   const [likeToggle, setLikeToggle] = useState<boolean>(false)
   const [saveToggle, setSaveToggle] = useState<boolean>(false)
   const [gradientCode, setGradientCode] = useState<string>("")
   const [isCopied, setIsCopied] = useState<boolean>(false)
+  const [likeCount, setLikeCount] = useState<number>(0)
+
+  /**
+   * sets default likes to the likes from the database
+   */
+  useEffect(() => {
+    setLikeCount(gradient.likes)
+  }, [gradient.likes])
 
   /**
    * Removes copied alert after 2 seconds
@@ -71,11 +91,6 @@ const InfoDrawer = ({
   }, [])
 
   /*
-   * gets current selected gradient from store
-   */
-  const { gradient } = useSelector((state: RootType) => state.gradientSlice)
-
-  /*
    * final string of all hexcodes in a gradient
    */
   const gradientStyleString: string = gradient.colors
@@ -83,18 +98,6 @@ const InfoDrawer = ({
       return `#${color}`
     })
     .join(", ")
-
-  /**
-   * toggle handlers for likes & save feature
-   */
-
-  const likeToggleHandler = useCallback(() => {
-    setLikeToggle(!likeToggle)
-  }, [likeToggle])
-
-  const saveToggleHandler = useCallback(() => {
-    setSaveToggle(!saveToggle)
-  }, [saveToggle])
 
   /**
    * gets gradient's code in the selected format
@@ -129,6 +132,78 @@ const colorsInRGB = [ ${gradient.colors
     copyToClipboard(gradientCode)
     setIsCopied(true)
   }, [gradientCode])
+
+  /**
+   * @param {boolean} likeToggle
+   * to hit like-a-gradient api on toggle
+   */
+  const hitLikePaletteAPI = useCallback(
+    (likeToggle: boolean) => {
+      return (
+        gradient.gradientGuid &&
+        validate(gradient.gradientGuid) &&
+        axios
+          .put(`${API_URLS.UPDATE_A_GRADIENT}/${gradient.gradientGuid}`, {
+            like: likeToggle, // request body
+            type: "Like/Unlike",
+          })
+          .then((res) => {
+            // updates like count instantly on UI while it asynchronously updates it in DB
+            setLikeCount(res.data.likes)
+            // mutates the 'all-gradients' api without reloading
+            mutate(API_URLS.GET_ALL_GRADIENTS)
+            // also updates the redux state
+            dispatch(updateCurrentGradient(res.data))
+          })
+          .catch((err) => {
+            logger({
+              error: err,
+              type: "error",
+            })
+          })
+      )
+    },
+    [gradient.gradientGuid, likeToggle]
+  )
+
+  // gets liked gradients by user in that session
+  const likedGradients: string[] =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("likedGradients") || "[]")
+
+  // if the user has already liked that gradient in that session, it will persist that
+  useEffect(() => {
+    return gradient.gradientGuid &&
+      likedGradients.includes(gradient.gradientGuid)
+      ? setLikeToggle(true)
+      : setLikeToggle(false)
+  }, [likedGradients, gradient.gradientGuid])
+
+  /**
+   * toggle handlers for likes & save feature
+   */
+  const likeToggleHandler = useCallback(() => {
+    setLikeToggle(!likeToggle)
+    hitLikePaletteAPI(!likeToggle)
+    const liked =
+      gradient.gradientGuid &&
+      (!likeToggle
+        ? likedGradients[likedGradients.push(gradient.gradientGuid) - 1]
+        : likedGradients.splice(
+            likedGradients.indexOf(gradient.gradientGuid),
+            1
+          ))
+    /**
+     *  stores liked palettes in local storage to persist temporarily
+     * once authentication has been implemented, this data will be stored in that user's collection
+     */
+    localStorage.setItem("likedGradients", JSON.stringify(likedGradients))
+    localStorage.setItem("previous-liked-gradients", JSON.stringify(liked))
+  }, [likeToggle, gradient.gradientGuid, gradient.likes])
+
+  const saveToggleHandler = useCallback(() => {
+    setSaveToggle(!saveToggle)
+  }, [saveToggle])
 
   return (
     <Drawer
@@ -213,7 +288,7 @@ const colorsInRGB = [ ${gradient.colors
           id={iid + "LikeButton"}
           onClick={likeToggleHandler}
         >
-          {likeToggle ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          {likeToggle ? <FavoriteIcon /> : <FavoriteBorderIcon />} {likeCount}
         </IconButton>
         <IconButton
           className={iid + "SaveButton"}
