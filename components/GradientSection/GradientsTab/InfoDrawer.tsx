@@ -166,12 +166,39 @@ const colorsInRGB = [ ${gradient.colors
     [gradient.gradientGuid, likeToggle]
   )
 
+  // gets liked gradients by user in that session
+  const likedGradients: string[] =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("likedGradients") || "[]")
+
+  // if the user has already liked that gradient in that session, it will persist that
+  useEffect(() => {
+    return gradient.gradientGuid &&
+      likedGradients.includes(gradient.gradientGuid)
+      ? setLikeToggle(true)
+      : setLikeToggle(false)
+  }, [likedGradients, gradient.gradientGuid])
+
   /**
    * toggle handlers for likes & save feature
    */
   const likeToggleHandler = useCallback(() => {
     setLikeToggle(!likeToggle)
     hitLikePaletteAPI(!likeToggle)
+    const liked =
+      gradient.gradientGuid &&
+      (!likeToggle
+        ? likedGradients[likedGradients.push(gradient.gradientGuid) - 1]
+        : likedGradients.splice(
+            likedGradients.indexOf(gradient.gradientGuid),
+            1
+          ))
+    /**
+     *  stores liked palettes in local storage to persist temporarily
+     * once authentication has been implemented, this data will be stored in that user's collection
+     */
+    localStorage.setItem("likedGradients", JSON.stringify(likedGradients))
+    localStorage.setItem("previous-liked-gradients", JSON.stringify(liked))
   }, [likeToggle, gradient.gradientGuid, gradient.likes])
 
   const saveToggleHandler = useCallback(() => {
