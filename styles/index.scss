@@ -14,6 +14,7 @@ body {
 .indexWrapper {
   background-color: $background_primary;
   height: 100vh;
+  max-height: -webkit-fill-available;
   display: flex;
   place-content: center center;
   align-items: center;
