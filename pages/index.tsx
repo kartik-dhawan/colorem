@@ -2,7 +2,11 @@ import Head from "next/head"
 import { Yellowtail } from "@next/font/google"
 import Link from "next/link"
 
-const yellowTail = Yellowtail({ weight: "400", subsets: ["latin"] })
+const yellowTail = Yellowtail({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+})
 
 /**
  *
