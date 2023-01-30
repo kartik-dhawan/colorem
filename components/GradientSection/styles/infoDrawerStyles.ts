@@ -70,6 +70,7 @@ export const styles = {
   },
   infoDrawerGradientName: {
     fontWeight: 300,
+    position: "relative",
     fontSize: {
       xs: "40px",
       sm: "45px",
@@ -85,6 +86,16 @@ export const styles = {
     padding: {
       xs: "3px 0px",
       md: "10px 0px",
+    },
+    tooltipOnHover: {
+      fontSize: "15px",
+      position: "absolute",
+      left: "55%",
+      top: "55%",
+      backgroundColor: "#333",
+      letterSpacing: "0.5px",
+      padding: "3px 6px",
+      display: "none",
     },
   },
   infoDrawerGradientColorsName: {
