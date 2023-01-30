@@ -252,7 +252,16 @@ const colorsInRGB = [ ${gradient.colors
           </Typography>
           <Typography
             variant="h1"
-            sx={styles.infoDrawerGradientName}
+            sx={{
+              ...styles.infoDrawerGradientName,
+              "&::after": {
+                content: `"${gradient.name}"`,
+                ...styles.infoDrawerGradientName.tooltipOnHover,
+              },
+              "&:hover::after": {
+                display: "flex",
+              },
+            }}
             className={iid + "GradientName"}
             id={iid + "GradientName"}
           >
