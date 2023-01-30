@@ -18,26 +18,57 @@ body {
   place-content: center center;
   align-items: center;
   .indexMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .indexHeader {
-      color: $text_third;
-      font-size: 60px;
-      letter-spacing: 1px;
-      font-weight: 300;
+      font-size: 128px;
+      line-height: 128px;
+
       @include mobiles-sm {
-        font-size: 25px;
-        padding: 20px;
+        font-size: 96px;
+        line-height: 96px;
       }
       @include mobiles {
-        font-size: 30px;
-        padding: 20px;
+        font-size: 96px;
+        line-height: 96px;
       }
       @include tablets {
-        font-size: 40px;
-        padding: 30px;
+        font-size: 112px;
+        line-height: 112px;
       }
-      a {
-        color: $next_blue;
-        font-weight: 700;
+      color: $next_blue;
+      font-weight: 700;
+      padding: 0px 10px;
+      border-bottom: 1px solid linear-gradient(90deg, #16a085, #f4d03f);
+      text-align: center;
+      background: linear-gradient(90deg, #16a085, #f4d03f);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      letter-spacing: 1px;
+    }
+    .indexLink {
+      color: $text_third;
+      font-size: 20px;
+      font-weight: 300;
+      text-align: center;
+      letter-spacing: 0.7px;
+      opacity: 0.8;
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      width: max-content;
+      transition: 200ms all ease;
+      &:hover {
+        opacity: 0.6;
+      }
+      @include mobiles-sm {
+        font-size: 16px;
+      }
+      @include mobiles {
+        font-size: 18px;
+      }
+      @include tablets {
+        font-size: 19px;
       }
     }
   }

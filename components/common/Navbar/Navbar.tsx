@@ -17,7 +17,7 @@ const Navbar = () => {
       id="navWrapper"
     >
       <Grid item sm={4} xs={6} sx={styles.navbarItems}>
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link href="/dashboard" style={{ textDecoration: "none" }}>
           Colorem
         </Link>
       </Grid>
