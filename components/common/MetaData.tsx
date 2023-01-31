@@ -1,4 +1,6 @@
 import Head from "next/head"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
 
 interface MetaProps {
   title: string
@@ -6,6 +8,8 @@ interface MetaProps {
 }
 
 const MetaData = ({ title, description }: MetaProps) => {
+  const content = useSelector((state: RootType) => state.contentSlice.data)
+
   return (
     <Head>
       {/* Primary meta tags */}
@@ -22,11 +26,7 @@ const MetaData = ({ title, description }: MetaProps) => {
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
-        content={
-          typeof window !== "undefined"
-            ? `${window.location.origin}/images/homeMetaImage.webp`
-            : "/images/og.webp"
-        }
+        content={"https:" + content.defaultMetaImage?.fields.file.url}
       />
       <meta property="og:site_name" content="colorem.vercel.app" />
       {/* Twitter */}
@@ -35,11 +35,7 @@ const MetaData = ({ title, description }: MetaProps) => {
       <meta name="twitter:description" content={description} />
       <meta
         name="twitter:image"
-        content={
-          typeof window !== "undefined"
-            ? `${window.location.origin}/images/homeMetaImage.webp`
-            : "/images/og.webp"
-        }
+        content={"https:" + content.defaultMetaImage?.fields.file.url}
       />
     </Head>
   )
