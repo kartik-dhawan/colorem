@@ -28,7 +28,6 @@ export const styles = {
       sm: "0rem 4rem",
     },
     fontWeight: 300,
-    fontFamily: "Nunito Sans",
     color: "#ebe1e1", // text_third
     "& > a": {
       color: "#0071f3f5",
@@ -46,7 +45,7 @@ export const styles = {
   },
   footerBoxReference: {
     "& > a": {
-      color: "#c7b4b4", // text_primary_dull
+      color: "#c0c3c6", // text_primary_dull
       fontSize: "17px",
       padding: {
         xs: "0px 20px",

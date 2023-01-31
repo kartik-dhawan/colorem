@@ -34,7 +34,7 @@ export const styles = {
       lg: "18px",
       xl: "20px",
     },
-    color: "#c7b4b4", // text_primary_dull
+    color: "#c0c3c6", // text_primary_dull
   },
   instructorOKBtn: {
     color: "#111",
