@@ -26,7 +26,7 @@ export const styles = {
       color: "#d9d9d9",
     },
     "& .MuiTabs-indicatorSpan": {
-      backgroundColor: "#c7b4b4", // $text_primary_dull
+      backgroundColor: "#c0c3c6", // $text_primary_dull
     },
   },
   gradientSectionColorBox: {

@@ -2,6 +2,9 @@ import { Grid } from "@mui/material"
 import Link from "next/link"
 import { styles } from "./styles"
 import { externalLinks } from "../../../utils/constants"
+import { Roboto } from "@next/font/google"
+
+const roboto = Roboto({ weight: "300", display: "swap", subsets: ["latin"] })
 
 const Navbar = () => {
   return (
@@ -13,7 +16,7 @@ const Navbar = () => {
         borderRight: "none",
         borderLeft: "none",
       }}
-      className="navWrapper"
+      className={"navWrapper " + roboto.className}
       id="navWrapper"
     >
       <Grid item sm={4} xs={6} sx={styles.navbarItems}>

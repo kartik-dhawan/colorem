@@ -9,6 +9,7 @@ import { styles } from "../styles/common/customErrorPage"
 import Link from "next/link"
 import WestIcon from "@mui/icons-material/West"
 import Head from "next/head"
+import { Roboto } from "@next/font/google"
 
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line
@@ -20,6 +21,8 @@ export const getStaticProps = async () => {
     revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
+
+const roboto = Roboto({ weight: "300", display: "swap", subsets: ["latin"] })
 
 const Custom404 = ({ content }: ContentfulType) => {
   const c4id = "custom404"
@@ -42,7 +45,7 @@ const Custom404 = ({ content }: ContentfulType) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box
-        className={c4id + "Wrapper"}
+        className={c4id + "Wrapper " + roboto.className}
         id={c4id + "Wrapper"}
         sx={styles.customErrorPageWrapper}
       >
