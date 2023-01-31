@@ -16,7 +16,7 @@ import {
   updateLoadingStatus,
 } from "../../redux/slices/gradientSlice"
 import { logger } from "../../lib/methods"
-import MetaData from "../../components/common/MetaData"
+import Head from "next/head"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -54,12 +54,38 @@ const Gradients = ({ contentData }: ContentfulType) => {
     dispatch(updateContent(contentData))
   }, [contentData, isLoading, data])
 
+  const title = "Colorem | Gradients"
+  const description = "Browse through blended color combinations & more."
+
   return (
     <>
-      <MetaData
-        title="Colorem | Gradients"
-        description="Browse through blended color combinations & more."
-      />
+      <Head>
+        {/* Primary meta tags */}
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        {/* Open Graph / Facebook */}
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+        <meta property="og:site_name" content="colorem.vercel.app" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+      </Head>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         <GradientSection />
       </ErrorBoundary>
