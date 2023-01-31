@@ -10,6 +10,9 @@ import SideNav from "../SideNav"
 import { IconButton, Typography } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { iconStyles } from "../PaletteSection/styles/styles"
+import { Roboto } from "@next/font/google"
+
+const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 
 const GradientSection = () => {
   const gid = "gradientSection"
@@ -29,7 +32,7 @@ const GradientSection = () => {
   return (
     <Box
       sx={{ width: "100%", typography: "body1", paddingTop: "5px" }}
-      className={gid + "Wrapper"}
+      className={gid + "Wrapper " + roboto.className}
       id={gid + "Wrapper"}
     >
       <TabContext value={value}>

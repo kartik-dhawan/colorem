@@ -4,11 +4,13 @@ import GradientBox from "./GradientBox"
 import { GradientDataType } from "../../../utils/interfaces"
 import PrimaryLoader from "../../common/Loaders/PrimaryLoader"
 import GradientFilter from "./GradientFilter"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootType } from "../../../redux/constants/stateTypes"
 import { useEffect, useState } from "react"
 import InfoDrawer from "./InfoDrawer"
 import Instructor from "../../common/Instructor"
+import { useRouter } from "next/router"
+import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
 
 interface GradientsTabProps {
   gid: string
@@ -16,8 +18,20 @@ interface GradientsTabProps {
 
 const GradientsTab = ({ gid }: GradientsTabProps) => {
   const pageName = "gradientsPage"
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const { guid } = router.query
 
   const [showInstructor, setShowInstructor] = useState<boolean>(false)
+
+  /**
+   * If there is no guid present in the query params, it will remove useless 'guid=' text from url
+   */
+  useEffect(() => {
+    if (guid === "") {
+      router.push("/gradients")
+    }
+  }, [guid])
 
   /**
    * gets the contentful data
@@ -34,6 +48,24 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
    * final array of gradients which is further twisted as per the filter
    */
   const [gradientsArray, setGradientsArray] = useState<GradientDataType[]>([])
+
+  /**
+   * If there is a guid in the query params, it will validate that guid
+   * check if there's a gradient object for that guid
+   * if yes, it will update the current gradient in store & toggle the info drawer with that data populated
+   */
+  useEffect(() => {
+    if (guid) {
+      const gradFromURL = gradientsArray.filter(
+        (item) => item.gradientGuid === guid
+      )
+
+      if (gradFromURL.length !== 0) {
+        dispatch(updateCurrentGradient(gradFromURL[0]))
+        setInfoDrawerToggle(true)
+      }
+    }
+  }, [guid, gradientsArray])
 
   // gets the filter value
   const { selectedColor, selectedColorsNumber } = useSelector(
@@ -62,7 +94,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           )
         : setGradientsArray(data)
     }
-  }, [selectedColor, selectedColorsNumber])
+  }, [selectedColor, selectedColorsNumber, data])
 
   /*
    * Toggle state for gradient info drawer

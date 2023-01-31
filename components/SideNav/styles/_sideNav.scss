@@ -17,7 +17,7 @@
       }
       .sideNavLink {
         &:any-link {
-          color: $text_primary;
+          color: darken($text_primary, 7%);
           text-decoration: none;
           text-transform: uppercase;
         }
@@ -28,7 +28,7 @@
           font-size: 24px;
         }
         .sideNavItemBody {
-          color: $text_primary_dull;
+          color: darken($text_primary_dull, 15%);
           font-size: 16px;
           font-weight: 300;
           text-transform: uppercase;

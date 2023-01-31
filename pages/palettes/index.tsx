@@ -14,6 +14,8 @@ import useSWR from "swr"
 import { API_URLS } from "../../utils/constants"
 import { logger } from "../../lib/methods"
 import { fetcher } from "../../utils/methods"
+import { Roboto } from "@next/font/google"
+import MetaData from "../../components/common/MetaData"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -27,6 +29,8 @@ export const getStaticProps = async () => {
     revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
+
+const roboto = Roboto({ display: "swap", weight: "300", subsets: ["latin"] })
 
 const Palettes = ({ contentData }: ContentfulType) => {
   const dispatch = useDispatch()
@@ -55,16 +59,26 @@ const Palettes = ({ contentData }: ContentfulType) => {
   })
 
   return (
-    <Box
-      sx={{
-        flex: 1,
-        display: "flex",
-      }}
-    >
-      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-        <PaletteSection />
-      </ErrorBoundary>
-    </Box>
+    <>
+      <MetaData
+        title="Colorem | Palettes"
+        description="Browse through various permutations colors to pick best for your theme."
+      />
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+        }}
+        className={roboto.className}
+      >
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onError={myErrorHandler}
+        >
+          <PaletteSection />
+        </ErrorBoundary>
+      </Box>
+    </>
   )
 }
 

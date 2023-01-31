@@ -14,6 +14,7 @@ import InfoIcon from "@mui/icons-material/Info"
 import { useDispatch } from "react-redux"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
 import { GradientDataType } from "../../../utils/interfaces"
+import { useRouter } from "next/router"
 
 interface GradientBoxProps {
   grad: GradientDataType
@@ -23,8 +24,8 @@ interface GradientBoxProps {
 const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
   const gid = "gradientBox"
   const id = useId()
-
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [randomBox, setRandomBoxState] = useState("wide")
 
@@ -39,7 +40,12 @@ const GradientBox = ({ grad, setInfoDrawerToggle }: GradientBoxProps) => {
   const handleInfoDrawerToggle = useCallback(() => {
     setInfoDrawerToggle(true)
     dispatch(updateCurrentGradient(grad))
-  }, [])
+    // populates guid into the url enabling url sharing
+    router.push({
+      pathname: "/gradients",
+      query: { ...router.query, guid: grad.gradientGuid },
+    })
+  }, [grad])
 
   const gradientStyleString: string = grad.colors
     .map((color) => {

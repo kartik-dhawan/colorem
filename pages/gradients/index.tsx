@@ -16,6 +16,7 @@ import {
   updateLoadingStatus,
 } from "../../redux/slices/gradientSlice"
 import { logger } from "../../lib/methods"
+import MetaData from "../../components/common/MetaData"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -51,12 +52,18 @@ const Gradients = ({ contentData }: ContentfulType) => {
 
     // storing contentful data in redux for this page
     dispatch(updateContent(contentData))
-  }, [contentData, isLoading])
+  }, [contentData, isLoading, data])
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-      <GradientSection />
-    </ErrorBoundary>
+    <>
+      <MetaData
+        title="Colorem | Gradients"
+        description="Browse through blended color combinations & more."
+      />
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+        <GradientSection />
+      </ErrorBoundary>
+    </>
   )
 }
 

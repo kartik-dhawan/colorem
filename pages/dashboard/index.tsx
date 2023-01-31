@@ -12,6 +12,8 @@ import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
+import { Roboto } from "@next/font/google"
+import MetaData from "../../components/common/MetaData"
 
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
@@ -30,6 +32,8 @@ export const getStaticProps = async () => {
   }
 }
 
+const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
+
 const Dashboard = ({ data }: ContentfulType) => {
   const dispatch = useDispatch()
 
@@ -38,7 +42,11 @@ const Dashboard = ({ data }: ContentfulType) => {
   }, [data])
 
   return (
-    <Box>
+    <Box className={roboto.className}>
+      <MetaData
+        title="Colorem"
+        description="Permutations with colors & more."
+      />
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         <SubNav content={data} />
         <FileSection />

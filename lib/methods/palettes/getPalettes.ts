@@ -56,6 +56,6 @@ export const getPaletteByGuid = async (
   if (palette) {
     return palette
   } else {
-    res.status(404).json(responseTexts.PALETTE_NOT_FOUND)
+    res.status(404).json({ message: responseTexts.PALETTE_NOT_FOUND })
   }
 }

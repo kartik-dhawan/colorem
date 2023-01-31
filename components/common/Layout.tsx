@@ -7,20 +7,22 @@ interface ChildrenType {
   children: JSX.Element
 }
 
+const styles = {
+  LayoutWrapper: {
+    margin: {
+      xs: "24px 30px",
+      sm: "30px 50px",
+    },
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+  },
+}
+
 const Layout = ({ children }: ChildrenType) => {
   return (
     <>
-      <Box
-        sx={{
-          margin: {
-            xs: "24px 30px",
-            sm: "30px 50px",
-          },
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
+      <Box sx={styles.LayoutWrapper}>
         <Head>
           <title>Colorem</title>
           <meta name="description" content="The permutations of colors." />

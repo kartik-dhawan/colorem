@@ -13,7 +13,7 @@ const SubNav = ({ content }: ContentfulType) => {
       container
       sx={{
         ...styles.nav,
-        margin: "25px 0px",
+        margin: "18px 0px",
       }}
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
