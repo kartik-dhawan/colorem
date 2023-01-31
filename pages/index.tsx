@@ -1,6 +1,6 @@
-import Head from "next/head"
 import { Yellowtail } from "@next/font/google"
 import Link from "next/link"
+import MetaData from "../components/common/MetaData"
 
 const yellowTail = Yellowtail({
   weight: "400",
@@ -16,12 +16,10 @@ const yellowTail = Yellowtail({
 const Home = () => {
   return (
     <div className="indexWrapper">
-      <Head>
-        <title>Colorem</title>
-        <meta name="description" content="The permutations of colors." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <MetaData
+        title="Colorem"
+        description="Permutations with colors & more."
+      />
       <main className="indexMain">
         <Link
           href="/dashboard"
