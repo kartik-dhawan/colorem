@@ -34,6 +34,7 @@ import axios from "axios"
 import { logger } from "../../../lib/methods"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
 import { useSWRConfig } from "swr"
+import { useRouter } from "next/router"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -46,6 +47,7 @@ const InfoDrawer = ({
 }: InfoDrawerProps) => {
   const iid = "infoDrawer"
   const dispatch = useDispatch()
+  const router = useRouter()
   const { mutate } = useSWRConfig()
 
   /*
@@ -63,8 +65,8 @@ const InfoDrawer = ({
    * sets default likes to the likes from the database
    */
   useEffect(() => {
-    setLikeCount(gradient.likes)
-  }, [gradient.likes])
+    setLikeCount(gradient?.likes)
+  }, [gradient?.likes])
 
   /**
    * Removes copied alert after 2 seconds
@@ -86,18 +88,30 @@ const InfoDrawer = ({
     setValue(newValue)
   }
 
+  /**
+   * On closing the info drawer, it will remove the query params and direct the user to '/gradients'
+   */
   const infoDrawerCloseHandler = useCallback(() => {
     setInfoDrawerToggle(false)
+    router.push(
+      {
+        pathname: "/gradients",
+        query: { ...router.query, guid: "" },
+      },
+      "/gradients"
+    )
   }, [])
 
   /*
    * final string of all hexcodes in a gradient
    */
-  const gradientStyleString: string = gradient.colors
-    .map((color) => {
-      return `#${color}`
-    })
-    .join(", ")
+  const gradientStyleString: string = gradient
+    ? gradient.colors
+        ?.map((color) => {
+          return `#${color}`
+        })
+        .join(", ")
+    : "..."
 
   /**
    * gets gradient's code in the selected format
@@ -163,7 +177,7 @@ const colorsInRGB = [ ${gradient.colors
           })
       )
     },
-    [gradient.gradientGuid, likeToggle]
+    [gradient?.gradientGuid, likeToggle]
   )
 
   // gets liked gradients by user in that session
@@ -173,11 +187,11 @@ const colorsInRGB = [ ${gradient.colors
 
   // if the user has already liked that gradient in that session, it will persist that
   useEffect(() => {
-    return gradient.gradientGuid &&
+    return gradient?.gradientGuid &&
       likedGradients.includes(gradient.gradientGuid)
       ? setLikeToggle(true)
       : setLikeToggle(false)
-  }, [likedGradients, gradient.gradientGuid])
+  }, [likedGradients, gradient?.gradientGuid])
 
   /**
    * toggle handlers for likes & save feature
@@ -199,7 +213,7 @@ const colorsInRGB = [ ${gradient.colors
      */
     localStorage.setItem("likedGradients", JSON.stringify(likedGradients))
     localStorage.setItem("previous-liked-gradients", JSON.stringify(liked))
-  }, [likeToggle, gradient.gradientGuid, gradient.likes])
+  }, [likeToggle, gradient?.gradientGuid, gradient?.likes])
 
   const saveToggleHandler = useCallback(() => {
     setSaveToggle(!saveToggle)
@@ -255,7 +269,7 @@ const colorsInRGB = [ ${gradient.colors
             sx={{
               ...styles.infoDrawerGradientName,
               "&::after": {
-                content: `"${gradient.name}"`,
+                content: `"${gradient?.name}"`,
                 ...styles.infoDrawerGradientName.tooltipOnHover,
               },
               "&:hover::after": {
@@ -265,7 +279,7 @@ const colorsInRGB = [ ${gradient.colors
             className={iid + "GradientName"}
             id={iid + "GradientName"}
           >
-            {gradient.name}
+            {gradient?.name}
           </Typography>
           <Typography
             variant="h4"
@@ -273,7 +287,7 @@ const colorsInRGB = [ ${gradient.colors
             id={iid + "GradientColorsName"}
             sx={styles.infoDrawerGradientColorsName}
           >
-            {gradient.colors.map((color) => GetColorName(color)).join(" & ")}
+            {gradient?.colors?.map((color) => GetColorName(color)).join(" & ")}
           </Typography>
         </Box>
       </Container>
