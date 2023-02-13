@@ -169,16 +169,6 @@ const colorsInRGB = [ ${gradient.colors
   )
 
   /**
-   * copies gradient code on change on value only in mobiles
-   */
-  useEffect(() => {
-    if (window.innerWidth < 600 && value !== "css") {
-      copyToClipboard(gradientCode)
-      setIsCopied(true)
-    }
-  }, [gradientCode, value])
-
-  /**
    * @param {boolean} likeToggle
    * to hit like-a-gradient api on toggle
    */
@@ -348,7 +338,10 @@ const colorsInRGB = [ ${gradient.colors
             onClick={() => {
               setAnchorEl(null)
               setValue("css")
-              copyToClipboard(gradientCode)
+              const cssGradientString = `background: linear-gradient(90deg, ${gradientStyleString});
+background: -moz-linear-gradient(90deg, ${gradientStyleString});
+background: -webkit-linear-gradient(90deg,${gradientStyleString});`
+              copyToClipboard(cssGradientString)
               setIsCopied(true)
             }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
@@ -362,6 +355,11 @@ const colorsInRGB = [ ${gradient.colors
             onClick={() => {
               setAnchorEl(null)
               setValue("json")
+              const jsonGradient: { [key: string]: string } = {}
+              gradient.colors.map((color, index) => {
+                return (jsonGradient[`color_${index}`] = `#${color}`)
+              })
+              copyToClipboard(JSON.stringify(jsonGradient))
             }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
@@ -374,6 +372,13 @@ const colorsInRGB = [ ${gradient.colors
             onClick={() => {
               setAnchorEl(null)
               setValue("javascript")
+              const arrayGradientString = `const colorsInHex = [ ${gradient.colors
+                .map((color) => `"#${color}"`)
+                .join(", ")} ]
+const colorsInRGB = [ ${gradient.colors
+                .map((color) => `"rgb${hexToRGB(`#${color}`)}"`)
+                .join(", ")} ]`
+              copyToClipboard(arrayGradientString)
             }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
