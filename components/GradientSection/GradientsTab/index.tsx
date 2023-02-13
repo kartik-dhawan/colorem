@@ -109,15 +109,6 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
 
   return (
     <>
-      {isLoading && !showInstructor && (
-        <Box
-          sx={styles.gradientSectionLoaderWrapper}
-          className={gid + "LoaderWrapper"}
-          id={gid + "LoaderWrapper"}
-        >
-          <PrimaryLoader />
-        </Box>
-      )}
       {gradientsArray && !showInstructor ? (
         <>
           <GradientFilter />
@@ -151,6 +142,15 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
       ) : (
         /* Design a proper error component for API fail */
         <pre>Error running the api please try again</pre>
+      )}
+      {isLoading && !showInstructor && (
+        <Box
+          sx={styles.gradientSectionLoaderWrapper}
+          className={gid + "LoaderWrapper"}
+          id={gid + "LoaderWrapper"}
+        >
+          <PrimaryLoader />
+        </Box>
       )}
     </>
   )
