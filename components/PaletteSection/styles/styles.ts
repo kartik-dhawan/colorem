@@ -157,6 +157,7 @@ export const styles = {
   },
   optionsBarMenu: {
     backgroundColor: "#111111a3",
+    top: "-18%",
     "& .MuiPaper-root": {
       backgroundColor: "transparent",
       borderRadius: "8px",

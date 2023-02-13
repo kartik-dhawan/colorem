@@ -2,8 +2,11 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Drawer,
   IconButton,
+  Menu,
+  MenuItem,
   Tab,
   Typography,
 } from "@mui/material"
@@ -35,6 +38,7 @@ import { logger } from "../../../lib/methods"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
 import { useSWRConfig } from "swr"
 import { useRouter } from "next/router"
+import { styles as SubMenuStyles } from "../../PaletteSection/styles/styles"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -60,6 +64,16 @@ const InfoDrawer = ({
   const [gradientCode, setGradientCode] = useState<string>("")
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
+
+  /**
+   * submenu classes & actions
+   */
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   /**
    * sets default likes to the likes from the database
@@ -142,10 +156,18 @@ const colorsInRGB = [ ${gradient.colors
     }
   }, [value, gradient])
 
-  const copyGradientHandler = useCallback(() => {
-    copyToClipboard(gradientCode)
-    setIsCopied(true)
-  }, [gradientCode])
+  const copyGradientHandler = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      console.log(window.innerWidth)
+      // only do this behaviour for tablets & desktops
+      if (window.innerWidth > 599) {
+        copyToClipboard(gradientCode)
+        setIsCopied(true)
+      }
+      setAnchorEl(event.currentTarget)
+    },
+    [gradientCode]
+  )
 
   /**
    * @param {boolean} likeToggle
@@ -296,6 +318,55 @@ const colorsInRGB = [ ${gradient.colors
         id={iid + "IconsWrapper"}
         sx={styles.infoDrawerIconsWrapper}
       >
+        <Menu
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          elevation={0}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          className={"abcdef"}
+          sx={SubMenuStyles.optionsBarMenu}
+        >
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={useCallback(() => {
+              setAnchorEl(null)
+            }, [])}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            CSS Class
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={useCallback(() => {
+              setAnchorEl(null)
+            }, [])}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            JSON Object
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={useCallback(() => {
+              setAnchorEl(null)
+            }, [])}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            Array
+          </MenuItem>
+        </Menu>
         <IconButton
           disableRipple
           sx={styles.infoDrawerCopyButton}
