@@ -132,11 +132,10 @@ const InfoDrawer = ({
    */
   useEffect(() => {
     if (value === "css") {
-      const cssGradientString = `.yourClass {
-  background: linear-gradient(90deg, ${gradientStyleString});
+      const cssGradientString = `  background: linear-gradient(90deg, ${gradientStyleString});
   background: -moz-linear-gradient(90deg, ${gradientStyleString});
   background: -webkit-linear-gradient(90deg,${gradientStyleString});
-}`
+`
       setGradientCode(cssGradientString)
     } else if (value === "json") {
       const jsonGradient: { [key: string]: string } = {}
@@ -154,20 +153,30 @@ const colorsInRGB = [ ${gradient.colors
       `
       setGradientCode(arrayGradientString)
     }
-  }, [value, gradient])
+  }, [value, gradient, gradientCode])
 
   const copyGradientHandler = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      console.log(window.innerWidth)
       // only do this behaviour for tablets & desktops
       if (window.innerWidth > 599) {
         copyToClipboard(gradientCode)
         setIsCopied(true)
+      } else {
+        setAnchorEl(event.currentTarget)
       }
-      setAnchorEl(event.currentTarget)
     },
     [gradientCode]
   )
+
+  /**
+   * copies gradient code on change on value only in mobiles
+   */
+  useEffect(() => {
+    if (window.innerWidth < 600 && value !== "css") {
+      copyToClipboard(gradientCode)
+      setIsCopied(true)
+    }
+  }, [gradientCode, value])
 
   /**
    * @param {boolean} likeToggle
@@ -331,15 +340,17 @@ const colorsInRGB = [ ${gradient.colors
             vertical: "top",
             horizontal: "left",
           }}
-          className={"abcdef"}
           sx={SubMenuStyles.optionsBarMenu}
         >
           <MenuItem
             disableRipple
             className={iid + "SubMenuItem"}
-            onClick={useCallback(() => {
+            onClick={() => {
               setAnchorEl(null)
-            }, [])}
+              setValue("css")
+              copyToClipboard(gradientCode)
+              setIsCopied(true)
+            }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
             CSS Class
@@ -348,9 +359,10 @@ const colorsInRGB = [ ${gradient.colors
           <MenuItem
             disableRipple
             className={iid + "SubMenuItem"}
-            onClick={useCallback(() => {
+            onClick={() => {
               setAnchorEl(null)
-            }, [])}
+              setValue("json")
+            }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
             JSON Object
@@ -359,9 +371,10 @@ const colorsInRGB = [ ${gradient.colors
           <MenuItem
             disableRipple
             className={iid + "SubMenuItem"}
-            onClick={useCallback(() => {
+            onClick={() => {
               setAnchorEl(null)
-            }, [])}
+              setValue("javascript")
+            }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
             Array
