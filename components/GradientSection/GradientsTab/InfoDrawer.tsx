@@ -360,6 +360,7 @@ background: -webkit-linear-gradient(90deg,${gradientStyleString});`
                 return (jsonGradient[`color_${index}`] = `#${color}`)
               })
               copyToClipboard(JSON.stringify(jsonGradient))
+              setIsCopied(true)
             }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
@@ -379,6 +380,7 @@ const colorsInRGB = [ ${gradient.colors
                 .map((color) => `"rgb${hexToRGB(`#${color}`)}"`)
                 .join(", ")} ]`
               copyToClipboard(arrayGradientString)
+              setIsCopied(true)
             }}
             sx={SubMenuStyles.optionsBarSubMenuItem}
           >
