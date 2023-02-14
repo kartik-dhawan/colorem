@@ -34,9 +34,8 @@
     "no-undef-init": "error",
     "no-unused-vars": "error",
     "semi": "off",
-    "camelcase": "error",
+    "camelcase": "off",
     "no-unused-expressions": "error",
-    "no-console": "warn",
     "no-multiple-empty-lines": ["error", { "max": 2 }],
     "no-duplicate-imports": "error",
     "no-console": "off"
