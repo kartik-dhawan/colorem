@@ -6,8 +6,12 @@ import {
   ListItemButton,
   Typography,
 } from "@mui/material"
-import { Roboto_Condensed } from "@next/font/google"
+import { Roboto_Condensed, Anton } from "@next/font/google"
 import MenuIcon from "@mui/icons-material/Menu"
+import { useId } from "react"
+import { styles } from "./styles"
+
+const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" })
 
 const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"],
@@ -22,7 +26,7 @@ const mockNavListData = [
   },
   {
     id: 2,
-    title: "Person behind the desk",
+    title: "Behind the desk",
   },
   {
     id: 3,
@@ -39,39 +43,56 @@ const mockNavListData = [
 ]
 
 const AboutPageNav = () => {
-  const aid = "about"
+  const aid = "aboutSideNav"
+  const id = useId()
 
   return (
-    <Box
-      sx={{
-        margin: {
-          xs: "24px 30px",
-          sm: "30px 50px",
-        },
-        flex: 1,
-      }}
-    >
-      <IconButton sx={{ color: "#c4c4c4" }}>
+    <Box sx={styles.aboutSideNavWrapper} className={aid + "Wrapper"}>
+      <IconButton
+        className={aid + "MenuButton"}
+        id={aid + "MenuButton"}
+        sx={styles.aboutSideNavMenuButton}
+      >
         <MenuIcon />
       </IconButton>
       <Typography
-        sx={{ fontWeight: 300, letterSpacing: "1px", color: "#c4c4c4" }}
-        className={aid + "SideNavTitleText " + roboto_condensed.className}
+        className={aid + "TitleText " + roboto_condensed.className}
+        id={aid + "TitleText"}
+        sx={styles.aboutSideNavTitleText}
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eius
         deleniti voluptates sit excepturi vel. Odit dignissimos consectetur
-        sunt. Praesentium culpa dolores deleniti rem totam sequi odio rerum
-        veniam quaerat tenetur adipisci, amet enim!
+        sunt. Praesentium culpa dolores deleniti.
       </Typography>
-      {mockNavListData.map((item) => {
-        return (
-          <List key={item.id}>
-            <ListItemButton>
-              <ListItem>{item.title}</ListItem>
+      <List
+        className={aid + "ListWrapper"}
+        id={aid + "ListWrapper"}
+        disablePadding
+        sx={{
+          margin: "30px 0px",
+        }}
+      >
+        {mockNavListData.map((item) => {
+          return (
+            <ListItemButton
+              disableGutters
+              key={item.id}
+              disableRipple
+              className={aid + "ListItemWrapper"}
+              id={aid + "ListItemWrapper" + id}
+              sx={styles.aboutSideNavListItemWrapper}
+            >
+              <ListItem
+                className={aid + "ListItem " + anton.className}
+                id={aid + "ListItem" + id}
+                sx={styles.aboutSideNavListItem}
+              >
+                {item.title}
+              </ListItem>
             </ListItemButton>
-          </List>
-        )
-      })}
+          )
+        })}
+      </List>
     </Box>
   )
 }
