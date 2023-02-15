@@ -3,9 +3,12 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import AboutLayout from "../../components/common/AboutLayout"
-import { updateContent } from "../../redux/slices/contentSlice"
+import {
+  updateAboutPageContent,
+  updateContent,
+} from "../../redux/slices/contentSlice"
 import { client } from "../../utils/contentful/config"
-import { ContentfulType } from "../../utils/interfaces"
+import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
 
 export const getStaticPaths = async () => {
   const { items } = await client.getEntries({
@@ -32,16 +35,31 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: any) => {
-  const response = await client.getEntries({
+  const contentData = await client.getEntries({
     content_type: "coloremDashboard",
   })
 
-  const { items } = await client.getEntries({
+  // current page content
+  const currentPage = await client.getEntries({
     content_type: "coloremAbout",
     "fields.navItemRoute": params?.route,
   })
 
-  if (items.length === 0) {
+  // fetches all items
+  const { items } = await client.getEntries({
+    content_type: "coloremAbout",
+  })
+
+  // converts the fetched items into usable object
+  const navItems: AboutNavItem[] = [...items].reverse().map((item: any) => {
+    return {
+      id: item.fields.id,
+      title: item.fields.navItemTitle,
+      route: item.fields.navItemRoute,
+    }
+  })
+
+  if (currentPage.items.length === 0) {
     return {
       redirect: {
         destination: "/players",
@@ -52,30 +70,30 @@ export const getStaticProps = async ({ params }: any) => {
 
   return {
     props: {
-      contentData: response?.items[0]?.fields,
-      aboutItem: items[0],
+      contentData: contentData?.items[0]?.fields,
+      navItems,
+      aboutItem: items[0].fields,
     },
     revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
-const AboutItem = ({ contentData, aboutItem }: ContentfulType) => {
+const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  console.log(aboutItem)
-
   useEffect(() => {
     // storing contentful data in redux for this page
+    dispatch(updateAboutPageContent(navItems))
     dispatch(updateContent(contentData))
-  }, [contentData])
+  }, [navItems])
 
   return (
     <AboutLayout>
       <Box
         sx={{
           flex: {
-            md: 0,
+            xs: 0,
             lg: 1,
           },
         }}

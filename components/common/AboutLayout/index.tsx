@@ -7,6 +7,10 @@ const AboutLayout = ({ children }: ChildrenType) => {
     <Box
       sx={{
         display: "flex",
+        flexDirection: {
+          xs: "column",
+          lg: "row",
+        },
       }}
     >
       <AboutPageNav />

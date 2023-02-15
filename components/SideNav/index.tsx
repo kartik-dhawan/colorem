@@ -5,8 +5,17 @@ import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { SideNavItemsType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
+import { Roboto_Condensed, Anton } from "@next/font/google"
 // EJS syntax for importing not working with framer motion in react so used CJS
 const { motion } = require("framer-motion") // eslint-disable-line
+
+const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" })
+
+const roboto_condensed = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: "300",
+  display: "swap",
+})
 
 interface SideNavProps {
   sideNavToggle: boolean
@@ -31,7 +40,7 @@ const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
 
   return (
     <Drawer
-      anchor={"right"}
+      anchor={"top"}
       open={sideNavToggle}
       onClose={sideNavCloseHandler}
       className={sid + "Drawer"}
@@ -55,19 +64,24 @@ const SideNav = ({ sideNavToggle, setSideNavToggle }: SideNavProps) => {
               <motion.div
                 initial={variant.before}
                 animate={variant.after}
-                transition={{ duration: 0.7, delay: item.id * 0.17 }}
+                transition={{ duration: 0.6, delay: item.id * 0.14 }}
                 key={item.id}
                 className={sid + "LinkItem"}
                 id={sid + "LinkItem_" + item.id}
               >
                 <Link
                   href={item.link}
-                  className={sid + "Link"}
+                  className={sid + "Link " + anton.className}
                   id={sid + "Link" + item.id}
+                  onClick={() => {
+                    setTimeout(() => {
+                      setSideNavToggle(false)
+                    }, 1000)
+                  }}
                 >
-                  {item.title}
+                  <div>{item.title}</div>
                   <div
-                    className={sid + "ItemBody"}
+                    className={sid + "ItemBody " + roboto_condensed.className}
                     id={sid + "ItemBody_" + item.id}
                   >
                     {item.body}
