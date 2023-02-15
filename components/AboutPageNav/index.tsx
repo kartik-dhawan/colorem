@@ -10,6 +10,10 @@ import { Roboto_Condensed, Anton } from "@next/font/google"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useId } from "react"
 import { styles } from "./styles"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { AboutNavItem } from "../../utils/interfaces"
+import Link from "next/link"
 
 const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" })
 
@@ -19,32 +23,13 @@ const roboto_condensed = Roboto_Condensed({
   display: "swap",
 })
 
-const mockNavListData = [
-  {
-    id: 1,
-    title: "About Project",
-  },
-  {
-    id: 2,
-    title: "Behind the desk",
-  },
-  {
-    id: 3,
-    title: "Tech nuggets",
-  },
-  {
-    id: 4,
-    title: "The Colorem team",
-  },
-  {
-    id: 5,
-    title: "More",
-  },
-]
-
 const AboutPageNav = () => {
   const aid = "aboutSideNav"
   const id = useId()
+
+  const { aboutPageNavItems } = useSelector(
+    (state: RootType) => state.contentSlice
+  )
 
   return (
     <Box sx={styles.aboutSideNavWrapper} className={aid + "Wrapper"}>
@@ -72,7 +57,7 @@ const AboutPageNav = () => {
           margin: "30px 0px",
         }}
       >
-        {mockNavListData.map((item) => {
+        {aboutPageNavItems?.map((item: AboutNavItem) => {
           return (
             <ListItemButton
               disableGutters
@@ -82,13 +67,15 @@ const AboutPageNav = () => {
               id={aid + "ListItemWrapper" + id}
               sx={styles.aboutSideNavListItemWrapper}
             >
-              <ListItem
-                className={aid + "ListItem " + anton.className}
-                id={aid + "ListItem" + id}
-                sx={styles.aboutSideNavListItem}
-              >
-                {item.title}
-              </ListItem>
+              <Link href={`/about/${item.route}`}>
+                <ListItem
+                  className={aid + "ListItem " + anton.className}
+                  id={aid + "ListItem" + id}
+                  sx={styles.aboutSideNavListItem}
+                >
+                  {item.title}
+                </ListItem>
+              </Link>
             </ListItemButton>
           )
         })}

@@ -7,6 +7,10 @@ export interface EssentialItemsType {
   body: string
 }
 
+export interface ChildrenType {
+  children: JSX.Element
+}
+
 export interface SideNavItemsType {
   body: string
   id: number
@@ -85,4 +89,10 @@ export interface InstructorObject {
   icon?: string
   instruction: string
   id: number
+}
+
+export interface AboutNavItem {
+  id: number
+  title: string
+  route: string
 }

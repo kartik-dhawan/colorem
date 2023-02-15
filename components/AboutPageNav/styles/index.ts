@@ -23,7 +23,7 @@ export const styles = {
     letterSpacing: "1px",
     color: "#c4c4c4",
     fontSize: {
-      xs: "17px",
+      xs: "16px",
       md: "19px",
       xl: "22px",
     },
@@ -39,16 +39,20 @@ export const styles = {
   },
   aboutSideNavListItemWrapper: {
     padding: {
-      xs: "0px 24px",
+      xs: "5px 24px",
+      sm: "0px 24px",
       md: "0px 32px",
       lg: "0px 40px",
     },
     lineHeight: {
-      xs: "52px",
+      xs: "50px",
       sm: "65px",
       md: "80px",
       xl: "110px",
     }, // keep the line height the same as the fontSize
+    "& > a": {
+      textDecoration: "none",
+    },
   },
   aboutSideNavListItem: {
     padding: "0px",
