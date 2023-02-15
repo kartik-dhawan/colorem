@@ -13,6 +13,7 @@ import { styles } from "./styles"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { AboutNavItem } from "../../utils/interfaces"
+import Link from "next/link"
 
 const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" })
 
@@ -27,7 +28,7 @@ const AboutPageNav = () => {
   const id = useId()
 
   const { aboutPageNavItems } = useSelector(
-    (state: RootType) => state.contentSlice.data
+    (state: RootType) => state.contentSlice
   )
 
   return (
@@ -66,13 +67,15 @@ const AboutPageNav = () => {
               id={aid + "ListItemWrapper" + id}
               sx={styles.aboutSideNavListItemWrapper}
             >
-              <ListItem
-                className={aid + "ListItem " + anton.className}
-                id={aid + "ListItem" + id}
-                sx={styles.aboutSideNavListItem}
-              >
-                {item.title}
-              </ListItem>
+              <Link href={`/about/${item.route}`}>
+                <ListItem
+                  className={aid + "ListItem " + anton.className}
+                  id={aid + "ListItem" + id}
+                  sx={styles.aboutSideNavListItem}
+                >
+                  {item.title}
+                </ListItem>
+              </Link>
             </ListItemButton>
           )
         })}

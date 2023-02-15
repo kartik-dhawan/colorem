@@ -50,6 +50,9 @@ export const styles = {
       md: "80px",
       xl: "110px",
     }, // keep the line height the same as the fontSize
+    "& > a": {
+      textDecoration: "none",
+    },
   },
   aboutSideNavListItem: {
     padding: "0px",

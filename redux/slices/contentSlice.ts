@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ContentfulType } from "../../utils/interfaces"
+import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
 import { ContentType } from "../constants/stateTypes"
 
 // initial state
 const initialState: ContentType = {
   data: {},
+  aboutPageNavItems: [],
 }
 
 export const contentSlice = createSlice({
@@ -18,10 +19,16 @@ export const contentSlice = createSlice({
     ) => {
       state.data = action.payload
     },
+    updateAboutPageContent: (
+      state: ContentType,
+      action: PayloadAction<AboutNavItem[]>
+    ) => {
+      state.aboutPageNavItems = action.payload
+    },
   },
 })
 
 // typescript support is included inside createSlice
-export const { updateContent } = contentSlice.actions
+export const { updateContent, updateAboutPageContent } = contentSlice.actions
 
 export default contentSlice.reducer

@@ -2,9 +2,9 @@ import { Box } from "@mui/material"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import AboutLayout from "../../components/common/AboutLayout"
-import { updateContent } from "../../redux/slices/contentSlice"
+import { updateAboutPageContent } from "../../redux/slices/contentSlice"
 import { client } from "../../utils/contentful/config"
-import { ContentfulType } from "../../utils/interfaces"
+import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
 
 /**
  *
@@ -13,24 +13,31 @@ import { ContentfulType } from "../../utils/interfaces"
  */
 
 export const getStaticProps = async () => {
-  const response = await client.getEntries({
-    content_type: "coloremDashboard",
+  const { items } = await client.getEntries({
+    content_type: "coloremAbout",
   })
+  const navItems: AboutNavItem[] = [...items].reverse().map((item: any) => {
+    return {
+      id: item.fields.id,
+      title: item.fields.navItemTitle,
+      route: item.fields.navItemRoute,
+    }
+  })
+
   return {
     props: {
-      contentData: response?.items[0]?.fields,
+      navItems,
     },
     revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
-const AboutPage = ({ contentData }: ContentfulType) => {
+const AboutPage = ({ navItems }: ContentfulType) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // storing contentful data in redux for this page
-    dispatch(updateContent(contentData))
-  }, [contentData])
+    dispatch(updateAboutPageContent(navItems))
+  }, [navItems])
 
   return (
     <AboutLayout>
