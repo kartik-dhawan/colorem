@@ -9,7 +9,10 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const noLayoutPages = ["/_error", "/", "/404", "/about"]
 
-  if (noLayoutPages.includes(router.pathname)) {
+  if (
+    noLayoutPages.includes(router.pathname) ||
+    router.pathname.includes("/about")
+  ) {
     return (
       <Provider store={store}>
         <Component {...pageProps} />
