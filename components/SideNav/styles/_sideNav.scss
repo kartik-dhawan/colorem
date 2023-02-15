@@ -1,44 +1,58 @@
 .sideNavWrapper {
+  max-height: -webkit-fill-available;
   .sideNavLinksContainer {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0rem 1rem;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin: 0rem 3rem;
+    padding-bottom: 5rem;
+    @include tablets-up {
+      padding-bottom: 2rem;
+    }
+    box-sizing: border-box;
     .sideNavLinkItem {
-      text-align: center;
-      margin: 10px;
-      @include tablets {
-        padding: 5px;
-      }
-      @include desktops {
-        padding: 15px;
-      }
+      text-align: left;
       .sideNavLink {
         &:any-link {
-          color: darken($text_primary, 7%);
+          color: darken($main_white, 3%);
           text-decoration: none;
           text-transform: uppercase;
         }
-        font-size: 22px;
+        font-size: 50px;
+        line-height: 50px;
         font-weight: 400;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         @include tablets-up {
-          font-size: 24px;
+          line-height: 65px;
+          font-size: 65px;
+        }
+        @include desktops-md {
+          line-height: 90px;
+          font-size: 90px;
+        }
+        @include desktops-lg {
+          line-height: 100px;
+          font-size: 100px;
+        }
+        @include desktops-xl {
+          line-height: 110px;
+          font-size: 110px;
         }
         .sideNavItemBody {
           color: darken($text_primary_dull, 15%);
           font-size: 16px;
+          line-height: 18px;
           font-weight: 300;
           text-transform: uppercase;
           letter-spacing: 0px;
-          font-family: "Nunito Sans";
           @include tablets {
             font-size: 18px;
           }
           @include desktops {
             font-size: 19px;
+            line-height: 19px;
           }
         }
       }
@@ -51,6 +65,9 @@
       }
       &:hover .sideNavLinkOverlay {
         width: 100%;
+      }
+      &:hover .sideNavLink {
+        color: $main_white_hover;
       }
     }
   }

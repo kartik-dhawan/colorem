@@ -8,12 +8,15 @@ import {
 } from "@mui/material"
 import { Roboto_Condensed, Anton } from "@next/font/google"
 import MenuIcon from "@mui/icons-material/Menu"
-import { useId } from "react"
+import { useId, useState } from "react"
 import { styles } from "./styles"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { AboutNavItem } from "../../utils/interfaces"
 import Link from "next/link"
+import SideNav from "../SideNav"
+// EJS syntax for importing not working with framer motion in react so used CJS
+const { motion } = require("framer-motion") // eslint-disable-line
 
 const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" })
 
@@ -23,6 +26,11 @@ const roboto_condensed = Roboto_Condensed({
   display: "swap",
 })
 
+const variant = {
+  before: { opacity: 0, x: -50 },
+  after: { opacity: 1, x: 0 },
+}
+
 const AboutPageNav = () => {
   const aid = "aboutSideNav"
   const id = useId()
@@ -31,12 +39,21 @@ const AboutPageNav = () => {
     (state: RootType) => state.contentSlice
   )
 
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
+
   return (
     <Box sx={styles.aboutSideNavWrapper} className={aid + "Wrapper"}>
+      <SideNav
+        sideNavToggle={sideNavToggle}
+        setSideNavToggle={setSideNavToggle}
+      />
       <IconButton
         className={aid + "MenuButton"}
         id={aid + "MenuButton"}
         sx={styles.aboutSideNavMenuButton}
+        onClick={() => {
+          setSideNavToggle(true)
+        }}
       >
         <MenuIcon />
       </IconButton>
@@ -57,28 +74,37 @@ const AboutPageNav = () => {
           margin: "30px 0px",
         }}
       >
-        {aboutPageNavItems?.map((item: AboutNavItem) => {
-          return (
-            <ListItemButton
-              disableGutters
-              key={item.id}
-              disableRipple
-              className={aid + "ListItemWrapper"}
-              id={aid + "ListItemWrapper" + id}
-              sx={styles.aboutSideNavListItemWrapper}
-            >
-              <Link href={`/about/${item.route}`}>
-                <ListItem
-                  className={aid + "ListItem " + anton.className}
-                  id={aid + "ListItem" + id}
-                  sx={styles.aboutSideNavListItem}
+        <motion.div transition={{ delay: 0.5 }}>
+          {aboutPageNavItems?.map((item: AboutNavItem) => {
+            return (
+              <motion.div
+                initial={variant.before}
+                animate={variant.after}
+                transition={{ duration: 0.7, delay: item.id * 0.17 }}
+                key={item.id}
+              >
+                <ListItemButton
+                  disableGutters
+                  key={item.id}
+                  disableRipple
+                  className={aid + "ListItemWrapper"}
+                  id={aid + "ListItemWrapper" + id}
+                  sx={styles.aboutSideNavListItemWrapper}
                 >
-                  {item.title}
-                </ListItem>
-              </Link>
-            </ListItemButton>
-          )
-        })}
+                  <Link href={`/about/${item.route}`}>
+                    <ListItem
+                      className={aid + "ListItem " + anton.className}
+                      id={aid + "ListItem" + id}
+                      sx={styles.aboutSideNavListItem}
+                    >
+                      {item.title}
+                    </ListItem>
+                  </Link>
+                </ListItemButton>
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </List>
     </Box>
   )
