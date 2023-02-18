@@ -2,7 +2,10 @@ import { Box } from "@mui/material"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import AboutLayout from "../../components/common/AboutLayout"
-import { updateAboutPageContent } from "../../redux/slices/contentSlice"
+import {
+  updateAboutPageContent,
+  updateContent,
+} from "../../redux/slices/contentSlice"
 import { client } from "../../utils/contentful/config"
 import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
 
@@ -13,6 +16,10 @@ import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
  */
 
 export const getStaticProps = async () => {
+  const contentData = await client.getEntries({
+    content_type: "coloremDashboard",
+  })
+
   const { items } = await client.getEntries({
     content_type: "coloremAbout",
   })
@@ -26,16 +33,18 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      contentData: contentData?.items[0]?.fields,
       navItems,
     },
     revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
-const AboutPage = ({ navItems }: ContentfulType) => {
+const AboutPage = ({ navItems, contentData }: ContentfulType) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(updateContent(contentData))
     dispatch(updateAboutPageContent(navItems))
   }, [navItems])
 
