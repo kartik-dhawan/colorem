@@ -96,3 +96,12 @@ export interface AboutNavItem {
   title: string
   route: string
 }
+
+export interface AnimationVariant {
+  before: {
+    [key: string]: string | number
+  }
+  after: {
+    [key: string]: string | number
+  }
+}

@@ -96,6 +96,9 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
             xs: 0,
             lg: 1,
           },
+          backgroundColor: "#c4c4c4",
+          height: "100vh",
+          maxHeight: "-webkit-fill-available",
         }}
       >
         {router.asPath}

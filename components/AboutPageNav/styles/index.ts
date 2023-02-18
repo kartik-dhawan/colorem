@@ -69,4 +69,42 @@ export const styles = {
       color: "#999999",
     },
   },
+  aboutSideNavButtonGroup: {
+    margin: {
+      xs: "0px 24px",
+      md: "0px 32px",
+      lg: "0px 40px",
+    },
+  },
+  aboutSideNavButtonsCommon: {
+    borderRadius: "0px",
+    fontSize: {
+      xs: "16px",
+      sm: "18px",
+      xl: "22px",
+    },
+    fontWeight: 400,
+    padding: {
+      xs: "5px 16px",
+      sm: "6px 16px",
+      md: "8px 16px",
+    },
+  },
+  aboutSideNavHomeButton: {
+    color: "#adadad",
+    borderColor: "#adadad",
+    "&:hover": {
+      color: "#c4c4c4",
+      borderColor: "#c4c4c4",
+    },
+  },
+  aboutSideNavBackButton: {
+    backgroundColor: "#adadad",
+    color: "#111",
+    borderColor: "#adadad",
+    "&:hover": {
+      backgroundColor: "#c4c4c4",
+      color: "#111",
+    },
+  },
 }
