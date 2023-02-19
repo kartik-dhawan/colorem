@@ -1,10 +1,17 @@
+import { useRouter } from "next/router"
 import { useEffect } from "react"
+import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
 import AboutPageContent from "../../components/AboutPageContent"
+import ColoremTeam from "../../components/AboutPageContent/ColoremTeam"
 import AboutLayout from "../../components/common/AboutLayout"
+import ErrorFallback, {
+  myErrorHandler,
+} from "../../components/common/ErrorFallback"
 import {
   updateAboutPageContent,
   updateContent,
+  updateCurrentAboutPageContent,
 } from "../../redux/slices/contentSlice"
 import { client } from "../../utils/contentful/config"
 import { AboutNavItem, ContentfulType } from "../../utils/interfaces"
@@ -57,6 +64,7 @@ export const getStaticProps = async ({ params }: any) => {
         id: item.fields.id,
         title: item.fields.navItemTitle,
         route: item.fields.navItemRoute,
+        content: item.fields.navItemContent ? item.fields.navItemContent : "",
       }
     })
     .sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -82,6 +90,9 @@ export const getStaticProps = async ({ params }: any) => {
 
 const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   const dispatch = useDispatch()
+  const router = useRouter()
+
+  const navItemSelected = router.query.route
 
   useEffect(() => {
     // storing contentful data in redux for this page
@@ -89,9 +100,24 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
     dispatch(updateContent(contentData))
   }, [navItems])
 
+  useEffect(() => {
+    navItems.forEach((element: any) => {
+      if (element.route === navItemSelected) {
+        dispatch(updateCurrentAboutPageContent(element))
+      }
+    })
+  }, [navItems, navItemSelected])
+
   return (
     <AboutLayout>
-      <AboutPageContent />
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+        {navItemSelected === "team" && <ColoremTeam />}
+        {navItemSelected !== "team" && (
+          <AboutPageContent>
+            <div>Content to be published in contentful.</div>
+          </AboutPageContent>
+        )}
+      </ErrorBoundary>
     </AboutLayout>
   )
 }
