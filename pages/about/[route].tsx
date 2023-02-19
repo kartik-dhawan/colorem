@@ -1,7 +1,6 @@
-import { Box } from "@mui/material"
-import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import AboutPageContent from "../../components/AboutPageContent"
 import AboutLayout from "../../components/common/AboutLayout"
 import {
   updateAboutPageContent,
@@ -51,13 +50,16 @@ export const getStaticProps = async ({ params }: any) => {
   })
 
   // converts the fetched items into usable object
-  const navItems: AboutNavItem[] = [...items].reverse().map((item: any) => {
-    return {
-      id: item.fields.id,
-      title: item.fields.navItemTitle,
-      route: item.fields.navItemRoute,
-    }
-  })
+  const navItems: AboutNavItem[] = [...items]
+    .reverse()
+    .map((item: any) => {
+      return {
+        id: item.fields.id,
+        title: item.fields.navItemTitle,
+        route: item.fields.navItemRoute,
+      }
+    })
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
 
   if (currentPage.items.length === 0) {
     return {
@@ -79,7 +81,6 @@ export const getStaticProps = async ({ params }: any) => {
 }
 
 const AboutItem = ({ navItems, contentData }: ContentfulType) => {
-  const router = useRouter()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -90,16 +91,7 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
-      <Box
-        sx={{
-          flex: {
-            xs: 0,
-            lg: 1,
-          },
-        }}
-      >
-        {router.asPath}
-      </Box>
+      <AboutPageContent />
     </AboutLayout>
   )
 }

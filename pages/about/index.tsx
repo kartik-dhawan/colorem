@@ -23,13 +23,15 @@ export const getStaticProps = async () => {
   const { items } = await client.getEntries({
     content_type: "coloremAbout",
   })
-  const navItems: AboutNavItem[] = [...items].reverse().map((item: any) => {
-    return {
-      id: item.fields.id,
-      title: item.fields.navItemTitle,
-      route: item.fields.navItemRoute,
-    }
-  })
+  const navItems: AboutNavItem[] = [...items]
+    .map((item: any) => {
+      return {
+        id: item.fields.id,
+        title: item.fields.navItemTitle,
+        route: item.fields.navItemRoute,
+      }
+    })
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
 
   return {
     props: {
