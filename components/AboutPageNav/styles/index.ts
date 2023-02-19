@@ -29,6 +29,11 @@ export const styles = {
       md: "19px",
       xl: "22px",
     },
+    lineHeight: {
+      xs: "24px",
+      md: "28px",
+      xl: "34px",
+    },
     padding: {
       xs: "0px 24px",
       md: "0px 32px",

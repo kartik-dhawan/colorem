@@ -95,7 +95,7 @@ const ColoremTeam = () => {
                     : styles.teamSectionUnselectedRoleButton
                 }
               >
-                <span className={antonio.className}>{role.label}</span>x
+                <span className={antonio.className}>{role.label}</span>
               </Button>
             )
           })}
