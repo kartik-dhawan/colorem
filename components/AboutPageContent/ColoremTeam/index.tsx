@@ -106,7 +106,8 @@ const ColoremTeam = () => {
           sx={styles.teamSectionRoleFunFact}
         >
           *
-          {teamSectionContent?.roles[selectedRole] &&
+          {teamSectionContent?.roles &&
+            // teamSectionContent?.roles[selectedRole] &&
             teamSectionContent?.roles[selectedRole]?.funFact}
         </Box>
         <Box
@@ -114,20 +115,21 @@ const ColoremTeam = () => {
             margin: "2rem 0rem",
           }}
         >
-          {teamSectionContent?.roles[selectedRole]?.body.map(
-            (bodyText: string, i: number) => {
-              return (
-                <Box
-                  key={i}
-                  className={tid + "BodyText " + roboto.className}
-                  id={id + tid + "BodyText"}
-                  sx={styles.teamSectionBodyText}
-                >
-                  {bodyText}
-                </Box>
-              )
-            }
-          )}
+          {teamSectionContent?.roles &&
+            teamSectionContent?.roles[selectedRole]?.body.map(
+              (bodyText: string, i: number) => {
+                return (
+                  <Box
+                    key={i}
+                    className={tid + "BodyText " + roboto.className}
+                    id={id + tid + "BodyText"}
+                    sx={styles.teamSectionBodyText}
+                  >
+                    {bodyText}
+                  </Box>
+                )
+              }
+            )}
           {/* temporary skeleton for an image */}
           <Box
             sx={{

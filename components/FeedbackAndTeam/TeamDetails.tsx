@@ -31,7 +31,7 @@ const TeamDetails = () => {
           margin: "0px 0px 25px 0px",
         }}
       >
-        <Link href="/about" className={tid + "Title"} id={tid + "Title"}>
+        <Link href="/about/team" className={tid + "Title"} id={tid + "Title"}>
           <Button variant="contained" sx={styles.teamSectionTitle}>
             TEAM
           </Button>
