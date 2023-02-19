@@ -37,8 +37,6 @@ const AboutPageNav = () => {
   let variant: AnimationVariant
   let buttonVariant: AnimationVariant
 
-  console.log(router)
-
   if (router.asPath === "/about") {
     variant = {
       before: { opacity: 0, x: -50 },
@@ -61,6 +59,10 @@ const AboutPageNav = () => {
 
   const { aboutPageNavItems } = useSelector(
     (state: RootType) => state.contentSlice
+  )
+
+  const sortedNavItems = [...aboutPageNavItems]?.sort((a, b) =>
+    a.id > b.id ? 1 : -1
   )
 
   const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
@@ -107,7 +109,7 @@ const AboutPageNav = () => {
         }}
       >
         <motion.div transition={{ delay: 0.5 }}>
-          {aboutPageNavItems?.map((item: AboutNavItem) => {
+          {sortedNavItems?.map((item: AboutNavItem) => {
             return (
               <motion.div
                 initial={variant.before}

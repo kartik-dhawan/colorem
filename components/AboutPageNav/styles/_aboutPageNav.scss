@@ -1,0 +1,4 @@
+.aboutSideNavTitleText {
+  @include ellipsis;
+  -webkit-line-clamp: 3;
+}

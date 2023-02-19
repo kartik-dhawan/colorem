@@ -1,4 +1,5 @@
 import { Box } from "@mui/material"
+import { motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
@@ -82,6 +83,11 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
+  const variant = {
+    before: { x: "100%" },
+    after: { x: 0 },
+  }
+
   useEffect(() => {
     // storing contentful data in redux for this page
     dispatch(updateAboutPageContent(navItems))
@@ -96,12 +102,31 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
             xs: 0,
             lg: 1,
           },
-          backgroundColor: "#c4c4c4",
-          height: "100vh",
-          maxHeight: "-webkit-fill-available",
+          position: {
+            xs: "absolute",
+            lg: "relative",
+          },
         }}
       >
-        {router.asPath}
+        <motion.div
+          initial={variant.before}
+          animate={variant.after}
+          transition={{ duration: 0.7 }}
+        >
+          <Box
+            sx={{
+              backgroundColor: "#c4c4c4",
+              minHeight: "100vh",
+              maxHeight: "-webkit-fill-available",
+              width: {
+                xs: "100vw",
+                lg: "100%",
+              },
+            }}
+          >
+            {router.asPath}
+          </Box>
+        </motion.div>
       </Box>
     </AboutLayout>
   )
