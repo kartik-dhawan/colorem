@@ -2,8 +2,11 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Drawer,
   IconButton,
+  Menu,
+  MenuItem,
   Tab,
   Typography,
 } from "@mui/material"
@@ -35,6 +38,7 @@ import { logger } from "../../../lib/methods"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
 import { useSWRConfig } from "swr"
 import { useRouter } from "next/router"
+import { styles as SubMenuStyles } from "../../PaletteSection/styles/styles"
 
 interface InfoDrawerProps {
   infoDrawerToggle: boolean
@@ -60,6 +64,16 @@ const InfoDrawer = ({
   const [gradientCode, setGradientCode] = useState<string>("")
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
+
+  /**
+   * submenu classes & actions
+   */
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   /**
    * sets default likes to the likes from the database
@@ -118,11 +132,10 @@ const InfoDrawer = ({
    */
   useEffect(() => {
     if (value === "css") {
-      const cssGradientString = `.yourClass {
-  background: linear-gradient(90deg, ${gradientStyleString});
+      const cssGradientString = `  background: linear-gradient(90deg, ${gradientStyleString});
   background: -moz-linear-gradient(90deg, ${gradientStyleString});
   background: -webkit-linear-gradient(90deg,${gradientStyleString});
-}`
+`
       setGradientCode(cssGradientString)
     } else if (value === "json") {
       const jsonGradient: { [key: string]: string } = {}
@@ -140,12 +153,20 @@ const colorsInRGB = [ ${gradient.colors
       `
       setGradientCode(arrayGradientString)
     }
-  }, [value, gradient])
+  }, [value, gradient, gradientCode])
 
-  const copyGradientHandler = useCallback(() => {
-    copyToClipboard(gradientCode)
-    setIsCopied(true)
-  }, [gradientCode])
+  const copyGradientHandler = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      // only do this behaviour for tablets & desktops
+      if (window.innerWidth > 599) {
+        copyToClipboard(gradientCode)
+        setIsCopied(true)
+      } else {
+        setAnchorEl(event.currentTarget)
+      }
+    },
+    [gradientCode]
+  )
 
   /**
    * @param {boolean} likeToggle
@@ -296,6 +317,76 @@ const colorsInRGB = [ ${gradient.colors
         id={iid + "IconsWrapper"}
         sx={styles.infoDrawerIconsWrapper}
       >
+        <Menu
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          elevation={0}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          sx={SubMenuStyles.optionsBarMenu}
+        >
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={() => {
+              setAnchorEl(null)
+              setValue("css")
+              const cssGradientString = `background: linear-gradient(90deg, ${gradientStyleString});
+background: -moz-linear-gradient(90deg, ${gradientStyleString});
+background: -webkit-linear-gradient(90deg,${gradientStyleString});`
+              copyToClipboard(cssGradientString)
+              setIsCopied(true)
+            }}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            CSS Class
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={() => {
+              setAnchorEl(null)
+              setValue("json")
+              const jsonGradient: { [key: string]: string } = {}
+              gradient.colors.map((color, index) => {
+                return (jsonGradient[`color_${index}`] = `#${color}`)
+              })
+              copyToClipboard(JSON.stringify(jsonGradient))
+              setIsCopied(true)
+            }}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            JSON Object
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            disableRipple
+            className={iid + "SubMenuItem"}
+            onClick={() => {
+              setAnchorEl(null)
+              setValue("javascript")
+              const arrayGradientString = `const colorsInHex = [ ${gradient.colors
+                .map((color) => `"#${color}"`)
+                .join(", ")} ]
+const colorsInRGB = [ ${gradient.colors
+                .map((color) => `"rgb${hexToRGB(`#${color}`)}"`)
+                .join(", ")} ]`
+              copyToClipboard(arrayGradientString)
+              setIsCopied(true)
+            }}
+            sx={SubMenuStyles.optionsBarSubMenuItem}
+          >
+            Array
+          </MenuItem>
+        </Menu>
         <IconButton
           disableRipple
           sx={styles.infoDrawerCopyButton}

@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface ContentfulType {
   [key: string]: any // eslint-disable-line
 }
@@ -5,6 +7,10 @@ export interface ContentfulType {
 export interface EssentialItemsType {
   id: number
   body: string
+}
+
+export interface ChildrenType {
+  children: ReactNode
 }
 
 export interface SideNavItemsType {
@@ -85,4 +91,25 @@ export interface InstructorObject {
   icon?: string
   instruction: string
   id: number
+}
+
+export interface AboutNavItem {
+  id: number
+  title: string
+  route: string
+  content?: any
+}
+
+export interface AnimationVariant {
+  before: {
+    [key: string]: string | number
+  }
+  after: {
+    [key: string]: string | number
+  }
+}
+
+export interface RoleButtonData {
+  role: string
+  label: string
 }

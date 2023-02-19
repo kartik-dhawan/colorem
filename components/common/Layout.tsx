@@ -2,10 +2,7 @@ import { Box } from "@mui/material"
 import Head from "next/head"
 import Navbar from "./Navbar/Navbar"
 import Footer from "./Footer/index"
-
-interface ChildrenType {
-  children: JSX.Element
-}
+import { ChildrenType } from "../../utils/interfaces"
 
 const styles = {
   LayoutWrapper: {

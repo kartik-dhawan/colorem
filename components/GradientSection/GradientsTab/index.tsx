@@ -11,6 +11,8 @@ import InfoDrawer from "./InfoDrawer"
 import Instructor from "../../common/Instructor"
 import { useRouter } from "next/router"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 
 interface GradientsTabProps {
   gid: string
@@ -108,16 +110,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
   }, [])
 
   return (
-    <>
-      {isLoading && !showInstructor && (
-        <Box
-          sx={styles.gradientSectionLoaderWrapper}
-          className={gid + "LoaderWrapper"}
-          id={gid + "LoaderWrapper"}
-        >
-          <PrimaryLoader />
-        </Box>
-      )}
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       {gradientsArray && !showInstructor ? (
         <>
           <GradientFilter />
@@ -152,7 +145,16 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
         /* Design a proper error component for API fail */
         <pre>Error running the api please try again</pre>
       )}
-    </>
+      {isLoading && !showInstructor && (
+        <Box
+          sx={styles.gradientSectionLoaderWrapper}
+          className={gid + "LoaderWrapper"}
+          id={gid + "LoaderWrapper"}
+        >
+          <PrimaryLoader />
+        </Box>
+      )}
+    </ErrorBoundary>
   )
 }
 
