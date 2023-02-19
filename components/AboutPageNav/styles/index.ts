@@ -1,8 +1,12 @@
 export const styles = {
   aboutSideNavWrapper: {
+    height: {
+      xs: "max-content",
+      lg: "100vh",
+    },
     margin: {
-      xs: "24px 30px",
-      sm: "30px 50px",
+      xs: "24px 30px 4rem 30px",
+      sm: "30px 50px 4rem 30px",
     },
     flex: 1,
   },
@@ -26,6 +30,11 @@ export const styles = {
       xs: "16px",
       md: "19px",
       xl: "22px",
+    },
+    lineHeight: {
+      xs: "24px",
+      md: "28px",
+      xl: "34px",
     },
     padding: {
       xs: "0px 24px",

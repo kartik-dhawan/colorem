@@ -11,6 +11,8 @@ import InfoDrawer from "./InfoDrawer"
 import Instructor from "../../common/Instructor"
 import { useRouter } from "next/router"
 import { updateCurrentGradient } from "../../../redux/slices/gradientSlice"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 
 interface GradientsTabProps {
   gid: string
@@ -108,7 +110,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
   }, [])
 
   return (
-    <>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       {gradientsArray && !showInstructor ? (
         <>
           <GradientFilter />
@@ -152,7 +154,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
           <PrimaryLoader />
         </Box>
       )}
-    </>
+    </ErrorBoundary>
   )
 }
 

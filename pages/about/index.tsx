@@ -1,7 +1,11 @@
 import { Box } from "@mui/material"
 import { useEffect } from "react"
+import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
 import AboutLayout from "../../components/common/AboutLayout"
+import ErrorFallback, {
+  myErrorHandler,
+} from "../../components/common/ErrorFallback"
 import {
   updateAboutPageContent,
   updateContent,
@@ -23,12 +27,14 @@ export const getStaticProps = async () => {
   const { items } = await client.getEntries({
     content_type: "coloremAbout",
   })
+
   const navItems: AboutNavItem[] = [...items]
     .map((item: any) => {
       return {
         id: item.fields.id,
         title: item.fields.navItemTitle,
         route: item.fields.navItemRoute,
+        content: item.fields.navItemContent ? item.fields.navItemContent : "",
       }
     })
     .sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -54,14 +60,16 @@ const AboutPage = ({ navItems, contentData }: ContentfulType) => {
     <AboutLayout>
       {/* the content component will come here */}
       {/* add {flex: 1} css property inside the wrapper of content section once you remove this box */}
-      <Box
-        sx={{
-          flex: {
-            md: 0,
-            lg: 1,
-          },
-        }}
-      ></Box>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+        <Box
+          sx={{
+            flex: {
+              md: 0,
+              lg: 1,
+            },
+          }}
+        ></Box>
+      </ErrorBoundary>
     </AboutLayout>
   )
 }

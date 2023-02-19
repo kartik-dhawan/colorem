@@ -1,10 +1,8 @@
 import { Box } from "@mui/material"
 import { motion } from "framer-motion"
-import { useRouter } from "next/router"
+import { ChildrenType } from "../../utils/interfaces"
 
-const AboutPageContent = () => {
-  const router = useRouter()
-
+const AboutPageContent = ({ children }: ChildrenType) => {
   const variant = {
     before: { x: "100%" },
     after: { x: 0 },
@@ -18,6 +16,8 @@ const AboutPageContent = () => {
           lg: 1,
         },
       }}
+      className="aboutPageContentWrapper"
+      id="aboutPageContentWrapper"
     >
       <motion.div
         initial={variant.before}
@@ -27,10 +27,12 @@ const AboutPageContent = () => {
         <Box
           sx={{
             backgroundColor: "#c4c4c4",
-            minHeight: "100vh",
-            maxHeight: "-webkit-fill-available",
+            height: {
+              xs: "max-content",
+              lg: "100vh",
+            },
             padding: {
-              xs: "20px 54px",
+              xs: "20px 30px",
               sm: "20px 74px",
               md: "20px 82px",
               lg: "48px 32px",
@@ -39,15 +41,7 @@ const AboutPageContent = () => {
             fontWeight: 400,
           }}
         >
-          {router.asPath}
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum saepe
-            porro perferendis obcaecati quas, natus, fugit vero explicabo
-            debitis atque dolore repellat fuga quibusdam quaerat ab, quia ipsam
-            suscipit libero blanditiis magni ratione aperiam consequatur
-            incidunt voluptas. Voluptas saepe magnam dolorem nisi? Quisquam sint
-            laborum consequuntur totam dolorem maiores necessitatibus.
-          </p>
+          {children}
         </Box>
       </motion.div>
     </Box>

@@ -6,6 +6,7 @@ import { ContentType } from "../constants/stateTypes"
 const initialState: ContentType = {
   data: {},
   aboutPageNavItems: [],
+  currentAboutContent: {},
 }
 
 export const contentSlice = createSlice({
@@ -25,10 +26,20 @@ export const contentSlice = createSlice({
     ) => {
       state.aboutPageNavItems = action.payload
     },
+    updateCurrentAboutPageContent: (
+      state: ContentType,
+      action: PayloadAction<AboutNavItem>
+    ) => {
+      state.currentAboutContent = action.payload
+    },
   },
 })
 
 // typescript support is included inside createSlice
-export const { updateContent, updateAboutPageContent } = contentSlice.actions
+export const {
+  updateContent,
+  updateAboutPageContent,
+  updateCurrentAboutPageContent,
+} = contentSlice.actions
 
 export default contentSlice.reducer

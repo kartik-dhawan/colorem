@@ -14,6 +14,7 @@ export type DispatchType = typeof store.dispatch
 export interface ContentType {
   data: ContentfulType
   aboutPageNavItems: AboutNavItem[]
+  currentAboutContent: any
 }
 
 export interface PalettesPagePropsType {
