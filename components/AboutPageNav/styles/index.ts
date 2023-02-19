@@ -1,5 +1,7 @@
 export const styles = {
   aboutSideNavWrapper: {
+    minHeight: "100vh",
+    maxHeight: "-webkit-fill-available",
     margin: {
       xs: "24px 30px",
       sm: "30px 50px",

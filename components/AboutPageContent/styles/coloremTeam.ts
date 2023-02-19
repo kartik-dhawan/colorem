@@ -60,7 +60,14 @@ export const styles = {
     margin: "16px 0px",
     fontSize: {
       xs: "16px",
-      xl: "18px",
+      md: "18px",
+      xl: "20px",
     },
+    lineHeight: {
+      xs: "22px",
+      md: "24px",
+      xl: "26px",
+    },
+    fontWeight: 400,
   },
 }

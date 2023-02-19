@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
 import { useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -18,8 +18,8 @@ const antonio = Antonio({
 const roboto = Roboto_Condensed({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
-  display: "swap",
   style: ["normal", "italic"],
+  display: "swap",
 })
 
 const initialRoleButtonState = [
@@ -67,13 +67,13 @@ const ColoremTeam = () => {
   return (
     <AboutPageContent>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-        <Typography
+        <Box
           className={tid + "Title " + antonio.className}
           id={tid + "Title"}
           sx={styles.teamSectionTitle}
         >
           {teamSectionContent?.title}
-        </Typography>
+        </Box>
         <ButtonGroup
           className={tid + "RoleButtonGroup"}
           id={tid + "RoleButtonGroup"}
@@ -83,7 +83,7 @@ const ColoremTeam = () => {
             return (
               <Button
                 key={i}
-                className={tid + "RolesButton " + antonio.className}
+                className={tid + "RolesButton"}
                 id={id + tid + "RolesButton"}
                 onClick={() => {
                   setSelectedRole(role.role)
@@ -95,19 +95,20 @@ const ColoremTeam = () => {
                     : styles.teamSectionUnselectedRoleButton
                 }
               >
-                {role.label}
+                <span className={antonio.className}>{role.label}</span>x
               </Button>
             )
           })}
         </ButtonGroup>
-        <Typography
+        <Box
           className={tid + "RoleFunFact " + roboto.className}
           id={tid + "RoleFunFact"}
-          gutterBottom
           sx={styles.teamSectionRoleFunFact}
         >
-          *{teamSectionContent?.roles[selectedRole]?.funFact}
-        </Typography>
+          *
+          {teamSectionContent?.roles[selectedRole] &&
+            teamSectionContent?.roles[selectedRole]?.funFact}
+        </Box>
         <Box
           sx={{
             margin: "2rem 0rem",
@@ -116,14 +117,14 @@ const ColoremTeam = () => {
           {teamSectionContent?.roles[selectedRole]?.body.map(
             (bodyText: string, i: number) => {
               return (
-                <Typography
+                <Box
                   key={i}
                   className={tid + "BodyText " + roboto.className}
                   id={id + tid + "BodyText"}
                   sx={styles.teamSectionBodyText}
                 >
                   {bodyText}
-                </Typography>
+                </Box>
               )
             }
           )}
