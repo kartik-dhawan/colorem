@@ -1,10 +1,12 @@
 export const styles = {
   aboutSideNavWrapper: {
-    minHeight: "100vh",
-    maxHeight: "-webkit-fill-available",
+    height: {
+      xs: "max-content",
+      lg: "100vh",
+    },
     margin: {
-      xs: "24px 30px",
-      sm: "30px 50px",
+      xs: "24px 30px 4rem 30px",
+      sm: "30px 50px 4rem 30px",
     },
     flex: 1,
   },
