@@ -44,4 +44,23 @@ export const styles = {
       backgroundColor: "#444",
     },
   },
+  teamSectionRoleFunFact: {
+    fontWeight: 300,
+    textAlign: "right",
+    fontSize: {
+      xs: "16px",
+      sm: "18px",
+      lg: "17px",
+      xl: "18px",
+    },
+    fontStyle: "italic",
+  },
+  teamSectionBodyText: {
+    textAlign: "justify",
+    margin: "16px 0px",
+    fontSize: {
+      xs: "16px",
+      xl: "18px",
+    },
+  },
 }

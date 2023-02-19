@@ -16,6 +16,8 @@ const AboutPageContent = ({ children }: ChildrenType) => {
           lg: 1,
         },
       }}
+      className="aboutPageContentWrapper"
+      id="aboutPageContentWrapper"
     >
       <motion.div
         initial={variant.before}

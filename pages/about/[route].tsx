@@ -94,6 +94,20 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   const navItemSelected = router.query.route
 
+  /**
+   * scrolls to the content page on first render in tablet & mobile view
+   */
+  useEffect(() => {
+    const contentElement = document.querySelector("#aboutPageContentWrapper")
+    console.log(contentElement)
+    console.log(window.innerWidth)
+    if (window.innerWidth < 1200) {
+      setTimeout(() => {
+        contentElement?.scrollIntoView({ behavior: "smooth" })
+      }, 500)
+    }
+  }, [])
+
   useEffect(() => {
     // storing contentful data in redux for this page
     dispatch(updateAboutPageContent(navItems))

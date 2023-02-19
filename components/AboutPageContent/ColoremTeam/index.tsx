@@ -1,5 +1,5 @@
-import { Button, ButtonGroup, Typography } from "@mui/material"
-import { Antonio } from "@next/font/google"
+import { Box, Button, ButtonGroup, Typography } from "@mui/material"
+import { Antonio, Roboto_Condensed } from "@next/font/google"
 import { useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
@@ -14,6 +14,12 @@ const antonio = Antonio({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+})
+const roboto = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  display: "swap",
+  style: ["normal", "italic"],
 })
 
 const initialRoleButtonState = [
@@ -94,6 +100,42 @@ const ColoremTeam = () => {
             )
           })}
         </ButtonGroup>
+        <Typography
+          className={tid + "RoleFunFact " + roboto.className}
+          id={tid + "RoleFunFact"}
+          gutterBottom
+          sx={styles.teamSectionRoleFunFact}
+        >
+          *{teamSectionContent?.roles[selectedRole]?.funFact}
+        </Typography>
+        <Box
+          sx={{
+            margin: "2rem 0rem",
+          }}
+        >
+          {teamSectionContent?.roles[selectedRole]?.body.map(
+            (bodyText: string, i: number) => {
+              return (
+                <Typography
+                  key={i}
+                  className={tid + "BodyText " + roboto.className}
+                  id={id + tid + "BodyText"}
+                  sx={styles.teamSectionBodyText}
+                >
+                  {bodyText}
+                </Typography>
+              )
+            }
+          )}
+          {/* temporary skeleton for an image */}
+          <Box
+            sx={{
+              height: "250px",
+              backgroundColor: "#999999",
+              margin: "32px 0px",
+            }}
+          ></Box>
+        </Box>
       </ErrorBoundary>
     </AboutPageContent>
   )
