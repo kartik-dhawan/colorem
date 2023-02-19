@@ -1,8 +1,6 @@
-import { Box } from "@mui/material"
-import { motion } from "framer-motion"
-import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import AboutPageContent from "../../components/AboutPageContent"
 import AboutLayout from "../../components/common/AboutLayout"
 import {
   updateAboutPageContent,
@@ -52,13 +50,16 @@ export const getStaticProps = async ({ params }: any) => {
   })
 
   // converts the fetched items into usable object
-  const navItems: AboutNavItem[] = [...items].reverse().map((item: any) => {
-    return {
-      id: item.fields.id,
-      title: item.fields.navItemTitle,
-      route: item.fields.navItemRoute,
-    }
-  })
+  const navItems: AboutNavItem[] = [...items]
+    .reverse()
+    .map((item: any) => {
+      return {
+        id: item.fields.id,
+        title: item.fields.navItemTitle,
+        route: item.fields.navItemRoute,
+      }
+    })
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
 
   if (currentPage.items.length === 0) {
     return {
@@ -80,13 +81,7 @@ export const getStaticProps = async ({ params }: any) => {
 }
 
 const AboutItem = ({ navItems, contentData }: ContentfulType) => {
-  const router = useRouter()
   const dispatch = useDispatch()
-
-  const variant = {
-    before: { x: "100%" },
-    after: { x: 0 },
-  }
 
   useEffect(() => {
     // storing contentful data in redux for this page
@@ -96,38 +91,7 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
-      <Box
-        sx={{
-          flex: {
-            xs: 0,
-            lg: 1,
-          },
-          position: {
-            xs: "absolute",
-            lg: "relative",
-          },
-        }}
-      >
-        <motion.div
-          initial={variant.before}
-          animate={variant.after}
-          transition={{ duration: 0.7 }}
-        >
-          <Box
-            sx={{
-              backgroundColor: "#c4c4c4",
-              minHeight: "100vh",
-              maxHeight: "-webkit-fill-available",
-              width: {
-                xs: "100vw",
-                lg: "100%",
-              },
-            }}
-          >
-            {router.asPath}
-          </Box>
-        </motion.div>
-      </Box>
+      <AboutPageContent />
     </AboutLayout>
   )
 }

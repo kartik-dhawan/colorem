@@ -53,6 +53,7 @@ export const styles = {
     "& > a": {
       textDecoration: "none",
     },
+    cursor: "pointer",
   },
   aboutSideNavListItem: {
     padding: "0px",

@@ -61,10 +61,6 @@ const AboutPageNav = () => {
     (state: RootType) => state.contentSlice
   )
 
-  const sortedNavItems = [...aboutPageNavItems]?.sort((a, b) =>
-    a.id > b.id ? 1 : -1
-  )
-
   const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   const homeButtonHandler = useCallback(() => {
@@ -109,7 +105,7 @@ const AboutPageNav = () => {
         }}
       >
         <motion.div transition={{ delay: 0.5 }}>
-          {sortedNavItems?.map((item: AboutNavItem) => {
+          {aboutPageNavItems?.map((item: AboutNavItem) => {
             return (
               <motion.div
                 initial={variant.before}
