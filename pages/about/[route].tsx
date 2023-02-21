@@ -8,6 +8,7 @@ import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
+import MetaData from "../../components/common/MetaData"
 import {
   updateAboutPageContent,
   updateContent,
@@ -124,6 +125,10 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
+      <MetaData
+        title="Colorem"
+        description="Learn more about the project Colorem."
+      />
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
         {navItemSelected !== "team" && (
