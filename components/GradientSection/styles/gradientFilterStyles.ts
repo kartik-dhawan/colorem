@@ -4,6 +4,7 @@ export const styles = {
     alignItems: "center",
     padding: "4px",
     minHeight: "50px",
+    position: "relative",
   },
   gradientFilterSubMenuBtn: {
     color: "#d9d9d9",
