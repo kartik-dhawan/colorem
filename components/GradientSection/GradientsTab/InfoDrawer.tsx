@@ -323,14 +323,18 @@ const colorsInRGB = [ ${gradient.colors
           onClose={handleClose}
           elevation={0}
           anchorOrigin={{
-            vertical: "top",
+            vertical: "bottom",
             horizontal: "left",
           }}
           transformOrigin={{
-            vertical: "top",
+            vertical: "bottom",
             horizontal: "left",
           }}
-          sx={SubMenuStyles.optionsBarMenu}
+          sx={{
+            ...SubMenuStyles.optionsBarMenu,
+            top: "-72px",
+            left: "16px",
+          }}
         >
           <MenuItem
             disableRipple
