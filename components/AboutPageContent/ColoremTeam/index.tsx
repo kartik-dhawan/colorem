@@ -8,6 +8,7 @@ import { RootType } from "../../../redux/constants/stateTypes"
 import { RoleButtonData } from "../../../utils/interfaces"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import { styles } from "../styles/coloremTeam"
+import { styles as commonStyles } from "../styles"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -52,6 +53,7 @@ const ColoremTeam = () => {
   useEffect(() => {
     const buttonArray: RoleButtonData[] = []
     teamSectionContent /* eslint-disable-line */ &&
+      teamSectionContent?.roles &&
       Object.keys(teamSectionContent?.roles).forEach((key: string) => {
         return (
           teamSectionContent &&
@@ -70,7 +72,7 @@ const ColoremTeam = () => {
         <Box
           className={tid + "Title " + antonio.className}
           id={tid + "Title"}
-          sx={styles.teamSectionTitle}
+          sx={commonStyles.aboutSubSectionTitle}
         >
           {teamSectionContent?.title}
         </Box>
@@ -107,7 +109,6 @@ const ColoremTeam = () => {
         >
           *
           {teamSectionContent?.roles &&
-            // teamSectionContent?.roles[selectedRole] &&
             teamSectionContent?.roles[selectedRole]?.funFact}
         </Box>
         <Box

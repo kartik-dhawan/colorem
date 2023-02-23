@@ -1,12 +1,23 @@
 import { Box } from "@mui/material"
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 import { ChildrenType } from "../../utils/interfaces"
 
 const AboutPageContent = ({ children }: ChildrenType) => {
-  const variant = {
-    before: { x: "100%" },
+  const [variant, setVariant] = useState<any>({
+    before: { x: 0 },
     after: { x: 0 },
-  }
+  })
+
+  const innerWidth = typeof window !== "undefined" && window.innerWidth
+  useEffect(() => {
+    if (innerWidth >= 1200) {
+      setVariant({
+        before: { x: "100%" },
+        after: { x: 0 },
+      })
+    }
+  }, [innerWidth])
 
   return (
     <Box
@@ -27,12 +38,10 @@ const AboutPageContent = ({ children }: ChildrenType) => {
         <Box
           sx={{
             backgroundColor: "#c4c4c4",
-            height: {
-              xs: "max-content",
-              lg: "100vh",
-            },
+            height: "max-content",
+            minHeight: { lg: "100vh" },
             padding: {
-              xs: "20px 30px",
+              xs: "20px 40px",
               sm: "20px 74px",
               md: "20px 82px",
               lg: "48px 32px",
