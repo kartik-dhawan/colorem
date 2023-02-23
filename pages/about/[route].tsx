@@ -99,14 +99,16 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   /**
    * scrolls to the content page on first render in tablet & mobile view
    */
+
+  const innerWidth = typeof window !== "undefined" && window.innerWidth
   useEffect(() => {
     const contentElement = document.querySelector("#aboutPageContentWrapper")
-    if (window.innerWidth < 1200) {
+    if (innerWidth < 1200) {
       setTimeout(() => {
         contentElement?.scrollIntoView({ behavior: "smooth" })
       }, 500)
     }
-  }, [])
+  }, [navItemSelected])
 
   useEffect(() => {
     // storing contentful data in redux for this page
