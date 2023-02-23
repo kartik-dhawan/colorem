@@ -7,6 +7,7 @@ import { RootType } from "../../../redux/constants/stateTypes"
 import { SkillType } from "../../../utils/interfaces"
 import { sortArrayByField } from "../../../utils/methods"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
+import { styles } from "../styles/behindTheDesk"
 import { styles as commonStyles } from "../styles/index"
 import SkillCard from "./SkillCard"
 
@@ -46,33 +47,16 @@ const BehindTheDesk = () => {
           {developerSectionContent?.title}
         </Box>
         <Box
-          className={did + "body " + roboto.className}
-          id={did + "body"}
-          sx={{
-            margin: "16px 0px",
-            fontSize: {
-              xs: "19px",
-              lg: "18px",
-              xl: "20px",
-            },
-            lineHeight: {
-              xs: "28px",
-              lg: "27px",
-              xl: "30px",
-            },
-            textAlign: "right",
-            fontStyle: "italic",
-            fontWeight: 300,
-          }}
+          className={did + "Body " + roboto.className}
+          id={did + "Body"}
+          sx={styles.developerSectionBody}
         >
           {developerSectionContent?.body}
         </Box>
         <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "16px",
-          }}
+          className={did + "CardsWrapper"}
+          id={did + "CardsWrapper"}
+          sx={styles.developerSectionCardsWrapper}
         >
           {orderedSkillsArray ? (
             orderedSkillsArray.map((item: SkillType, i: number) => {
