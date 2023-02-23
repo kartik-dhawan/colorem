@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
-import AboutPageContent from "../../components/AboutPageContent"
+import BehindTheDesk from "../../components/AboutPageContent/BehindTheDesk"
 import ColoremTeam from "../../components/AboutPageContent/ColoremTeam"
 import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
@@ -100,8 +100,6 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
    */
   useEffect(() => {
     const contentElement = document.querySelector("#aboutPageContentWrapper")
-    console.log(contentElement)
-    console.log(window.innerWidth)
     if (window.innerWidth < 1200) {
       setTimeout(() => {
         contentElement?.scrollIntoView({ behavior: "smooth" })
@@ -131,11 +129,7 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
       />
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
-        {navItemSelected !== "team" && (
-          <AboutPageContent>
-            <div>Content to be published in contentful.</div>
-          </AboutPageContent>
-        )}
+        {navItemSelected === "developer" && <BehindTheDesk />}
       </ErrorBoundary>
     </AboutLayout>
   )

@@ -10,16 +10,6 @@ const reusableStyles = {
 }
 
 export const styles = {
-  teamSectionTitle: {
-    fontSize: {
-      xs: "48px",
-      sm: "48px",
-      md: "64px",
-    },
-    textAlign: "right",
-    display: "block",
-    borderBottom: "2px solid #111",
-  },
   teamSectionRoleButtonGroup: {
     margin: "16px 0px",
     display: "flex",

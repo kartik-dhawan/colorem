@@ -160,3 +160,15 @@ export const hexToRGB = (hex: string) => {
     )})`
   return rgb
 }
+
+/**
+ * returns a sorted array of objects on the basis of a key in the object
+ * @param {any[]} arr
+ * @param {string} field
+ * @returns
+ */
+export const sortArrayByField = (arr: any[], key: string) => {
+  const sortedArray =
+    arr && [...arr].sort((a: any, b: any) => (a[key] > b[key] ? 1 : -1))
+  return sortedArray
+}
