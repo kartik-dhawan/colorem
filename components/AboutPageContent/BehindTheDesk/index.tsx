@@ -1,5 +1,6 @@
-import { Box } from "@mui/material"
+import { Box, Button, Divider } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
+import { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
@@ -27,14 +28,21 @@ const roboto = Roboto_Condensed({
 const BehindTheDesk = () => {
   const did = "developerSection"
 
+  const [cardsLimit, setCardsLimit] = useState<number>(3)
+  const [isMaxCardLimit, setIsMaxCardLimit] = useState<boolean>(false)
+
   const developerSectionContent = useSelector(
     (state: RootType) => state.contentSlice.currentAboutContent
   ).content
 
-  const orderedSkillsArray = sortArrayByField(
+  /**
+   * sorts the array according to order coming from contentful
+   * & then slices it to three for initial render
+   */
+  const initialOrderedSkillsArray = sortArrayByField(
     developerSectionContent?.skills,
     "order"
-  )
+  )?.slice(0, cardsLimit)
 
   return (
     <AboutPageContent>
@@ -54,12 +62,19 @@ const BehindTheDesk = () => {
           {developerSectionContent?.body}
         </Box>
         <Box
+          className={did + "Skillset " + roboto.className}
+          id={did + "Skillset"}
+          sx={styles.developerSectionSkillset}
+        >
+          Skillset
+        </Box>
+        <Box
           className={did + "CardsWrapper"}
           id={did + "CardsWrapper"}
           sx={styles.developerSectionCardsWrapper}
         >
-          {orderedSkillsArray ? (
-            orderedSkillsArray.map((item: SkillType, i: number) => {
+          {initialOrderedSkillsArray ? (
+            initialOrderedSkillsArray.map((item: SkillType, i: number) => {
               return <SkillCard key={i} skillDetails={item} />
             })
           ) : (
@@ -69,6 +84,30 @@ const BehindTheDesk = () => {
             </div>
           )}
         </Box>
+        <Divider sx={{ marginTop: "16px", height: "2px" }} />
+        {/* toggled 'See more' / 'See less' button */}
+        {!isMaxCardLimit ? (
+          <Button
+            onClick={() => {
+              setCardsLimit(developerSectionContent?.skills.length)
+              setIsMaxCardLimit(true)
+            }}
+            sx={styles.skillCardSeeMoreLessButton}
+          >
+            <div className={roboto.className}>See more</div>
+          </Button>
+        ) : (
+          <Button
+            disableRipple
+            onClick={() => {
+              setCardsLimit(3)
+              setIsMaxCardLimit(false)
+            }}
+            sx={styles.skillCardSeeMoreLessButton}
+          >
+            <div className={roboto.className}>See less</div>
+          </Button>
+        )}
       </ErrorBoundary>
     </AboutPageContent>
   )

@@ -34,7 +34,7 @@ export const styles = {
     fontWeight: 300,
   },
   developerSectionCardsWrapper: {
-    marginTop: "2rem",
+    marginTop: "16px",
     display: "grid",
     gridTemplateColumns: {
       xs: "1fr",
@@ -46,6 +46,14 @@ export const styles = {
       md: "20px",
       lg: "16px",
     },
+    maxHeight: { lg: "40rem" },
+    overflow: "scroll",
+  },
+  developerSectionSkillset: {
+    fontSize: "24px",
+    textTransform: "uppercase",
+    fontWeight: 600,
+    marginTop: "24px",
   },
   skillCardWrapper: {
     color: "#c4c4c4",
@@ -128,5 +136,16 @@ export const styles = {
     backgroundColor: "#373737",
     marginTop: "4px",
   },
-  // developerSection
+  skillCardSeeMoreLessButton: {
+    display: "flex",
+    justifyContent: "center",
+    color: "#111",
+    width: "100%",
+    margin: "8px 0px",
+    "&:hover": {
+      color: "#111",
+      backgroundColor: "transparent",
+      textDecoration: "underline",
+    },
+  },
 }
