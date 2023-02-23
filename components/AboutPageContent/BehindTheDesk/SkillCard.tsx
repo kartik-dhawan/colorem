@@ -1,7 +1,7 @@
-import { Box, LinearProgress, Stack } from "@mui/material"
+import { Box, Divider, LinearProgress, Stack } from "@mui/material"
 import { useId } from "react"
 import { SkillType } from "../../../utils/interfaces"
-import AccountBoxIcon from "@mui/icons-material/AccountBox"
+import PersonPinIcon from "@mui/icons-material/PersonPin"
 import { Roboto_Condensed } from "@next/font/google"
 import { styles } from "../styles/behindTheDesk"
 import { monthsToYears } from "../../../utils/methods"
@@ -24,76 +24,69 @@ const SkillCard = ({ skillDetails }: SkillCardProps) => {
     <Box
       className={sid + "Wrapper " + roboto.className}
       id={id + sid + "Wrapper"}
-      sx={{
-        color: "#c4c4c4",
-        backgroundColor: "#222",
-        padding: "10px",
-      }}
+      sx={styles.skillCardWrapper}
     >
       <Box
         className={sid + "Header"}
         id={id + sid + "Header"}
-        sx={{ display: "flex", alignItems: "center", gap: "4px" }}
+        sx={styles.skillCardHeader}
       >
+        <PersonPinIcon />
         <Box
           sx={{
-            height: "24px",
-            aspectRatio: "1",
-          }}
-        >
-          <AccountBoxIcon />
-        </Box>
-        <Box
-          sx={{
-            fontSize: "18px",
+            fontSize: {
+              xs: "20px",
+              md: "18px",
+              xl: "21px",
+            },
           }}
         >
           {skillDetails.techName}
         </Box>
       </Box>
-
+      <Divider sx={{ backgroundColor: "#999", margin: "12px 6px 0px 6px" }} />
       <Stack
         className={sid + "Details " + roboto.className}
         id={sid + "Details"}
         sx={styles.skillCardDetailsSection}
       >
-        <Box sx={styles.skillCardFieldText}>
+        <Box sx={{ ...styles.skillCardFieldText, gridArea: "hands" }}>
           <div className={sid + "FieldTitle"}>Hands-On</div>
           <div className={sid + "FieldValue"}>
             {monthsToYears(skillDetails.handsOnExperience)}
           </div>
         </Box>
-        <Box sx={styles.skillCardFieldText}>
+        <Box sx={{ ...styles.skillCardFieldText, gridArea: "work" }}>
           <div className={sid + "FieldTitle"}>Work Experience</div>
           <div className={sid + "FieldValue"}>
             {monthsToYears(skillDetails.professionalExperience)}
           </div>
         </Box>
-        <Box sx={styles.skillCardFieldProgressBar}>
+        <Box sx={{ ...styles.skillCardProgressBarField, gridArea: "fluency" }}>
           <div className={sid + "FieldTitle"}>Fluency</div>
           <LinearProgress
             variant="determinate"
             value={skillDetails.fluency * 100}
             color={"secondary"}
             sx={{
-              borderRadius: "100px",
-              backgroundColor: "#a1b4a8", // progress_bar_green_complement
+              ...styles.skillCardProgressBar,
               "& > span": {
-                backgroundColor: "#1db954", // progress_bar_green
+                backgroundColor: "#642B73",
+                background: "linear-gradient(90deg, #642B73, #C6426E)",
               },
             }}
           />
         </Box>
-        <Box sx={styles.skillCardFieldProgressBar}>
+        <Box sx={{ ...styles.skillCardProgressBarField, gridArea: "adap" }}>
           <div className={sid + "FieldTitle"}>Adaptability</div>
           <LinearProgress
             variant="determinate"
             value={skillDetails.adaptability * 100}
             sx={{
-              borderRadius: "100px",
-              backgroundColor: "#c9cbae", // progress_bar_yellow_complement
+              ...styles.skillCardProgressBar,
               "& > span": {
-                backgroundColor: "#b9a91d", // progress_bar_yellow
+                backgroundColor: "#134E5E",
+                background: "linear-gradient(90deg, #134E5E, #71B280)",
               },
             }}
           />

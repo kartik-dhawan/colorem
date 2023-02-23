@@ -3,7 +3,11 @@ const commonUtilStyles = {
     fontWeight: 300,
     "& > .skillCardFieldTitle": {
       textTransform: "uppercase",
-      fontSize: "12px",
+      fontSize: {
+        xs: "14px",
+        md: "12px",
+        xl: "14px",
+      },
       fontWeight: 400,
       letterSpacing: "1px",
       color: "#999999",
@@ -37,25 +41,92 @@ export const styles = {
       md: "1fr 1fr",
       lg: "1fr 1fr 1fr",
     },
-    gap: "16px",
+    gap: {
+      xs: "16px",
+      md: "20px",
+      lg: "16px",
+    },
+  },
+  skillCardWrapper: {
+    color: "#c4c4c4",
+    backgroundColor: "#222",
+    padding: {
+      xs: "14px",
+      lg: "10px",
+    },
+    height: "max-content",
+    overflow: "hidden",
+    position: "relative",
+    width: "-webkit-fill-available",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: {
+        xs: "-400px",
+        sm: "-500px",
+        lg: "-300px",
+      },
+      width: {
+        xs: "45%",
+        md: "60%",
+      },
+      height: "100%",
+      background: "rgba(255, 255, 255, 0.2)",
+      transform: "skewX(-30deg)",
+      transition: "0.4s",
+    },
+    "&:hover::before": {
+      left: {
+        xs: "550px",
+        sm: "800px",
+        lg: "250px",
+      },
+      background: "rgba(255, 255, 255, 0.1)",
+    },
+  },
+  skillCardHeader: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    margin: "4px 0px 0px 4px",
+    "& > svg": {
+      height: "24px",
+      aspectRatio: "1",
+    },
   },
   skillCardFieldText: {
     ...commonUtilStyles.cardFieldTitle,
     "& > .skillCardFieldValue": {
-      fontSize: "18px",
+      fontSize: {
+        xs: "20px",
+        md: "18px",
+        xl: "20px",
+      },
     },
-  },
-  skillCardFieldProgressBar: {
-    ...commonUtilStyles.cardFieldTitle,
   },
   skillCardDetailsSection: {
     margin: "16px 4px",
     display: "grid",
-    gridTemplateColumns: {
-      xs: "1fr 1fr",
-      lg: "1fr",
+    gridTemplateAreas: {
+      xs: `"hands work"
+      "fluency fluency"
+      "adap adap"`,
+      lg: `"hands hands"
+      "work work"
+      "fluency fluency"
+      "adap adap"`,
     },
     gap: "16px",
+  },
+  skillCardProgressBarField: {
+    ...commonUtilStyles.cardFieldTitle,
+  },
+  skillCardProgressBar: {
+    height: "6px",
+    borderRadius: "100px",
+    backgroundColor: "#373737",
+    marginTop: "4px",
   },
   // developerSection
 }

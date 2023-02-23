@@ -27,12 +27,10 @@ const AboutPageContent = ({ children }: ChildrenType) => {
         <Box
           sx={{
             backgroundColor: "#c4c4c4",
-            height: {
-              xs: "max-content",
-              lg: "100vh",
-            },
+            height: "max-content",
+            minHeight: { lg: "100vh" },
             padding: {
-              xs: "20px 30px",
+              xs: "20px 40px",
               sm: "20px 74px",
               md: "20px 82px",
               lg: "48px 32px",
