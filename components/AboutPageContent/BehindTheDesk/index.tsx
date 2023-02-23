@@ -1,9 +1,10 @@
-import { Box, Container } from "@mui/material"
+import { Box } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
 import { RootType } from "../../../redux/constants/stateTypes"
+import { SkillType } from "../../../utils/interfaces"
 import { sortArrayByField } from "../../../utils/methods"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import { styles as commonStyles } from "../styles/index"
@@ -66,9 +67,15 @@ const BehindTheDesk = () => {
         >
           {developerSectionContent?.body}
         </Box>
-        <Container>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "16px",
+          }}
+        >
           {orderedSkillsArray ? (
-            orderedSkillsArray.map((item, i: number) => {
+            orderedSkillsArray.map((item: SkillType, i: number) => {
               return <SkillCard key={i} skillDetails={item} />
             })
           ) : (
@@ -77,7 +84,7 @@ const BehindTheDesk = () => {
               contentful.
             </div>
           )}
-        </Container>
+        </Box>
       </ErrorBoundary>
     </AboutPageContent>
   )
