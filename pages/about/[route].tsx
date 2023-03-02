@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -9,7 +10,6 @@ import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
-import MetaData from "../../components/common/MetaData"
 import {
   updateAboutPageContent,
   updateContent,
@@ -124,12 +124,38 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
     })
   }, [navItems, navItemSelected])
 
+  const title = "Colorem"
+  const description = "Learn more about the project Colorem."
+
   return (
     <AboutLayout>
-      <MetaData
-        title="Colorem"
-        description="Learn more about the project Colorem."
-      />
+      <Head>
+        {/* Primary meta tags */}
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        {/* Open Graph / Facebook */}
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+        <meta property="og:site_name" content="colorem.vercel.app" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+      </Head>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
         {navItemSelected === "developer" && <BehindTheDesk />}
