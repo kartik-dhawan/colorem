@@ -130,6 +130,7 @@ export const styles = {
       xs: 3,
       md: 2,
     },
+    position: "relative",
   },
   infoDrawerCopyButton: {
     color: "#111",

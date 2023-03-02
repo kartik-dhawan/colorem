@@ -57,7 +57,7 @@ export const styles = {
       xs: "50px",
       sm: "65px",
       md: "80px",
-      xl: "110px",
+      xl: "95px",
     }, // keep the line height the same as the fontSize
     "& > a": {
       textDecoration: "none",
@@ -71,7 +71,7 @@ export const styles = {
       xs: "50px",
       sm: "65px",
       md: "80px",
-      xl: "110px",
+      xl: "95px",
     },
     textTransform: "uppercase",
     transition: "100ms all ease-in-out",

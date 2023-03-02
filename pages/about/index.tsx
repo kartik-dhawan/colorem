@@ -6,6 +6,7 @@ import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
+import MetaData from "../../components/common/MetaData"
 import {
   updateAboutPageContent,
   updateContent,
@@ -58,6 +59,10 @@ const AboutPage = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
+      <MetaData
+        title="Colorem"
+        description="Learn more about the project Colorem."
+      />
       {/* the content component will come here */}
       {/* add {flex: 1} css property inside the wrapper of content section once you remove this box */}
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>

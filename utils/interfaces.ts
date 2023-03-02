@@ -113,3 +113,14 @@ export interface RoleButtonData {
   role: string
   label: string
 }
+
+export interface SkillType {
+  order: number
+  techName: string
+  techLabel: string
+  fluency: number
+  adaptability: number
+  professionalExperience: number
+  handsOnExperience: number
+  projects: number
+}

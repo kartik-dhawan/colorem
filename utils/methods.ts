@@ -160,3 +160,30 @@ export const hexToRGB = (hex: string) => {
     )})`
   return rgb
 }
+
+/**
+ * returns a sorted array of objects on the basis of a key in the object
+ * @param {any[]} arr
+ * @param {string} field
+ * @returns
+ */
+export const sortArrayByField = (arr: any[], key: string) => {
+  const sortedArray =
+    arr && [...arr].sort((a: any, b: any) => (a[key] > b[key] ? 1 : -1))
+  return sortedArray
+}
+
+/**
+ * converts months to 'years & months' format
+ * returns '< year' if months < 12
+ * @param {number} months
+ * @returns
+ */
+export const monthsToYears = (months: number) => {
+  const years = Math.floor(months / 12)
+  const remainingMonths = months % 12
+  if (years === 0) {
+    return "< year"
+  }
+  return `${years}y ${remainingMonths}m`
+}

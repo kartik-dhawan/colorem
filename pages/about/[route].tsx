@@ -3,11 +3,13 @@ import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
 import AboutPageContent from "../../components/AboutPageContent"
+import BehindTheDesk from "../../components/AboutPageContent/BehindTheDesk"
 import ColoremTeam from "../../components/AboutPageContent/ColoremTeam"
 import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
+import MetaData from "../../components/common/MetaData"
 import {
   updateAboutPageContent,
   updateContent,
@@ -97,16 +99,16 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   /**
    * scrolls to the content page on first render in tablet & mobile view
    */
+
+  const innerWidth = typeof window !== "undefined" && window.innerWidth
   useEffect(() => {
     const contentElement = document.querySelector("#aboutPageContentWrapper")
-    console.log(contentElement)
-    console.log(window.innerWidth)
-    if (window.innerWidth < 1200) {
+    if (innerWidth < 1200) {
       setTimeout(() => {
         contentElement?.scrollIntoView({ behavior: "smooth" })
       }, 500)
     }
-  }, [])
+  }, [navItemSelected])
 
   useEffect(() => {
     // storing contentful data in redux for this page
@@ -124,9 +126,14 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
+      <MetaData
+        title="Colorem"
+        description="Learn more about the project Colorem."
+      />
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
-        {navItemSelected !== "team" && (
+        {navItemSelected === "developer" && <BehindTheDesk />}
+        {navItemSelected !== "team" && navItemSelected !== "developer" && (
           <AboutPageContent>
             <div>Content to be published in contentful.</div>
           </AboutPageContent>
