@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -9,7 +10,6 @@ import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
-import MetaData from "../../components/common/MetaData"
 import {
   updateAboutPageContent,
   updateContent,
@@ -126,10 +126,50 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
 
   return (
     <AboutLayout>
-      <MetaData
-        title="Colorem"
-        description="Learn more about the project Colorem."
-      />
+      <Head>
+        {/* Primary meta tags */}
+        <title>Colorem</title>
+        <meta name="title" content="Colorem" />
+        <meta
+          name="description"
+          content="Learn more about the project Colorem."
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+        <meta property="og:title" content="Colorem" />
+        <meta
+          property="og:description"
+          content="Learn more about the project Colorem."
+        />
+        <meta
+          property="og:image"
+          content={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/images/homeMetaImage.webp`
+              : "/images/og.webp"
+          }
+        />
+        <meta property="og:site_name" content="colorem.vercel.app" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Colorem" />
+        <meta
+          name="twitter:description"
+          content="Learn more about the project Colorem."
+        />
+        <meta
+          name="twitter:image"
+          content={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/images/homeMetaImage.webp`
+              : "/images/og.webp"
+          }
+        />
+      </Head>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
         {navItemSelected === "developer" && <BehindTheDesk />}
