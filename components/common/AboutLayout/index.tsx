@@ -10,6 +10,10 @@ const AboutLayout = ({ children }: ChildrenType) => {
       <Box
         sx={{
           display: "flex",
+          minHeight: {
+            lg: "720px",
+            xl: "840px",
+          },
           height: "100vh",
           maxHeight: "-webkit-fill-available",
           overflow: {

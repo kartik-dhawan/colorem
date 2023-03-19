@@ -1,10 +1,12 @@
 import { Box, Stack } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
+import { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
 import { RootType } from "../../../redux/constants/stateTypes"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
+import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
 import { styles as commonStyles } from "../styles/index"
 
 // loading fonts before component loads
@@ -22,6 +24,8 @@ const roboto = Roboto_Condensed({
 
 const ProjectInsights = () => {
   const iid = "insightsSection"
+
+  const [selectedArena, setSelectedArena] = useState<string>("management")
 
   const insightsSectionContent = useSelector(
     (state: RootType) => state.contentSlice.currentAboutContent
@@ -52,6 +56,12 @@ const ProjectInsights = () => {
           >
             {insightsSectionContent?.body}
           </Box>
+          {/* common button group component */}
+          <PrimaryButtonGroup
+            buttonArray={insightsSectionContent?.arenasList}
+            setSelectedButton={setSelectedArena}
+            selectedButton={selectedArena}
+          />
         </Stack>
       </ErrorBoundary>
     </AboutPageContent>
