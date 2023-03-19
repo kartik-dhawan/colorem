@@ -14,7 +14,7 @@ const AboutLayout = ({ children }: ChildrenType) => {
             lg: "720px",
             xl: "840px",
           },
-          height: "100vh",
+          height: "max-content",
           maxHeight: "-webkit-fill-available",
           overflow: {
             lg: "hidden",

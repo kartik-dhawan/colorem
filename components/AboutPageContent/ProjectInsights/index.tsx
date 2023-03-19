@@ -1,12 +1,13 @@
 import { Box, Stack } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
-import { useState } from "react"
+import { useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
 import { RootType } from "../../../redux/constants/stateTypes"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
+import { styles } from "../styles/projectInsights"
 import { styles as commonStyles } from "../styles/index"
 
 // loading fonts before component loads
@@ -23,6 +24,7 @@ const roboto = Roboto_Condensed({
 })
 
 const ProjectInsights = () => {
+  const id = useId()
   const iid = "insightsSection"
 
   const [selectedArena, setSelectedArena] = useState<string>("management")
@@ -31,7 +33,11 @@ const ProjectInsights = () => {
     (state: RootType) => state.contentSlice.currentAboutContent
   ).content
 
-  console.log(insightsSectionContent)
+  const selectedRoleContent =
+    insightsSectionContent?.arenas &&
+    insightsSectionContent.arenas[selectedArena].content
+
+  console.log(selectedRoleContent)
 
   return (
     <AboutPageContent>
@@ -62,6 +68,50 @@ const ProjectInsights = () => {
             setSelectedButton={setSelectedArena}
             selectedButton={selectedArena}
           />
+          {/* content according to the roles */}
+          <Box
+            className={iid + "ContentWrapper"}
+            id={iid + "ContentWrapper"}
+            sx={{ textAlign: "right" }}
+          >
+            {selectedRoleContent &&
+              selectedRoleContent?.map((item: any, index: number) => {
+                return (
+                  <div key={index}>
+                    <Stack
+                      className={iid + "ContentItemWrapper " + roboto.className}
+                      id={id + iid + "ContentItemWrapper"}
+                      sx={{
+                        margin: "8px 0px",
+                      }}
+                    >
+                      <Box
+                        className={iid + "ContentItemTitle"}
+                        sx={styles.insightsSectionContentItemTitle}
+                      >
+                        {item.title}
+                      </Box>
+                      <Box
+                        className={iid + "ContentItemText"}
+                        sx={styles.insightsSectionContentItemText}
+                      >
+                        {item.body.map((text: string, i: number) => {
+                          return <div key={i}>{text}</div>
+                        })}
+                      </Box>
+                    </Stack>
+                    {/* temporary skeleton for an image */}
+                    <Box
+                      sx={{
+                        height: "250px",
+                        backgroundColor: "#999999",
+                        margin: "0px 0px 24px 0px",
+                      }}
+                    ></Box>
+                  </div>
+                )
+              })}
+          </Box>
         </Stack>
       </ErrorBoundary>
     </AboutPageContent>
