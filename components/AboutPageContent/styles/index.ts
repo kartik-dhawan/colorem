@@ -9,4 +9,20 @@ export const styles = {
     display: "block",
     borderBottom: "2px solid #111",
   },
+  aboutSubSectionBody: {
+    margin: "16px 0px",
+    fontSize: {
+      xs: "19px",
+      lg: "18px",
+      xl: "20px",
+    },
+    lineHeight: {
+      xs: "28px",
+      lg: "27px",
+      xl: "30px",
+    },
+    textAlign: "right",
+    fontStyle: "italic",
+    fontWeight: 300,
+  },
 }

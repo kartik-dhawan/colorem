@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup } from "@mui/material"
+import { Box } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
 import { useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -9,6 +9,7 @@ import { RoleButtonData } from "../../../utils/interfaces"
 import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import { styles } from "../styles/coloremTeam"
 import { styles as commonStyles } from "../styles"
+import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -76,32 +77,12 @@ const ColoremTeam = () => {
         >
           {teamSectionContent?.title}
         </Box>
-        <ButtonGroup
-          className={tid + "RoleButtonGroup"}
-          id={tid + "RoleButtonGroup"}
-          sx={styles.teamSectionRoleButtonGroup}
-        >
-          {teamRoles?.map((role: RoleButtonData, i: number) => {
-            return (
-              <Button
-                key={i}
-                className={tid + "RolesButton"}
-                id={id + tid + "RolesButton"}
-                onClick={() => {
-                  setSelectedRole(role.role)
-                }}
-                disableRipple
-                sx={
-                  selectedRole === role.role
-                    ? styles.teamSectionSelectedRoleButton
-                    : styles.teamSectionUnselectedRoleButton
-                }
-              >
-                <span className={antonio.className}>{role.label}</span>
-              </Button>
-            )
-          })}
-        </ButtonGroup>
+        {/* common button group component */}
+        <PrimaryButtonGroup
+          buttonArray={teamRoles}
+          setSelectedButton={setSelectedRole}
+          selectedButton={selectedRole}
+        />
         <Box
           className={tid + "RoleFunFact " + roboto.className}
           id={tid + "RoleFunFact"}

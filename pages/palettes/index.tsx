@@ -15,7 +15,7 @@ import { API_URLS } from "../../utils/constants"
 import { logger } from "../../lib/methods"
 import { fetcher } from "../../utils/methods"
 import { Roboto } from "@next/font/google"
-import MetaData from "../../components/common/MetaData"
+import Head from "next/head"
 
 export const getStaticProps = async () => {
   const contentResponse = await client.getEntries({
@@ -58,12 +58,39 @@ const Palettes = ({ contentData }: ContentfulType) => {
     dispatch(updateContent(contentData))
   })
 
+  const title = "Colorem | Palettes"
+  const description =
+    "Browse through various permutations colors to pick best for your theme."
+
   return (
     <>
-      <MetaData
-        title="Colorem | Palettes"
-        description="Browse through various permutations colors to pick best for your theme."
-      />
+      <Head>
+        {/* Primary meta tags */}
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        {/* Open Graph / Facebook */}
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+        <meta property="og:site_name" content="colorem.vercel.app" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image"
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
+        />
+      </Head>
       <Box
         sx={{
           flex: 1,
