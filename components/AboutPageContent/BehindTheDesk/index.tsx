@@ -57,7 +57,7 @@ const BehindTheDesk = () => {
         <Box
           className={did + "Body " + roboto.className}
           id={did + "Body"}
-          sx={styles.developerSectionBody}
+          sx={commonStyles.aboutSubSectionBody}
         >
           {developerSectionContent?.body}
         </Box>

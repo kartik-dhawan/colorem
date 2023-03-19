@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import AboutPageContent from "../../components/AboutPageContent"
 import BehindTheDesk from "../../components/AboutPageContent/BehindTheDesk"
 import ColoremTeam from "../../components/AboutPageContent/ColoremTeam"
+import ProjectInsights from "../../components/AboutPageContent/ProjectInsights"
 import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
   myErrorHandler,
@@ -159,11 +160,14 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
         {navItemSelected === "team" && <ColoremTeam />}
         {navItemSelected === "developer" && <BehindTheDesk />}
-        {navItemSelected !== "team" && navItemSelected !== "developer" && (
-          <AboutPageContent>
-            <div>Content to be published in contentful.</div>
-          </AboutPageContent>
-        )}
+        {navItemSelected === "project" && <ProjectInsights />}
+        {navItemSelected !== "team" &&
+          navItemSelected !== "developer" &&
+          navItemSelected !== "project" && (
+            <AboutPageContent>
+              <div>Content to be published in contentful.</div>
+            </AboutPageContent>
+          )}
       </ErrorBoundary>
     </AboutLayout>
   )
