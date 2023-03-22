@@ -9,8 +9,7 @@ import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
 import { styles } from "../styles/projectInsights"
 import { styles as commonStyles } from "../styles/index"
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
+import MouseIcon from "@mui/icons-material/Mouse"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -44,22 +43,22 @@ const ProjectInsights = () => {
     insightsSectionContent?.arenas &&
     insightsSectionContent.arenas[selectedArena].content
 
-  if (typeof window !== "undefined") {
+  useEffect(() => {
     insightsSection = document.querySelector(".css-1wvgw2s-MuiStack-root")
     scrollLength = insightsSection && scrollPosition === "top" ? 1000 : -1000
-  }
+  }, [scrollPosition])
 
+  // scroll logic
   const handleScroll = () => {
     setSectionTop(
       document.querySelector("#insightsSectionTitle")?.getBoundingClientRect()
         .top
     )
   }
-
   useEffect(() => {
     insightsSection?.addEventListener("scroll", handleScroll)
     return () => insightsSection?.removeEventListener("scroll", handleScroll)
-  })
+  }, [])
 
   const handleScrollButton = useCallback(() => {
     if (scrollPosition === "top") {
@@ -73,6 +72,8 @@ const ProjectInsights = () => {
       behavior: "smooth",
     })
   }, [scrollPosition])
+
+  console.log(scrollPosition, sectionTop)
 
   return (
     <AboutPageContent>
@@ -149,26 +150,11 @@ const ProjectInsights = () => {
           </Box>
         </Stack>
         <IconButton
-          sx={{
-            position: "fixed",
-            bottom: "50px",
-            border: "2px solid #888",
-            "& > svg": {
-              backgroundColor: "#333",
-              color: "#d9d9d9",
-              borderRadius: "100px",
-              padding: "8px",
-              margin: "-4px",
-            },
-          }}
+          sx={styles.insightsSectionScrollButton}
           disableRipple
           onClick={handleScrollButton}
         >
-          {scrollPosition === "top" && sectionTop && sectionTop > -200 ? (
-            <ArrowDownwardIcon />
-          ) : (
-            <ArrowUpwardIcon />
-          )}
+          <MouseIcon />
         </IconButton>
       </ErrorBoundary>
     </AboutPageContent>
