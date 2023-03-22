@@ -50,12 +50,10 @@ const ProjectInsights = () => {
   }
 
   const handleScroll = () => {
-    if (typeof window !== "undefined") {
-      setSectionTop(
-        document.querySelector("#insightsSectionTitle")?.getBoundingClientRect()
-          .top
-      )
-    }
+    setSectionTop(
+      document.querySelector("#insightsSectionTitle")?.getBoundingClientRect()
+        .top
+    )
   }
 
   useEffect(() => {
