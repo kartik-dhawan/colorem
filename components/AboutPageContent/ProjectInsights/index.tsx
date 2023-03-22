@@ -1,6 +1,6 @@
-import { Box, Stack } from "@mui/material"
+import { Box, IconButton, Stack } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "@next/font/google"
-import { useId, useState } from "react"
+import { useCallback, useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
@@ -9,6 +9,8 @@ import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
 import { styles } from "../styles/projectInsights"
 import { styles as commonStyles } from "../styles/index"
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -27,6 +29,11 @@ const ProjectInsights = () => {
   const id = useId()
   const iid = "insightsSection"
 
+  let insightsSection: Element | null
+  let scrollLength: number | undefined
+
+  const [scrollPosition, setScrollPosition] = useState<"top" | "bottom">("top")
+  const [sectionTop, setSectionTop] = useState<number | undefined>()
   const [selectedArena, setSelectedArena] = useState<string>("management")
 
   const insightsSectionContent = useSelector(
@@ -37,7 +44,37 @@ const ProjectInsights = () => {
     insightsSectionContent?.arenas &&
     insightsSectionContent.arenas[selectedArena].content
 
-  console.log(selectedRoleContent)
+  if (typeof window !== "undefined") {
+    insightsSection = document.querySelector(".css-1wvgw2s-MuiStack-root")
+    scrollLength = insightsSection && scrollPosition === "top" ? 1000 : -1000
+  }
+
+  const handleScroll = () => {
+    if (typeof window !== "undefined") {
+      setSectionTop(
+        document.querySelector("#insightsSectionTitle")?.getBoundingClientRect()
+          .top
+      )
+    }
+  }
+
+  useEffect(() => {
+    insightsSection?.addEventListener("scroll", handleScroll)
+    return () => insightsSection?.removeEventListener("scroll", handleScroll)
+  })
+
+  const handleScrollButton = useCallback(() => {
+    if (scrollPosition === "top") {
+      setScrollPosition("bottom")
+    } else {
+      setScrollPosition("top")
+    }
+    insightsSection?.scrollTo({
+      top: scrollLength,
+      left: 0,
+      behavior: "smooth",
+    })
+  }, [scrollPosition])
 
   return (
     <AboutPageContent>
@@ -113,6 +150,28 @@ const ProjectInsights = () => {
               })}
           </Box>
         </Stack>
+        <IconButton
+          sx={{
+            position: "fixed",
+            bottom: "50px",
+            border: "2px solid #888",
+            "& > svg": {
+              backgroundColor: "#333",
+              color: "#d9d9d9",
+              borderRadius: "100px",
+              padding: "8px",
+              margin: "-4px",
+            },
+          }}
+          disableRipple
+          onClick={handleScrollButton}
+        >
+          {scrollPosition === "top" && sectionTop && sectionTop > -200 ? (
+            <ArrowDownwardIcon />
+          ) : (
+            <ArrowUpwardIcon />
+          )}
+        </IconButton>
       </ErrorBoundary>
     </AboutPageContent>
   )

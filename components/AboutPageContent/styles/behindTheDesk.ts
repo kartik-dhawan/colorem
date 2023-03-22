@@ -46,7 +46,6 @@ export const styles = {
       md: "20px",
       lg: "16px",
     },
-    height: { lg: "30rem" },
     overflowY: "scroll",
   },
   developerSectionSkillset: {
