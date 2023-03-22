@@ -22,4 +22,16 @@ export const styles = {
       marginBottom: "12px",
     },
   },
+  insightsSectionScrollButton: {
+    position: "fixed",
+    bottom: "50px",
+    border: "2px solid #888",
+    "& > svg": {
+      backgroundColor: "#333",
+      color: "#d9d9d9",
+      borderRadius: "100px",
+      padding: "8px",
+      margin: "-4px",
+    },
+  },
 }
