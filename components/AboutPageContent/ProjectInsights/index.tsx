@@ -143,7 +143,7 @@ const ProjectInsights = () => {
                         backgroundColor: "#999999",
                         margin: "0px 0px 24px 0px",
                       }}
-                    ></Box>
+                    />
                   </div>
                 )
               })}
