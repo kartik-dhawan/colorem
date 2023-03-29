@@ -14,7 +14,7 @@ import useSWR from "swr"
 import { API_URLS } from "../../utils/constants"
 import { logger } from "../../lib/methods"
 import { fetcher } from "../../utils/methods"
-import { Roboto } from "@next/font/google"
+import { Roboto } from "next/font/google"
 import Head from "next/head"
 
 export const getStaticProps = async () => {

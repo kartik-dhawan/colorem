@@ -8,7 +8,7 @@ import {
   ListItemButton,
   Typography,
 } from "@mui/material"
-import { Roboto_Condensed, Anton } from "@next/font/google"
+import { Roboto_Condensed, Anton } from "next/font/google"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useCallback, useId, useState } from "react"
 import { styles } from "./styles"

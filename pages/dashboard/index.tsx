@@ -12,7 +12,7 @@ import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
-import { Roboto } from "@next/font/google"
+import { Roboto } from "next/font/google"
 import Head from "next/head"
 
 // This function gets called at build time on server-side.
