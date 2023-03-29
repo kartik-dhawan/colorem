@@ -1,5 +1,5 @@
 import { Box, IconButton, Stack } from "@mui/material"
-import { Antonio, Roboto_Condensed } from "@next/font/google"
+import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useCallback, useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
@@ -143,7 +143,7 @@ const ProjectInsights = () => {
                         backgroundColor: "#999999",
                         margin: "0px 0px 24px 0px",
                       }}
-                    ></Box>
+                    />
                   </div>
                 )
               })}

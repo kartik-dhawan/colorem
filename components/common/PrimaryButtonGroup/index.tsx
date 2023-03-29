@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from "@mui/material"
-import { Antonio } from "@next/font/google"
+import { Antonio } from "next/font/google"
 import { useId } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { RoleButtonData } from "../../../utils/interfaces"

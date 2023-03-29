@@ -3,9 +3,9 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
-import AboutPageContent from "../../components/AboutPageContent"
 import BehindTheDesk from "../../components/AboutPageContent/BehindTheDesk"
 import ColoremTeam from "../../components/AboutPageContent/ColoremTeam"
+import MoreSection from "../../components/AboutPageContent/MoreSection"
 import ProjectInsights from "../../components/AboutPageContent/ProjectInsights"
 import AboutLayout from "../../components/common/AboutLayout"
 import ErrorFallback, {
@@ -161,13 +161,7 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
         {navItemSelected === "team" && <ColoremTeam />}
         {navItemSelected === "developer" && <BehindTheDesk />}
         {navItemSelected === "project" && <ProjectInsights />}
-        {navItemSelected !== "team" &&
-          navItemSelected !== "developer" &&
-          navItemSelected !== "project" && (
-            <AboutPageContent>
-              <div>Content to be published in contentful.</div>
-            </AboutPageContent>
-          )}
+        {navItemSelected === "more" && <MoreSection />}
       </ErrorBoundary>
     </AboutLayout>
   )

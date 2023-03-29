@@ -2,7 +2,7 @@ import { Grid } from "@mui/material"
 import Link from "next/link"
 import { styles } from "./styles"
 import { externalLinks } from "../../../utils/constants"
-import { Roboto } from "@next/font/google"
+import { Roboto } from "next/font/google"
 
 const roboto = Roboto({ weight: "300", display: "swap", subsets: ["latin"] })
 

@@ -9,7 +9,7 @@ import { styles } from "../styles/common/customErrorPage"
 import Link from "next/link"
 import WestIcon from "@mui/icons-material/West"
 import Head from "next/head"
-import { Roboto } from "@next/font/google"
+import { Roboto } from "next/font/google"
 
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line

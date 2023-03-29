@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { SideNavItemsType } from "../../utils/interfaces"
 import { styles } from "./styles/styles"
-import { Roboto_Condensed, Anton } from "@next/font/google"
+import { Roboto_Condensed, Anton } from "next/font/google"
 // EJS syntax for importing not working with framer motion in react so used CJS
 const { motion } = require("framer-motion") // eslint-disable-line
 
