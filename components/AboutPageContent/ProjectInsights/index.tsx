@@ -32,7 +32,7 @@ const ProjectInsights = () => {
   let scrollLength: number | undefined
 
   const [scrollPosition, setScrollPosition] = useState<"top" | "bottom">("top")
-  const [sectionTop, setSectionTop] = useState<number | undefined>()
+  const [sectionTop, setSectionTop] = useState<number | undefined>() // eslint-disable-line
   const [selectedArena, setSelectedArena] = useState<string>("management")
 
   const insightsSectionContent = useSelector(
@@ -72,8 +72,6 @@ const ProjectInsights = () => {
       behavior: "smooth",
     })
   }, [scrollPosition])
-
-  console.log(scrollPosition, sectionTop)
 
   return (
     <AboutPageContent>

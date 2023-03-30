@@ -78,6 +78,8 @@ export const styles = {
     "&:hover": {
       color: "#999999",
     },
+    backgroundClip: "text",
+    textFillColor: "transparent",
   },
   aboutSideNavButtonGroup: {
     margin: {
