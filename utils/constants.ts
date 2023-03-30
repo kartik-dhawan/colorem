@@ -72,7 +72,24 @@ export const popupAlertTitles = {
 }
 
 export const aboutSectionColorScheme = {
-  navItemContentColors: ["#D7D79A", "#C7F2E3", "#BFD1E1", "#DECDD8"],
+  navItemContentColors: [
+    {
+      route: "project",
+      color: "#F3F3E8",
+    },
+    {
+      route: "developer",
+      color: "#D3E1E6",
+    },
+    {
+      route: "team",
+      color: "#D3E1E6",
+    },
+    {
+      route: "more",
+      color: "#FAF4F5",
+    },
+  ],
   navItemColors: [
     ["#666600", "#999966"],
     ["#136a8a", "#267871"],

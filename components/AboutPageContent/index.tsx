@@ -1,6 +1,9 @@
 import { Box } from "@mui/material"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { RootType } from "../../redux/constants/stateTypes"
+import { aboutSectionColorScheme } from "../../utils/constants"
 import { ChildrenType } from "../../utils/interfaces"
 
 const AboutPageContent = ({ children }: ChildrenType) => {
@@ -9,7 +12,14 @@ const AboutPageContent = ({ children }: ChildrenType) => {
     after: { x: 0 },
   })
 
+  const [backgroundColor, setBackgroundColor] = useState<string>("#c4c4c4")
+
+  const selectedNavItem = useSelector(
+    (state: RootType) => state.contentSlice.currentAboutContent
+  )?.route
+
   const innerWidth = typeof window !== "undefined" && window.innerWidth
+
   useEffect(() => {
     if (innerWidth >= 1200) {
       setVariant({
@@ -18,6 +28,15 @@ const AboutPageContent = ({ children }: ChildrenType) => {
       })
     }
   }, [innerWidth])
+
+  // sets a background color according to the color of the selected navitem
+  useEffect(() => {
+    aboutSectionColorScheme.navItemContentColors.forEach((color) => {
+      if (color.route === selectedNavItem) {
+        setBackgroundColor(color.color)
+      }
+    })
+  }, [selectedNavItem])
 
   return (
     <Box
@@ -37,7 +56,10 @@ const AboutPageContent = ({ children }: ChildrenType) => {
       >
         <Box
           sx={{
-            backgroundColor: "#c4c4c4",
+            backgroundColor: {
+              xs: "#c4c4c4",
+              lg: backgroundColor,
+            },
             height: "max-content",
             minHeight: { lg: "100vh" },
             padding: {
