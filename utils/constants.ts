@@ -70,3 +70,13 @@ export const ColorNumberOptionsConstants = [2, 3, 4, 5]
 export const popupAlertTitles = {
   COPIED: "Copied",
 }
+
+export const aboutSectionColorScheme = {
+  navItemContentColors: ["#D7D79A", "#C7F2E3", "#BFD1E1", "#DECDD8"],
+  navItemColors: [
+    ["#666600", "#999966"],
+    ["#136a8a", "#267871"],
+    ["#004680", "#4484BA"],
+    ["#964676", "#5f2081"],
+  ],
+}

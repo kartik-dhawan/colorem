@@ -18,6 +18,7 @@ import { AboutNavItem, AnimationVariant } from "../../utils/interfaces"
 import Link from "next/link"
 import SideNav from "../SideNav"
 import { useRouter } from "next/router"
+import { aboutSectionColorScheme } from "../../utils/constants"
 // EJS syntax for importing not working with framer motion in react so used CJS
 const { motion } = require("framer-motion") // eslint-disable-line
 
@@ -36,6 +37,8 @@ const AboutPageNav = () => {
 
   let variant: AnimationVariant
   let buttonVariant: AnimationVariant
+
+  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
 
   if (router.asPath === "/about") {
     variant = {
@@ -61,7 +64,9 @@ const AboutPageNav = () => {
     (state: RootType) => state.contentSlice
   )
 
-  const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
+  const selectedNavItem = useSelector(
+    (state: RootType) => state.contentSlice.currentAboutContent
+  )?.route
 
   const homeButtonHandler = useCallback(() => {
     router.push("/dashboard")
@@ -105,7 +110,7 @@ const AboutPageNav = () => {
         }}
       >
         <motion.div transition={{ delay: 0.5 }}>
-          {aboutPageNavItems?.map((item: AboutNavItem) => {
+          {aboutPageNavItems?.map((item: AboutNavItem, i: number) => {
             return (
               <motion.div
                 initial={variant.before}
@@ -125,7 +130,15 @@ const AboutPageNav = () => {
                     <ListItem
                       className={aid + "ListItem " + anton.className}
                       id={aid + "ListItem" + id}
-                      sx={styles.aboutSideNavListItem}
+                      sx={{
+                        ...styles.aboutSideNavListItem,
+                        backgroundImage:
+                          selectedNavItem === item.route
+                            ? `linear-gradient(90deg, ${aboutSectionColorScheme.navItemColors[
+                                i
+                              ].map((color: string) => `${color} `)})`
+                            : "linear-gradient(90deg, #c4c4c4, #c4c4c4)",
+                      }}
                     >
                       {item.title}
                     </ListItem>
