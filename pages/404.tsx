@@ -58,10 +58,10 @@ const Custom404 = ({ content }: ContentfulType) => {
           <Box sx={styles.customErrorPageCatIcon}>
             <Image
               src="/images/catIcon.png"
-              alt={"Cat Icon"}
+              alt="Cat Icon"
               width={80}
               height={80}
-              color={"white"}
+              color="white"
             ></Image>
           </Box>
           4
