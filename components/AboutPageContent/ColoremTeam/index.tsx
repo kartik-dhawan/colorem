@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Divider } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -77,12 +77,21 @@ const ColoremTeam = () => {
         >
           {teamSectionContent?.title}
         </Box>
-        {/* common button group component */}
-        <PrimaryButtonGroup
-          buttonArray={teamRoles}
-          setSelectedButton={setSelectedRole}
-          selectedButton={selectedRole}
-        />
+        <Box sx={styles.teamSectionButtonGroupWrapper}>
+          <Box
+            sx={styles.teamSectionPersonName}
+            className={tid + "PersonName " + roboto.className}
+          >
+            {selectedRole !== "agileLead" && "Also"} Kartik Dhawan
+          </Box>
+          <Divider sx={styles.teamSectionNameDivider} />
+          {/* common button group component */}
+          <PrimaryButtonGroup
+            buttonArray={teamRoles}
+            setSelectedButton={setSelectedRole}
+            selectedButton={selectedRole}
+          />
+        </Box>
         <Box
           className={tid + "RoleFunFact " + roboto.className}
           id={tid + "RoleFunFact"}
