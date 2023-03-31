@@ -46,8 +46,7 @@ export const styles = {
       md: "20px",
       lg: "16px",
     },
-    maxHeight: { lg: "40rem" },
-    overflow: "scroll",
+    overflowY: "scroll",
   },
   developerSectionSkillset: {
     fontSize: "24px",

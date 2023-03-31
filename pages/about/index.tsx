@@ -1,5 +1,6 @@
 import { Box } from "@mui/material"
 import Head from "next/head"
+import Image from "next/image"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useDispatch } from "react-redux"
@@ -98,8 +99,29 @@ const AboutPage = ({ navItems, contentData }: ContentfulType) => {
               md: 0,
               lg: 1,
             },
+            position: {
+              md: "absolute",
+              lg: "relative",
+            },
+            right: {
+              md: "75px",
+              lg: "0px",
+            },
+            top: "300px",
+            display: {
+              xs: "none",
+              md: "flex",
+            },
           }}
-        ></Box>
+        >
+          <Image
+            src="/images/aboutIllustration2.svg"
+            alt="Illustration"
+            width={400}
+            height={400}
+            priority
+          />
+        </Box>
       </ErrorBoundary>
     </AboutLayout>
   )

@@ -1,5 +1,5 @@
 import { Box, Button, Divider } from "@mui/material"
-import { Antonio, Roboto_Condensed } from "@next/font/google"
+import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useSelector } from "react-redux"
@@ -57,7 +57,7 @@ const BehindTheDesk = () => {
         <Box
           className={did + "Body " + roboto.className}
           id={did + "Body"}
-          sx={styles.developerSectionBody}
+          sx={commonStyles.aboutSubSectionBody}
         >
           {developerSectionContent?.body}
         </Box>

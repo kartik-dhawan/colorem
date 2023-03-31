@@ -10,7 +10,7 @@ import SideNav from "../SideNav"
 import { IconButton, Typography } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { iconStyles } from "../PaletteSection/styles/styles"
-import { Roboto } from "@next/font/google"
+import { Roboto } from "next/font/google"
 
 const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 

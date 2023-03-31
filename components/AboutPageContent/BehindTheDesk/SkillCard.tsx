@@ -2,7 +2,7 @@ import { Box, Divider, LinearProgress, Stack } from "@mui/material"
 import { useId } from "react"
 import { SkillType } from "../../../utils/interfaces"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
-import { Roboto_Condensed } from "@next/font/google"
+import { Roboto_Condensed } from "next/font/google"
 import { styles } from "../styles/behindTheDesk"
 import { monthsToYears } from "../../../utils/methods"
 

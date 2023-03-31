@@ -1,4 +1,4 @@
-import { Yellowtail } from "@next/font/google"
+import { Yellowtail } from "next/font/google"
 import Head from "next/head"
 import Link from "next/link"
 import { useEffect } from "react"
