@@ -1,19 +1,37 @@
-import { Button, Grid } from "@mui/material"
+import { Button, Grid, IconButton } from "@mui/material"
 import { useState } from "react"
 import { ContentfulType } from "../../../utils/interfaces"
 import { styles } from "./styles"
 import SideNav from "../../SideNav"
+import { Antonio } from "next/font/google"
+import DarkModeIcon from "@mui/icons-material/DarkMode"
+import LightModeIcon from "@mui/icons-material/LightMode"
+
+const antonio = Antonio({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 const SubNav = ({ content }: ContentfulType) => {
   const snid = "subNav"
   const [sideNavToggle, setSideNavToggle] = useState<boolean>(false)
+  const [themeToggle, setThemeToggle] = useState<boolean>(false)
+
+  const themeToggler = () => {
+    setThemeToggle(!themeToggle)
+  }
 
   return (
     <Grid
       container
       sx={{
         ...styles.nav,
-        margin: "18px 0px",
+        flexDirection: {
+          xs: "column",
+          sm: "row",
+        },
+        margin: "18px 0px 27px",
       }}
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
@@ -26,8 +44,8 @@ const SubNav = ({ content }: ContentfulType) => {
       <Grid
         item
         xs={6}
-        sm={4}
-        className={snid + "Title"}
+        sm={6}
+        className={snid + "Title " + antonio.className}
         id={snid + "Title"}
         sx={styles.subNavTitle}
       >
@@ -36,15 +54,27 @@ const SubNav = ({ content }: ContentfulType) => {
       <Grid
         item
         xs={6}
-        sm={4}
+        sm={2}
         textAlign={"right"}
-        sx={{ color: "#ebe1e1" }} // text_third
         className={snid + "ChooseTheme"}
         id={snid + "ChooseTheme"}
+        sx={styles.subNavThemeIcon}
       >
-        Theme
+        <IconButton onClick={themeToggler}>
+          {themeToggle ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
       </Grid>
-      <Grid item xs={0} sm={4} textAlign={"right"}>
+      <Grid
+        item
+        xs={0}
+        sm={4}
+        sx={{
+          textAlign: {
+            xs: "left",
+            sm: "right",
+          },
+        }}
+      >
         <Button
           variant="contained"
           className={snid + "GetStartBtn"}

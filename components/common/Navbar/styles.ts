@@ -20,26 +20,46 @@ export const styles = {
   },
   navbarItems: {
     fontSize: {
-      xs: "20px",
-      md: "18px",
-      xl: "22px",
+      xs: "18px",
+      md: "16px",
+      xl: "20px",
     },
   },
   // subnav title
   subNavTitle: {
     fontSize: {
-      xs: "31px",
-      md: "35px",
-      lg: "37px",
-      xl: "41px",
+      xs: "40px",
+      sm: "36px",
+      md: "40px",
+      lg: "56px",
+      xl: "56px",
     },
-    fontWeight: 400,
-    color: "#D9D9D9", // text_primary
+    fontWeight: 700,
+    color: "#ced1d2", // text_primary
+    background: "linear-gradient(54deg, #c4c4c4 14%, #616161)",
+    textFillColor: "transparent",
+    backgroundClip: "text",
     paddingRight: {
-      md: "100px",
+      xs: "0px",
+      md: "50px",
+      lg: "100px",
+      xl: "250px",
+    },
+    maxWidth: {
+      xs: "85%",
+      sm: "65%",
     },
   },
   // subnav button
+  subNavThemeIcon: {
+    display: {
+      xs: "none",
+      sm: "block",
+      "& > button": {
+        color: "#ebe1e1",
+      },
+    },
+  },
   subNavButton: {
     backgroundColor: "#D9D9D9", // background_secondary
     color: "#111", // $text_secondary: #111;
