@@ -1,9 +1,16 @@
 import { Grid, Typography } from "@mui/material"
 import { Box } from "@mui/system"
+import { Antonio } from "next/font/google"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { EssentialItemsType } from "../../utils/interfaces"
 import { styles } from "./styles"
+
+const antonio = Antonio({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 const Essentials = () => {
   const eid = "essentialsSection"
@@ -15,14 +22,13 @@ const Essentials = () => {
       id={eid + "Wrapper"}
       sx={styles.essentialsSectionWrapper}
     >
-      <Typography
-        variant="h2"
-        className={eid + "Title"}
+      <Box
+        className={eid + "Title " + antonio.className}
         id={eid + "Title"}
         sx={styles.essentialsSectionTitle}
       >
         The Essentials
-      </Typography>
+      </Box>
       <Grid container className={eid + "Body"} id={eid + "Body"}>
         {content.essentialItemsText?.map((item: EssentialItemsType) => {
           return (

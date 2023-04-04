@@ -1,9 +1,9 @@
 export const styles = {
   nav: {
+    fontFamily: "Roboto Condensed !important",
     padding: {
-      xs: "7px 4px",
-      sm: "10px 4px",
-      md: "12px 4px",
+      xs: "8px 4px",
+      md: "10px 4px",
       xl: "15px 4px",
     },
     textTransform: "uppercase",
@@ -20,7 +20,7 @@ export const styles = {
   },
   navbarItems: {
     fontSize: {
-      xs: "18px",
+      xs: "15px",
       md: "16px",
       xl: "20px",
     },
@@ -76,9 +76,9 @@ export const styles = {
       xl: "22px",
     },
     padding: {
-      xs: "7px 15px",
+      xs: "7px 18px",
       md: "10px 23px",
-      xl: "13px 30px",
+      xl: "13px 32px",
     },
     marginTop: {
       xs: "20px",

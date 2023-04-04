@@ -17,7 +17,7 @@ export const styles = {
     color: "#111",
     padding: {
       xs: "1rem 1.5rem",
-      lg: "2rem 1rem",
+      lg: "1.5rem 1rem 1rem",
     },
     fontSize: {
       xs: "40px",

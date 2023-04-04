@@ -84,7 +84,7 @@ const SubNav = ({ content }: ContentfulType) => {
             setSideNavToggle(!sideNavToggle)
           }}
         >
-          Get Started
+          Start looking
         </Button>
       </Grid>
     </Grid>
