@@ -15,16 +15,46 @@ import { styles as SubMenuStyles } from "../../../PaletteSection/styles/styles"
 import { styles } from "../../styles/gradientFilterStyles"
 import ColorOptions from "./ColorOptions"
 import NumberOptions from "./NumberOptions"
+import { useDispatch } from "react-redux"
+import {
+  toggleSelectedColor,
+  toggleSelectedColorsNumber,
+} from "../../../../redux/slices/toggleSlice"
+import {
+  ColorNumberOptionsConstants,
+  ColorOptionConstants,
+} from "../../../../utils/constants"
+import { ColorListType } from "../../../../utils/interfaces"
 
 const GradientFilter = () => {
   const gid = "gradientFilter"
+  const dispatch = useDispatch()
 
   const [filterType, setFilterType] = useState<string>("")
+  const [colorOptionsList, setColorOptionsList] =
+    useState<ColorListType[]>(ColorOptionConstants)
+  const [isColorSelected, setIsColorSelected] = useState<boolean>(false)
+  const [colorNumbersList, setColorNumbersList] = useState<number[]>(
+    ColorNumberOptionsConstants
+  )
+  const [isNumberSelected, setIsNumberSelected] = useState<boolean>(false)
 
   // for toggling submenu
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+
+  const handleCloseFilter = () => {
+    setFilterType("")
+    setColorOptionsList(ColorOptionConstants)
+    setIsColorSelected(false)
+    dispatch(toggleSelectedColor(""))
+    setColorNumbersList(ColorNumberOptionsConstants)
+    setIsNumberSelected(false)
+    dispatch(toggleSelectedColorsNumber(null))
+  }
+
   const handleSubMenuIconClick = (event: React.MouseEvent<HTMLElement>) => {
+    handleCloseFilter()
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
@@ -69,9 +99,7 @@ const GradientFilter = () => {
             </Typography>
             {/* cross button to clear the filter */}
             <IconButton
-              onClick={() => {
-                setFilterType("")
-              }}
+              onClick={handleCloseFilter}
               sx={styles.gradientFilterClearTypeBtn}
               className={gid + "ClearTypeBtn"}
             >
@@ -128,8 +156,22 @@ const GradientFilter = () => {
           },
         }}
       >
-        {filterType === "Color" && <ColorOptions />}
-        {filterType === "Number" && <NumberOptions />}
+        {filterType === "Color" && (
+          <ColorOptions
+            setIsColorSelected={setIsColorSelected}
+            isColorSelected={isColorSelected}
+            setColorOptionsList={setColorOptionsList}
+            colorOptionsList={colorOptionsList}
+          />
+        )}
+        {filterType === "Number" && (
+          <NumberOptions
+            setColorNumbersList={setColorNumbersList}
+            colorNumbersList={colorNumbersList}
+            isNumberSelected={isNumberSelected}
+            setIsNumberSelected={setIsNumberSelected}
+          />
+        )}
       </Box>
     </Box>
   )

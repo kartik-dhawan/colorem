@@ -48,7 +48,7 @@ const GradientSection = () => {
             id={gid + "TabList"}
           >
             <Tab
-              label="Gradients"
+              label="Library"
               value="1"
               sx={styles.gradientSectionTabs}
               disableRipple

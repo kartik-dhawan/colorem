@@ -1,17 +1,23 @@
 import { Box, Button, Typography } from "@mui/material"
-import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { toggleSelectedColorsNumber } from "../../../../redux/slices/toggleSlice"
 import { ColorNumberOptionsConstants } from "../../../../utils/constants"
 import { styles as ColorOptionStyles } from "../../styles/gradientFilterStyles"
 
-const NumberOptions = () => {
-  const dispatch = useDispatch()
+interface NumberOptionsProps {
+  setColorNumbersList: (param: number[]) => void // eslint-disable-line
+  colorNumbersList: number[]
+  setIsNumberSelected: (param: boolean) => void // eslint-disable-line
+  isNumberSelected: boolean
+}
 
-  const [colorNumbersList, setColorNumbersList] = useState<number[]>(
-    ColorNumberOptionsConstants
-  )
-  const [isNumberSelected, setIsNumberSelected] = useState<boolean>(false)
+const NumberOptions = ({
+  setColorNumbersList,
+  colorNumbersList,
+  setIsNumberSelected,
+  isNumberSelected,
+}: NumberOptionsProps) => {
+  const dispatch = useDispatch()
 
   // sets the active selected colorNumberList & stores the selected color number it in redux store
   const selectColorNumberHandler = (colorNumber: number) => {

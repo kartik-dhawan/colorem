@@ -1,14 +1,15 @@
 import { Grid, Typography } from "@mui/material"
 import { Box } from "@mui/system"
-import { Antonio } from "next/font/google"
+import { Roboto_Condensed } from "next/font/google"
 import { useSelector } from "react-redux"
 import { RootType } from "../../redux/constants/stateTypes"
 import { EssentialItemsType } from "../../utils/interfaces"
 import { styles } from "./styles"
 
-const antonio = Antonio({
+const roboto = Roboto_Condensed({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 })
 
@@ -23,7 +24,7 @@ const Essentials = () => {
       sx={styles.essentialsSectionWrapper}
     >
       <Box
-        className={eid + "Title " + antonio.className}
+        className={eid + "Title " + roboto.className}
         id={eid + "Title"}
         sx={styles.essentialsSectionTitle}
       >
