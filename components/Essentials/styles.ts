@@ -17,7 +17,7 @@ export const styles = {
     color: "#111",
     padding: {
       xs: "1rem 1.5rem",
-      lg: "2rem 1rem",
+      lg: "1.5rem 1rem 1rem",
     },
     fontSize: {
       xs: "40px",
@@ -25,8 +25,7 @@ export const styles = {
       lg: "60px",
     },
     fontWeight: 400,
-    fontFamily: "Nunito Sans",
-    letterSpacing: "0.4px",
+    fontFamily: "Roboto condensed",
   },
   essentialsSectionBodyItem: {
     display: "flex",
@@ -37,6 +36,7 @@ export const styles = {
     },
   },
   essentialsItemTitle: {
+    fontFamily: "Roboto Condensed !important",
     fontWeight: {
       xs: 400,
       sm: 500,

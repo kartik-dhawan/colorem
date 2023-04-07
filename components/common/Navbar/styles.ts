@@ -1,9 +1,9 @@
 export const styles = {
   nav: {
+    fontFamily: "Roboto Condensed !important",
     padding: {
-      xs: "7px 4px",
-      sm: "10px 4px",
-      md: "12px 4px",
+      xs: "8px 4px",
+      md: "10px 4px",
       xl: "15px 4px",
     },
     textTransform: "uppercase",
@@ -20,26 +20,46 @@ export const styles = {
   },
   navbarItems: {
     fontSize: {
-      xs: "20px",
-      md: "18px",
-      xl: "22px",
+      xs: "15px",
+      md: "16px",
+      xl: "20px",
     },
   },
   // subnav title
   subNavTitle: {
     fontSize: {
-      xs: "31px",
-      md: "35px",
-      lg: "37px",
-      xl: "41px",
+      xs: "40px",
+      sm: "36px",
+      md: "40px",
+      lg: "56px",
+      xl: "56px",
     },
-    fontWeight: 400,
-    color: "#D9D9D9", // text_primary
+    fontWeight: 700,
+    color: "#ced1d2", // text_primary
+    background: "linear-gradient(54deg, #c4c4c4 14%, #616161)",
+    textFillColor: "transparent",
+    backgroundClip: "text",
     paddingRight: {
-      md: "100px",
+      xs: "0px",
+      md: "50px",
+      lg: "100px",
+      xl: "250px",
+    },
+    maxWidth: {
+      xs: "85%",
+      sm: "65%",
     },
   },
   // subnav button
+  subNavThemeIcon: {
+    display: {
+      xs: "none",
+      sm: "block",
+      "& > button": {
+        color: "#ebe1e1",
+      },
+    },
+  },
   subNavButton: {
     backgroundColor: "#D9D9D9", // background_secondary
     color: "#111", // $text_secondary: #111;
@@ -56,9 +76,9 @@ export const styles = {
       xl: "22px",
     },
     padding: {
-      xs: "7px 15px",
+      xs: "7px 18px",
       md: "10px 23px",
-      xl: "13px 30px",
+      xl: "13px 32px",
     },
     marginTop: {
       xs: "20px",
