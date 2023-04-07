@@ -6,7 +6,9 @@ export const styles = {
       md: "30px 0px 30px 30px",
     },
     marginRight: "1.5rem",
-    background: "linear-gradient(180deg, #19c7a2 0%, #51d9bc 90%)", // green - green_color_1, green_color_2
+    background: "linear-gradient(180deg, #19c7a20d 0%, #51bdd938 90%)", // green - green_color_1, green_color_2
+    boxShadow: "0 2px 56px -18px #8787875c",
+    backdropFilter: "blur( 4px )",
     height: {
       xs: "335px",
       sm: "350px",
@@ -27,6 +29,8 @@ export const styles = {
       lg: "500px",
     },
     height: "max-content",
-    background: "linear-gradient(180deg, #fdc449 0%, #ddbc6f 80%)", // yellow - yellow_color_1, yellow_color_2
+    border: "1px solid #fff3",
+    boxShadow: "0 2px 56px -18px #8787875c",
+    backdropFilter: "blur( 4px )",
   },
 }
