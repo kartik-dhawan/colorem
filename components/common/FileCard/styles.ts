@@ -7,7 +7,7 @@ export const styles = {
     },
     marginRight: "1.5rem",
     background: "linear-gradient(180deg, #19c7a20d 0%, #51bdd938 90%)", // green - green_color_1, green_color_2
-    boxShadow: "0 2px 56px -18px #8787875c",
+    boxShadow: "0 2px 40px -18px #8787875c",
     backdropFilter: "blur( 4px )",
     height: {
       xs: "335px",
@@ -30,7 +30,7 @@ export const styles = {
     },
     height: "max-content",
     border: "1px solid #fff3",
-    boxShadow: "0 2px 56px -18px #8787875c",
+    boxShadow: "0 2px 32px -18px #8787875c",
     backdropFilter: "blur( 4px )",
   },
 }

@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material"
 import { styles } from "./styles"
 import BrowseCard from "./BrowseCard"
+import React from "react"
+import PalettesPreviewCard from "./PalettesPreviewCard"
 
 interface FileCardType {
   type: string
@@ -32,7 +34,8 @@ const FileCard = ({ type, fid, fr }: FileCardType) => {
         }
       >
         {/* conditionally rendered card content */}
-        {type === "right" ? <BrowseCard fid={fid} /> : ""}
+        {type === "right" && <BrowseCard fid={fid} />}
+        {type === "left" && <PalettesPreviewCard fid={fid} />}
       </Grid>
     </Grid>
   )

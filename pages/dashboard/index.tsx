@@ -4,7 +4,7 @@ import FileSection from "../../components/FileSection"
 import Essentials from "../../components/Essentials"
 import FeedbackAndTeam from "../../components/FeedbackAndTeam"
 import { client } from "../../utils/contentful/config"
-import { ContentfulType } from "../../utils/interfaces"
+import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateContent } from "../../redux/slices/contentSlice"
@@ -14,6 +14,11 @@ import ErrorFallback, {
 } from "../../components/common/ErrorFallback"
 import { Roboto } from "next/font/google"
 import Head from "next/head"
+import useSWR from "swr"
+import { API_URLS } from "../../utils/constants"
+import { fetcher } from "../../utils/methods"
+import { updatePalettes } from "../../redux/slices/paletteSlice"
+import { logger } from "../../lib/methods"
 
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
@@ -23,7 +28,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      data: response?.items[0]?.fields,
+      contentData: response?.items[0]?.fields,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -34,12 +39,30 @@ export const getStaticProps = async () => {
 
 const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 
-const Dashboard = ({ data }: ContentfulType) => {
+const Dashboard = ({ contentData }: ContentfulType) => {
   const dispatch = useDispatch()
 
+  // using SWR for data fetching because when we use useEffect(), after react 18
+  // it calls the function twice.
+  // while using useSWR() it only gets called once, and even when we try to
+  // call it again in any of the subcomponent it uses the response of its previous call
+  const { data, error } = useSWR<PaletteDataType[]>(
+    API_URLS.GET_ALL_PALETTES,
+    fetcher
+  )
+
   useEffect(() => {
-    dispatch(updateContent(data))
-  }, [data])
+    // if we get data on axios call, store it in redux
+    dispatch(updatePalettes(data ? data : []))
+
+    // handle the error here, set it in redux and display a generic error page.
+    if (error) {
+      // we need to create an error page for error condition
+      logger({ error, type: "error" })
+    }
+
+    dispatch(updateContent(contentData))
+  }, [data, contentData])
 
   const title = "Colorem"
   const description = "Permutations with colors & more."
@@ -61,7 +84,7 @@ const Dashboard = ({ data }: ContentfulType) => {
         <meta property="og:description" content={description} />
         <meta
           property="og:image"
-          content={"https:" + data.defaultMetaImage?.fields.file.url}
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
         />
         <meta property="og:site_name" content="colorem.vercel.app" />
         {/* Twitter */}
@@ -70,11 +93,11 @@ const Dashboard = ({ data }: ContentfulType) => {
         <meta name="twitter:description" content={description} />
         <meta
           name="twitter:image"
-          content={"https:" + data.defaultMetaImage?.fields.file.url}
+          content={"https:" + contentData.defaultMetaImage?.fields.file.url}
         />
       </Head>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-        <SubNav content={data} />
+        <SubNav content={contentData} />
         <FileSection />
         <FeedbackAndTeam />
         <Essentials />
