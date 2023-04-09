@@ -35,25 +35,34 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
             variant="rectangular"
             height={56}
             width={"100%"}
-            sx={{ bgcolor: "grey.800", borderRadius: "8px" }}
-          />
-          <Skeleton
-            variant="rectangular"
-            height={56}
-            width={"100%"}
             sx={styles.fileSectionSkeleton}
           />
           <Skeleton
             variant="rectangular"
             height={56}
             width={"100%"}
-            sx={styles.fileSectionSkeleton}
+            sx={{
+              ...styles.fileSectionSkeleton,
+              animationDelay: "150ms",
+            }}
           />
           <Skeleton
             variant="rectangular"
             height={56}
             width={"100%"}
-            sx={styles.fileSectionSkeleton}
+            sx={{
+              ...styles.fileSectionSkeleton,
+              animationDelay: "450ms",
+            }}
+          />
+          <Skeleton
+            variant="rectangular"
+            height={56}
+            width={"100%"}
+            sx={{
+              ...styles.fileSectionSkeleton,
+              animationDelay: "300ms",
+            }}
           />
         </Container>
       ) : (

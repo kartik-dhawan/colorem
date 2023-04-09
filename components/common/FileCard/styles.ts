@@ -112,6 +112,5 @@ export const styles = {
   fileSectionSkeleton: {
     bgcolor: "grey.800",
     borderRadius: "8px",
-    animationDelay: "3000ms",
   },
 }
