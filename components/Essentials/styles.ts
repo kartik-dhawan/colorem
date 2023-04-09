@@ -5,6 +5,10 @@ export const styles = {
       sm: "3rem 0rem",
     },
     backgroundColor: "#d9d6c9",
+    background: {
+      xs: "linear-gradient(10deg, #efefbb9c, #cdddd4fa)",
+      md: "linear-gradient(76deg, #efefbb9c, #cdddd4fa)",
+    },
     color: "#3b4850",
     padding: {
       xs: "1rem 0rem",

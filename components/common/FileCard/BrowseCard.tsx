@@ -31,7 +31,7 @@ const BrowseCard = ({ fid }: BrowseCardProps) => {
         />
       </div>
       <Link href="/palettes" className={fid + "ArrowIconWrapper"}>
-        <div className={fid + "Browse"}>Browse more</div>
+        <div className={fid + "Browse"}>Browse</div>
         <EastIcon className={fid + "ArrowIcon"} />
       </Link>
     </div>
