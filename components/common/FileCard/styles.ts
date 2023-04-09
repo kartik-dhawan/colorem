@@ -109,5 +109,9 @@ export const styles = {
       color: "#959595",
     },
   },
-  // fileSection
+  fileSectionSkeleton: {
+    bgcolor: "grey.800",
+    borderRadius: "8px",
+    animationDelay: "3000ms",
+  },
 }
