@@ -1,6 +1,11 @@
 import { API_URLS } from "../../../utils/constants"
 import { PaletteDataType } from "../../../utils/interfaces"
-import { fetcher, getShuffledArray } from "../../../utils/methods"
+import {
+  LightenDarkenColor,
+  fetcher,
+  getShuffledArray,
+  lightOrDark,
+} from "../../../utils/methods"
 import useSWR from "swr"
 import { Box, Container, Typography } from "@mui/material"
 import Link from "next/link"
@@ -33,8 +38,12 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
             height: "100%",
             flexDirection: "column",
             justifyContent: "space-around",
-            padding: "2rem 0px",
+            padding: "2rem 1.5rem",
             position: "relative",
+            gap: {
+              xs: "16px",
+              sm: "8px",
+            },
           }}
         >
           {getShuffledArray(data, 4)?.map((palette: PaletteDataType) => {
@@ -50,7 +59,12 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
                   id={id + fid + "PreviewPaletteColorsWrapper"}
                   sx={{
                     display: "flex",
-                    height: "56px",
+                    height: {
+                      xs: "48px",
+                      sm: "64px",
+                      md: "48px",
+                      lg: "52px",
+                    },
                   }}
                 >
                   {palette.hex.map((hex: string) => {
@@ -60,12 +74,50 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
                         className={fid + "PreviewPaletteColor"}
                         id={id + fid + "PreviewPaletteColor"}
                         sx={{
-                          backgroundColor: `#${hex}`,
+                          backgroundColor: `#${
+                            lightOrDark(hex) === "light"
+                              ? LightenDarkenColor(hex, -30)
+                              : hex
+                          }`,
                           height: "100%",
                           flexGrow: 1,
-                          transition: "200ms all ease",
+                          transition: "500ms all ease",
+                          "&:first-child": {
+                            borderRadius: "8px 0px 0px 8px",
+                          },
+                          "&:last-child": {
+                            borderRadius: "0px 8px 8px 0px",
+                          },
                           "&:hover": {
-                            flexGrow: 3,
+                            flexGrow: {
+                              xs: 2,
+                              sm: 4,
+                              md: 3,
+                              lg: 20,
+                            },
+                          },
+                          "&::after": {
+                            content: {
+                              xs: `"#${hex}"`, // eslint-disable-line
+                              md: `""`, // eslint-disable-line
+                              lg: `"#${hex}"`, // eslint-disable-line
+                            },
+                            height: "100%",
+                            display: "flex",
+                            opacity: 0,
+                            fontWeight: 300,
+                            fontSize: {
+                              xs: "10px",
+                              lg: "12px",
+                            },
+                            color: `#${
+                              lightOrDark(hex) === "dark" ? "c4c4c4" : "333"
+                            }`,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          },
+                          "&:hover::after": {
+                            opacity: 1,
                           },
                         }}
                       ></Box>
@@ -76,6 +128,11 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
                   className={fid + "PreviewPaletteName"}
                   id={id + fid + "PreviewPaletteName"}
                   variant="body1"
+                  sx={{
+                    textTransform: "capitalize",
+                    fontWeight: 300,
+                    paddingTop: "4px",
+                  }}
                 >
                   {palette.name}
                 </Typography>
@@ -86,10 +143,17 @@ const PalettesPreviewCard = ({ fid }: PalettesPreviewProps) => {
             <Typography
               sx={{
                 position: "absolute",
-                right: 0,
-                bottom: 0,
+                right: "24px",
+                bottom: "16px",
                 color: "#d9d9d9",
-                borderBottom: "1px solid #c4c4c4",
+                borderBottom: "0.5px solid #c4c4c4",
+                fontFamily: "Roboto condensed",
+                fontWeight: 300,
+                letterSpacing: "0.5px",
+                transition: "150ms all ease",
+                "&:hover": {
+                  color: "#959595",
+                },
               }}
             >
               View more

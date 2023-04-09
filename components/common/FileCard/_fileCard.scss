@@ -29,7 +29,6 @@
           color: #cdcdcd;
           margin: 20px;
           font-size: 40px;
-          cursor: pointer;
           @include mobileAndTablet {
             font-size: 32px;
           }
@@ -94,50 +93,44 @@
           }
         }
       }
+
       .fileSectionArrowIconWrapper {
-        border: 1px solid #cdcdcdd2;
         display: flex;
-        justify-content: space-between;
-        margin: 20px 20px;
-        padding: 10px;
+        color: #cdcdcd;
+        gap: 20px;
+        padding: 8px;
+        border: 0.5px solid #cdcdcd;
         border-radius: 1000px;
-        cursor: pointer;
-        z-index: 10;
-        color: $text_primary;
+        margin: 20px;
         text-decoration: none;
+        z-index: 10;
         @include tablets {
-          padding: 7px;
-        }
-        @include tablets-up {
-          width: 25%;
+          gap: 16px;
         }
         .fileSectionBrowse {
-          text-align: left;
-          align-self: center;
-          margin: 0 6%;
+          display: flex;
+          align-items: center;
+          margin-left: 16px;
           font-size: 20px;
-          color: #cdcdcd;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          font-weight: 400;
-          &:any-link {
-            text-decoration: none;
-          }
+          font-weight: 300;
           @include mobiles {
             display: none;
           }
           @include mobiles-sm {
             display: none;
           }
+          @include tablets {
+            margin-left: 10px;
+            font-size: 16px;
+          }
         }
         .fileSectionArrowIcon {
-          background-color: #d7d7d7bd;
+          background-color: #d7d7d792;
           color: #20363d;
-          padding: 12px;
+          padding: 10px;
           border-radius: 1000px;
           @include tablets {
-            padding: 6px;
+            padding: 5px;
           }
         }
       }
