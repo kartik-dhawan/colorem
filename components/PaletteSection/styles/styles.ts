@@ -210,6 +210,9 @@ export const iconStyles = {
   optionsSaveIcon: {
     "&:hover::after": { sm: getTooltipStylesHoverAfter("Bookmark") },
     "&:hover::before": { sm: getTooltipStylesHoverBefore() },
+    "&.Mui-disabled": {
+      color: "#595555",
+    },
   },
   optionsIconNext: {
     color: "#d9d9d9",
