@@ -72,10 +72,11 @@ const MoreSection = () => {
         {moreSectionContent?.contactLinks?.map((item: ContactItem) => {
           return (
             <Link
-              href={item.url}
+              href={item.label === "Email" ? `mailto:${item.url}` : item.url}
               className={mid + "IconLink"}
               id={mid + id + "IconLink"}
               key={item.linkId}
+              target="_blank"
             >
               <Box
                 sx={{

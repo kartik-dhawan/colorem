@@ -101,10 +101,9 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
    * scrolls to the content page on first render in tablet & mobile view
    */
 
-  const innerWidth = typeof window !== "undefined" && window.innerWidth
   useEffect(() => {
     const contentElement = document.querySelector("#aboutPageContentWrapper")
-    if (innerWidth < 1200) {
+    if (typeof window !== "undefined" && window.innerWidth < 1200) {
       setTimeout(() => {
         contentElement?.scrollIntoView({ behavior: "smooth" })
       }, 500)
