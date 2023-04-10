@@ -60,7 +60,7 @@ const AboutPageNav = () => {
     }
   }
 
-  const { aboutPageNavItems } = useSelector(
+  const { aboutPageNavItems, data } = useSelector(
     (state: RootType) => state.contentSlice
   )
 
@@ -97,9 +97,7 @@ const AboutPageNav = () => {
         id={aid + "TitleText"}
         sx={styles.aboutSideNavTitleText}
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eius
-        deleniti voluptates sit excepturi vel. Odit dignissimos consectetur
-        sunt. Praesentium culpa dolores deleniti.
+        {data.aboutPageDescription}
       </Typography>
       <List
         className={aid + "ListWrapper"}

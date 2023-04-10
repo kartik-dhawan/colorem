@@ -30,8 +30,8 @@ const BrowseCard = ({ fid }: BrowseCardProps) => {
           priority
         />
       </div>
-      <Link href="/palettes" className={fid + "ArrowIconWrapper"}>
-        <div className={fid + "Browse"}>Browse more</div>
+      <Link href="/gradients" className={fid + "ArrowIconWrapper"}>
+        <div className={fid + "Browse"}>Browse</div>
         <EastIcon className={fid + "ArrowIcon"} />
       </Link>
     </div>

@@ -187,3 +187,20 @@ export const monthsToYears = (months: number) => {
   }
   return `${years}y ${remainingMonths}m`
 }
+/**
+ *
+ * @param {any[]} arr
+ * @param {number} requiredLength // optional
+ * @returns
+ */
+export const getShuffledArray = (arr: any[], requiredLength?: number) => {
+  const array = [...arr]
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)) // random index from 0 to
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  if (requiredLength) {
+    return array.slice(0, requiredLength)
+  }
+  return array
+}

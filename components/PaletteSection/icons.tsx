@@ -91,6 +91,7 @@ export const SaveIconComponent = ({
         ...sx,
       }}
       onClick={savedHandler}
+      disabled
     >
       {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
     </IconButton>

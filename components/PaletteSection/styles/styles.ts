@@ -152,8 +152,14 @@ export const styles = {
   paletteSectionTitle: {
     color: "#d9d9d9", // $text_primary
     textTransform: "capitalize",
-    fontSize: "20px",
+    fontSize: {
+      xs: "22px",
+      lg: "24px",
+      xl: "26px",
+    },
     fontWeight: 300,
+    fontFamily: "Roboto condensed",
+    letterSpacing: "0.5px",
   },
   optionsBarMenu: {
     backgroundColor: "#111111a3",
@@ -204,6 +210,9 @@ export const iconStyles = {
   optionsSaveIcon: {
     "&:hover::after": { sm: getTooltipStylesHoverAfter("Bookmark") },
     "&:hover::before": { sm: getTooltipStylesHoverBefore() },
+    "&.Mui-disabled": {
+      color: "#595555",
+    },
   },
   optionsIconNext: {
     color: "#d9d9d9",

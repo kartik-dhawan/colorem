@@ -1,19 +1,26 @@
 import { Box, Button, Typography } from "@mui/material"
-import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { toggleSelectedColor } from "../../../../redux/slices/toggleSlice"
 import { ColorOptionConstants } from "../../../../utils/constants"
 import { ColorListType } from "../../../../utils/interfaces"
 import { styles } from "../../styles/gradientFilterStyles"
 
-const ColorOptions = () => {
+interface ColorOptionsProps {
+  setIsColorSelected: (param: boolean) => void // eslint-disable-line
+  isColorSelected: boolean
+  setColorOptionsList: (param: ColorListType[]) => void // eslint-disable-line
+  colorOptionsList: ColorListType[]
+}
+
+const ColorOptions = ({
+  setIsColorSelected,
+  isColorSelected,
+  setColorOptionsList,
+  colorOptionsList,
+}: ColorOptionsProps) => {
   const cid = "filterByColor"
 
   const dispatch = useDispatch()
-
-  const [colorOptionsList, setColorOptionsList] =
-    useState<ColorListType[]>(ColorOptionConstants)
-  const [isColorSelected, setIsColorSelected] = useState<boolean>(false)
 
   // sets the active selected colorlist & stores the selected color name it in redux store
   const selectColorHandler = (color: ColorListType) => {

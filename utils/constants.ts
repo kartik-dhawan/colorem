@@ -8,9 +8,15 @@ export const externalLinks = {
 
 export const API_URLS = {
   GET_ALL_PALETTES: "/api/palettes",
+  GET_NEW_PALETTE_AND_SAVE: "api/palettes/save",
   UPDATE_A_PALETTE: "/api/palettes", // followed by the guid
   GET_ALL_GRADIENTS: "/api/gradients",
   UPDATE_A_GRADIENT: "/api/gradients", // followed by the guid
+}
+
+export const INTERNAL_API_FAIL_ERROR_MESSAGE = {
+  ALL_PALETTES:
+    "Error. Could not fetch the data. Please try again. If the problem persists, please check your internet connection.",
 }
 
 export const COPIED_ALERT_TIMEOUT = 2000

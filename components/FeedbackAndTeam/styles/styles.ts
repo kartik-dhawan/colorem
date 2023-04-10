@@ -31,11 +31,10 @@ export const styles = {
     fontSize: {
       xs: "20px",
       sm: "22px",
-      md: "24px",
-      lg: "28px",
+      lg: "24px",
+      xl: "28px",
     },
     fontWeight: 300,
-    textTransform: "uppercase",
     color: "#d9d9d9", // text_primary
     textAlign: "left",
   },
@@ -47,6 +46,7 @@ export const styles = {
     textTransform: "uppercase",
     fontWeight: 500,
     letterSpacing: "0.5px",
+    fontFamily: "Roboto Condensed !important",
   },
   feedbackcard: {
     display: "flex",

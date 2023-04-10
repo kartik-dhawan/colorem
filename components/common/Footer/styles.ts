@@ -12,8 +12,10 @@ export const styles = {
     margin: "5px 15px",
     color: "#d9d9d9",
     fontSize: {
-      xs: "45px",
-      sm: "53px",
+      xs: "36px",
+      sm: "44px",
+      md: "50px",
+      lg: "54px",
     },
     cursor: "pointer",
   },
@@ -21,7 +23,8 @@ export const styles = {
     textAlign: "center",
     fontSize: {
       xs: "18px",
-      sm: "19px",
+      sm: "17px",
+      md: "19px",
     },
     padding: {
       xs: "0rem 2rem",
