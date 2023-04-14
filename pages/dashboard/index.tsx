@@ -16,6 +16,7 @@ import { Roboto } from "next/font/google"
 import Head from "next/head"
 import { updatePalettes } from "../../redux/slices/paletteSlice"
 import { getAllColorPalettes } from "../../lib/methods/palettes/getPalettes"
+import { manager } from "../../lib/database/connectionManager"
 
 const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 
@@ -24,6 +25,9 @@ const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 // revalidation is enabled and a new request comes in
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line
+
+  // need to connect DB again inside getStaticProps - else build will fail (specific to this project)
+  manager.connect()
 
   /**
    *  fetches data directly from the database
