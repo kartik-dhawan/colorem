@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import colorPalette from "../../database/models/colorPalette"
 import { responseTexts, URLS } from "../../utils/constants"
 import { getPaletteByGuid } from "./getPalettes"
+import { manager } from "../../database/connectionManager"
 
 /**
  * runs colormind api and returns a promise
@@ -51,6 +52,7 @@ export const updatePaletteLikesByGuid = async (
   res: NextApiResponse,
   paletteGuid: string | string[] | undefined
 ) => {
+  manager.connect()
   /**
    * gets the palette matching the GUID from URL
    */
