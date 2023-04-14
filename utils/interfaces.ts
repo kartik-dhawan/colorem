@@ -4,6 +4,10 @@ export interface ContentfulType {
   [key: string]: any // eslint-disable-line
 }
 
+export interface PalettesPage extends ContentfulType {
+  palettes: PaletteDataType[]
+}
+
 export interface EssentialItemsType {
   id: number
   body: string
