@@ -26,7 +26,8 @@ export const getServerSideProps = async () => {
   /**
    *  fetches data directly from the database
    *  without involving calling the API
-   * */
+   *
+   */
   const palettes = await getAllColorPalettes()
 
   return {
