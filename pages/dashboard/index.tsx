@@ -4,7 +4,7 @@ import FileSection from "../../components/FileSection"
 import Essentials from "../../components/Essentials"
 import FeedbackAndTeam from "../../components/FeedbackAndTeam"
 import { client } from "../../utils/contentful/config"
-import { PalettesPage } from "../../utils/interfaces"
+import { DashboardPage } from "../../utils/interfaces"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateContent } from "../../redux/slices/contentSlice"
@@ -47,7 +47,7 @@ export const getStaticProps = async () => {
   }
 }
 
-const Dashboard = ({ contentData, palettes }: PalettesPage) => {
+const Dashboard = ({ contentData, palettes }: DashboardPage) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
