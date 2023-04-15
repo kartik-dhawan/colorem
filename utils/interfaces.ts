@@ -12,6 +12,10 @@ export interface PalettesPage extends ContentfulType {
   palettes: PaletteDataType[]
 }
 
+export interface GradientsPage extends ContentfulType {
+  palettes: GradientDataType[]
+}
+
 export interface EssentialItemsType {
   id: number
   body: string
