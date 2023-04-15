@@ -5,6 +5,7 @@ import { GradientBody } from "../../utils/interfaces"
 import { responseTexts, SaveGradientBodyKeys } from "../../utils/constants"
 import { areArraysEqual, logger } from ".."
 import { getGradientByGuid } from "./getGradients"
+import { manager } from "../../database/connectionManager"
 
 /**
  *
@@ -60,6 +61,8 @@ export const updateGradientLikesByGuid = async (
   res: NextApiResponse,
   gradGuid: string | string[] | undefined
 ) => {
+  manager.connect()
+
   const gradient = await getGradientByGuid(res, gradGuid)
 
   /**
