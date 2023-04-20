@@ -121,7 +121,7 @@ const ProjectInsights = () => {
             {selectedRoleContent &&
               selectedRoleContent?.map((item: any, index: number) => {
                 const imageUrl =
-                  "https://" + selectedRoleImages[index].fields.file.url
+                  "https:" + selectedRoleImages[index].fields.file.url
                 return (
                   <div key={index}>
                     <Stack

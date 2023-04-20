@@ -99,7 +99,7 @@ const MoreSection = () => {
               </Typography>
             </Box>
             <Image
-              src={"https://" + moreSectionImages1?.general[0].fields.file.url}
+              src={"https:" + moreSectionImages1?.general[0].fields.file.url}
               fill
               alt={""}
               style={{

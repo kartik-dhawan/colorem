@@ -146,7 +146,7 @@ const ColoremTeam = () => {
                       className={tid + "Image"}
                       id={id + tid + "Image"}
                       key={id}
-                      src={"https://" + image.fields.file.url}
+                      src={"https:" + image.fields.file.url}
                       fill
                       alt={""}
                       style={{
