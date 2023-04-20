@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack } from "@mui/material"
+import { Box, IconButton, Skeleton, Stack } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useCallback, useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -9,7 +9,10 @@ import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
 import { styles } from "../styles/projectInsights"
 import { styles as commonStyles } from "../styles/index"
+import { styles as teamStyles } from "../styles/coloremTeam"
 import MouseIcon from "@mui/icons-material/Mouse"
+import Image from "next/image"
+import Link from "next/link"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -39,9 +42,16 @@ const ProjectInsights = () => {
     (state: RootType) => state.contentSlice.currentAboutContent
   ).content
 
+  const projectsSectionImages = useSelector(
+    (state: RootType) => state.contentSlice.currentAboutContent
+  ).images
+
   const selectedRoleContent =
     insightsSectionContent?.arenas &&
     insightsSectionContent.arenas[selectedArena].content
+
+  const selectedRoleImages =
+    projectsSectionImages && projectsSectionImages[`${selectedArena}Images`]
 
   useEffect(() => {
     insightsSection = document.querySelector(".css-1wvgw2s-MuiStack-root")
@@ -110,6 +120,8 @@ const ProjectInsights = () => {
           >
             {selectedRoleContent &&
               selectedRoleContent?.map((item: any, index: number) => {
+                const imageUrl =
+                  "https://" + selectedRoleImages[index].fields.file.url
                 return (
                   <div key={index}>
                     <Stack
@@ -134,19 +146,40 @@ const ProjectInsights = () => {
                         })}
                       </Box>
                     </Stack>
-                    {/* temporary skeleton for an image */}
+                    {/* Image mapped according to the data & image array */}
                     <Box
-                      sx={{
-                        height: "250px",
-                        backgroundColor: "#999999",
-                        margin: "0px 0px 24px 0px",
-                      }}
-                    />
+                      className={iid + "ImageWrapper"}
+                      id={iid + "ImageWrapper"}
+                      sx={styles.insightsSectionImageWrapper}
+                    >
+                      {!selectedRoleImages[index] ? (
+                        <Skeleton
+                          sx={teamStyles.skeletonCss}
+                          animation="pulse"
+                        />
+                      ) : (
+                        <Link href={imageUrl} target="_blank">
+                          <Image
+                            src={imageUrl}
+                            fill
+                            alt={""}
+                            style={{
+                              position: "absolute",
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              borderRadius: "16px",
+                            }}
+                          />
+                        </Link>
+                      )}
+                    </Box>
                   </div>
                 )
               })}
           </Box>
         </Stack>
+        {/* TODO remove 'display: none' from styles of this icon before working on it */}
         <IconButton
           sx={styles.insightsSectionScrollButton}
           disableRipple

@@ -73,8 +73,8 @@ export const getStaticProps = async ({ params }: any) => {
           developmentImages: item.fields.developmentImages
             ? item.fields.developmentImages
             : null,
-          headlessCmsImages: item.fields.headlessCmsImages
-            ? item.fields.headlessCmsImages
+          headlessCMSImages: item.fields.headlessCMSImages
+            ? item.fields.headlessCMSImages
             : null,
           managementImages: item.fields.managementImages
             ? item.fields.managementImages
