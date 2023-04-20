@@ -23,6 +23,7 @@ export const styles = {
     },
   },
   insightsSectionScrollButton: {
+    display: "none",
     position: "fixed",
     bottom: "50px",
     border: "2px solid #888",
@@ -33,5 +34,16 @@ export const styles = {
       padding: "8px",
       margin: "-4px",
     },
+  },
+  insightsSectionImageWrapper: {
+    minHeight: {
+      xs: "230px",
+      sm: "440px",
+      md: "580px",
+      lg: "440px",
+    },
+    height: "max-content",
+    margin: "0px 0px 0px 0px",
+    position: "relative",
   },
 }

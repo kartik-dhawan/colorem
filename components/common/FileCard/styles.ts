@@ -42,6 +42,7 @@ export const styles = {
     justifyContent: "space-around",
     padding: "2rem 1.5rem",
     position: "relative",
+    fontWeight: 300,
     gap: {
       xs: "16px",
       sm: "8px",

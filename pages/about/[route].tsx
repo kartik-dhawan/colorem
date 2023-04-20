@@ -68,6 +68,21 @@ export const getStaticProps = async ({ params }: any) => {
         title: item.fields.navItemTitle,
         route: item.fields.navItemRoute,
         content: item.fields.navItemContent ? item.fields.navItemContent : "",
+        images: {
+          general: item.fields.navItemImages ? item.fields.navItemImages : null,
+          developmentImages: item.fields.developmentImages
+            ? item.fields.developmentImages
+            : null,
+          headlessCMSImages: item.fields.headlessCMSImages
+            ? item.fields.headlessCMSImages
+            : null,
+          managementImages: item.fields.managementImages
+            ? item.fields.managementImages
+            : null,
+          qualityAssuranceImages: item.fields.qualityAssuranceImages
+            ? item.fields.qualityAssuranceImages
+            : null,
+        },
       }
     })
     .sort((a, b) => (a.id > b.id ? 1 : -1))

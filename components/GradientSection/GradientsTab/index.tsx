@@ -42,9 +42,7 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
     (state: RootType) => state.contentSlice.data
   )
 
-  const { data, isLoading } = useSelector(
-    (state: RootType) => state.gradientSlice
-  )
+  const { data } = useSelector((state: RootType) => state.gradientSlice)
 
   /*
    * final array of gradients which is further twisted as per the filter
@@ -111,7 +109,23 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-      {gradientsArray && !showInstructor ? (
+      {showInstructor ? (
+        <Box sx={{ fontWeight: 300, letterSpacing: "0.3px" }}>
+          <Instructor
+            instructorData={gradientSectionInstructor}
+            setShowInstructor={setShowInstructor}
+            page={pageName}
+          />
+        </Box>
+      ) : gradientsArray.length === 0 ? (
+        <Box
+          sx={styles.gradientSectionLoaderWrapper}
+          className={gid + "LoaderWrapper"}
+          id={gid + "LoaderWrapper"}
+        >
+          <PrimaryLoader />
+        </Box>
+      ) : (
         <>
           <GradientFilter />
           <InfoDrawer
@@ -133,26 +147,6 @@ const GradientsTab = ({ gid }: GradientsTabProps) => {
             ))}
           </Box>
         </>
-      ) : showInstructor ? (
-        <Box sx={{ fontWeight: 300, letterSpacing: "0.3px" }}>
-          <Instructor
-            instructorData={gradientSectionInstructor}
-            setShowInstructor={setShowInstructor}
-            page={pageName}
-          />
-        </Box>
-      ) : (
-        /* Design a proper error component for API fail */
-        <pre>Error running the api please try again</pre>
-      )}
-      {isLoading && !showInstructor && (
-        <Box
-          sx={styles.gradientSectionLoaderWrapper}
-          className={gid + "LoaderWrapper"}
-          id={gid + "LoaderWrapper"}
-        >
-          <PrimaryLoader />
-        </Box>
       )}
     </ErrorBoundary>
   )

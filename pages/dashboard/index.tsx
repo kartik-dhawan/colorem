@@ -4,7 +4,7 @@ import FileSection from "../../components/FileSection"
 import Essentials from "../../components/Essentials"
 import FeedbackAndTeam from "../../components/FeedbackAndTeam"
 import { client } from "../../utils/contentful/config"
-import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
+import { DashboardPage } from "../../utils/interfaces"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateContent } from "../../redux/slices/contentSlice"
@@ -14,11 +14,11 @@ import ErrorFallback, {
 } from "../../components/common/ErrorFallback"
 import { Roboto } from "next/font/google"
 import Head from "next/head"
-import useSWR from "swr"
-import { API_URLS } from "../../utils/constants"
-import { fetcher } from "../../utils/methods"
 import { updatePalettes } from "../../redux/slices/paletteSlice"
-import { logger } from "../../lib/methods"
+import { getAllColorPalettes } from "../../lib/methods/palettes/getPalettes"
+import { manager } from "../../lib/database/connectionManager"
+
+const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
 
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
@@ -26,9 +26,19 @@ import { logger } from "../../lib/methods"
 export const getStaticProps = async () => {
   const response = await client.getEntries({ content_type: "coloremDashboard" }) // eslint-disable-line
 
+  // need to connect DB again inside getStaticProps - else build will fail (specific to this project)
+  manager.connect()
+
+  /**
+   *  fetches data directly from the database
+   *  without involving calling the API
+   * */
+  const palettes = await getAllColorPalettes()
+
   return {
     props: {
       contentData: response?.items[0]?.fields,
+      palettes: JSON.parse(JSON.stringify(palettes)),
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -37,32 +47,16 @@ export const getStaticProps = async () => {
   }
 }
 
-const roboto = Roboto({ weight: "400", display: "swap", subsets: ["latin"] })
-
-const Dashboard = ({ contentData }: ContentfulType) => {
+const Dashboard = ({ contentData, palettes }: DashboardPage) => {
   const dispatch = useDispatch()
 
-  // using SWR for data fetching because when we use useEffect(), after react 18
-  // it calls the function twice.
-  // while using useSWR() it only gets called once, and even when we try to
-  // call it again in any of the subcomponent it uses the response of its previous call
-  const { data, error } = useSWR<PaletteDataType[]>(
-    API_URLS.GET_ALL_PALETTES,
-    fetcher
-  )
-
   useEffect(() => {
-    // if we get data on axios call, store it in redux
-    dispatch(updatePalettes(data ? data : []))
+    // gets palettes as props from getStaticProps & stores them in redux
+    dispatch(updatePalettes(palettes))
 
-    // handle the error here, set it in redux and display a generic error page.
-    if (error) {
-      // we need to create an error page for error condition
-      logger({ error, type: "error" })
-    }
-
+    // saves contentful data in redux store for this page
     dispatch(updateContent(contentData))
-  }, [data, contentData])
+  }, [palettes, contentData])
 
   const title = "Colorem"
   const description = "Permutations with colors & more."

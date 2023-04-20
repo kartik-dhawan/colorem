@@ -5,54 +5,47 @@ import { useEffect } from "react"
 import { updatePalettes } from "../../redux/slices/paletteSlice"
 import { client } from "../../utils/contentful/config"
 import { updateContent } from "../../redux/slices/contentSlice"
-import { ContentfulType, PaletteDataType } from "../../utils/interfaces"
+import { PalettesPage } from "../../utils/interfaces"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, {
   myErrorHandler,
 } from "../../components/common/ErrorFallback"
-import useSWR from "swr"
-import { API_URLS } from "../../utils/constants"
-import { logger } from "../../lib/methods"
-import { fetcher } from "../../utils/methods"
 import { Roboto } from "next/font/google"
 import Head from "next/head"
+import { manager } from "../../lib/database/connectionManager"
+import { getAllColorPalettes } from "../../lib/methods/palettes/getPalettes"
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const contentResponse = await client.getEntries({
     content_type: "coloremDashboard", // eslint-disable-line
   })
 
+  // need to connect DB again inside getStaticProps - else build will fail (specific to this project)
+  manager.connect()
+
+  /**
+   *  fetches data directly from the database
+   *  without involving calling the API
+   *
+   */
+  const palettes = await getAllColorPalettes()
+
   return {
     props: {
       contentData: contentResponse?.items[0]?.fields,
+      palettes: JSON.parse(JSON.stringify(palettes)),
     },
-    revalidate: parseInt(process.env.ISR_REVAL_TIME_DASHBOARD || "10"), // In seconds
   }
 }
 
 const roboto = Roboto({ display: "swap", weight: "300", subsets: ["latin"] })
 
-const Palettes = ({ contentData }: ContentfulType) => {
+const Palettes = ({ contentData, palettes }: PalettesPage) => {
   const dispatch = useDispatch()
-
-  // using SWR for data fetching because when we use useEffect(), after react 18
-  // it calls the function twice.
-  // while using useSWR() it only gets called once, and even when we try to
-  // call it again in any of the subcomponent it uses the response of its previous call
-  const { data, error } = useSWR<PaletteDataType[]>(
-    API_URLS.GET_ALL_PALETTES,
-    fetcher
-  )
 
   useEffect(() => {
     // if we get data on axios call, store it in redux
-    dispatch(updatePalettes(data ? data : []))
-
-    // handle the error here, set it in redux and display a generic error page.
-    if (error) {
-      // we need to create an error page for error condition
-      logger({ error, type: "error" })
-    }
+    dispatch(updatePalettes(palettes))
 
     // storing contentful data in redux for this page
     dispatch(updateContent(contentData))

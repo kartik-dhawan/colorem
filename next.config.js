@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     domains: ["images.ctfassets.net"],
   },
+  staticPageGenerationTimeout: 1000,
 }
 
 module.exports = nextConfig // eslint-disable-line

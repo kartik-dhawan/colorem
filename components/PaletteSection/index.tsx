@@ -45,7 +45,7 @@ const PaletteSection = () => {
 
   useEffect(() => {
     // when the palettes finish it goes back to the first palette repeats the whole list again
-    if (totalPalettes && count > totalPalettes - 1) {
+    if (totalPalettes && count > totalPalettes - 2) {
       setCount(0)
       setPalette(getNewPaletteOnSpacebar(0))
     }
