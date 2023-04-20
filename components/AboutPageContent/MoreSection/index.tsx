@@ -1,9 +1,10 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Box, Container, Skeleton, Typography } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useSelector } from "react-redux"
 import AboutPageContent from ".."
 import { RootType } from "../../../redux/constants/stateTypes"
 import { styles as commonStyles } from "../styles/index"
+import { styles as teamStyles } from "../styles/coloremTeam"
 import Link from "next/link"
 import { styles } from "../styles/moreSection"
 import { useId } from "react"
@@ -70,44 +71,46 @@ const MoreSection = () => {
         id={mid + "ProfileCard"}
         sx={styles.moreSectionProfileCard}
       >
-        <Box sx={styles.moreSectionGradientEffect} />
-        <Box
-          className={mid + "ProfileCardContent"}
-          id={mid + "ProfileCardContent"}
-          sx={styles.moreSectionProfileCardContent}
-        >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="h5" className={roboto.className} sx={{}}>
-              Kartik Dhawan
-            </Typography>
-            {data.portfolioUrl && (
-              <Link href={data.portfolioUrl} target="_blank">
-                <LaunchIcon />
-              </Link>
-            )}
-          </Box>
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: 300, letterSpacing: "0.5px" }}
-          >
-            I personally love looking at the moon. How about you?
-          </Typography>
-        </Box>
         {!moreSectionImages1?.general[0].fields.file.url ? (
-          <>Loader...</>
+          <Skeleton sx={teamStyles.skeletonCss} animation="pulse" />
         ) : (
-          <Image
-            src={"https://" + moreSectionImages1?.general[0].fields.file.url}
-            fill
-            alt={""}
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "16px",
-            }}
-          />
+          <>
+            <Box sx={styles.moreSectionGradientEffect} />
+            <Box
+              className={mid + "ProfileCardContent"}
+              id={mid + "ProfileCardContent"}
+              sx={styles.moreSectionProfileCardContent}
+            >
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography variant="h5" className={roboto.className} sx={{}}>
+                  Kartik Dhawan
+                </Typography>
+                {data.portfolioUrl && (
+                  <Link href={data.portfolioUrl} target="_blank">
+                    <LaunchIcon />
+                  </Link>
+                )}
+              </Box>
+              <Typography
+                variant="subtitle1"
+                sx={{ fontWeight: 300, letterSpacing: "0.5px" }}
+              >
+                I personally love looking at the moon. How about you?
+              </Typography>
+            </Box>
+            <Image
+              src={"https://" + moreSectionImages1?.general[0].fields.file.url}
+              fill
+              alt={""}
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "16px",
+              }}
+            />
+          </>
         )}
       </Box>
       <Container
