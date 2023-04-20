@@ -40,7 +40,8 @@ export const styles = {
     },
   },
   teamSectionBodyText: {
-    textAlign: "justify",
+    textAlign: "left",
+    wordBreak: "break-word",
     margin: "16px 0px",
     fontSize: {
       xs: "16px",
@@ -53,5 +54,23 @@ export const styles = {
       xl: "26px",
     },
     fontWeight: 400,
+  },
+  skeletonCss: {
+    position: "absolute",
+    zIndex: 100,
+    width: "100%",
+    height: "100%",
+    margin: "-64px 0px",
+  },
+  teamSectionImageWrapper: {
+    minHeight: {
+      xs: "280px",
+      sm: "340px",
+      md: "500px",
+      lg: "400px",
+    },
+    height: "max-content",
+    margin: "32px 0px",
+    position: "relative",
   },
 }

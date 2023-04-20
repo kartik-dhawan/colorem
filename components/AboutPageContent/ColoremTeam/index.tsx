@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material"
+import { Box, Divider, Skeleton } from "@mui/material"
 import { Antonio, Roboto_Condensed } from "next/font/google"
 import { useEffect, useId, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -10,6 +10,7 @@ import ErrorFallback, { myErrorHandler } from "../../common/ErrorFallback"
 import { styles } from "../styles/coloremTeam"
 import { styles as commonStyles } from "../styles"
 import PrimaryButtonGroup from "../../common/PrimaryButtonGroup"
+import Image from "next/image"
 
 // loading fonts before component loads
 const antonio = Antonio({
@@ -42,11 +43,18 @@ const ColoremTeam = () => {
     (state: RootType) => state.contentSlice.currentAboutContent
   ).content
 
+  /*
+   * gets the images for current about subpage from redux store
+   */
+  const teamSectionImages = useSelector(
+    (state: RootType) => state.contentSlice.currentAboutContent
+  ).images?.general
+
   const [teamRoles, setTeamRoles] = useState<RoleButtonData[]>(
     initialRoleButtonState
   )
 
-  const [selectedRole, setSelectedRole] = useState<string>("agileLead")
+  const [selectedRole, setSelectedRole] = useState<string>("frontEndDeveloper")
 
   /**
    * filters & stores role-button label data
@@ -82,7 +90,7 @@ const ColoremTeam = () => {
             sx={styles.teamSectionPersonName}
             className={tid + "PersonName " + roboto.className}
           >
-            {selectedRole !== "agileLead" && "Also"} Kartik Dhawan
+            {selectedRole !== "frontEndDeveloper" && "Also"} Kartik Dhawan
           </Box>
           <Divider sx={styles.teamSectionNameDivider} />
           {/* common button group component */}
@@ -121,14 +129,38 @@ const ColoremTeam = () => {
                 )
               }
             )}
-          {/* temporary skeleton for an image */}
+
+          {/* Image for each role */}
           <Box
-            sx={{
-              height: "250px",
-              backgroundColor: "#999999",
-              margin: "32px 0px",
-            }}
-          ></Box>
+            className={tid + "ImageWrapper"}
+            id={tid + "ImageWrapper"}
+            sx={styles.teamSectionImageWrapper}
+          >
+            {!teamSectionImages ? (
+              <Skeleton sx={styles.skeletonCss} animation="pulse" />
+            ) : (
+              teamSectionImages.map((image: any) => {
+                if (image.fields.title === selectedRole) {
+                  return (
+                    <Image
+                      className={tid + "Image"}
+                      id={id + tid + "Image"}
+                      key={id}
+                      src={"https:" + image.fields.file.url}
+                      fill
+                      alt={""}
+                      style={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  )
+                }
+              })
+            )}
+          </Box>
         </Box>
       </ErrorBoundary>
     </AboutPageContent>

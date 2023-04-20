@@ -64,4 +64,34 @@ export const styles = {
       },
     },
   },
+  moreSectionProfileCard: {
+    minHeight: "440px",
+    height: "max-content",
+    margin: "24px 0px",
+    position: "relative",
+  },
+  moreSectionGradientEffect: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    zIndex: 100,
+    background: "linear-gradient(0deg, #d9d9d959 0%, transparent 50%)",
+  },
+  moreSectionProfileCardContent: {
+    position: "absolute",
+    zIndex: 1000,
+    color: "#d9d9d9",
+    bottom: "24px",
+    left: "24px",
+    "& a": {
+      color: "#d9d9d9",
+      margin: "6px",
+      "&:hover": {
+        color: "#a6a8af",
+      },
+      "& > svg": {
+        fontSize: "20px",
+      },
+    },
+  },
 }
