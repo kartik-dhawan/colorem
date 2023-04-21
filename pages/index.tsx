@@ -42,7 +42,7 @@ const Home = ({ contentData }: ContentfulType) => {
   const description = "Permutations with colors & more."
 
   return (
-    <div className="indexWrapper">
+    <div className="indexWrapper" data-testid="indexWrapper">
       <Head>
         {/* Primary meta tags */}
         <title>{title}</title>
