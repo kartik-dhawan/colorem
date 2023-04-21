@@ -22,6 +22,7 @@ const FileCard = ({ type, fid, fr }: FileCardType) => {
         display: "flex",
         flexDirection: "column",
       }}
+      data-testid={fid + type}
     >
       <Grid
         item

@@ -18,7 +18,7 @@ import Feedback from "../../../components/FeedbackAndTeam/Feedback"
 import TeamDetails from "../../../components/FeedbackAndTeam/TeamDetails"
 
 describe("Dashboard page", () => {
-  it("-- should render", () => {
+  it("-- should match snapshot", () => {
     const tree = renderer
       .create(
         <Provider store={store}>

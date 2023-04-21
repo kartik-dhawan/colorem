@@ -7,7 +7,7 @@ import { render } from "@testing-library/react"
 import "@testing-library/jest-dom"
 
 describe("Home page", () => {
-  it("-- should render", () => {
+  it("-- should match snapshot", () => {
     const tree = renderer
       .create(
         <Provider store={store}>

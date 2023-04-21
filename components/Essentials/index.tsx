@@ -31,7 +31,12 @@ const Essentials = () => {
       >
         The Essentials
       </Box>
-      <Grid container className={eid + "Body"} id={eid + "Body"}>
+      <Grid
+        container
+        className={eid + "Body"}
+        id={eid + "Body"}
+        data-testid={eid + "Body"}
+      >
         {content.essentialItemsText?.map((item: EssentialItemsType) => {
           return (
             <Grid
