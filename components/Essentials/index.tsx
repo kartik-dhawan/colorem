@@ -21,6 +21,7 @@ const Essentials = () => {
     <Box
       className={eid + "Wrapper"}
       id={eid + "Wrapper"}
+      data-testid={eid + "Wrapper"}
       sx={styles.essentialsSectionWrapper}
     >
       <Box

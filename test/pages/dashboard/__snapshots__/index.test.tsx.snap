@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dashboard page should render 1`] = `
+exports[`Dashboard page -- should render 1`] = `
 <div
   className="MuiBox-root css-0"
 >
   <div
     className="MuiGrid-root MuiGrid-container subNavWrapper css-1oudet0-MuiGrid-root"
+    data-testid="subNavWrapper"
     id="subNavWrapper"
   >
     <div
@@ -79,6 +80,7 @@ exports[`Dashboard page should render 1`] = `
   </div>
   <div
     className="MuiGrid-root MuiGrid-container fileSectionWrapper css-11lq3yg-MuiGrid-root"
+    data-testid="fileSectionWrapper"
   >
     <div
       className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-8 fileSectionCard css-k0o1dg-MuiGrid-root"
@@ -211,6 +213,7 @@ exports[`Dashboard page should render 1`] = `
   >
     <div
       className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-5 feedbackSectionWrapper css-14expfb-MuiGrid-root"
+      data-testid="feedbackSectionWrapper"
       id="feedbackSectionWrapper"
     >
       <h5
@@ -306,6 +309,7 @@ exports[`Dashboard page should render 1`] = `
     </div>
     <div
       className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-7 teamSectionWrapper css-16629bz-MuiGrid-root"
+      data-testid="teamSectionWrapper"
       id="teamSectionWrapper"
     >
       <div
@@ -354,6 +358,7 @@ exports[`Dashboard page should render 1`] = `
   </div>
   <div
     className="essentialsSectionWrapper MuiBox-root css-1q5wgsi"
+    data-testid="essentialsSectionWrapper"
     id="essentialsSectionWrapper"
   >
     <div
