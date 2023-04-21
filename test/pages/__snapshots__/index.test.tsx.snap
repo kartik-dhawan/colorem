@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page -- should match snapshot 1`] = `
+<div
+  className="indexWrapper"
+  data-testid="indexWrapper"
+>
+  <main
+    className="indexMain"
+  >
+    <a
+      className="indexHeader className"
+      href="/dashboard"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+    >
+      Colorem
+    </a>
+    <a
+      className="indexLink"
+      href="/dashboard"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+    >
+      Start creating
+    </a>
+  </main>
+</div>
+`;

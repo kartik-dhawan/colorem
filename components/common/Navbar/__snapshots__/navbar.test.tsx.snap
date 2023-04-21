@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar & SubNav Component -- (Navbar) should match snapshot 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container navWrapper className css-cd4ypu-MuiGrid-root"
+  id="navWrapper"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-4 css-pxn3g2-MuiGrid-root"
+  >
+    <a
+      href="/dashboard"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+      style={
+        {
+          "textDecoration": "none",
+        }
+      }
+    >
+      Colorem
+    </a>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-4 css-1ipynby-MuiGrid-root"
+  >
+    <a
+      href="/about"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+      style={
+        {
+          "textDecoration": "none",
+        }
+      }
+    >
+      About
+    </a>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 css-2tokck-MuiGrid-root"
+  >
+    <a
+      href="https://github.com/kartik-dhawan"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+      style={
+        {
+          "textDecoration": "none",
+        }
+      }
+      target="_blank"
+    >
+      Github
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Navbar & SubNav Component -- (SubNav) should match snapshot 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container subNavWrapper css-1oudet0-MuiGrid-root"
+  data-testid="subNavWrapper"
+  id="subNavWrapper"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-6 subNavTitle className css-3wmuhz-MuiGrid-root"
+    id="subNavTitle"
+  >
+    PERMUTATIONS WITH COLORS AND MORE.
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-2 subNavChooseTheme css-9bgm2f-MuiGrid-root"
+    id="subNavChooseTheme"
+  >
+    <button
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="DarkModeIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 css-4q8h96-MuiGrid-root"
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium subNavGetStartBtn css-ubt6ix-MuiButtonBase-root-MuiButton-root"
+      disabled={false}
+      id="subNavGetStartBtn"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      Start looking
+    </button>
+  </div>
+</div>
+`;

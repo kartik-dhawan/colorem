@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Essentials section Component -- should match snapshot 1`] = `
+<div
+  className="essentialsSectionWrapper MuiBox-root css-1q5wgsi"
+  data-testid="essentialsSectionWrapper"
+  id="essentialsSectionWrapper"
+>
+  <div
+    className="essentialsSectionTitle className MuiBox-root css-ns0x91"
+    id="essentialsSectionTitle"
+  >
+    The Essentials
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-container essentialsSectionBody css-11lq3yg-MuiGrid-root"
+    data-testid="essentialsSectionBody"
+    id="essentialsSectionBody"
+  />
+</div>
+`;

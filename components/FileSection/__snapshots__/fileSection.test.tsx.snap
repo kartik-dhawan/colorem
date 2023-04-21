@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`File section Component -- should match snapshot 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container fileSectionWrapper css-11lq3yg-MuiGrid-root"
+  data-testid="fileSectionWrapper"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-8 fileSectionCard css-k0o1dg-MuiGrid-root"
+    data-testid="fileSectionright"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item fileSectionCardLower css-1hjlv0p-MuiGrid-root"
+      id="fileSectionCardLower"
+    >
+      <div
+        className="fileSectionRightFileContent"
+      >
+        <div
+          className="fileSectionContent"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium fileSectionGrainIcon css-i4bv87-MuiSvgIcon-root"
+            data-testid="GrainIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12-8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-4 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+            />
+          </svg>
+          <h5
+            className="MuiTypography-root MuiTypography-h5 fileSectionContentText css-ag7rrr-MuiTypography-root"
+          />
+        </div>
+        <div
+          className="fileSectionRightFileImage"
+        >
+          <img
+            alt="bitmoji image"
+            data-nimg="1"
+            decoding="async"
+            fetchpriority="high"
+            height={425}
+            onError={[Function]}
+            onLoad={[Function]}
+            src="/_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=1080&q=75"
+            srcSet="/_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=640&q=75 1x, /_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=1080&q=75 2x"
+            style={
+              {
+                "color": "transparent",
+              }
+            }
+            width={425}
+          />
+        </div>
+        <a
+          className="fileSectionArrowIconWrapper"
+          href="/gradients"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="fileSectionBrowse"
+          >
+            Browse
+          </div>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium fileSectionArrowIcon css-i4bv87-MuiSvgIcon-root"
+            data-testid="EastIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="m15 5-1.41 1.41L18.17 11H2v2h16.17l-4.59 4.59L15 19l7-7-7-7z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-4 fileSectionCard css-1eqpqzh-MuiGrid-root"
+    data-testid="fileSectionleft"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item fileSectionCardLower css-5w37io-MuiGrid-root"
+      id="fileSectionCardLower"
+    >
+      <div
+        className="MuiContainer-root MuiContainer-maxWidthLg css-r2ks57-MuiContainer-root"
+      >
+        <span
+          className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-4i0lvv-MuiSkeleton-root"
+          style={
+            {
+              "height": 56,
+              "width": "100%",
+            }
+          }
+        />
+        <span
+          className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-ovvgps-MuiSkeleton-root"
+          style={
+            {
+              "height": 56,
+              "width": "100%",
+            }
+          }
+        />
+        <span
+          className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-aedbwi-MuiSkeleton-root"
+          style={
+            {
+              "height": 56,
+              "width": "100%",
+            }
+          }
+        />
+        <span
+          className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-2ql2a-MuiSkeleton-root"
+          style={
+            {
+              "height": 56,
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
