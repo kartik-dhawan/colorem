@@ -7,7 +7,7 @@ import mockRouter from "next-router-mock"
 
 jest.mock("next/router", () => require("next-router-mock"))
 
-describe("Login page", () => {
+describe("Login component", () => {
   it("-- (login) should match snapshot", () => {
     mockRouter.push({
       pathname: "/login",
@@ -32,7 +32,7 @@ describe("Login page", () => {
 
   it("-- (signup) should match snapshot", () => {
     mockRouter.push({
-      pathname: "/signup",
+      pathname: "/login",
       query: { ...mockRouter.query, activity: "signup" },
     })
 

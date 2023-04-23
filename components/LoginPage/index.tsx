@@ -108,11 +108,19 @@ const LoginPage = () => {
           }}
         />
         {toggleLoginActivity ? (
-          <Button disableRipple sx={styles.loginPageButton}>
+          <Button
+            disableRipple
+            sx={styles.loginPageButton}
+            data-testid={lid + "LoginButton"}
+          >
             Login
           </Button>
         ) : (
-          <Button disableRipple sx={styles.loginPageButton}>
+          <Button
+            disableRipple
+            sx={styles.loginPageButton}
+            data-testid={lid + "SignupButton"}
+          >
             Sign Up
           </Button>
         )}
@@ -123,6 +131,7 @@ const LoginPage = () => {
             disableRipple
             sx={styles.loginPageExtraOptionsButton}
             onClick={handleSignupToggle}
+            data-testid={lid + "ToggleSignup"}
           >
             create an account
           </Button>
@@ -131,6 +140,7 @@ const LoginPage = () => {
             disableRipple
             sx={styles.loginPageExtraOptionsButton}
             onClick={handleLoginToggle}
+            data-testid={lid + "ToggleLogin"}
           >
             log into an account
           </Button>

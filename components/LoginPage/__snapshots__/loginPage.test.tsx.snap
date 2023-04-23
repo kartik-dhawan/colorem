@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login page -- (login) should match snapshot 1`] = `
+exports[`Login component -- (login) should match snapshot 1`] = `
 [
   <div
     className="loginPageFormWrapper MuiBox-root css-177k47l"
@@ -88,6 +88,7 @@ exports[`Login page -- (login) should match snapshot 1`] = `
     </div>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e5zz5g-MuiButtonBase-root-MuiButton-root"
+      data-testid="loginPageLoginButton"
       disabled={false}
       onBlur={[Function]}
       onContextMenu={[Function]}
@@ -112,6 +113,7 @@ exports[`Login page -- (login) should match snapshot 1`] = `
   >
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1l03z47-MuiButtonBase-root-MuiButton-root"
+      data-testid="loginPageToggleSignup"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -175,7 +177,7 @@ exports[`Login page -- (login) should match snapshot 1`] = `
 ]
 `;
 
-exports[`Login page -- (signup) should match snapshot 1`] = `
+exports[`Login component -- (signup) should match snapshot 1`] = `
 [
   <div
     className="loginPageFormWrapper MuiBox-root css-177k47l"
@@ -303,6 +305,7 @@ exports[`Login page -- (signup) should match snapshot 1`] = `
     </div>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e5zz5g-MuiButtonBase-root-MuiButton-root"
+      data-testid="loginPageSignupButton"
       disabled={false}
       onBlur={[Function]}
       onContextMenu={[Function]}
@@ -327,6 +330,7 @@ exports[`Login page -- (signup) should match snapshot 1`] = `
   >
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1l03z47-MuiButtonBase-root-MuiButton-root"
+      data-testid="loginPageToggleLogin"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
