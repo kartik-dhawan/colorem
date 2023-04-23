@@ -2,13 +2,20 @@ import { Box, Button, TextField } from "@mui/material"
 import { styles } from "./styles"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import { LoginFormState } from "../../utils/interfaces"
 
 const LoginPage = () => {
   const lid = "loginPage"
+  const router = useRouter()
+
+  const initialFormState: LoginFormState = {
+    email: "",
+    username: "",
+    password: "",
+  }
 
   const [toggleLoginActivity, setToggleLoginActivity] = useState<boolean>(true) // true - login & false - sign up
-
-  const router = useRouter()
+  const [formData, setFormData] = useState<LoginFormState>(initialFormState)
 
   // enables url traversing to sign up or login page specificaly
   useEffect(() => {
@@ -27,6 +34,7 @@ const LoginPage = () => {
       pathname: "/login",
       query: { ...router.query, activity: "login" },
     })
+    setFormData(initialFormState)
   }, [router])
 
   // toogles from login page to signup page
@@ -36,6 +44,7 @@ const LoginPage = () => {
       pathname: "/login",
       query: { ...router.query, activity: "signup" },
     })
+    setFormData(initialFormState)
   }, [router])
 
   return (
@@ -64,6 +73,10 @@ const LoginPage = () => {
               },
               ...styles.loginPageTextField,
             }}
+            value={formData.email}
+            onChange={(e) => {
+              setFormData({ ...formData, email: e.target.value })
+            }}
           />
         )}
         <TextField
@@ -73,6 +86,11 @@ const LoginPage = () => {
           id={lid + "UsernameField"}
           data-testid={lid + "UsernameField"}
           sx={styles.loginPageTextField}
+          value={formData.username}
+          required
+          onChange={(e) => {
+            setFormData({ ...formData, username: e.target.value })
+          }}
         />
         <TextField
           label="Password"
@@ -84,6 +102,10 @@ const LoginPage = () => {
           data-testid={lid + "PasswordField"}
           required
           sx={styles.loginPageTextField}
+          value={formData.password}
+          onChange={(e) => {
+            setFormData({ ...formData, password: e.target.value })
+          }}
         />
         {toggleLoginActivity ? (
           <Button disableRipple sx={styles.loginPageButton}>
