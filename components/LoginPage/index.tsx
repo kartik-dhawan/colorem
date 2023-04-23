@@ -3,10 +3,16 @@ import { styles } from "./styles"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { LoginFormState } from "../../utils/interfaces"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import db, { app } from "../../lib/auth/firebaseConfig"
+import { collection, query, where } from "firebase/firestore"
+import { getDataFromQuery } from "../../lib/auth/firestore"
 
 const LoginPage = () => {
   const lid = "loginPage"
   const router = useRouter()
+  const auth = getAuth(app)
+  const collectioRef = collection(db, "users")
 
   const initialFormState: LoginFormState = {
     email: "",
@@ -26,6 +32,27 @@ const LoginPage = () => {
       setToggleLoginActivity(false)
     }
   }, [router.query])
+
+  const loginHandler = async () => {
+    // querying the firestore db to get email for the entered usernmame
+    const q = query(collectioRef, where("username", "==", formData.username))
+    const data = await getDataFromQuery(q)
+
+    // using that email & password entered by user to login
+    return (
+      data.email !== "" &&
+      signInWithEmailAndPassword(auth, data.email, formData.password).then(
+        async (user) => {
+          // algo : HS256
+          const token = await user.user.getIdToken()
+          localStorage.setItem("firebase-token", JSON.stringify(token))
+          document.cookie = `firebase-token=${token}`
+          // clears form data after login
+          setFormData(initialFormState)
+        }
+      )
+    )
+  }
 
   // toogles from signup page to login page
   const handleLoginToggle = useCallback(() => {
@@ -112,6 +139,7 @@ const LoginPage = () => {
             disableRipple
             sx={styles.loginPageButton}
             data-testid={lid + "LoginButton"}
+            onClick={loginHandler}
           >
             Login
           </Button>

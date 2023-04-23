@@ -95,6 +95,7 @@ exports[`Login page -- should match snapshot 1`] = `
       data-testid="loginPageLoginButton"
       disabled={false}
       onBlur={[Function]}
+      onClick={[Function]}
       onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}

@@ -138,7 +138,7 @@ export interface SkillType {
 }
 
 export interface LoginFormState {
-  email?: string
-  password?: string
-  username?: string
+  email: string
+  password: string
+  username: string
 }
