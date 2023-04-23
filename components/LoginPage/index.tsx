@@ -1,8 +1,42 @@
 import { Box, Button, TextField } from "@mui/material"
 import { styles } from "./styles"
+import { useCallback, useEffect, useState } from "react"
+import { useRouter } from "next/router"
 
 const LoginPage = () => {
   const lid = "loginPage"
+
+  const [toggleLoginActivity, setToggleLoginActivity] = useState<boolean>(true) // true - login & false - sign up
+
+  const router = useRouter()
+
+  // enables url traversing to sign up or login page specificaly
+  useEffect(() => {
+    const activityStatus = router.query?.activity
+    if (activityStatus === "login") {
+      setToggleLoginActivity(true)
+    } else if (activityStatus === "signup") {
+      setToggleLoginActivity(false)
+    }
+  }, [router.query])
+
+  // toogles from signup page to login page
+  const handleLoginToggle = useCallback(() => {
+    setToggleLoginActivity(true)
+    router.push({
+      pathname: "/login",
+      query: { ...router.query, activity: "login" },
+    })
+  }, [router])
+
+  // toogles from login page to signup page
+  const handleSignupToggle = useCallback(() => {
+    setToggleLoginActivity(false)
+    router.push({
+      pathname: "/login",
+      query: { ...router.query, activity: "signup" },
+    })
+  }, [router])
 
   return (
     <>
@@ -12,23 +46,26 @@ const LoginPage = () => {
         data-testid={lid + "FormWrapper"}
         sx={styles.loginPageFormWrapper}
       >
-        <TextField
-          label="Email Id"
-          type="email"
-          autoComplete="current-password"
-          variant="standard"
-          className={lid + "TextField"}
-          id={lid + "PasswordField"}
-          data-testid={lid + "PasswordField"}
-          sx={{
-            minWidth: {
-              sm: "50%",
-              md: "40%",
-              lg: "35%",
-            },
-            ...styles.loginPageTextField,
-          }}
-        />
+        {!toggleLoginActivity && (
+          <TextField
+            label="Email Id"
+            type="email"
+            autoComplete="current-password"
+            variant="standard"
+            className={lid + "TextField"}
+            id={lid + "PasswordField"}
+            data-testid={lid + "PasswordField"}
+            required
+            sx={{
+              minWidth: {
+                sm: "50%",
+                md: "40%",
+                lg: "35%",
+              },
+              ...styles.loginPageTextField,
+            }}
+          />
+        )}
         <TextField
           label="Username"
           variant="standard"
@@ -45,22 +82,37 @@ const LoginPage = () => {
           className={lid + "TextField"}
           id={lid + "PasswordField"}
           data-testid={lid + "PasswordField"}
+          required
           sx={styles.loginPageTextField}
         />
-        <Button disableRipple sx={styles.loginPageButton}>
-          Login
-        </Button>
-        <Button disableRipple sx={styles.loginPageButton}>
-          Sign Up
-        </Button>
+        {toggleLoginActivity ? (
+          <Button disableRipple sx={styles.loginPageButton}>
+            Login
+          </Button>
+        ) : (
+          <Button disableRipple sx={styles.loginPageButton}>
+            Sign Up
+          </Button>
+        )}
       </Box>
       <Box sx={styles.loginPageExtraOptions}>
-        <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
-          create an account
-        </Button>
-        <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
-          log into an account
-        </Button>
+        {toggleLoginActivity ? (
+          <Button
+            disableRipple
+            sx={styles.loginPageExtraOptionsButton}
+            onClick={handleSignupToggle}
+          >
+            create an account
+          </Button>
+        ) : (
+          <Button
+            disableRipple
+            sx={styles.loginPageExtraOptionsButton}
+            onClick={handleLoginToggle}
+          >
+            log into an account
+          </Button>
+        )}
         <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
           recover account
         </Button>

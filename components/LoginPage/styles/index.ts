@@ -4,7 +4,7 @@ export const styles = {
     flexDirection: "column",
     justifyContent: "center",
     gap: "34px",
-    border: "0.5px solid #727272",
+    backgroundColor: "#050505",
     position: "absolute",
     top: "2rem",
     bottom: "2rem",
@@ -40,9 +40,12 @@ export const styles = {
       lg: "20%",
     },
     "& > .MuiFormLabel-root": {
-      color: "#d9d9d9",
+      color: "#727272",
       fontWeight: 300,
-      fontSize: "18px",
+      fontSize: {
+        xs: "16px",
+        md: "18px",
+      },
       "&.Mui-focussed": {
         color: "#727272 !important",
       },
@@ -53,7 +56,10 @@ export const styles = {
     "& > .MuiInputBase-root": {
       padding: "2px 8px",
       fontWeight: 300,
-      fontSize: "18px",
+      fontSize: {
+        xs: "16px",
+        md: "18px",
+      },
       "&::before": {
         borderBottom: "0.5px solid #d9d9d9 !important",
       },
@@ -95,6 +101,7 @@ export const styles = {
     fontWeight: 300,
     color: "#727272",
     transition: "500ms all ease",
+    lineHeight: "16px",
     "&:hover": {
       backgroundColor: "transparent",
       color: "#b1b1b1",
