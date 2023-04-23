@@ -136,3 +136,9 @@ export interface SkillType {
   handsOnExperience: number
   projects: number
 }
+
+export interface LoginFormState {
+  email?: string
+  password?: string
+  username?: string
+}
