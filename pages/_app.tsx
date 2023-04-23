@@ -7,7 +7,7 @@ import { Provider } from "react-redux"
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const noLayoutPages = ["/_error", "/", "/404", "/about"]
+  const noLayoutPages = ["/_error", "/", "/404", "/about", "/login"]
 
   if (
     noLayoutPages.includes(router.pathname) ||
