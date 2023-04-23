@@ -32,6 +32,7 @@
     "mongoose": "^6.8.0",
     "next": "^13.2.4",
     "next-redux-wrapper": "^8.0.0",
+    "next-router-mock": "^0.9.3",
     "random-words": "^1.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
