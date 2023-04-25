@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { updateContent } from "../redux/slices/contentSlice"
 import { client } from "../utils/contentful/config"
 import { ContentfulType } from "../utils/interfaces"
+import { useRouter } from "next/router"
 
 const yellowTail = Yellowtail({
   weight: "400",
@@ -33,6 +34,12 @@ export const getStaticProps = async () => {
 
 const Home = ({ contentData }: ContentfulType) => {
   const dispatch = useDispatch()
+  const router = useRouter()
+
+  useEffect(() => {
+    document.cookie = `page-route=${router.asPath}`
+  }, [])
+
   useEffect(() => {
     // storing contentful data in redux for this page
     dispatch(updateContent(contentData))

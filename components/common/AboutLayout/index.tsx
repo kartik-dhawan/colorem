@@ -3,8 +3,16 @@ import { ErrorBoundary } from "react-error-boundary"
 import { ChildrenType } from "../../../utils/interfaces"
 import AboutPageNav from "../../AboutPageNav"
 import ErrorFallback, { myErrorHandler } from "../ErrorFallback"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 const AboutLayout = ({ children }: ChildrenType) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    document.cookie = `page-route=${router.asPath}`
+  }, [])
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       <Box
