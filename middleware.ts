@@ -39,4 +39,7 @@ export const middleware = async (request: NextRequest) => {
 // simply add routes to protect in this config
 export const config = {
   matcher: ["/login", "/admin", "/gradients/create"],
+  unstable_allowDynamic: [
+    "**/node_modules/lodash/lodash.js", // use a glob to allow anything in the function-bind 3rd party module
+  ],
 }
