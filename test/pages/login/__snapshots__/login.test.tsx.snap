@@ -91,9 +91,10 @@ exports[`Login page -- should match snapshot 1`] = `
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e5zz5g-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="loginPageLoginButton"
       disabled={false}
+      id=":r2:"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}

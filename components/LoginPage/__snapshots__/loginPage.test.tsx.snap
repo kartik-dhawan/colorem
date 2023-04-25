@@ -87,9 +87,10 @@ exports[`Login component -- (login) should match snapshot 1`] = `
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e5zz5g-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="loginPageLoginButton"
       disabled={false}
+      id=":r2:"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -305,10 +306,12 @@ exports[`Login component -- (signup) should match snapshot 1`] = `
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e5zz5g-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="loginPageSignupButton"
-      disabled={false}
+      disabled={true}
+      id=":r5:"
       onBlur={[Function]}
+      onClick={[Function]}
       onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
@@ -320,7 +323,7 @@ exports[`Login component -- (signup) should match snapshot 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={0}
+      tabIndex={-1}
       type="button"
     >
       Sign Up
