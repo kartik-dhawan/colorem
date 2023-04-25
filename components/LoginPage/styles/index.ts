@@ -78,7 +78,7 @@ export const styles = {
       sm: "40%",
       md: "30%",
     },
-    backgroundColor: "#727272",
+    backgroundColor: "#959595",
     borderRadius: "0px",
     marginTop: {
       xs: "1rem",

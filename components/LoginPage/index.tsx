@@ -7,6 +7,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
 import { collection, query, where } from "firebase/firestore"
 import { getDataFromQuery } from "../../lib/auth/firestore"
+import LoadingButton from "@mui/lab/LoadingButton"
 
 const LoginPage = () => {
   const lid = "loginPage"
@@ -20,12 +21,18 @@ const LoginPage = () => {
     password: "",
   }
 
+  // finds the status of the page - login or signup
+  const activityStatus = router.query?.activity
+    ? router.query?.activity
+    : "login"
+
   const [toggleLoginActivity, setToggleLoginActivity] = useState<boolean>(true) // true - login & false - sign up
   const [formData, setFormData] = useState<LoginFormState>(initialFormState)
+  const [loader, setLoader] = useState<boolean>(false)
+  const [disabledButton, setDisabledButton] = useState<boolean>(false)
 
   // enables url traversing to sign up or login page specificaly
   useEffect(() => {
-    const activityStatus = router.query?.activity
     if (activityStatus === "login") {
       setToggleLoginActivity(true)
     } else if (activityStatus === "signup") {
@@ -33,7 +40,36 @@ const LoginPage = () => {
     }
   }, [router.query])
 
+  function isValidEmail(email: string) {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+
+  /*
+   * textfield input check to disable or enable buttons
+   * also adds a check for password to be at least of 6 characters
+   * & username to be of at least 4 characters
+   */
+  useEffect(() => {
+    if (
+      (activityStatus === "login" && formData.username.length < 4) ||
+      formData.password.length <= 5
+    ) {
+      setDisabledButton(true)
+    } else if (
+      (activityStatus === "signup" && !isValidEmail(formData.email)) ||
+      formData.password.length <= 5 ||
+      formData.username.length < 4
+    ) {
+      setDisabledButton(true)
+    } else {
+      setDisabledButton(false)
+    }
+  }, [formData])
+
   const loginHandler = async () => {
+    // initializes loader
+    setLoader(true)
+
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", formData.username))
     const data = await getDataFromQuery(q)
@@ -41,17 +77,26 @@ const LoginPage = () => {
     // using that email & password entered by user to login
     return (
       data.email !== "" &&
-      signInWithEmailAndPassword(auth, data.email, formData.password).then(
-        async (user) => {
+      signInWithEmailAndPassword(auth, data.email, formData.password)
+        .then(async (user) => {
           // algo : HS256
           const token = await user.user.getIdToken()
           localStorage.setItem("firebase-token", JSON.stringify(token))
           document.cookie = `firebase-token=${token}`
           // clears form data after login
           setFormData(initialFormState)
-        }
-      )
+          router.push("/dashboard")
+        })
+        .catch((error) => {
+          console.log(error)
+          setLoader(false)
+        })
     )
+  }
+
+  const signUpHandler = () => {
+    setLoader(true)
+    router.push("/dashboard")
   }
 
   // toogles from signup page to login page
@@ -135,22 +180,27 @@ const LoginPage = () => {
           }}
         />
         {toggleLoginActivity ? (
-          <Button
+          <LoadingButton
             disableRipple
             sx={styles.loginPageButton}
             data-testid={lid + "LoginButton"}
             onClick={loginHandler}
+            loading={loader}
+            disabled={disabledButton}
           >
             Login
-          </Button>
+          </LoadingButton>
         ) : (
-          <Button
+          <LoadingButton
             disableRipple
             sx={styles.loginPageButton}
             data-testid={lid + "SignupButton"}
+            onClick={signUpHandler}
+            loading={loader}
+            disabled={disabledButton}
           >
             Sign Up
-          </Button>
+          </LoadingButton>
         )}
       </Box>
       <Box sx={styles.loginPageExtraOptions}>
