@@ -14,10 +14,14 @@ export const middleware = async (request: NextRequest) => {
   /**
    * if we're logged in, remove acces from '/login' page
    */
-  if (request.nextUrl.pathname === "/login" && validDecoded !== null) {
+  if (
+    request.nextUrl.pathname === "/login" &&
+    validDecoded !== null &&
+    validDecoded !== undefined
+  ) {
     return NextResponse.redirect(new URL(previousRoute, request.url))
   } else if (request.nextUrl.pathname !== "/login") {
-    if (validDecoded !== null) {
+    if (validDecoded !== null && validDecoded !== undefined) {
       /**
        * If the token is valid
        * the user is authenticated
@@ -40,6 +44,7 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: ["/login", "/admin", "/gradients/create"],
   unstable_allowDynamic: [
+    // FIX
     "**/node_modules/lodash/lodash.js", // use a glob to allow anything in the function-bind 3rd party module
   ],
 }
