@@ -7,7 +7,7 @@ import { aboutSectionColorScheme } from "../../utils/constants"
 import { ChildrenType } from "../../utils/interfaces"
 
 const AboutPageContent = ({ children }: ChildrenType) => {
-  const [variant, setVariant] = useState<any>({
+  /* eslint-disable-line */ const [variant, setVariant] = useState<any>({
     before: { x: 0 },
     after: { x: 0 },
   })

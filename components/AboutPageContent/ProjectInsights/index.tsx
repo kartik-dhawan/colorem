@@ -119,64 +119,68 @@ const ProjectInsights = () => {
             sx={{ textAlign: "right" }}
           >
             {selectedRoleContent &&
-              selectedRoleContent?.map((item: any, index: number) => {
-                const imageUrl =
-                  "https:" + selectedRoleImages[index].fields.file.url
-                return (
-                  <div key={index}>
-                    <Stack
-                      className={iid + "ContentItemWrapper " + roboto.className}
-                      id={id + iid + "ContentItemWrapper"}
-                      sx={{
-                        margin: "8px 0px",
-                      }}
-                    >
-                      <Box
-                        className={iid + "ContentItemTitle"}
-                        sx={styles.insightsSectionContentItemTitle}
+              selectedRoleContent?.map(
+                (item: any /* eslint-disable-line */, index: number) => {
+                  const imageUrl =
+                    "https:" + selectedRoleImages[index].fields.file.url
+                  return (
+                    <div key={index}>
+                      <Stack
+                        className={
+                          iid + "ContentItemWrapper " + roboto.className
+                        }
+                        id={id + iid + "ContentItemWrapper"}
+                        sx={{
+                          margin: "8px 0px",
+                        }}
                       >
-                        {item.title}
-                      </Box>
+                        <Box
+                          className={iid + "ContentItemTitle"}
+                          sx={styles.insightsSectionContentItemTitle}
+                        >
+                          {item.title}
+                        </Box>
+                        <Box
+                          className={iid + "ContentItemText"}
+                          sx={styles.insightsSectionContentItemText}
+                        >
+                          {item.body.map((text: string, i: number) => {
+                            return <div key={i}>{text}</div>
+                          })}
+                        </Box>
+                      </Stack>
+                      {/* Image mapped according to the data & image array */}
                       <Box
-                        className={iid + "ContentItemText"}
-                        sx={styles.insightsSectionContentItemText}
+                        className={iid + "ImageWrapper"}
+                        id={iid + "ImageWrapper"}
+                        sx={styles.insightsSectionImageWrapper}
                       >
-                        {item.body.map((text: string, i: number) => {
-                          return <div key={i}>{text}</div>
-                        })}
-                      </Box>
-                    </Stack>
-                    {/* Image mapped according to the data & image array */}
-                    <Box
-                      className={iid + "ImageWrapper"}
-                      id={iid + "ImageWrapper"}
-                      sx={styles.insightsSectionImageWrapper}
-                    >
-                      {!selectedRoleImages[index] ? (
-                        <Skeleton
-                          sx={teamStyles.skeletonCss}
-                          animation="pulse"
-                        />
-                      ) : (
-                        <Link href={imageUrl} target="_blank">
-                          <Image
-                            src={imageUrl}
-                            fill
-                            alt={""}
-                            style={{
-                              position: "absolute",
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "contain",
-                              borderRadius: "16px",
-                            }}
+                        {!selectedRoleImages[index] ? (
+                          <Skeleton
+                            sx={teamStyles.skeletonCss}
+                            animation="pulse"
                           />
-                        </Link>
-                      )}
-                    </Box>
-                  </div>
-                )
-              })}
+                        ) : (
+                          <Link href={imageUrl} target="_blank">
+                            <Image
+                              src={imageUrl}
+                              fill
+                              alt={""}
+                              style={{
+                                position: "absolute",
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "contain",
+                                borderRadius: "16px",
+                              }}
+                            />
+                          </Link>
+                        )}
+                      </Box>
+                    </div>
+                  )
+                }
+              )}
           </Box>
         </Stack>
         {/* TODO remove 'display: none' from styles of this icon before working on it */}

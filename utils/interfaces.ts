@@ -109,7 +109,7 @@ export interface AboutNavItem {
   id: number
   title: string
   route: string
-  content?: any
+  content?: any /* eslint-disable-line */
 }
 
 export interface AnimationVariant {

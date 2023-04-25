@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
   })
 
   const navItems: AboutNavItem[] = [...items]
-    .map((item: any) => {
+    .map((item: any) /* eslint-disable-line */ => {
       return {
         id: item.fields.id,
         title: item.fields.navItemTitle,
