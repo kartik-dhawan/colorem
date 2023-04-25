@@ -167,9 +167,14 @@ export const hexToRGB = (hex: string) => {
  * @param {string} field
  * @returns
  */
-export const sortArrayByField = (arr: any[], key: string) => {
+export const sortArrayByField = (
+  arr: any[] /* eslint-disable-line */,
+  key: string
+) => {
   const sortedArray =
-    arr && [...arr].sort((a: any, b: any) => (a[key] > b[key] ? 1 : -1))
+    arr &&
+    [...arr].sort((a: any, b: any) /* eslint-disable-line */ =>
+      a[key] > b[key] ? 1 : -1)
   return sortedArray
 }
 
@@ -193,7 +198,10 @@ export const monthsToYears = (months: number) => {
  * @param {number} requiredLength // optional
  * @returns
  */
-export const getShuffledArray = (arr: any[], requiredLength?: number) => {
+export const getShuffledArray = (
+  arr: any[] /* eslint-disable-line */,
+  requiredLength?: number
+) => {
   const array = [...arr]
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1)) // random index from 0 to
@@ -204,3 +212,18 @@ export const getShuffledArray = (arr: any[], requiredLength?: number) => {
   }
   return array
 }
+
+/**
+ * @param {string} str
+ */
+export const parseCookie = (str: string) =>
+  str
+    .split(";")
+    .map((v) => v.split("="))
+    .reduce(
+      (acc: any, v) /* eslint-disable-line */ => {
+        acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
+        return acc
+      },
+      {}
+    )

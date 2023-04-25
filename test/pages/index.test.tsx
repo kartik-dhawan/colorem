@@ -6,6 +6,8 @@ import renderer from "react-test-renderer"
 import { render } from "@testing-library/react"
 import "@testing-library/jest-dom"
 
+jest.mock("next/router", () => require("next-router-mock"))
+
 describe("Home page", () => {
   it("-- should match snapshot", () => {
     const tree = renderer

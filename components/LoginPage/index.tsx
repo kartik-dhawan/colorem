@@ -6,7 +6,7 @@ import { LoginFormState } from "../../utils/interfaces"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
 import { collection, query, where } from "firebase/firestore"
-import { getDataFromQuery } from "../../lib/auth/firestore"
+import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
 
 const LoginPage = () => {
@@ -72,7 +72,7 @@ const LoginPage = () => {
 
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", formData.username))
-    const data = await getDataFromQuery(q)
+    const data = await getUsersDataFromQuery(q)
 
     // using that email & password entered by user to login
     return (

@@ -139,7 +139,7 @@ const ColoremTeam = () => {
             {!teamSectionImages ? (
               <Skeleton sx={styles.skeletonCss} animation="pulse" />
             ) : (
-              teamSectionImages.map((image: any) => {
+              teamSectionImages.map((image: any) /* eslint-disable-line */ => {
                 if (image.fields.title === selectedRole) {
                   return (
                     <Image
