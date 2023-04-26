@@ -37,3 +37,7 @@ export interface GradientSliceType {
   data: GradientDataType[]
   isLoading: boolean
 }
+
+export interface AuthenticationState {
+  isAuthenticated: boolean
+}

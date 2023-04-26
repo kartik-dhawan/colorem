@@ -1,12 +1,15 @@
 import { Grid } from "@mui/material"
 import Link from "next/link"
 import { styles } from "./styles"
-import { externalLinks } from "../../../utils/constants"
 import { Roboto } from "next/font/google"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
 const roboto = Roboto({ weight: "300", display: "swap", subsets: ["latin"] })
 
 const Navbar = () => {
+  const { isAuthenticated } = useSelector((state: RootType) => state.authSlice)
+
   return (
     <Grid
       container
@@ -24,16 +27,11 @@ const Navbar = () => {
           Colorem
         </Link>
       </Grid>
-      <Grid item sm={4} xs={6} textAlign={"right"} sx={styles.navbarItems}>
-        <Link href="/about" style={{ textDecoration: "none" }}>
-          About
-        </Link>
-      </Grid>
       <Grid
         item
         sm={4}
+        textAlign={"right"}
         sx={{
-          textAlign: "right",
           display: {
             xs: "none",
             sm: "inline",
@@ -41,12 +39,24 @@ const Navbar = () => {
           ...styles.navbarItems,
         }}
       >
+        <Link href="/about" style={{ textDecoration: "none" }}>
+          About
+        </Link>
+      </Grid>
+      <Grid
+        item
+        sm={4}
+        xs={6}
+        sx={{
+          textAlign: "right",
+          ...styles.navbarItems,
+        }}
+      >
         <Link
-          href={externalLinks.GITHUB}
-          target="_blank"
+          href={isAuthenticated ? "/logout" : "/login"}
           style={{ textDecoration: "none" }}
         >
-          Github
+          {isAuthenticated ? "Logout" : "Login"}
         </Link>
       </Grid>
     </Grid>

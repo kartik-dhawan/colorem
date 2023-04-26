@@ -142,3 +142,10 @@ export interface LoginFormState {
   password: string
   username: string
 }
+
+export interface TokenExpirationDetails {
+  isValid: boolean
+  now: number
+  exp: number
+  expTimeInSeconds: number
+}

@@ -8,10 +8,13 @@ import ErrorFallback, {
 } from "../../components/common/ErrorFallback"
 import { Box, Typography } from "@mui/material"
 import { styles } from "../../components/LoginPage/styles"
+import { useDispatch } from "react-redux"
+import { updateAuthStatus } from "../../redux/slices/authSlice"
 
 const LogoutPage = () => {
   const auth = getAuth(app)
   const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     signOut(auth)
@@ -19,6 +22,9 @@ const LogoutPage = () => {
         console.log(sign)
         localStorage.removeItem("firebase-token")
         document.cookie = "firebase-token='';"
+        // updates auth state in redux
+        dispatch(updateAuthStatus(false))
+        // post logout redirect
         router.push("/login")
       })
       .catch((error) => {

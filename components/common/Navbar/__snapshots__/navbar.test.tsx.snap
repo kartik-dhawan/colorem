@@ -23,7 +23,7 @@ exports[`Navbar & SubNav Component -- (Navbar) should match snapshot 1`] = `
     </a>
   </div>
   <div
-    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-4 css-1ipynby-MuiGrid-root"
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 css-2tokck-MuiGrid-root"
   >
     <a
       href="/about"
@@ -40,10 +40,10 @@ exports[`Navbar & SubNav Component -- (Navbar) should match snapshot 1`] = `
     </a>
   </div>
   <div
-    className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 css-2tokck-MuiGrid-root"
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-4 css-1ipynby-MuiGrid-root"
   >
     <a
-      href="https://github.com/kartik-dhawan"
+      href="/login"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onTouchStart={[Function]}
@@ -52,9 +52,8 @@ exports[`Navbar & SubNav Component -- (Navbar) should match snapshot 1`] = `
           "textDecoration": "none",
         }
       }
-      target="_blank"
     >
-      Github
+      Login
     </a>
   </div>
 </div>

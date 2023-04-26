@@ -10,11 +10,14 @@ import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
+import { useDispatch } from "react-redux"
+import { updateAuthStatus } from "../../redux/slices/authSlice"
 
 const LoginPage = () => {
   const lid = "loginPage"
   const router = useRouter()
   const auth = getAuth(app)
+  const dispatch = useDispatch()
   const collectioRef = collection(db, "users")
 
   const initialFormState: LoginFormState = {
@@ -99,10 +102,13 @@ const LoginPage = () => {
         .then(async (user) => {
           // algo : HS256
           const token = await user.user.getIdToken()
-          localStorage.setItem("firebase-token", JSON.stringify(token))
+          localStorage.setItem("firebase-token", token)
           document.cookie = `firebase-token=${token}`
           // clears form data after login
           setFormData(initialFormState)
+          // sets auth state in redux
+          dispatch(updateAuthStatus(true))
+          // post login redirect
           router.push("/dashboard")
         })
         .catch((error) => {
