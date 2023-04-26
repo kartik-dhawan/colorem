@@ -4,7 +4,8 @@ export const styles = {
       xs: "max-content",
       lg: "100vh",
     },
-    margin: {
+    boxSizing: "border-box",
+    padding: {
       xs: "24px 30px 4rem 30px",
       sm: "30px 50px 4rem 30px",
     },

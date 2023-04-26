@@ -8,6 +8,8 @@ import db, { app } from "../../lib/auth/firebaseConfig"
 import { collection, query, where } from "firebase/firestore"
 import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
 
 const LoginPage = () => {
   const lid = "loginPage"
@@ -120,7 +122,7 @@ const LoginPage = () => {
   }, [router])
 
   return (
-    <>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       <Box
         className={lid + "FormWrapper"}
         id={lid + "FormWrapper"}
@@ -230,7 +232,7 @@ const LoginPage = () => {
           log in with google
         </Button>
       </Box>
-    </>
+    </ErrorBoundary>
   )
 }
 export default LoginPage

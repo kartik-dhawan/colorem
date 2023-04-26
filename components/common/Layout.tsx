@@ -8,7 +8,8 @@ import { useEffect } from "react"
 
 const styles = {
   LayoutWrapper: {
-    margin: {
+    boxSizing: "border-box",
+    padding: {
       xs: "24px 30px",
       sm: "30px 50px",
     },
@@ -35,7 +36,7 @@ const Layout = ({ children }: ChildrenType) => {
         <Navbar />
         {children}
       </Box>
-      <Footer />
+      {router.asPath !== "/logout" && <Footer />}
     </>
   )
 }
