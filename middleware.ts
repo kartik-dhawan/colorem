@@ -7,7 +7,10 @@ export const middleware = async (request: NextRequest) => {
   const authHeader = requestHeaders.get("cookie")
   const parsedCookie = authHeader && parseCookie(authHeader)
   const token = parsedCookie && parsedCookie["firebase-token"]
-  const previousRoute = parsedCookie["page-route"] || "/dashboard"
+  const previousRoute =
+    parsedCookie && parsedCookie["page-route"]
+      ? parsedCookie["page-route"]
+      : "/dashboard"
 
   const validDecoded = token && jwt.decode(token)
 
