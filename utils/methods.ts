@@ -1,6 +1,11 @@
 import axios from "axios"
 import { gradientBoxTypes } from "./constants"
-import { GetContrastingColor, GetLightOrDarkTextColor } from "./interfaces"
+import {
+  GetContrastingColor,
+  GetLightOrDarkTextColor,
+  TokenExpirationDetails,
+} from "./interfaces"
+import jwt from "jsonwebtoken"
 
 /**
  * lightens or darkens a color by a certain amount
@@ -227,3 +232,29 @@ export const parseCookie = (str: string) =>
       },
       {}
     )
+
+/**
+ *
+ * @param {string} token
+ * @returns
+ * isValid: true -> not expired
+ * isValid: false -> expired
+ */
+export const isTokenValid = (token: any) => {
+  const decoded = token && jwt.decode(token)
+  const expiration = decoded?.exp * 1000
+  const expTime = Math.floor((expiration - Date.now()) / 1000)
+
+  /**
+   * if token is invalid in format or we pass the wrong token
+   * the expiration would not be a number and hence we return isValid: false in that case
+   */
+  const tokenExpirationDetails: TokenExpirationDetails = {
+    isValid: Number.isNaN(expiration) ? false : !(Date.now() >= expiration),
+    now: Date.now(),
+    exp: expiration,
+    expTimeInSeconds: expTime >= 0 ? expTime : 0,
+  }
+
+  return tokenExpirationDetails
+}
