@@ -33,6 +33,22 @@ const LoginPage = () => {
   const [loader, setLoader] = useState<boolean>(false)
   const [disabledButton, setDisabledButton] = useState<boolean>(false)
 
+  // logs user in on enter
+  useEffect(() => {
+    const keyDownHandler = (event: any) /** esint-disable-line */ => {
+      if (event.key === "Enter") {
+        event.preventDefault()
+        return !disabledButton && loginHandler()
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler)
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler)
+    }
+  }, [disabledButton])
+
   // enables url traversing to sign up or login page specificaly
   useEffect(() => {
     if (activityStatus === "login") {
