@@ -49,7 +49,7 @@ const Layout = ({ children }: ChildrenType) => {
     // to make the token consistent
     if (token === "") {
       document.cookie = "firebase-token='';"
-      router.replace("/login")
+      router.asPath === "/admin" && router.replace("/login") // eslint-disable-line
     }
   }, [router.asPath, isValid, token])
 
