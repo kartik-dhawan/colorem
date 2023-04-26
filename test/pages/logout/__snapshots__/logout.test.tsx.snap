@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logout page -- should match snapshot 1`] = `
+<div
+  className="logoutPageWrapper MuiBox-root css-z7qmyv"
+  data-testid="logoutPageWrapper"
+  id="logoutPageWrapper"
+>
+  <h6
+    className="MuiTypography-root MuiTypography-subtitle1 logoutPageText css-122tm9-MuiTypography-root"
+    data-testid="logoutPageText"
+    id="logoutPageText"
+  >
+    Please wait while we log you out...
+  </h6>
+</div>
+`;

@@ -7,18 +7,30 @@ export const middleware = async (request: NextRequest) => {
   const authHeader = requestHeaders.get("cookie")
   const parsedCookie = authHeader && parseCookie(authHeader)
   const token = parsedCookie && parsedCookie["firebase-token"]
-  const previousRoute = parsedCookie["page-route"] || "/dashboard"
+  const previousRoute =
+    parsedCookie && parsedCookie["page-route"]
+      ? parsedCookie["page-route"]
+      : "/dashboard"
 
   const validDecoded = token && jwt.decode(token)
 
-  /**
-   * if we're logged in, remove acces from '/login' page
-   */
   if (
     request.nextUrl.pathname === "/login" &&
     validDecoded !== null &&
     validDecoded !== undefined
   ) {
+    /**
+     * if we're logged in, remove acces from '/login' page
+     */
+    return NextResponse.redirect(new URL(previousRoute, request.url))
+  } else if (
+    request.nextUrl.pathname === "/logout" &&
+    validDecoded === null &&
+    validDecoded === undefined
+  ) {
+    /**
+     * if we're logged out, remove acces from '/logout' page
+     */
     return NextResponse.redirect(new URL(previousRoute, request.url))
   } else if (request.nextUrl.pathname !== "/login") {
     if (validDecoded !== null && validDecoded !== undefined) {
@@ -42,7 +54,7 @@ export const middleware = async (request: NextRequest) => {
 
 // simply add routes to protect in this config
 export const config = {
-  matcher: ["/login", "/admin", "/gradients/create"],
+  matcher: ["/login", "/logout", "/admin", "/gradients/create"],
   unstable_allowDynamic: [
     // FIX
     "**/node_modules/lodash/lodash.js", // use a glob to allow anything in the function-bind 3rd party module

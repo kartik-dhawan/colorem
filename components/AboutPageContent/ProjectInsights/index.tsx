@@ -86,12 +86,7 @@ const ProjectInsights = () => {
   return (
     <AboutPageContent>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-        <Stack
-          sx={{
-            overflowY: { lg: "scroll" },
-            maxHeight: { lg: "100vh" },
-          }}
-        >
+        <Stack>
           <Box
             className={iid + "Title " + antonio.className}
             id={iid + "Title"}

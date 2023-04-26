@@ -49,9 +49,6 @@ export const styles = {
       "&.Mui-focussed": {
         color: "#727272 !important",
       },
-      // "&.css-1c2i806-MuiFormLabel-root-MuiInputlabel-root.Mui-focused": {
-      //   color: "#727272 !important",
-      // },
     },
     "& > .MuiInputBase-root": {
       padding: "2px 8px",
@@ -106,5 +103,18 @@ export const styles = {
       backgroundColor: "transparent",
       color: "#b1b1b1",
     },
+  },
+  logoutPageWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "80vh",
+  },
+  logoutPageText: {
+    fontWeight: 300,
+    fontSize: "16px",
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    color: "#b1b1b1",
   },
 }
