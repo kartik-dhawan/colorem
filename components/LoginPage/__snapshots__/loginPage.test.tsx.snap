@@ -306,9 +306,9 @@ exports[`Login component -- (signup) should match snapshot 1`] = `
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="loginPageSignupButton"
-      disabled={true}
+      disabled={false}
       id=":r5:"
       onBlur={[Function]}
       onClick={[Function]}
@@ -323,7 +323,7 @@ exports[`Login component -- (signup) should match snapshot 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={-1}
+      tabIndex={0}
       type="button"
     >
       Sign Up

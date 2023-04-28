@@ -4,6 +4,7 @@ import ErrorIcon from "@mui/icons-material/Error"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import { useCallback, useState } from "react"
 import { styles } from "./styles"
+import { getErrorObjectByCode } from "../../../lib/auth/errorMessages"
 
 interface AuthAlertProps {
   state: LoginErrorSuccess
@@ -43,7 +44,7 @@ const AuthAlert = ({ state }: AuthAlertProps) => {
             color: state.status === "error" ? "#ca8282" : "#7aa965",
           }}
         >
-          {state.error?.code}
+          {state.error && getErrorObjectByCode(state.error?.code).title}
         </Typography>
         <Button
           className={aid + "DetailsToggle"}
@@ -61,7 +62,7 @@ const AuthAlert = ({ state }: AuthAlertProps) => {
           data-testid={aid + "DetailsBody"}
           sx={styles.authAlertDetailsBody}
         >
-          {state.error?.message}
+          {state.error && getErrorObjectByCode(state.error?.code).message}
         </Typography>
       )}
     </Box>

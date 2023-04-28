@@ -24,7 +24,7 @@ exports[`Auth Alert component -- should match snapshot 1`] = `
       className="MuiTypography-root MuiTypography-body1 authAlertTitle css-19hq4de-MuiTypography-root"
       data-testid="authAlertTitle"
     >
-      Firebase: Error (auth/wrong-password).
+      Incorrect password
     </p>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium authAlertDetailsToggle css-14ukkwu-MuiButtonBase-root-MuiButton-root"

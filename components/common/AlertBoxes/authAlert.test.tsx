@@ -8,7 +8,7 @@ import { LoginErrorSuccess } from "../../../utils/interfaces"
 const authError: LoginErrorSuccess = {
   status: "error",
   error: {
-    code: "Firebase: Error (auth/wrong-password).",
+    code: "auth/wrong-password",
     name: "wrong password",
     message: "Firebase: Error (auth/wrong-password).",
     customData: {},
