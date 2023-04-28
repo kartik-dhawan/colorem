@@ -17,6 +17,7 @@ import {
 } from "../../redux/slices/authSlice"
 import AuthAlert from "../common/AlertBoxes/AuthAlert"
 import { RootType } from "../../redux/constants/stateTypes"
+import { isValidEmail } from "../../utils/methods"
 
 const LoginPage = () => {
   const lid = "loginPage"
@@ -45,6 +46,41 @@ const LoginPage = () => {
     (state: RootType) => state.authSlice
   )
 
+  // logs user in on enter
+  useEffect(() => {
+    const keyDownHandler = (event: any) => {
+      if (event.key === "Enter" && !disabledButton) {
+        event.preventDefault()
+        return loginHandler()
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler)
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler)
+    }
+  }, [disabledButton, formData])
+
+  /*
+   * textfield input check to disable or enable buttons
+   * also adds a check for password to be at least of 6 characters
+   * & username to be of at least 4 characters
+   */
+  useEffect(() => {
+    setDisabledButton(false)
+    if (activityStatus === "login") {
+      ;(formData.username.length < 4 || formData.password.length < 6) && // eslint-disable-line
+        setDisabledButton(true)
+    }
+    if (activityStatus === "signup") {
+      ;(formData.username.length < 4 || // eslint-disable-line
+        formData.password.length < 6 ||
+        !isValidEmail(formData.email)) &&
+        setDisabledButton(true)
+    }
+  }, [formData])
+
   // enables url traversing to sign up or login page specificaly
   useEffect(() => {
     if (activityStatus === "login") {
@@ -63,7 +99,7 @@ const LoginPage = () => {
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", formData.username))
     console.log(formData)
-    getUsersDataFromQuery(q).then((data: any) => {
+    getUsersDataFromQuery(q).then((data: any) /* eslint-disable-line */ => {
       console.log(data)
 
       if (data !== null) {

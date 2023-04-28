@@ -154,7 +154,7 @@ export interface AuthError {
   name?: string
   code: string
   message?: string
-  customData?: any
+  customData?: any // eslint-disable-line
 }
 
 export interface LoginErrorSuccess {
