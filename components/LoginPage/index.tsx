@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material"
 import { styles } from "./styles"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { LoginFormState } from "../../utils/interfaces"
+import { LoginErrorSuccess, LoginFormState } from "../../utils/interfaces"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
 import { collection, query, where } from "firebase/firestore"
@@ -10,8 +10,14 @@ import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
-import { useDispatch } from "react-redux"
-import { updateAuthStatus } from "../../redux/slices/authSlice"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  updateAuthStatus,
+  updateErrorSuccessState,
+} from "../../redux/slices/authSlice"
+import AuthAlert from "../common/AlertBoxes/AuthAlert"
+import { isValidEmail } from "../../utils/methods"
+import { RootType } from "../../redux/constants/stateTypes"
 
 const LoginPage = () => {
   const lid = "loginPage"
@@ -35,6 +41,10 @@ const LoginPage = () => {
   const [formData, setFormData] = useState<LoginFormState>(initialFormState)
   const [loader, setLoader] = useState<boolean>(false)
   const [disabledButton, setDisabledButton] = useState<boolean>(false)
+
+  const { errorSuccessState } = useSelector(
+    (state: RootType) => state.authSlice
+  )
 
   // logs user in on enter
   useEffect(() => {
@@ -61,10 +71,6 @@ const LoginPage = () => {
     }
   }, [router.query])
 
-  function isValidEmail(email: string) {
-    return /\S+@\S+\.\S+/.test(email)
-  }
-
   /*
    * textfield input check to disable or enable buttons
    * also adds a check for password to be at least of 6 characters
@@ -88,6 +94,8 @@ const LoginPage = () => {
   }, [formData])
 
   const loginHandler = async () => {
+    dispatch(updateErrorSuccessState({ status: null, error: null }))
+
     // initializes loader
     setLoader(true)
 
@@ -112,7 +120,17 @@ const LoginPage = () => {
           router.push("/dashboard")
         })
         .catch((error) => {
-          console.log(error)
+          // all errors will be handled in the same format
+          const errorObject: LoginErrorSuccess = {
+            status: "error",
+            error: {
+              code: error.code,
+              message: error.message,
+              name: error.name,
+              customData: error.customData,
+            },
+          }
+          dispatch(updateErrorSuccessState(errorObject))
           setLoader(false)
         })
     )
@@ -151,6 +169,9 @@ const LoginPage = () => {
         data-testid={lid + "FormWrapper"}
         sx={styles.loginPageFormWrapper}
       >
+        {errorSuccessState.status !== null && (
+          <AuthAlert state={errorSuccessState} />
+        )}
         {!toggleLoginActivity && (
           <TextField
             label="Email Id"

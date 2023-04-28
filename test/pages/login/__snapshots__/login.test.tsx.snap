@@ -7,7 +7,7 @@ exports[`Login page -- should match snapshot 1`] = `
   id="loginPageWrapper"
 >
   <div
-    className="loginPageFormWrapper MuiBox-root css-177k47l"
+    className="loginPageFormWrapper MuiBox-root css-18l78r8"
     data-testid="loginPageFormWrapper"
     id="loginPageFormWrapper"
   >

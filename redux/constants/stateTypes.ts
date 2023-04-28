@@ -4,6 +4,7 @@ import {
   GradientDataType,
   PaletteDataType,
   AboutNavItem,
+  LoginErrorSuccess,
 } from "../../utils/interfaces"
 // Add the Type for all the states used in redux in this file.
 
@@ -40,4 +41,5 @@ export interface GradientSliceType {
 
 export interface AuthenticationState {
   isAuthenticated: boolean
+  errorSuccessState: LoginErrorSuccess
 }

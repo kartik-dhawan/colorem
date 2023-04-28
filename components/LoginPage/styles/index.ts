@@ -18,6 +18,7 @@ export const styles = {
   loginPageFormWrapper: {
     display: "flex",
     flexWrap: "wrap",
+    position: "relative",
     gap: {
       xs: "16px",
       sm: "32px",

@@ -258,3 +258,12 @@ export const isTokenValid = (token: any) => {
 
   return tokenExpirationDetails
 }
+
+/**
+ *
+ * @param {string} email
+ * @returns {boolean}
+ */
+export const isValidEmail = (email: string) => {
+  return /\S+@\S+\.\S+/.test(email)
+}

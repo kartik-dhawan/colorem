@@ -149,3 +149,15 @@ export interface TokenExpirationDetails {
   exp: number
   expTimeInSeconds: number
 }
+
+export interface AuthError {
+  name?: string
+  code: string
+  message?: string
+  customData?: any
+}
+
+export interface LoginErrorSuccess {
+  status: "error" | "success" | null
+  error: AuthError | null
+}

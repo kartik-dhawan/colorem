@@ -3,7 +3,7 @@
 exports[`Login component -- (login) should match snapshot 1`] = `
 [
   <div
-    className="loginPageFormWrapper MuiBox-root css-177k47l"
+    className="loginPageFormWrapper MuiBox-root css-18l78r8"
     data-testid="loginPageFormWrapper"
     id="loginPageFormWrapper"
   >
@@ -182,7 +182,7 @@ exports[`Login component -- (login) should match snapshot 1`] = `
 exports[`Login component -- (signup) should match snapshot 1`] = `
 [
   <div
-    className="loginPageFormWrapper MuiBox-root css-177k47l"
+    className="loginPageFormWrapper MuiBox-root css-18l78r8"
     data-testid="loginPageFormWrapper"
     id="loginPageFormWrapper"
   >
