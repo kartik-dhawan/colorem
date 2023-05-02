@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard page -- should match snapshot 1`] = `
+<div
+  className="MuiBox-root css-0"
+>
+  <div
+    className="MuiGrid-root MuiGrid-container subNavWrapper css-1oudet0-MuiGrid-root"
+    data-testid="subNavWrapper"
+    id="subNavWrapper"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-6 subNavTitle className css-3wmuhz-MuiGrid-root"
+      id="subNavTitle"
+    >
+      PERMUTATIONS WITH COLORS AND MORE.
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-2 subNavChooseTheme css-9bgm2f-MuiGrid-root"
+      id="subNavChooseTheme"
+    >
+      <button
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="DarkModeIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 css-4q8h96-MuiGrid-root"
+    >
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium subNavGetStartBtn css-ubt6ix-MuiButtonBase-root-MuiButton-root"
+        disabled={false}
+        id="subNavGetStartBtn"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        Start looking
+      </button>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-container fileSectionWrapper css-11lq3yg-MuiGrid-root"
+    data-testid="fileSectionWrapper"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-8 fileSectionCard css-k0o1dg-MuiGrid-root"
+      data-testid="fileSectionright"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item fileSectionCardLower css-1hjlv0p-MuiGrid-root"
+        id="fileSectionCardLower"
+      >
+        <div
+          className="fileSectionRightFileContent"
+        >
+          <div
+            className="fileSectionContent"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium fileSectionGrainIcon css-i4bv87-MuiSvgIcon-root"
+              data-testid="GrainIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12-8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-4 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+            <h5
+              className="MuiTypography-root MuiTypography-h5 fileSectionContentText css-ag7rrr-MuiTypography-root"
+            />
+          </div>
+          <div
+            className="fileSectionRightFileImage"
+          >
+            <img
+              alt="bitmoji image"
+              data-nimg="1"
+              decoding="async"
+              fetchpriority="high"
+              height={425}
+              onError={[Function]}
+              onLoad={[Function]}
+              src="/_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=1080&q=75"
+              srcSet="/_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=640&q=75 1x, /_next/image?url=%2Fimages%2Fbrowse_bitmoji.webp&w=1080&q=75 2x"
+              style={
+                {
+                  "color": "transparent",
+                }
+              }
+              width={425}
+            />
+          </div>
+          <a
+            className="fileSectionArrowIconWrapper"
+            href="/gradients"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onTouchStart={[Function]}
+          >
+            <div
+              className="fileSectionBrowse"
+            >
+              Browse
+            </div>
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium fileSectionArrowIcon css-i4bv87-MuiSvgIcon-root"
+              data-testid="EastIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="m15 5-1.41 1.41L18.17 11H2v2h16.17l-4.59 4.59L15 19l7-7-7-7z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-4 fileSectionCard css-1eqpqzh-MuiGrid-root"
+      data-testid="fileSectionleft"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item fileSectionCardLower css-5w37io-MuiGrid-root"
+        id="fileSectionCardLower"
+      >
+        <div
+          className="MuiContainer-root MuiContainer-maxWidthLg css-r2ks57-MuiContainer-root"
+        >
+          <span
+            className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-4i0lvv-MuiSkeleton-root"
+            style={
+              {
+                "height": 56,
+                "width": "100%",
+              }
+            }
+          />
+          <span
+            className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-ovvgps-MuiSkeleton-root"
+            style={
+              {
+                "height": 56,
+                "width": "100%",
+              }
+            }
+          />
+          <span
+            className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-aedbwi-MuiSkeleton-root"
+            style={
+              {
+                "height": 56,
+                "width": "100%",
+              }
+            }
+          />
+          <span
+            className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-2ql2a-MuiSkeleton-root"
+            style={
+              {
+                "height": 56,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-5 css-1n8pt8h-MuiGrid-root"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-5 feedbackSectionWrapper css-14expfb-MuiGrid-root"
+      data-testid="feedbackSectionWrapper"
+      id="feedbackSectionWrapper"
+    >
+      <h5
+        className="MuiTypography-root MuiTypography-h5 feedbackSectionTitle css-1pcczsu-MuiTypography-root"
+        id="feedbackSectionTitle"
+      />
+      <div
+        className="feedbackCardsWrapper MuiBox-root css-0"
+        id="feedbackCardsWrapper"
+      >
+        <div
+          className="feedbackCard MuiBox-root css-hkx9zj"
+          id="feedbackCard"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium feedbackIcon css-i4bv87-MuiSvgIcon-root"
+            data-testid="FavoriteIcon"
+            focusable="false"
+            id="feedbackIcon"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root MuiTypography-body1 css-rn997f-MuiTypography-root"
+          >
+            23
+             new likes on palettes.
+          </p>
+        </div>
+        <div
+          className="feedbackCard MuiBox-root css-hkx9zj"
+          id="feedbackCard"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium feedbackIcon css-i4bv87-MuiSvgIcon-root"
+            data-testid="PersonOutlineIcon"
+            focusable="false"
+            id="feedbackIcon"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root MuiTypography-body1 feedbackCardBody css-rn997f-MuiTypography-root"
+          >
+            Mr. Shay sent a
+             
+            <b>
+              <i>
+                feedback
+              </i>
+            </b>
+            , 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores eaque dolor ad! 🇦🇷 💟'
+          </p>
+        </div>
+        <div
+          className="feedbackCard MuiBox-root css-hkx9zj"
+          id="feedbackCard"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium feedbackIcon css-i4bv87-MuiSvgIcon-root"
+            data-testid="CommentIcon"
+            focusable="false"
+            id="feedbackIcon"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root MuiTypography-body1 feedbackCardBody css-rn997f-MuiTypography-root"
+          >
+            Mr. Shay sent a
+             
+            <b>
+              <i>
+                comment
+              </i>
+            </b>
+            , 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores eaque dolor ad! 🇦🇷 💟'
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-7 teamSectionWrapper css-16629bz-MuiGrid-root"
+      data-testid="teamSectionWrapper"
+      id="teamSectionWrapper"
+    >
+      <div
+        className="teamSectionHead MuiBox-root css-w09u1u"
+        id="teamSectionHead"
+      >
+        <a
+          className="teamSectionTitle"
+          href="/about/team"
+          id="teamSectionTitle"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onTouchStart={[Function]}
+        >
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-fv8tu3-MuiButtonBase-root-MuiButton-root"
+            disabled={false}
+            onBlur={[Function]}
+            onContextMenu={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            TEAM
+          </button>
+        </a>
+        <div
+          className="teamSectionAvatarWrapper MuiBox-root css-1ra01ct"
+          id="teamSectionAvatarWrapper"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body2 teamSectionBody css-1tz1ww6-MuiTypography-root"
+        id="teamSectionBody"
+      />
+    </div>
+  </div>
+  <div
+    className="essentialsSectionWrapper MuiBox-root css-1q5wgsi"
+    data-testid="essentialsSectionWrapper"
+    id="essentialsSectionWrapper"
+  >
+    <div
+      className="essentialsSectionTitle className MuiBox-root css-ns0x91"
+      id="essentialsSectionTitle"
+    >
+      The Essentials
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container essentialsSectionBody css-11lq3yg-MuiGrid-root"
+      data-testid="essentialsSectionBody"
+      id="essentialsSectionBody"
+    />
+  </div>
+</div>
+`;

@@ -4,6 +4,7 @@ import {
   GradientDataType,
   PaletteDataType,
   AboutNavItem,
+  LoginErrorSuccess,
 } from "../../utils/interfaces"
 // Add the Type for all the states used in redux in this file.
 
@@ -14,7 +15,7 @@ export type DispatchType = typeof store.dispatch
 export interface ContentType {
   data: ContentfulType
   aboutPageNavItems: AboutNavItem[]
-  currentAboutContent: any
+  currentAboutContent: any /* eslint-disable-line */
 }
 
 export interface PalettesPagePropsType {
@@ -36,4 +37,9 @@ export interface GradientSliceType {
   gradient: GradientDataType
   data: GradientDataType[]
   isLoading: boolean
+}
+
+export interface AuthenticationState {
+  isAuthenticated: boolean
+  errorSuccessState: LoginErrorSuccess
 }

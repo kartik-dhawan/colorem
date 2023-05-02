@@ -21,6 +21,7 @@ const TeamDetails = () => {
       order={{ md: 2, xs: 1 }}
       className={tid + "Wrapper"}
       id={tid + "Wrapper"}
+      data-testid={tid + "Wrapper"}
     >
       <Box
         className={tid + "Head"}

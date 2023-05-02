@@ -7,7 +7,7 @@ import { aboutSectionColorScheme } from "../../utils/constants"
 import { ChildrenType } from "../../utils/interfaces"
 
 const AboutPageContent = ({ children }: ChildrenType) => {
-  const [variant, setVariant] = useState<any>({
+  /* eslint-disable-line */ const [variant, setVariant] = useState<any>({
     before: { x: 0 },
     after: { x: 0 },
   })
@@ -60,8 +60,9 @@ const AboutPageContent = ({ children }: ChildrenType) => {
               xs: "#c4c4c4",
               lg: backgroundColor,
             },
-            height: "max-content",
-            minHeight: { lg: "100vh" },
+            height: { lg: "100vh" },
+            overflowY: { lg: "scroll" },
+            boxSizing: "border-box",
             padding: {
               xs: "20px 40px",
               sm: "20px 74px",

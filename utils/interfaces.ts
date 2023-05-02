@@ -109,7 +109,7 @@ export interface AboutNavItem {
   id: number
   title: string
   route: string
-  content?: any
+  content?: any /* eslint-disable-line */
 }
 
 export interface AnimationVariant {
@@ -135,4 +135,29 @@ export interface SkillType {
   professionalExperience: number
   handsOnExperience: number
   projects: number
+}
+
+export interface LoginFormState {
+  email: string
+  password: string
+  username: string
+}
+
+export interface TokenExpirationDetails {
+  isValid: boolean
+  now: number
+  exp: number
+  expTimeInSeconds: number
+}
+
+export interface AuthError {
+  name?: string
+  code: string
+  message?: string
+  customData?: any // eslint-disable-line
+}
+
+export interface LoginErrorSuccess {
+  status: "error" | "success" | null
+  error: AuthError | null
 }

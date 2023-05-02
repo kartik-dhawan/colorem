@@ -35,6 +35,7 @@ const SubNav = ({ content }: ContentfulType) => {
       }}
       className={snid + "Wrapper"}
       id={snid + "Wrapper"}
+      data-testid={"subNavWrapper"}
     >
       {/* positioned absolute-fixed and will cover the whole screen */}
       <SideNav

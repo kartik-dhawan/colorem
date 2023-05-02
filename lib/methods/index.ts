@@ -17,7 +17,10 @@ export const logger = (logData: any) /* eslint-disable-line */ => {
  * @param {any[]} array2
  * @returns
  */
-export const areArraysEqual = (array1: any[], array2: any[]) => {
+export const areArraysEqual = (
+  array1: any[] /* eslint-disable-line */,
+  array2: any[] /* eslint-disable-line */
+) => {
   return array1.every((value) => {
     return array2.includes(value)
   })

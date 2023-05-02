@@ -29,7 +29,7 @@ export const getStaticPaths = async () => {
    * the key inside 'params' object should be equal to the file name
    * ex: if file name is [slug].tsx, the object should be params: {slug: ""}
    */
-  const paths = items.map((item: any) => {
+  const paths = items.map((item: any) /* eslint-disable-line */ => {
     return {
       params: {
         route: item.fields && item.fields.navItemRoute,
@@ -43,7 +43,9 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }: any) => {
+export const getStaticProps = async ({
+  params,
+}: any) /* eslint-disable-line */ => {
   const contentData = await client.getEntries({
     content_type: "coloremDashboard",
   })
@@ -62,7 +64,7 @@ export const getStaticProps = async ({ params }: any) => {
   // converts the fetched items into usable object
   const navItems: AboutNavItem[] = [...items]
     .reverse()
-    .map((item: any) => {
+    .map((item: any) /* eslint-disable-line */ => {
       return {
         id: item.fields.id,
         title: item.fields.navItemTitle,
@@ -132,7 +134,7 @@ const AboutItem = ({ navItems, contentData }: ContentfulType) => {
   }, [navItems])
 
   useEffect(() => {
-    navItems.forEach((element: any) => {
+    navItems.forEach((element: any) /* eslint-disable-line */ => {
       if (element.route === navItemSelected) {
         dispatch(updateCurrentAboutPageContent(element))
       }
