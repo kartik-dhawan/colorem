@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material"
 import { styles } from "./styles"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { LoginFormState } from "../../utils/interfaces"
+import { LoginErrorSuccess, LoginFormState } from "../../utils/interfaces"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
 import { collection, query, where } from "firebase/firestore"
@@ -10,8 +10,14 @@ import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
-import { useDispatch } from "react-redux"
-import { updateAuthStatus } from "../../redux/slices/authSlice"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  updateAuthStatus,
+  updateErrorSuccessState,
+} from "../../redux/slices/authSlice"
+import AuthAlert from "../common/AlertBoxes/AuthAlert"
+import { RootType } from "../../redux/constants/stateTypes"
+import { isValidEmail } from "../../utils/methods"
 
 const LoginPage = () => {
   const lid = "loginPage"
@@ -34,14 +40,18 @@ const LoginPage = () => {
   const [toggleLoginActivity, setToggleLoginActivity] = useState<boolean>(true) // true - login & false - sign up
   const [formData, setFormData] = useState<LoginFormState>(initialFormState)
   const [loader, setLoader] = useState<boolean>(false)
-  const [disabledButton, setDisabledButton] = useState<boolean>(false)
+  const [disabledButton, setDisabledButton] = useState<boolean>(false) // eslint-disable-line
+
+  const { errorSuccessState } = useSelector(
+    (state: RootType) => state.authSlice
+  )
 
   // logs user in on enter
   useEffect(() => {
-    const keyDownHandler = (event: any) /** esint-disable-line */ => {
-      if (event.key === "Enter") {
+    const keyDownHandler = (event: any) => {
+      if (event.key === "Enter" && !disabledButton) {
         event.preventDefault()
-        return !disabledButton && loginHandler()
+        return loginHandler()
       }
     }
 
@@ -50,7 +60,26 @@ const LoginPage = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler)
     }
-  }, [disabledButton])
+  }, [disabledButton, formData])
+
+  /*
+   * textfield input check to disable or enable buttons
+   * also adds a check for password to be at least of 6 characters
+   * & username to be of at least 4 characters
+   */
+  useEffect(() => {
+    setDisabledButton(false)
+    if (activityStatus === "login") {
+      ;(formData.username.length < 4 || formData.password.length < 6) && // eslint-disable-line
+        setDisabledButton(true)
+    }
+    if (activityStatus === "signup") {
+      ;(formData.username.length < 4 || // eslint-disable-line
+        formData.password.length < 6 ||
+        !isValidEmail(formData.email)) &&
+        setDisabledButton(true)
+    }
+  }, [formData])
 
   // enables url traversing to sign up or login page specificaly
   useEffect(() => {
@@ -61,61 +90,59 @@ const LoginPage = () => {
     }
   }, [router.query])
 
-  function isValidEmail(email: string) {
-    return /\S+@\S+\.\S+/.test(email)
-  }
-
-  /*
-   * textfield input check to disable or enable buttons
-   * also adds a check for password to be at least of 6 characters
-   * & username to be of at least 4 characters
-   */
-  useEffect(() => {
-    if (
-      (activityStatus === "login" && formData.username.length < 4) ||
-      formData.password.length <= 5
-    ) {
-      setDisabledButton(true)
-    } else if (
-      (activityStatus === "signup" && !isValidEmail(formData.email)) ||
-      formData.password.length <= 5 ||
-      formData.username.length < 4
-    ) {
-      setDisabledButton(true)
-    } else {
-      setDisabledButton(false)
-    }
-  }, [formData])
-
   const loginHandler = async () => {
+    dispatch(updateErrorSuccessState({ status: null, error: null }))
+
     // initializes loader
     setLoader(true)
 
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", formData.username))
-    const data = await getUsersDataFromQuery(q)
-
-    // using that email & password entered by user to login
-    return (
-      data.email !== "" &&
-      signInWithEmailAndPassword(auth, data.email, formData.password)
-        .then(async (user) => {
-          // algo : HS256
-          const token = await user.user.getIdToken()
-          localStorage.setItem("firebase-token", token)
-          document.cookie = `firebase-token=${token}`
-          // clears form data after login
-          setFormData(initialFormState)
-          // sets auth state in redux
-          dispatch(updateAuthStatus(true))
-          // post login redirect
-          router.push("/dashboard")
-        })
-        .catch((error) => {
-          console.log(error)
-          setLoader(false)
-        })
-    )
+    console.log(formData)
+    getUsersDataFromQuery(q).then((data: any) /* eslint-disable-line */ => {
+      if (data !== null) {
+        signInWithEmailAndPassword(auth, data.email, formData.password)
+          .then(async (user) => {
+            // algo : HS256
+            const token = await user.user.getIdToken()
+            localStorage.setItem("firebase-token", token)
+            document.cookie = `firebase-token=${token}`
+            // clears form data after login
+            setFormData(initialFormState)
+            // sets auth state in redux
+            dispatch(updateAuthStatus(true))
+            // post login redirect
+            router.push("/dashboard")
+          })
+          .catch((error) => {
+            // all errors will be handled in the same format
+            const errorObject: LoginErrorSuccess = {
+              status: "error",
+              error: {
+                code: error.code,
+                message: error.message,
+                name: error.name,
+                customData: error.customData,
+              },
+            }
+            dispatch(updateErrorSuccessState(errorObject))
+            setLoader(false)
+          })
+      } else {
+        const errorObject: LoginErrorSuccess = {
+          status: "error",
+          error: {
+            name: "EmailNotFound",
+            code: "auth/email-not-found",
+            message:
+              "The username is incorrect, the account does not exist. Please signup to continue.",
+            customData: {},
+          },
+        }
+        dispatch(updateErrorSuccessState(errorObject))
+        setLoader(false)
+      }
+    })
   }
 
   const signUpHandler = () => {
@@ -151,6 +178,9 @@ const LoginPage = () => {
         data-testid={lid + "FormWrapper"}
         sx={styles.loginPageFormWrapper}
       >
+        {errorSuccessState.status !== null && (
+          <AuthAlert state={errorSuccessState} />
+        )}
         {!toggleLoginActivity && (
           <TextField
             label="Email Id"

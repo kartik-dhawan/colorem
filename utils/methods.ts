@@ -240,7 +240,7 @@ export const parseCookie = (str: string) =>
  * isValid: true -> not expired
  * isValid: false -> expired
  */
-export const isTokenValid = (token: any) => {
+export const isTokenValid = (token: any) /* eslint-disable-line */ => {
   const decoded = token && jwt.decode(token)
   const expiration = decoded?.exp * 1000
   const expTime = Math.floor((expiration - Date.now()) / 1000)
@@ -257,4 +257,13 @@ export const isTokenValid = (token: any) => {
   }
 
   return tokenExpirationDetails
+}
+
+/**
+ *
+ * @param {string} email
+ * @returns {boolean}
+ */
+export const isValidEmail = (email: string) => {
+  return /\S+@\S+\.\S+/.test(email)
 }

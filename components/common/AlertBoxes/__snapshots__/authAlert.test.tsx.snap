@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth Alert component -- should match snapshot 1`] = `
+<div
+  className="authAlertWrapper MuiBox-root css-1xnyalf"
+  data-testid="authAlertWrapper"
+>
+  <div
+    className="authAlertTitleWrapper MuiBox-root css-1cjxdn5"
+    data-testid="authAlertTitleWrapper"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="ErrorIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+      />
+    </svg>
+    <p
+      className="MuiTypography-root MuiTypography-body1 authAlertTitle css-19hq4de-MuiTypography-root"
+      data-testid="authAlertTitle"
+    >
+      Incorrect password
+    </p>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium authAlertDetailsToggle css-1bru0sb-MuiButtonBase-root-MuiButton-root"
+      data-testid="authAlertDetailsToggle"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      (show more)
+    </button>
+  </div>
+</div>
+`;

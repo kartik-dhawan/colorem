@@ -1,4 +1,5 @@
 export const styles = {
+  // primary alert - copy
   primaryAlertWrapper: {
     position: "fixed",
     display: "flex",
@@ -25,5 +26,44 @@ export const styles = {
     textTransform: "capitalize",
     opacity: 0.85,
     letterSpacing: "1px",
+  },
+
+  // auth alert
+  authAlertWrapper: {
+    position: "absolute",
+    width: "100%",
+    bottom: {
+      xs: "216px",
+      sm: "144px",
+      md: "72px",
+    },
+  },
+  authAlertTitleWrapper: {
+    display: "flex",
+    gap: "12px",
+    alignItems: "center",
+  },
+  authAlertTitle: {
+    textTransform: "uppercase",
+    fontWeight: 400,
+    fontSize: "16px",
+    letterSpacing: "1px",
+  },
+  authAlertDetailsButton: {
+    textTransform: "capitalize",
+    color: "#b1b1b1",
+    fontWeight: 300,
+    display: {
+      xs: "none",
+      sm: "flex",
+    },
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  authAlertDetailsBody: {
+    fontWeight: 300,
+    fontStyle: "italic",
+    fontSize: "14px",
   },
 }
