@@ -2,7 +2,7 @@
 
 exports[`Auth Alert component -- should match snapshot 1`] = `
 <div
-  className="authAlertWrapper MuiBox-root css-g2niwc"
+  className="authAlertWrapper MuiBox-root css-1xnyalf"
   data-testid="authAlertWrapper"
 >
   <div
@@ -27,7 +27,7 @@ exports[`Auth Alert component -- should match snapshot 1`] = `
       Incorrect password
     </p>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium authAlertDetailsToggle css-14ukkwu-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium authAlertDetailsToggle css-1bru0sb-MuiButtonBase-root-MuiButton-root"
       data-testid="authAlertDetailsToggle"
       disabled={false}
       onBlur={[Function]}

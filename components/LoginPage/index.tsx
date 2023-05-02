@@ -100,8 +100,6 @@ const LoginPage = () => {
     const q = query(collectioRef, where("username", "==", formData.username))
     console.log(formData)
     getUsersDataFromQuery(q).then((data: any) /* eslint-disable-line */ => {
-      console.log(data)
-
       if (data !== null) {
         signInWithEmailAndPassword(auth, data.email, formData.password)
           .then(async (user) => {
@@ -145,8 +143,6 @@ const LoginPage = () => {
         setLoader(false)
       }
     })
-
-    // using that email & password entered by user to login
   }
 
   const signUpHandler = () => {

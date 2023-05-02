@@ -31,7 +31,12 @@ export const styles = {
   // auth alert
   authAlertWrapper: {
     position: "absolute",
-    bottom: "72px",
+    width: "100%",
+    bottom: {
+      xs: "216px",
+      sm: "144px",
+      md: "72px",
+    },
   },
   authAlertTitleWrapper: {
     display: "flex",
@@ -48,6 +53,10 @@ export const styles = {
     textTransform: "capitalize",
     color: "#b1b1b1",
     fontWeight: 300,
+    display: {
+      xs: "none",
+      sm: "flex",
+    },
     "&:hover": {
       textDecoration: "underline",
     },
