@@ -264,6 +264,7 @@ const LoginPage = () => {
             sx={styles.loginPageExtraOptionsButton}
             onClick={handleSignupToggle}
             data-testid={lid + "ToggleSignup"}
+            disabled
           >
             create an account
           </Button>

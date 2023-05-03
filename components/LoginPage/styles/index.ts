@@ -104,6 +104,9 @@ export const styles = {
       backgroundColor: "transparent",
       color: "#b1b1b1",
     },
+    "&.Mui-disabled": {
+      color: "#727272",
+    },
   },
   logoutPageWrapper: {
     display: "flex",

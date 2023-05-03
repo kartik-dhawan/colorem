@@ -118,9 +118,9 @@ exports[`Login page -- should match snapshot 1`] = `
     className="MuiBox-root css-98mxar"
   >
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1l03z47-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium Mui-disabled MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
       data-testid="loginPageToggleSignup"
-      disabled={false}
+      disabled={true}
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -134,13 +134,13 @@ exports[`Login page -- should match snapshot 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={0}
+      tabIndex={-1}
       type="button"
     >
       create an account
     </button>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1l03z47-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
       disabled={false}
       onBlur={[Function]}
       onContextMenu={[Function]}
@@ -160,7 +160,7 @@ exports[`Login page -- should match snapshot 1`] = `
       recover account
     </button>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1l03z47-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
       disabled={false}
       onBlur={[Function]}
       onContextMenu={[Function]}
