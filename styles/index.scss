@@ -75,16 +75,13 @@ body {
   }
 }
 
-.MuiLinearProgress-root {
+#__next > .MuiLinearProgress-root {
   position: fixed !important;
   top: 0;
   left: 0;
   z-index: 838953457;
   height: 2px;
   width: 100vw;
-}
-
-.MuiLinearProgress-root {
   background-color: lighten($spotify_green, 60);
   & > span:first-child {
     background-color: darken($spotify_green, 20);
