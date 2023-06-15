@@ -114,9 +114,9 @@ exports[`Login component -- (login) should match snapshot 1`] = `
     className="MuiBox-root css-98mxar"
   >
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium Mui-disabled MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
       data-testid="loginPageToggleSignup"
-      disabled={true}
+      disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -130,7 +130,7 @@ exports[`Login component -- (login) should match snapshot 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={-1}
+      tabIndex={0}
       type="button"
     >
       create an account

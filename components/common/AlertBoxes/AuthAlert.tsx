@@ -8,9 +8,10 @@ import { getErrorObjectByCode } from "../../../lib/auth/errorMessages"
 
 interface AuthAlertProps {
   state: LoginErrorSuccess
+  activityStatus: string | string[]
 }
 
-const AuthAlert = ({ state }: AuthAlertProps) => {
+const AuthAlert = ({ state, activityStatus }: AuthAlertProps) => {
   const aid = "authAlert"
   const [detailsToggle, setDetailsToggle] = useState<boolean>(false)
 
@@ -20,7 +21,11 @@ const AuthAlert = ({ state }: AuthAlertProps) => {
 
   return (
     <Box
-      sx={styles.authAlertWrapper}
+      sx={
+        activityStatus === "login"
+          ? styles.authAlertWrapper
+          : styles.authAlertWrapperSignUp
+      }
       className={aid + "Wrapper"}
       data-testid={aid + "Wrapper"}
     >

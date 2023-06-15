@@ -2,7 +2,7 @@
 
 exports[`Auth Alert component -- should match snapshot 1`] = `
 <div
-  className="authAlertWrapper MuiBox-root css-1xnyalf"
+  className="authAlertWrapper MuiBox-root css-ovmoj4"
   data-testid="authAlertWrapper"
 >
   <div
