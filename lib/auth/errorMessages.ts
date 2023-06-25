@@ -27,6 +27,12 @@ export const getErrorObjectByCode = (errorCode: string) => {
         message: "The provided credentials are not allowed.",
       }
 
+    case "auth/email-already-in-use":
+      return {
+        title: "Email already in use",
+        message: "Please sign in or use a different email.",
+      }
+
     default:
       return {
         title: "Login error",

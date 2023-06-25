@@ -3,9 +3,13 @@ import { styles } from "./styles"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { LoginErrorSuccess, LoginFormState } from "../../utils/interfaces"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
-import { collection, query, where } from "firebase/firestore"
+import { addDoc, collection, query, where } from "firebase/firestore"
 import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import LoadingButton from "@mui/lab/LoadingButton"
 import { ErrorBoundary } from "react-error-boundary"
@@ -98,7 +102,6 @@ const LoginPage = () => {
 
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", formData.username))
-    console.log(formData)
     getUsersDataFromQuery(q).then((data: any) /* eslint-disable-line */ => {
       if (data !== null) {
         signInWithEmailAndPassword(auth, data.email, formData.password)
@@ -147,11 +150,42 @@ const LoginPage = () => {
 
   const signUpHandler = () => {
     setLoader(true)
-    router.push("/dashboard")
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then(async (res) => {
+        const token = await res.user.getIdToken()
+        // logs user in after sign up
+        localStorage.setItem("firebase-token", token)
+        document.cookie = `firebase-token=${token}`
+        // clears form data after login
+        setFormData(initialFormState)
+        // sets auth state in redux
+        dispatch(updateAuthStatus(true))
+        // saves username & email in database
+        await addDoc(collectioRef, {
+          email: formData.email,
+          username: formData.username,
+        })
+        setLoader(false)
+        router.push("/dashboard")
+      })
+      .catch((error) => {
+        const errorObject: LoginErrorSuccess = {
+          status: "error",
+          error: {
+            code: error.code,
+            message: error.message,
+            name: error.name,
+            customData: error.customData,
+          },
+        }
+        dispatch(updateErrorSuccessState(errorObject))
+        setLoader(false)
+      })
   }
 
   // toogles from signup page to login page
   const handleLoginToggle = useCallback(() => {
+    dispatch(updateErrorSuccessState({ status: null, error: null }))
     setToggleLoginActivity(true)
     router.push({
       pathname: "/login",
@@ -162,6 +196,7 @@ const LoginPage = () => {
 
   // toogles from login page to signup page
   const handleSignupToggle = useCallback(() => {
+    dispatch(updateErrorSuccessState({ status: null, error: null }))
     setToggleLoginActivity(false)
     router.push({
       pathname: "/login",
@@ -179,7 +214,10 @@ const LoginPage = () => {
         sx={styles.loginPageFormWrapper}
       >
         {errorSuccessState.status !== null && (
-          <AuthAlert state={errorSuccessState} />
+          <AuthAlert
+            state={errorSuccessState}
+            activityStatus={activityStatus}
+          />
         )}
         {!toggleLoginActivity && (
           <TextField
@@ -264,7 +302,6 @@ const LoginPage = () => {
             sx={styles.loginPageExtraOptionsButton}
             onClick={handleSignupToggle}
             data-testid={lid + "ToggleSignup"}
-            disabled
           >
             create an account
           </Button>

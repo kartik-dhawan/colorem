@@ -38,6 +38,15 @@ export const styles = {
       md: "72px",
     },
   },
+  authAlertWrapperSignUp: {
+    position: "absolute",
+    width: "100%",
+    bottom: {
+      xs: "216px",
+      sm: "144px",
+      md: "160px",
+    },
+  },
   authAlertTitleWrapper: {
     display: "flex",
     gap: "12px",
