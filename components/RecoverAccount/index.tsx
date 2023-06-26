@@ -194,7 +194,7 @@ const RecoverPassword = () => {
               }}
               onClick={goBackHandler}
             >
-              go back
+              go back to login page
             </Button>
           </Box>
         )}
