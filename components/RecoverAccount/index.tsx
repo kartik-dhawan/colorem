@@ -1,5 +1,5 @@
-import { Box, Button, TextField } from "@mui/material"
-import { styles as AuthStyles, styles } from "../LoginPage/styles"
+import { Box, Button, TextField, Typography } from "@mui/material"
+import { styles as AuthStyles } from "../LoginPage/styles"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
 import { LoadingButton } from "@mui/lab"
@@ -18,6 +18,9 @@ import { collection, query, where } from "firebase/firestore"
 import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 import AuthAlert from "../common/AlertBoxes/AuthAlert"
 import { RootType } from "../../redux/constants/stateTypes"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import { styles } from "./styles"
+import { RESET_EMAIL_SUCCESS_TEXT } from "../../utils/constants"
 
 const RecoverPassword = () => {
   const rid = "recoverPassword"
@@ -31,6 +34,7 @@ const RecoverPassword = () => {
   const [disabledButton, setDisabledButton] = useState<boolean>(false)
   const [recoveryType, setRecoveryType] = useState<RecoveryType>("email")
   const [emailSentSuccess, setEmailSentSuccess] = useState<boolean | null>(null)
+  const [loader, setLoader] = useState<boolean>(false)
 
   const { errorSuccessState } = useSelector(
     (state: RootType) => state.authSlice
@@ -63,6 +67,8 @@ const RecoverPassword = () => {
   }, [router])
 
   const resetPasswordHandler = async () => {
+    setLoader(true)
+
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", recoveryUsername))
 
@@ -80,6 +86,7 @@ const RecoverPassword = () => {
         setEmailSentSuccess(true)
       })
       .catch((error) => {
+        setLoader(false)
         setEmailSentSuccess(false)
         const errorObject: LoginErrorSuccess = {
           status: "error",
@@ -134,7 +141,7 @@ const RecoverPassword = () => {
                   className={rid + "TextField"}
                   id={rid + "UsernameField"}
                   data-testid={rid + "UsernameField"}
-                  sx={styles.loginPageTextField}
+                  sx={AuthStyles.loginPageTextField}
                   value={recoveryUsername}
                   required
                   onChange={(e) => {
@@ -144,9 +151,9 @@ const RecoverPassword = () => {
               )}
               <LoadingButton
                 disableRipple
-                sx={styles.loginPageButton}
+                sx={AuthStyles.loginPageButton}
                 data-testid={rid + "RecoverButton"}
-                // loading={loader}
+                loading={loader}
                 disabled={disabledButton}
                 onClick={resetPasswordHandler}
               >
@@ -173,7 +180,24 @@ const RecoverPassword = () => {
             </Box>
           </>
         )}
-        {emailSentSuccess && <pre>Email sent</pre>}
+        {emailSentSuccess && (
+          <Box sx={styles.recoverPasswordEmailSuccessWrapper}>
+            <CheckCircleIcon />
+            <Typography sx={styles.recoverPasswordEmailSuccessText}>
+              {RESET_EMAIL_SUCCESS_TEXT}
+            </Typography>
+            <Button
+              disableRipple
+              sx={{
+                ...AuthStyles.loginPageExtraOptionsButton,
+                width: "max-content",
+              }}
+              onClick={goBackHandler}
+            >
+              go back
+            </Button>
+          </Box>
+        )}
       </Box>
     </ErrorBoundary>
   )
