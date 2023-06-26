@@ -9,14 +9,15 @@ import { isValidEmail } from "../../utils/methods"
 import { LoginErrorSuccess, RecoveryType } from "../../utils/interfaces"
 import { getAuth, sendPasswordResetEmail } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
-import { getErrorObjectByCode } from "../../lib/auth/errorMessages"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {
   resetErrorState,
   updateErrorSuccessState,
 } from "../../redux/slices/authSlice"
 import { collection, query, where } from "firebase/firestore"
 import { getUsersDataFromQuery } from "../../lib/auth/firestore"
+import AuthAlert from "../common/AlertBoxes/AuthAlert"
+import { RootType } from "../../redux/constants/stateTypes"
 
 const RecoverPassword = () => {
   const rid = "recoverPassword"
@@ -29,6 +30,11 @@ const RecoverPassword = () => {
   const [recoveryUsername, setRecoveryUsername] = useState<string>("")
   const [disabledButton, setDisabledButton] = useState<boolean>(false)
   const [recoveryType, setRecoveryType] = useState<RecoveryType>("email")
+  const [emailSentSuccess, setEmailSentSuccess] = useState<boolean | null>(null)
+
+  const { errorSuccessState } = useSelector(
+    (state: RootType) => state.authSlice
+  )
 
   // validates the entered data
   useEffect(() => {
@@ -43,7 +49,9 @@ const RecoverPassword = () => {
     }
   }, [recoveryEmail, recoveryUsername])
 
-  const recoverPasswordHandler = useCallback(() => {
+  const recoverPasswordTypeHandler = useCallback(() => {
+    dispatch(resetErrorState())
+    setEmailSentSuccess(null)
     return recoveryType === "email"
       ? setRecoveryType("username")
       : setRecoveryType("email")
@@ -57,21 +65,22 @@ const RecoverPassword = () => {
   const resetPasswordHandler = async () => {
     // querying the firestore db to get email for the entered usernmame
     const q = query(collectioRef, where("username", "==", recoveryUsername))
+
     const data = await getUsersDataFromQuery(q)
 
     /* if user wants to recovers by email, use the email entered
      * else if user enters username, it will fetch the email from firestore
      * corressponding to that username
      */
-    const email = recoveryType === "username" ? data.email : recoveryEmail
+    const email = recoveryType === "username" ? data?.email : recoveryEmail
 
     sendPasswordResetEmail(auth, email)
       .then(() => {
         console.log("email sent")
+        setEmailSentSuccess(true)
       })
       .catch((error) => {
-        console.log(error.code)
-        console.log(getErrorObjectByCode(error.code))
+        setEmailSentSuccess(false)
         const errorObject: LoginErrorSuccess = {
           status: "error",
           error: {
@@ -88,75 +97,83 @@ const RecoverPassword = () => {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       <Box sx={AuthStyles.loginPageWrapper}>
-        <Box sx={AuthStyles.loginPageFormWrapper}>
-          {recoveryType === "email" && (
-            <TextField
-              label="Recovery Email Id"
-              type="email"
-              autoComplete="current-password"
-              variant="standard"
-              className={rid + "TextField"}
-              id={rid + "PasswordField"}
-              data-testid={rid + "PasswordField"}
-              required
-              sx={{
-                minWidth: {
-                  sm: "50%",
-                  md: "40%",
-                  lg: "35%",
-                },
-                ...AuthStyles.loginPageTextField,
-              }}
-              value={recoveryEmail}
-              onChange={(e) => {
-                setRecoveryEmail(e.target.value)
-              }}
-            />
-          )}
-          {recoveryType === "username" && (
-            <TextField
-              label="Recovery Username"
-              variant="standard"
-              className={rid + "TextField"}
-              id={rid + "UsernameField"}
-              data-testid={rid + "UsernameField"}
-              sx={styles.loginPageTextField}
-              value={recoveryUsername}
-              required
-              onChange={(e) => {
-                setRecoveryUsername(e.target.value)
-              }}
-            />
-          )}
-          <LoadingButton
-            disableRipple
-            sx={styles.loginPageButton}
-            data-testid={rid + "RecoverButton"}
-            // loading={loader}
-            disabled={disabledButton}
-            onClick={resetPasswordHandler}
-          >
-            Send Link
-          </LoadingButton>
-        </Box>
-        <Box sx={AuthStyles.loginPageExtraOptions}>
-          <Button
-            disableRipple
-            sx={AuthStyles.loginPageExtraOptionsButton}
-            onClick={recoverPasswordHandler}
-          >
-            {recoveryType === "email"
-              ? "recover using username"
-              : "recover using email"}
-          </Button>
-          <Button
-            disableRipple
-            sx={AuthStyles.loginPageExtraOptionsButton}
-            onClick={goBackHandler}
-          >
-            go back
-          </Button>
-        </Box>
+        {(emailSentSuccess === null || !emailSentSuccess) && (
+          <>
+            <Box sx={AuthStyles.loginPageFormWrapper}>
+              {emailSentSuccess === false && (
+                <AuthAlert state={errorSuccessState} activityStatus="login" />
+              )}
+              {recoveryType === "email" && (
+                <TextField
+                  label="Recovery Email Id"
+                  type="email"
+                  autoComplete="current-password"
+                  variant="standard"
+                  className={rid + "TextField"}
+                  id={rid + "PasswordField"}
+                  data-testid={rid + "PasswordField"}
+                  required
+                  sx={{
+                    minWidth: {
+                      sm: "50%",
+                      md: "40%",
+                      lg: "35%",
+                    },
+                    ...AuthStyles.loginPageTextField,
+                  }}
+                  value={recoveryEmail}
+                  onChange={(e) => {
+                    setRecoveryEmail(e.target.value)
+                  }}
+                />
+              )}
+              {recoveryType === "username" && (
+                <TextField
+                  label="Recovery Username"
+                  variant="standard"
+                  className={rid + "TextField"}
+                  id={rid + "UsernameField"}
+                  data-testid={rid + "UsernameField"}
+                  sx={styles.loginPageTextField}
+                  value={recoveryUsername}
+                  required
+                  onChange={(e) => {
+                    setRecoveryUsername(e.target.value)
+                  }}
+                />
+              )}
+              <LoadingButton
+                disableRipple
+                sx={styles.loginPageButton}
+                data-testid={rid + "RecoverButton"}
+                // loading={loader}
+                disabled={disabledButton}
+                onClick={resetPasswordHandler}
+              >
+                Send Link
+              </LoadingButton>
+            </Box>
+            <Box sx={AuthStyles.loginPageExtraOptions}>
+              <Button
+                disableRipple
+                sx={AuthStyles.loginPageExtraOptionsButton}
+                onClick={recoverPasswordTypeHandler}
+              >
+                {recoveryType === "email"
+                  ? "recover using username"
+                  : "recover using email"}
+              </Button>
+              <Button
+                disableRipple
+                sx={AuthStyles.loginPageExtraOptionsButton}
+                onClick={goBackHandler}
+              >
+                go back
+              </Button>
+            </Box>
+          </>
+        )}
+        {emailSentSuccess && <pre>Email sent</pre>}
       </Box>
     </ErrorBoundary>
   )
