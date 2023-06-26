@@ -205,6 +205,10 @@ const LoginPage = () => {
     setFormData(initialFormState)
   }, [router])
 
+  const recoverRouteHandler = useCallback(() => {
+    router.push("/recover")
+  }, [router])
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
       <Box
@@ -315,7 +319,11 @@ const LoginPage = () => {
             log into an account
           </Button>
         )}
-        <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
+        <Button
+          disableRipple
+          sx={styles.loginPageExtraOptionsButton}
+          onClick={recoverRouteHandler}
+        >
           recover account
         </Button>
         <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
