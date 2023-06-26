@@ -16,6 +16,7 @@ import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
 import { useDispatch, useSelector } from "react-redux"
 import {
+  resetErrorState,
   updateAuthStatus,
   updateErrorSuccessState,
 } from "../../redux/slices/authSlice"
@@ -95,7 +96,7 @@ const LoginPage = () => {
   }, [router.query])
 
   const loginHandler = async () => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
 
     // initializes loader
     setLoader(true)
@@ -185,7 +186,7 @@ const LoginPage = () => {
 
   // toogles from signup page to login page
   const handleLoginToggle = useCallback(() => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
     setToggleLoginActivity(true)
     router.push({
       pathname: "/login",
@@ -196,7 +197,7 @@ const LoginPage = () => {
 
   // toogles from login page to signup page
   const handleSignupToggle = useCallback(() => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
     setToggleLoginActivity(false)
     router.push({
       pathname: "/login",

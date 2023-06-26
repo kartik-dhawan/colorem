@@ -6,11 +6,24 @@ import { LoadingButton } from "@mui/lab"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useState } from "react"
 import { isValidEmail } from "../../utils/methods"
-import { RecoveryType } from "../../utils/interfaces"
+import { LoginErrorSuccess, RecoveryType } from "../../utils/interfaces"
+import { getAuth, sendPasswordResetEmail } from "firebase/auth"
+import db, { app } from "../../lib/auth/firebaseConfig"
+import { getErrorObjectByCode } from "../../lib/auth/errorMessages"
+import { useDispatch } from "react-redux"
+import {
+  resetErrorState,
+  updateErrorSuccessState,
+} from "../../redux/slices/authSlice"
+import { collection, query, where } from "firebase/firestore"
+import { getUsersDataFromQuery } from "../../lib/auth/firestore"
 
 const RecoverPassword = () => {
   const rid = "recoverPassword"
   const router = useRouter()
+  const auth = getAuth(app)
+  const dispatch = useDispatch()
+  const collectioRef = collection(db, "users")
 
   const [recoveryEmail, setRecoveryEmail] = useState<string>("")
   const [recoveryUsername, setRecoveryUsername] = useState<string>("")
@@ -37,8 +50,40 @@ const RecoverPassword = () => {
   }, [recoveryEmail, recoveryType])
 
   const goBackHandler = useCallback(() => {
+    dispatch(resetErrorState())
     router.push("/login")
   }, [router])
+
+  const resetPasswordHandler = async () => {
+    // querying the firestore db to get email for the entered usernmame
+    const q = query(collectioRef, where("username", "==", recoveryUsername))
+    const data = await getUsersDataFromQuery(q)
+
+    /* if user wants to recovers by email, use the email entered
+     * else if user enters username, it will fetch the email from firestore
+     * corressponding to that username
+     */
+    const email = recoveryType === "username" ? data.email : recoveryEmail
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("email sent")
+      })
+      .catch((error) => {
+        console.log(error.code)
+        console.log(getErrorObjectByCode(error.code))
+        const errorObject: LoginErrorSuccess = {
+          status: "error",
+          error: {
+            code: error.code,
+            message: error.message,
+            name: error.name,
+            customData: error.customData,
+          },
+        }
+        dispatch(updateErrorSuccessState(errorObject))
+      })
+  }
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
@@ -89,6 +134,7 @@ const RecoverPassword = () => {
             data-testid={rid + "RecoverButton"}
             // loading={loader}
             disabled={disabledButton}
+            onClick={resetPasswordHandler}
           >
             Send Link
           </LoadingButton>
