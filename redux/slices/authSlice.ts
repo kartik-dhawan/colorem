@@ -26,9 +26,14 @@ const authSlice = createSlice({
     ) => {
       state.errorSuccessState = action.payload
     },
+    resetErrorState: (state: AuthenticationState) => {
+      state.errorSuccessState = initialState.errorSuccessState
+      state.isAuthenticated = false
+    },
   },
 })
 
-export const { updateAuthStatus, updateErrorSuccessState } = authSlice.actions
+export const { updateAuthStatus, updateErrorSuccessState, resetErrorState } =
+  authSlice.actions
 
 export default authSlice.reducer

@@ -161,3 +161,5 @@ export interface LoginErrorSuccess {
   status: "error" | "success" | null
   error: AuthError | null
 }
+
+export type RecoveryType = "username" | "email"

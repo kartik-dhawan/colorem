@@ -33,6 +33,18 @@ export const getErrorObjectByCode = (errorCode: string) => {
         message: "Please sign in or use a different email.",
       }
 
+    case "auth/user-not-found":
+      return {
+        title: "User not found",
+        message: "Please enter a valid email/username.",
+      }
+
+    case "auth/missing-email":
+      return {
+        title: "User not found",
+        message: "Please enter a valid email/username.",
+      }
+
     default:
       return {
         title: "Login error",
