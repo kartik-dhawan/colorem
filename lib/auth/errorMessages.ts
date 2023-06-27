@@ -52,3 +52,8 @@ export const getErrorObjectByCode = (errorCode: string) => {
       }
   }
 }
+
+export const LOGOUT_SUCCESS_MESSAGE = {
+  name: "Logged out",
+  message: "User has been successfully logged out. Please login to continue",
+}
