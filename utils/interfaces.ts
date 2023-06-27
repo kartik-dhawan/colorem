@@ -157,9 +157,15 @@ export interface AuthError {
   customData?: any // eslint-disable-line
 }
 
+export interface AuthSuccess {
+  name?: string
+  message?: string
+}
+
 export interface LoginErrorSuccess {
   status: "error" | "success" | null
   error: AuthError | null
+  success?: AuthSuccess | null
 }
 
 export type RecoveryType = "username" | "email"
