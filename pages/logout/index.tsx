@@ -9,7 +9,11 @@ import ErrorFallback, {
 import { Box, Typography } from "@mui/material"
 import { styles } from "../../components/LoginPage/styles"
 import { useDispatch } from "react-redux"
-import { updateAuthStatus } from "../../redux/slices/authSlice"
+import {
+  updateAuthStatus,
+  updateErrorSuccessState,
+} from "../../redux/slices/authSlice"
+import { LOGOUT_SUCCESS_MESSAGE } from "../../lib/auth/errorMessages"
 
 const LogoutPage = () => {
   const auth = getAuth(app)
@@ -22,6 +26,14 @@ const LogoutPage = () => {
         console.log(sign)
         localStorage.removeItem("firebase-token")
         document.cookie = "firebase-token='';"
+        // sets logout status in redux to show success alert on logout
+        dispatch(
+          updateErrorSuccessState({
+            status: "success",
+            error: null,
+            success: LOGOUT_SUCCESS_MESSAGE,
+          })
+        )
         // updates auth state in redux
         dispatch(updateAuthStatus(false))
         // post logout redirect

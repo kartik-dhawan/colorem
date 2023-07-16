@@ -9,7 +9,7 @@ import { LinearProgress } from "@mui/material"
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const noLayoutPages = ["/_error", "/", "/404", "/about", "/login"]
+  const noLayoutPages = ["/_error", "/", "/404", "/about", "/login", "/recover"]
 
   const [routeLoading, setRouteLoading] = useState<boolean>(false)
 

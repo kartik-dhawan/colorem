@@ -5,6 +5,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import { useCallback, useState } from "react"
 import { styles } from "./styles"
 import { getErrorObjectByCode } from "../../../lib/auth/errorMessages"
+import { useSelector } from "react-redux"
+import { RootType } from "../../../redux/constants/stateTypes"
 
 interface AuthAlertProps {
   state: LoginErrorSuccess
@@ -18,6 +20,10 @@ const AuthAlert = ({ state, activityStatus }: AuthAlertProps) => {
   const detailsToggleHandler = useCallback(() => {
     setDetailsToggle(!detailsToggle)
   }, [detailsToggle])
+
+  const { errorSuccessState } = useSelector(
+    (state: RootType) => state.authSlice
+  )
 
   return (
     <Box
@@ -50,6 +56,7 @@ const AuthAlert = ({ state, activityStatus }: AuthAlertProps) => {
           }}
         >
           {state.error && getErrorObjectByCode(state.error?.code).title}
+          {state.status === "success" && errorSuccessState.success?.name}
         </Typography>
         <Button
           className={aid + "DetailsToggle"}
@@ -68,6 +75,7 @@ const AuthAlert = ({ state, activityStatus }: AuthAlertProps) => {
           sx={styles.authAlertDetailsBody}
         >
           {state.error && getErrorObjectByCode(state.error?.code).message}
+          {state.status === "success" && errorSuccessState.success?.message}
         </Typography>
       )}
     </Box>

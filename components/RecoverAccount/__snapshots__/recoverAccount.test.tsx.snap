@@ -1,66 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login page -- should match snapshot 1`] = `
+exports[`Recover password component -- should match snapshot 1`] = `
 <div
-  className="loginPageWrapper MuiBox-root css-a11n4z"
-  data-testid="loginPageWrapper"
-  id="loginPageWrapper"
+  className="MuiBox-root css-a11n4z"
 >
   <div
-    className="loginPageFormWrapper MuiBox-root css-18l78r8"
-    data-testid="loginPageFormWrapper"
-    id="loginPageFormWrapper"
+    className="MuiBox-root css-18l78r8"
   >
     <div
-      className="MuiFormControl-root MuiTextField-root loginPageTextField css-1nbje9m-MuiFormControl-root-MuiTextField-root"
-      data-testid="loginPageUsernameField"
+      className="MuiFormControl-root MuiTextField-root recoverPasswordTextField css-1wyy5f0-MuiFormControl-root-MuiTextField-root"
+      data-testid="recoverPasswordPasswordField"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink={false}
-        htmlFor="loginPageUsernameField"
-        id="loginPageUsernameField-label"
+        htmlFor="recoverPasswordPasswordField"
+        id="recoverPasswordPasswordField-label"
       >
-        Username
-        <span
-          aria-hidden={true}
-          className="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-        >
-           
-          *
-        </span>
-      </label>
-      <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-v4u5dn-MuiInputBase-root-MuiInput-root"
-        onClick={[Function]}
-      >
-        <input
-          aria-invalid={false}
-          autoFocus={false}
-          className="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
-          disabled={false}
-          id="loginPageUsernameField"
-          onAnimationStart={[Function]}
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          required={true}
-          type="text"
-          value=""
-        />
-      </div>
-    </div>
-    <div
-      className="MuiFormControl-root MuiTextField-root loginPageTextField css-1nbje9m-MuiFormControl-root-MuiTextField-root"
-      data-testid="loginPagePasswordField"
-    >
-      <label
-        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
-        data-shrink={false}
-        htmlFor="loginPagePasswordField"
-        id="loginPagePasswordField-label"
-      >
-        Password
+        Recovery Email Id
         <span
           aria-hidden={true}
           className="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
@@ -79,22 +36,22 @@ exports[`Login page -- should match snapshot 1`] = `
           autoFocus={false}
           className="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
           disabled={false}
-          id="loginPagePasswordField"
+          id="recoverPasswordPasswordField"
           onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           required={true}
-          type="password"
+          type="email"
           value=""
         />
       </div>
     </div>
     <button
       className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11wldcc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      data-testid="loginPageLoginButton"
+      data-testid="recoverPasswordRecoverButton"
       disabled={false}
-      id=":r2:"
+      id=":r1:"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -111,7 +68,7 @@ exports[`Login page -- should match snapshot 1`] = `
       tabIndex={0}
       type="button"
     >
-      Login
+      Send Link
     </button>
   </div>
   <div
@@ -119,7 +76,6 @@ exports[`Login page -- should match snapshot 1`] = `
   >
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
-      data-testid="loginPageToggleSignup"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -137,7 +93,7 @@ exports[`Login page -- should match snapshot 1`] = `
       tabIndex={0}
       type="button"
     >
-      create an account
+      recover using username
     </button>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
@@ -158,28 +114,7 @@ exports[`Login page -- should match snapshot 1`] = `
       tabIndex={0}
       type="button"
     >
-      recover account
-    </button>
-    <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-dtaz37-MuiButtonBase-root-MuiButton-root"
-      disabled={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onContextMenu={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      tabIndex={0}
-      type="button"
-    >
-      log in with google
+      go back
     </button>
   </div>
 </div>

@@ -103,3 +103,6 @@ export const aboutSectionColorScheme = {
     ["#964676", "#5f2081"],
   ],
 }
+
+export const RESET_EMAIL_SUCCESS_TEXT =
+  "A password-reset link has been sent to your registered email ID. Follow the link to continue."

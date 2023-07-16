@@ -7,6 +7,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth"
 import db, { app } from "../../lib/auth/firebaseConfig"
 import { addDoc, collection, query, where } from "firebase/firestore"
@@ -16,6 +18,7 @@ import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback, { myErrorHandler } from "../common/ErrorFallback"
 import { useDispatch, useSelector } from "react-redux"
 import {
+  resetErrorState,
   updateAuthStatus,
   updateErrorSuccessState,
 } from "../../redux/slices/authSlice"
@@ -29,6 +32,7 @@ const LoginPage = () => {
   const auth = getAuth(app)
   const dispatch = useDispatch()
   const collectioRef = collection(db, "users")
+  const googleProvider = new GoogleAuthProvider()
 
   const initialFormState: LoginFormState = {
     email: "",
@@ -95,7 +99,7 @@ const LoginPage = () => {
   }, [router.query])
 
   const loginHandler = async () => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
 
     // initializes loader
     setLoader(true)
@@ -162,6 +166,7 @@ const LoginPage = () => {
         dispatch(updateAuthStatus(true))
         // saves username & email in database
         await addDoc(collectioRef, {
+          method: "email-password",
           email: formData.email,
           username: formData.username,
         })
@@ -185,7 +190,7 @@ const LoginPage = () => {
 
   // toogles from signup page to login page
   const handleLoginToggle = useCallback(() => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
     setToggleLoginActivity(true)
     router.push({
       pathname: "/login",
@@ -196,7 +201,7 @@ const LoginPage = () => {
 
   // toogles from login page to signup page
   const handleSignupToggle = useCallback(() => {
-    dispatch(updateErrorSuccessState({ status: null, error: null }))
+    dispatch(resetErrorState())
     setToggleLoginActivity(false)
     router.push({
       pathname: "/login",
@@ -204,6 +209,48 @@ const LoginPage = () => {
     })
     setFormData(initialFormState)
   }, [router])
+
+  const recoverRouteHandler = useCallback(() => {
+    router.push("/recover")
+  }, [router])
+
+  const signInWithGoogleHandler = async () => {
+    signInWithPopup(auth, googleProvider)
+      .then(async (result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential && credential.idToken
+        token && localStorage.setItem("firebase-token", token)
+        document.cookie = `firebase-token=${token}`
+        // The signed-in user info.
+        const user = result.user
+        // saves email in database if there is not already an account
+        const q = query(collectioRef, where("email", "==", user?.email))
+        const getFireStoreUser = await getUsersDataFromQuery(q)
+        user &&
+          getFireStoreUser === null &&
+          (await addDoc(collectioRef, {
+            method: "google",
+            email: user?.email,
+            photoUrl: user.photoURL,
+            displayName: user.displayName,
+          }))
+        router.push("/admin")
+      })
+      .catch((error) => {
+        const errorObject: LoginErrorSuccess = {
+          status: "error",
+          error: {
+            code: error.code,
+            message: error.message,
+            name: error.name,
+            customData: error.customData,
+          },
+        }
+        dispatch(updateErrorSuccessState(errorObject))
+        setLoader(false)
+      })
+  }
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrorHandler}>
@@ -315,10 +362,18 @@ const LoginPage = () => {
             log into an account
           </Button>
         )}
-        <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
+        <Button
+          disableRipple
+          sx={styles.loginPageExtraOptionsButton}
+          onClick={recoverRouteHandler}
+        >
           recover account
         </Button>
-        <Button disableRipple sx={styles.loginPageExtraOptionsButton}>
+        <Button
+          disableRipple
+          sx={styles.loginPageExtraOptionsButton}
+          onClick={signInWithGoogleHandler}
+        >
           log in with google
         </Button>
       </Box>
