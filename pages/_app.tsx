@@ -6,6 +6,8 @@ import store from "../redux/store"
 import { Provider } from "react-redux"
 import { useState } from "react"
 import { LinearProgress } from "@mui/material"
+import Head from "next/head"
+import Script from "next/script"
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -29,6 +31,21 @@ export default function App({ Component, pageProps }: AppProps) {
   ) {
     return (
       <Provider store={store}>
+        <Head>
+          <Script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
+          />
+          <Script id="google-analytics">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.G_TAG_CODE}');
+            `}
+          </Script>
+        </Head>
         <Component {...pageProps} />
       </Provider>
     )
