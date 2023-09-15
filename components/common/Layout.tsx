@@ -8,7 +8,6 @@ import { useEffect } from "react"
 import { updateAuthStatus } from "../../redux/slices/authSlice"
 import { isTokenValid } from "../../utils/methods"
 import { useDispatch } from "react-redux"
-import Script from "next/script"
 
 const styles = {
   LayoutWrapper: {
@@ -58,19 +57,6 @@ const Layout = ({ children }: ChildrenType) => {
     <>
       <Box sx={styles.LayoutWrapper}>
         <Head>
-          <Script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
-          />
-          <Script id="google-analytics">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', '${process.env.G_TAG_CODE}');
-            `}
-          </Script>
           <title>Colorem</title>
           <meta name="description" content="The permutations of colors." />
           <link rel="icon" href="/favicon.ico" />
