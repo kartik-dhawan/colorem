@@ -7,6 +7,7 @@ import { updateContent } from "../redux/slices/contentSlice"
 import { client } from "../utils/contentful/config"
 import { ContentfulType } from "../utils/interfaces"
 import { useRouter } from "next/router"
+import Script from "next/script"
 
 const yellowTail = Yellowtail({
   weight: "400",
@@ -88,6 +89,19 @@ const Home = ({ contentData }: ContentfulType) => {
           Start creating
         </Link>
       </main>
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
+      />
+      <Script id="google-analytics">
+        {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.G_TAG_CODE}');
+            `}
+      </Script>
     </div>
   )
 }
