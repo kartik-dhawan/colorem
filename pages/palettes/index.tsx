@@ -14,6 +14,7 @@ import { Roboto } from "next/font/google"
 import Head from "next/head"
 import { manager } from "../../lib/database/connectionManager"
 import { getAllColorPalettes } from "../../lib/methods/palettes/getPalettes"
+import Script from "next/script"
 
 export const getServerSideProps = async () => {
   const contentResponse = await client.getEntries({
@@ -58,6 +59,19 @@ const Palettes = ({ contentData, palettes }: PalettesPage) => {
   return (
     <>
       <Head>
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
+        />
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.G_TAG_CODE}');
+            `}
+        </Script>
         {/* Primary meta tags */}
         <title>{title}</title>
         <meta name="title" content={title} />

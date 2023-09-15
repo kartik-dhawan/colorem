@@ -52,6 +52,19 @@ const Home = ({ contentData }: ContentfulType) => {
   return (
     <div className="indexWrapper" data-testid="indexWrapper">
       <Head>
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
+        />
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.G_TAG_CODE}');
+            `}
+        </Script>
         {/* Primary meta tags */}
         <title>{title}</title>
         <meta name="title" content={title} />
@@ -93,15 +106,6 @@ const Home = ({ contentData }: ContentfulType) => {
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
       />
-      <Script id="google-analytics">
-        {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', '${process.env.G_TAG_CODE}');
-            `}
-      </Script>
     </div>
   )
 }

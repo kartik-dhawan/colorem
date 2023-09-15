@@ -58,9 +58,6 @@ const Layout = ({ children }: ChildrenType) => {
     <>
       <Box sx={styles.LayoutWrapper}>
         <Head>
-          <title>Colorem</title>
-          <meta name="description" content="The permutations of colors." />
-          <link rel="icon" href="/favicon.ico" />
           <Script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
@@ -74,6 +71,9 @@ const Layout = ({ children }: ChildrenType) => {
               gtag('config', '${process.env.G_TAG_CODE}');
             `}
           </Script>
+          <title>Colorem</title>
+          <meta name="description" content="The permutations of colors." />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar />
         {children}

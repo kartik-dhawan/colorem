@@ -15,6 +15,7 @@ import {
 import Head from "next/head"
 import { getAllColorGradients } from "../../lib/methods/gradients/getGradients"
 import { manager } from "../../lib/database/connectionManager"
+import Script from "next/script"
 
 export const getServerSideProps = async () => {
   const contentResponse = await client.getEntries({
@@ -59,6 +60,19 @@ const Gradients = ({ contentData, gradients }: GradientsPage) => {
   return (
     <>
       <Head>
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_CODE}`}
+        />
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.G_TAG_CODE}');
+            `}
+        </Script>
         {/* Primary meta tags */}
         <title>{title}</title>
         <meta name="title" content={title} />
